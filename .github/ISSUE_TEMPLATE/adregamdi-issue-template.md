@@ -1,8 +1,8 @@
 ---
 name: Adregamdi issue Template
 about: Describe this issue template's purpose here.
-title: ''
-labels: ''
+title: 'Feature:'
+labels: "✨ Feature"
 assignees: ''
 
 ---
