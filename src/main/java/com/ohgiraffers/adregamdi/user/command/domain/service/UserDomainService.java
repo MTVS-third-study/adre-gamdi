@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.user.domain.service;
+package com.ohgiraffers.adregamdi.user.command.domain.service;
 
 import org.springframework.stereotype.Component;
 

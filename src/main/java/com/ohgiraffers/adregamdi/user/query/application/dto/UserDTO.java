@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.user.application.dto;
+package com.ohgiraffers.adregamdi.user.query.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

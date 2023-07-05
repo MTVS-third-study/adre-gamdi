@@ -1,6 +1,6 @@
-package com.ohgiraffers.adregamdi.user.application.controller;
+package com.ohgiraffers.adregamdi.user.query.application.controller;
 
-import com.ohgiraffers.adregamdi.user.application.service.UserService;
+import com.ohgiraffers.adregamdi.user.query.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -12,4 +12,5 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
 }
