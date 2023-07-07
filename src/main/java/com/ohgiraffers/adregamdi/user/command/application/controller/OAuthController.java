@@ -4,8 +4,8 @@ import com.ohgiraffers.adregamdi.user.command.application.service.OAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
 //@AllArgsConstructor
+@RestController
 @RequestMapping("/oauth")
 public class OAuthController {
     private final OAuthService oAuthService;
@@ -17,11 +17,12 @@ public class OAuthController {
 
     // 카카오
     @ResponseBody
-    @GetMapping("kakao")
+    @GetMapping("kakao/login")
     public String kakaoCallback(@RequestParam String code) {
-        String token = oAuthService.getKakaoAccessToken(code); // access token 발급
-        oAuthService.getUserInfo(token); // 사용자 정보 조회
-        oAuthService.logout(token); // 로그아웃
+        oAuthService.login(code);
+//        String token = oAuthService.getKakaoAccessToken(code); // access token 발급
+//        oAuthService.getUserInfo(token); // 사용자 정보 조회
+//        oAuthService.logout(token); // 로그아웃
         return "성공";
     }
 
