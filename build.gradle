@@ -23,8 +23,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.webjars.bower/jquery
     implementation 'org.webjars.bower:jquery:3.5.1'
-    // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+//    // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
+//    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
