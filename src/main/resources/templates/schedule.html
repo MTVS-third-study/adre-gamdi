@@ -5,19 +5,28 @@
     <title>Title</title>
     <!-- 설명. 카카오맵 api appkey-->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68b6fbdf7ad018b34a2bab823e0f11ae"></script>
+    <link rel="stylesheet" href="css/schedule.css" type="text/css"/>
 </head>
 <body>
-    <div id="map" style="width: 100%; height: 100vh"></div>
+    <div class="schedule-container">
+        <div class="schedule-list">
+            <a href="/#"><img src="images/logo.png" style="height: 60px; width: 60px"/></a>
+        </div>
 
+        <div id="map" class="schedule-map" style="width: 65%; height: 100vh;"></div>
+    </div>
 
     <script type="text/javascript">
         let container = document.getElementById("map");
         let options = {
-            center: new kakao.maps.LatLng(33.350701, 126.570667),
-            level: 9
+            center: new kakao.maps.LatLng(33.350701, 126.470667),
+            level: 10
         };
-
         let map = new kakao.maps.Map(container, options);
+        map.setMaxLevel(11);    // 필기. 지도 축소 최대치 설정
+
+        // 설명. 지도 이동 범위 제한
+        let pos1 = new kakao.maps.LatLng()
     </script>
 </body>
 </html>
