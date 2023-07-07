@@ -3,7 +3,6 @@ package com.ohgiraffers.adregamdi.user.command.application.controller;
 import com.ohgiraffers.adregamdi.user.command.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class UserContorller {
@@ -14,8 +13,8 @@ public class UserContorller {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "kakao/loginForm";
-    }
+//    @GetMapping("/")
+//    public String index() {
+//        return "kakao/loginForm";
+//    }
 }

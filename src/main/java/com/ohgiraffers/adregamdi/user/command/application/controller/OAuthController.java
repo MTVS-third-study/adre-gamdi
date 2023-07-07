@@ -17,10 +17,11 @@ public class OAuthController {
 
     // 카카오
     @ResponseBody
-    @GetMapping("/kakao")
+    @GetMapping("kakao")
     public String kakaoCallback(@RequestParam String code) {
         String token = oAuthService.getKakaoAccessToken(code); // access token 발급
         oAuthService.getUserInfo(token); // 사용자 정보 조회
+        oAuthService.logout(token); // 로그아웃
         return "성공";
     }
 
