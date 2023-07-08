@@ -18,7 +18,11 @@ public class UserDomainService {
         return userInfraService.getKakaoAccessToken(code);
     }
 
-    public UserDTO getUserInfo(String token) {
-        return userInfraService.getUserInfo(token);
+    public UserDTO getKakaoUserInfo(String token) {
+        return userInfraService.getKakaoUserInfo(token);
+    }
+
+    public void logout(String token) {
+        userInfraService.logout(token);
     }
 }

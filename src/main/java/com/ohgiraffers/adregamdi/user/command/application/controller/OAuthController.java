@@ -1,9 +1,12 @@
 package com.ohgiraffers.adregamdi.user.command.application.controller;
 
+import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
 import com.ohgiraffers.adregamdi.user.command.application.service.OAuthService;
 import com.ohgiraffers.adregamdi.user.command.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 //@AllArgsConstructor
 @RestController
@@ -21,19 +24,28 @@ public class OAuthController {
     // 카카오
     @ResponseBody
     @GetMapping("kakao/login")
-    public String kakaoCallback(@RequestParam String code) {
-        int result = oAuthService.login(code);
+    public String kakaoCallback(@RequestParam String code, HttpSession session) {
+        String token = oAuthService.getKakaoAccessToken(code);
+        UserDTO loginUser = oAuthService.getKakaoUserInfo(token);
+        int result = userService.login(loginUser);
 
         if (result == 1) {
-
-            return "redirect:/";
+            session.setAttribute("loginUser", loginUser);
+            UserDTO test = (UserDTO) session.getAttribute("loginUser");
+            System.out.println("test = " + test.getId());
+            System.out.println("test = " + test.getNickname());
+            System.out.println("test = " + test.getEmail());
+            System.out.println("test = " + test.getGender());
+            session.removeAttribute("loginUser");
+            oAuthService.logout(token); // 로그아웃
+            return "로그인 성공";
         }
-
-//        String token = oAuthService.getKakaoAccessToken(code); // access token 발급
-//        oAuthService.getUserInfo(token); // 사용자 정보 조회
-//        oAuthService.logout(token); // 로그아웃
         return "로그인 실패";
     }
+
+//    @ResponseBody
+//    @GetMapping("kakao/logout")
+//    public
 
 //    // 네이버
 //    @ResponseBody

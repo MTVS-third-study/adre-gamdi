@@ -5,25 +5,23 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-@Entity
+//@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column
+    //    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+    //    @Column
     private String nickname;
-    @Column
+    //    @Column
     private String email;
-    @Column
+    //    @Column
     private String gender;
 
-    public User update(int id, String nickname, String email, String gender) {
+    public User update(String id, String nickname, String email, String gender) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;

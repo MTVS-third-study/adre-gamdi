@@ -10,7 +10,7 @@ public class UserInfraRepository implements UserRepository {
     @Override
     public int insertUser(UserDTO userInfo) {
 
-        return 0;
+        return 1;
     }
 
     @Override

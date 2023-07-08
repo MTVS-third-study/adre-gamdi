@@ -66,7 +66,7 @@ public class UserInfraService {
         return access_Token;
     }
 
-    public UserDTO getUserInfo(String token) {
+    public UserDTO getKakaoUserInfo(String token) {
         String reqURL = "https://kapi.kakao.com/v2/user/me";
         UserDTO userInfo = null;
 
@@ -96,14 +96,10 @@ public class UserInfraService {
             //Gson 라이브러리로 JSON파싱
             JsonElement element = JsonParser.parseString(result.toString());
 
-//
-//            System.out.println("id : " + id);
-//            System.out.println("email : " + email);
-
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-            int id = element.getAsJsonObject().get("id").getAsInt();
+            String id = element.getAsJsonObject().get("id").getAsString();
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 //            String email = kakao_account.getAsJsonObject().get("email").getAsString();
             boolean hasEmail = kakao_account.get("has_email").getAsBoolean();
@@ -118,10 +114,6 @@ public class UserInfraService {
             userInfo.setNickname(nickname);
             userInfo.setEmail(email);
             userInfo.setGender(gender);
-            System.out.println("id = " + id);
-            System.out.println("nickname = " + nickname);
-            System.out.println("email = " + email);
-            System.out.println("gender = " + gender);
 
             br.close();
 
@@ -151,7 +143,7 @@ public class UserInfraService {
             while ((line = br.readLine()) != null) {
                 result.append(line);
             }
-            System.out.println(result);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

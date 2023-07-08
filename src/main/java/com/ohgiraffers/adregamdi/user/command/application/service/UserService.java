@@ -13,6 +13,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public int login(UserDTO userInfo) {
+        return userRepository.insertUser(userInfo);// 우리 db로
+    }
+
     public UserDTO selectUserOne(int id) { // 현재 유저 조회
         User user = userRepository.selectUserOne(id);
         return new UserDTO(
