@@ -1,5 +1,7 @@
 package com.ohgiraffers.adregamdi.user.command.application.service;
 
+import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
+import com.ohgiraffers.adregamdi.user.command.domain.repository.UserRepository;
 import com.ohgiraffers.adregamdi.user.command.domain.service.UserDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,22 +11,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 
 @Service
 public class OAuthService {
     private final UserDomainService userDomainService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public OAuthService(UserDomainService userDomainService) {
+    public OAuthService(UserDomainService userDomainService, UserRepository userRepository) {
         this.userDomainService = userDomainService;
+        this.userRepository = userRepository;
     }
 
-    public String login(String code) {
+    public int login(String code) {
         String token = userDomainService.getKakaoAccessToken(code); // 액세스 토큰 발행
-        Map<String, Object> userInfo = userDomainService.getUserInfo(token); // 유저 정보 조회
-        // 우리 db로
-        return "";
+        UserDTO userInfo = userDomainService.getUserInfo(token); // 카카오로부터 유저 정보 조회
+        return userRepository.insertUser(userInfo);// 우리 db로
     }
 
     public void logout(String token) {
