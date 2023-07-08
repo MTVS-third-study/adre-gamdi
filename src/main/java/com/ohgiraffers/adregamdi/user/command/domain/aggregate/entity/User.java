@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
     @Column
     private String nickname;
     @Column
@@ -21,7 +21,7 @@ public class User {
     @Column
     private String gender;
 
-    public User update(String id, String nickname, String email, String gender) {
+    public User update(int id, String nickname, String email, String gender) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
