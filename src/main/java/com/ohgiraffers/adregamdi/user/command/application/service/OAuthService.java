@@ -21,8 +21,8 @@ public class OAuthService {
     }
 
     public String login(String code) {
-        String token = userDomainService.getKakaoAccessToken(code);
-        Map<String, Object> userInfo = userDomainService.getUserInfo(token);
+        String token = userDomainService.getKakaoAccessToken(code); // 액세스 토큰 발행
+        Map<String, Object> userInfo = userDomainService.getUserInfo(token); // 유저 정보 조회
         // 우리 db로
         return "";
     }
