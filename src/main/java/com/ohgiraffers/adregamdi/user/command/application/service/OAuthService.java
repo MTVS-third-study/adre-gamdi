@@ -27,7 +27,6 @@ public class OAuthService {
         return "";
     }
 
-
     public void logout(String token) {
         String reqURL = "https://kapi.kakao.com/v1/user/logout";
 
