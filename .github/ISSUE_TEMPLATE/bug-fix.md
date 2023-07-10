@@ -1,8 +1,8 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: "[]"
-labels: ''
+name: Bug Fix
+about: 버그 고치기
+title: "[Bug-fix] ()"
+labels: "\U0001F41E BugFix"
 assignees: ''
 
 ---
@@ -20,4 +20,4 @@ assignees: ''
 
 ## 어떻게 해결했는지
 
-## 담당자
+## 문제 발생 구역

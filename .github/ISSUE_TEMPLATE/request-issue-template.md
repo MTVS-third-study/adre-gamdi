@@ -1,8 +1,8 @@
 ---
 name: Request Issue Template
-about: Describe this issue template's purpose here.
-title: "[]"
-labels: ''
+about: 요청하기
+title: "[Request] ()"
+labels: "\U0001F3E4Request"
 assignees: ''
 
 ---
