@@ -18,6 +18,15 @@ public class MainController {
         return "kakao/loginForm";
     }
 
+//    @GetMapping("logout")
+//    public String logout(HttpSession session) {
+//        String token = (String) session.getAttribute("kakaoToken");
+//        if () {
+//            return "kakao/logout";
+//        }
+//        return "naver/logout";
+//    }
+
     @GetMapping("schedule")
     public String goSchedule() {
         return "schedule";
