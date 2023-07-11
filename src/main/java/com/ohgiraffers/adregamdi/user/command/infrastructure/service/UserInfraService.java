@@ -115,30 +115,41 @@ public class UserInfraService implements UserDomainService {
             String id = element.getAsJsonObject().get("id").getAsString();
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 
-            String email = kakao_account.getAsJsonObject().get("email").getAsString();
-//            boolean hasEmail = kakao_account.get("email_needs_agreement").getAsBoolean();
-//            String email = "";
-            if (email.equals("")) {
-                email = "";
+            String email = "";
+            try {
+                if ("".equals(kakao_account.getAsJsonObject().get("email").getAsString())
+                        || kakao_account.getAsJsonObject().get("email").getAsString() == null) {
+                    throw new NullPointerException();
+                } else {
+                    email = kakao_account.getAsJsonObject().get("email").getAsString();
+                }
+            } catch (NullPointerException ne) {
+                ne.printStackTrace();
             }
 
-//            boolean hashAgeRangeEmail = kakao_account.get("age_range_needs_agreement").getAsBoolean();
-//            String age = "";
-            String age = kakao_account.getAsJsonObject().get("age_range").getAsString();
-            if (age.equals("")) {
-                age = "";
+            String age = "";
+            try {
+                if ("".equals(kakao_account.getAsJsonObject().get("age_range").getAsString())
+                        || kakao_account.getAsJsonObject().get("age_range").getAsString() == null) {
+                    throw new NullPointerException();
+                } else {
+                    age = kakao_account.getAsJsonObject().get("age_range").getAsString();
+                }
+            } catch (NullPointerException ne) {
+                ne.printStackTrace();
             }
 
-//            boolean hasGender = kakao_account.get("gender_needs_agreement").getAsBoolean();
-//            String gender = "";
-            String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
-            if (gender.equals("")) {
-                gender = "";
+            String gender = "";
+            try {
+                if ("".equals(kakao_account.getAsJsonObject().get("gender").getAsString())
+                        || kakao_account.getAsJsonObject().get("gender").getAsString() == null) {
+                    throw new NullPointerException();
+                } else {
+                    gender = kakao_account.getAsJsonObject().get("gender").getAsString();
+                }
+            } catch (NullPointerException ne) {
+                ne.printStackTrace();
             }
-
-//            String age = kakao_account.getAsJsonObject().get("age_range").getAsString();
-//
-//            String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
 
             userInfo = new UserDTO();
             userInfo.setId(id);
