@@ -1,25 +1,33 @@
 package com.ohgiraffers.adregamdi.review.domain.entity;
 
+import java.util.Date;
+
 public class reviewEntity {
 
     private int reviewNo;
     private int likeNum;
-    private int starpoint;
+    private int starPoint;
     private String image;
     private String reviewContents;
-    private int reportedNum;
+    private boolean reportStatus;
     private int userNo;
     private int placeNo;
+    private Date regDate;
 
-    public reviewEntity(int reviewNo, int likeNum, int starpoint, String image, String reviewContents, int reportedNum, int userNo, int placeNo) {
+
+    public reviewEntity() {
+    }
+
+    public reviewEntity(int reviewNo, int likeNum, int starPoint, String image, String reviewContents, boolean reportStatus, int userNo, int placeNo, Date regDate) {
         this.reviewNo = reviewNo;
         this.likeNum = likeNum;
-        this.starpoint = starpoint;
+        this.starPoint = starPoint;
         this.image = image;
         this.reviewContents = reviewContents;
-        this.reportedNum = reportedNum;
+        this.reportStatus = reportStatus;
         this.userNo = userNo;
         this.placeNo = placeNo;
+        this.regDate = regDate;
     }
 
     public int getReviewNo() {
@@ -38,12 +46,12 @@ public class reviewEntity {
         this.likeNum = likeNum;
     }
 
-    public int getStarpoint() {
-        return starpoint;
+    public int getStarPoint() {
+        return starPoint;
     }
 
-    public void setStarpoint(int starpoint) {
-        this.starpoint = starpoint;
+    public void setStarPoint(int starPoint) {
+        this.starPoint = starPoint;
     }
 
     public String getImage() {
@@ -62,12 +70,12 @@ public class reviewEntity {
         this.reviewContents = reviewContents;
     }
 
-    public int getReportedNum() {
-        return reportedNum;
+    public boolean getReportedNum() {
+        return reportStatus;
     }
 
-    public void setReportedNum(int reportedNum) {
-        this.reportedNum = reportedNum;
+    public void reportStatus(boolean reportStatus) {
+        this.reportStatus = reportStatus;
     }
 
     public int getUserNo() {
@@ -85,4 +93,6 @@ public class reviewEntity {
     public void setPlaceNo(int placeNo) {
         this.placeNo = placeNo;
     }
+
+
 }

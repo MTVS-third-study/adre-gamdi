@@ -3,9 +3,9 @@ package com.ohgiraffers.adregamdi.review.domain.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateReviewService {
+public class InsertReviewService {
 
-    public void insertReviewContents() {
+    public void insertReview() {
 
     }
 }
