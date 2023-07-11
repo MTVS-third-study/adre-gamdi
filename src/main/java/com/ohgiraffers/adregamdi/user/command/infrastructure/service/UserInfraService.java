@@ -4,6 +4,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
+import com.ohgiraffers.adregamdi.user.command.domain.service.UserDomainService;
+import com.ohgiraffers.adregamdi.user.query.application.service.UserFindService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -11,7 +14,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @Service
-public class UserInfraService {
+public class UserInfraService implements UserDomainService {
+    private final UserFindService userFindService;
+
+    @Autowired
+    public UserInfraService(UserFindService userFindService) {
+        this.userFindService = userFindService;
+    }
+
+    //
+    @Override
     public String getKakaoAccessToken(String code) {
         String access_Token = "";
         String refresh_Token = "";
@@ -66,6 +78,7 @@ public class UserInfraService {
         return access_Token;
     }
 
+    @Override
     public UserDTO getKakaoUserInfo(String token) {
         String reqURL = "https://kapi.kakao.com/v2/user/me";
         UserDTO userInfo = null;
@@ -101,18 +114,38 @@ public class UserInfraService {
 
             String id = element.getAsJsonObject().get("id").getAsString();
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-//            String email = kakao_account.getAsJsonObject().get("email").getAsString();
-            boolean hasEmail = kakao_account.get("has_email").getAsBoolean();
-            String email = "";
-            if (hasEmail) {
-                email = kakao_account.getAsJsonObject().get("email").getAsString();
+
+            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+//            boolean hasEmail = kakao_account.get("email_needs_agreement").getAsBoolean();
+//            String email = "";
+            if (email.equals("")) {
+                email = "";
             }
+
+//            boolean hashAgeRangeEmail = kakao_account.get("age_range_needs_agreement").getAsBoolean();
+//            String age = "";
+            String age = kakao_account.getAsJsonObject().get("age_range").getAsString();
+            if (age.equals("")) {
+                age = "";
+            }
+
+//            boolean hasGender = kakao_account.get("gender_needs_agreement").getAsBoolean();
+//            String gender = "";
             String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
+            if (gender.equals("")) {
+                gender = "";
+            }
+
+//            String age = kakao_account.getAsJsonObject().get("age_range").getAsString();
+//
+//            String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
 
             userInfo = new UserDTO();
             userInfo.setId(id);
-            userInfo.setNickname(nickname);
+            userInfo.setKakaoNickName(nickname);
+            userInfo.setServiceNickName("");
             userInfo.setEmail(email);
+            userInfo.setAge(age);
             userInfo.setGender(gender);
 
             br.close();
@@ -123,6 +156,7 @@ public class UserInfraService {
         return userInfo;
     }
 
+    @Override
     public void logout(String token) {
         String reqURL = "https://kapi.kakao.com/v1/user/logout";
 
@@ -147,5 +181,11 @@ public class UserInfraService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    @Override
+    public UserDTO findOneUser(String id) {
+        return userFindService.findOneUser(id);
     }
 }

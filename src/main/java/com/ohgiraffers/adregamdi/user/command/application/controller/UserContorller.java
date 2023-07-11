@@ -12,9 +12,5 @@ public class UserContorller {
     public UserContorller(UserService userService) {
         this.userService = userService;
     }
-
-//    @GetMapping("/")
-//    public String index() {
-//        return "kakao/loginForm";
-//    }
+    
 }
