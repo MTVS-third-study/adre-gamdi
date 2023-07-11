@@ -1,28 +1,16 @@
 package com.ohgiraffers.adregamdi.user.command.domain.service;
 
 import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
-import com.ohgiraffers.adregamdi.user.command.infrastructure.service.UserInfraService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDomainService {
-    private final UserInfraService userInfraService;
+public interface UserDomainService {
+    // https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:8080/oauth/kakao/logout
+    String getKakaoAccessToken(String code);
 
-    @Autowired
-    public UserDomainService(UserInfraService userInfraService) {
-        this.userInfraService = userInfraService;
-    }
+    UserDTO getKakaoUserInfo(String token);
 
-    public String getKakaoAccessToken(String code) {
-        return userInfraService.getKakaoAccessToken(code);
-    }
+    void logout(String token);
 
-    public UserDTO getKakaoUserInfo(String token) {
-        return userInfraService.getKakaoUserInfo(token);
-    }
-
-    public void logout(String token) {
-        userInfraService.logout(token);
-    }
+    UserDTO findOneUser(String id);
 }
