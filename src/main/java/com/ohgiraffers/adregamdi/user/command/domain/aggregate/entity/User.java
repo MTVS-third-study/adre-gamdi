@@ -15,16 +15,22 @@ public class User {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     //    @Column
-    private String nickname;
+    private String kakaoNickName;
+    //    @Column
+    private String serviceNickName;
     //    @Column
     private String email;
     //    @Column
+    private String age;
+    //    @Column
     private String gender;
 
-    public User update(String id, String nickname, String email, String gender) {
+    public User update(String id, String kakaoNickName, String serviceNickName, String email, String age, String gender) {
         this.id = id;
-        this.nickname = nickname;
+        this.kakaoNickName = kakaoNickName;
+        this.serviceNickName = serviceNickName;
         this.email = email;
+        this.age = age;
         this.gender = gender;
         return this;
     }

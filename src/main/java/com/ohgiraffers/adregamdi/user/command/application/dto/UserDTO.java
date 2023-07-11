@@ -11,7 +11,9 @@ import lombok.Setter;
 @Setter
 public class UserDTO {
     private String id;
-    private String nickname;
+    private String kakaoNickName;
+    private String serviceNickName;
     private String email;
+    private String age;
     private String gender;
 }

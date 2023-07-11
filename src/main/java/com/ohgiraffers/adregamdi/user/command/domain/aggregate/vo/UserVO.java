@@ -6,8 +6,10 @@ import lombok.EqualsAndHashCode;
 @Builder
 @EqualsAndHashCode
 public class UserVO {
-    private int id;
-    private String nickname;
+    private String id;
+    private String kakaoNickName;
+    private String serviceNickName;
     private String email;
+    private String age;
     private String gender;
 }
