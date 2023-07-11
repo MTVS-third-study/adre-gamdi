@@ -10,14 +10,16 @@ public class UserTests {
     @DisplayName("UserVO 동등 객체 판단 테스트")
     void equalTest() {
         UserVO userDTO1 = UserVO.builder()
-                .id(1)
-                .nickname("q")
+                .id("1")
+                .kakaoNickName("q")
+                .serviceNickName("q")
                 .email("q")
                 .gender("q")
                 .build();
         UserVO userDTO2 = UserVO.builder()
-                .id(1)
-                .nickname("q")
+                .id("1")
+                .kakaoNickName("q")
+                .serviceNickName("q")
                 .email("q")
                 .gender("q")
                 .build();
