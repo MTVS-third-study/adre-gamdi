@@ -1,13 +1,17 @@
 package com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.entity;
 
-import java.sql.Date;
+import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.Day;
+import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.UserNo;
 
 public class Schedule {
 
-    private int scheduleNo;
-    private int userNo;
+    private int scheduleNo; // pk
+    private UserNo userNo; // fk
     private String scheduleName;
-    private Date startDay;
-    private Date endDay;
+
+    private Day day;
+
+//    private Date startDay;
+//    private Date endDay;
 
 }
