@@ -1,20 +1,22 @@
 package com.ohgiraffers.adregamdi.blacklist.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+//import javax.persistence.Column;
+//import javax.persistence.Embeddable;
 import java.time.LocalDateTime;
 
-@Embeddable
+//@Embeddable
 public class BlackListDate {
 
-    @Column
+//    @Column
     private LocalDateTime startDateTime;
 
-    @Column
+//    @Column
     private LocalDateTime endDateTime;
 
-    @Column
+//    @Column
     private int period;
+
+    public BlackListDate() {}
 
     public BlackListDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.startDateTime = startDateTime;

@@ -1,11 +1,11 @@
 package com.ohgiraffers.adregamdi.blacklist.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+//import javax.persistence.Column;
+//import javax.persistence.Embeddable;
 
-@Embeddable
+//@Embeddable
 public class BlackListMemberNo {
 
-    @Column(name = "BLACKLIST_MEMBER_NO")
+//    @Column(name = "BLACKLIST_MEMBER_NO")
     private int blackListMemberNo;
 }

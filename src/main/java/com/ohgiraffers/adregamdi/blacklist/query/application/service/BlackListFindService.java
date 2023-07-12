@@ -7,14 +7,14 @@ import java.util.List;
 
 public class BlackListFindService {
 
-    private BlackListQueryRepository repository;
-
-    public BlackListFindService(BlackListQueryRepository repository) {
-        this.repository = repository;
-    }
-
-    public void findAllBlackLists() {
-
-        List<BlackList> blackLists = repository.findAll();
-    }
+//    private BlackListQueryRepository repository;
+//
+//    public BlackListFindService(BlackListQueryRepository repository) {
+//        this.repository = repository;
+//    }
+//
+//    public void findAllBlackLists() {
+//
+//        List<BlackList> blackLists = repository.findAll();
+//    }
 }
