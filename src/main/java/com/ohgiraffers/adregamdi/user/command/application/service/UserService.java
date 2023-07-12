@@ -17,8 +17,6 @@ public class UserService {
         this.userDomainService = userDomainService;
     }
 
-}
-
     public int login(UserDTO userInfo) {
         UserDTO findUserInfo = userDomainService.findOneUser(userInfo.getId());
         if (userInfo == findUserInfo) {
