@@ -6,11 +6,11 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class ReviewEntity {
+
     private int reviewNo;
     private int likeNum;
     private double starPoint;
