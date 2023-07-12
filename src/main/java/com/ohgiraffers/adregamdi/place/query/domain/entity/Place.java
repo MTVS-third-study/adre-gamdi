@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity;
+package com.ohgiraffers.adregamdi.place.query.domain.entity;
 
 public class Place {
 
@@ -10,4 +10,5 @@ public class Place {
     private String categoryCode;
     private String placeAddress;
     private String roadPlaceAddress;
+
 }

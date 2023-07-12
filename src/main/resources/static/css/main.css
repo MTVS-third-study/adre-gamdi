@@ -1,0 +1,21 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "neon";
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#Wrapper1{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background:url("/images/jejuIsland.png") no-repeat center center;
+    background-size: 100% 100%;
+}
+#Wrapper2
