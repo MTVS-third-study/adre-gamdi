@@ -16,11 +16,17 @@ public class BlackListDate {
     @Column
     private int period;
 
+    public BlackListDate() {
+
+    }
+
     public BlackListDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.period = getPeriod();
     }
+
+
 
     private int getPeriod() {
 
