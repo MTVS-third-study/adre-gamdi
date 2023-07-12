@@ -56,6 +56,8 @@
 특정 지역 카테고리별 정보 제공 및 나만의 제주도 일정 플래너 지원
 
 <img width="493" alt="image" src="https://github.com/MTVS-third-study/adregamdi/assets/134986842/6236b01b-2dfe-4237-9a50-665d754e2c92">
+<img width="587" alt="image" src="https://github.com/MTVS-third-study/adregamdi/assets/115992753/bee5131c-d371-4af9-927e-52756de4b78b">
+
 
 
 <br>
