@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
+import com.ohgiraffers.adregamdi.user.command.domain.exception.UserException;
 import com.ohgiraffers.adregamdi.user.command.domain.service.UserDomainService;
 import com.ohgiraffers.adregamdi.user.query.application.service.UserFindService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +99,7 @@ public class UserInfraService implements UserDomainService {
 
             //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String line = "";
+            String line;
             StringBuilder result = new StringBuilder();
 
             while ((line = br.readLine()) != null) {
@@ -112,44 +113,12 @@ public class UserInfraService implements UserDomainService {
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
+            UserException userException = new UserException();
             String id = element.getAsJsonObject().get("id").getAsString();
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-
-            String email = "";
-            try {
-                if ("".equals(kakao_account.getAsJsonObject().get("email").getAsString())
-                        || kakao_account.getAsJsonObject().get("email").getAsString() == null) {
-                    throw new NullPointerException();
-                } else {
-                    email = kakao_account.getAsJsonObject().get("email").getAsString();
-                }
-            } catch (NullPointerException ne) {
-                ne.printStackTrace();
-            }
-
-            String age = "";
-            try {
-                if ("".equals(kakao_account.getAsJsonObject().get("age_range").getAsString())
-                        || kakao_account.getAsJsonObject().get("age_range").getAsString() == null) {
-                    throw new NullPointerException();
-                } else {
-                    age = kakao_account.getAsJsonObject().get("age_range").getAsString();
-                }
-            } catch (NullPointerException ne) {
-                ne.printStackTrace();
-            }
-
-            String gender = "";
-            try {
-                if ("".equals(kakao_account.getAsJsonObject().get("gender").getAsString())
-                        || kakao_account.getAsJsonObject().get("gender").getAsString() == null) {
-                    throw new NullPointerException();
-                } else {
-                    gender = kakao_account.getAsJsonObject().get("gender").getAsString();
-                }
-            } catch (NullPointerException ne) {
-                ne.printStackTrace();
-            }
+            String email = userException.solveNullPointerException("email", kakao_account);
+            String age = userException.solveNullPointerException("age", kakao_account);
+            String gender = userException.solveNullPointerException("gender", kakao_account);
 
             userInfo = new UserDTO();
             userInfo.setId(id);
