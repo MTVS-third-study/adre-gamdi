@@ -2,20 +2,20 @@ package com.ohgiraffers.adregamdi.report.domain.entity;
 
 import java.util.Date;
 
-public class reportEntity {
+public class ReportEntity {
 
     private int reportNo;
     private int reporterNo;
     private int respondentNo;
-    private int reportedReviewNo;
+    private int reportCategoryCode;
     private String reportContents;
     private Date reportedDate;
 
-    public reportEntity(int reportNo, int reporterNo, int respondentNo, int reportedReviewNo, String reportContents, Date reportedDate) {
+    public ReportEntity(int reportNo, int reporterNo, int respondentNo, int reportCategoryCode, String reportContents, Date reportedDate) {
         this.reportNo = reportNo;
         this.reporterNo = reporterNo;
         this.respondentNo = respondentNo;
-        this.reportedReviewNo = reportedReviewNo;
+        this.reportCategoryCode = reportCategoryCode;
         this.reportContents = reportContents;
         this.reportedDate = reportedDate;
     }
@@ -44,12 +44,12 @@ public class reportEntity {
         this.respondentNo = respondentNo;
     }
 
-    public int getReportedReviewNo() {
-        return reportedReviewNo;
+    public int getreportCategoryCode() {
+        return reportCategoryCode;
     }
 
-    public void setReportedReviewNo(int reportedReviewNo) {
-        this.reportedReviewNo = reportedReviewNo;
+    public void setreportCategoryCode(int reportCategoryCode) {
+        this.reportCategoryCode = reportCategoryCode;
     }
 
     public String getReportContents() {
@@ -67,4 +67,6 @@ public class reportEntity {
     public void setReportedDate(Date reportedDate) {
         this.reportedDate = reportedDate;
     }
+
+
 }
