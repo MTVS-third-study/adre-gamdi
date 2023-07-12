@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class ReportEntity {
+
     private int reportNo;
     private int reportCategoryCode;
     private String reportContents;

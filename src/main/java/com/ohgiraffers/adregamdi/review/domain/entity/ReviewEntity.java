@@ -11,7 +11,6 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class ReviewEntity {
-
     private int reviewNo;
     private int likeNum;
     private double starPoint;
