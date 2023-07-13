@@ -65,6 +65,8 @@
 
 ## 📗 : 프로젝트 세부 사항
 
+[WiKi](https://github.com/MTVS-third-study/adregamdi/wiki)
+
 
 ### 장점
 
