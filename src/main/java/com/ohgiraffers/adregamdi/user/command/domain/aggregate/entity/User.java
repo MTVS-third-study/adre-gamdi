@@ -35,14 +35,6 @@ public class User {
     private int grade;
     //    @Column
     private boolean blacklist_status;
-    //    @Column
-    private int report_count;
-    //    @Column
-    private int review_count;
-    //    @Column
-    private int grade;
-    //    @Column
-    private boolean blacklist_status;
 
 //    public User update(String id, String kakaoNickName, String serviceNickName, String email, String age, String gender) {
 //        this.id = id;
