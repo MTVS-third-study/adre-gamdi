@@ -1,5 +1,7 @@
 package com.ohgiraffers.adregamdi.review.application.dto;
 
+import com.ohgiraffers.adregamdi.review.domain.aggregate.entity.ReviewPlaceNo;
+import com.ohgiraffers.adregamdi.review.domain.aggregate.entity.ReviewWriterNo;
 import lombok.*;
 
 import java.util.Date;
@@ -10,13 +12,13 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class ReviewDTO {
-    private int reviewNo;
+    private int reviewNo;   // 기본 키
     private int likeNum;
-    private double starPoint;
-    private String reviewImage;
-    private String reviewContents;
-    private boolean reportStatus;
-    private int userNo;
-    private int placeNo;
+    private int starPoint;
+    private String originReviewImageName;
+    private String savedReviewImageName;
+    private String reviewContent;
     private Date regDate;
+    private ReviewWriterNo reviewWriterNo;
+    private ReviewPlaceNo reviewPlaceNo;
 }
