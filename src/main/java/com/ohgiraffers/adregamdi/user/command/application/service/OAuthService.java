@@ -2,6 +2,7 @@ package com.ohgiraffers.adregamdi.user.command.application.service;
 
 import com.ohgiraffers.adregamdi.user.command.application.dto.KakaoUserDTO;
 import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
+import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
 import com.ohgiraffers.adregamdi.user.command.domain.repository.UserRepository;
 import com.ohgiraffers.adregamdi.user.command.domain.service.KakaoDomainService;
 import com.ohgiraffers.adregamdi.user.command.domain.service.UserDomainService;
@@ -23,14 +24,41 @@ public class OAuthService {
 
     public UserDTO kakaoLogin(String code) {
         KakaoUserDTO kakaoInfo = kakaoDomainService.getKakaoUserInfo(code); // 카카오
-        return validateUser(kakaoInfo.getId());
+        return validateUser(kakaoInfo);
     }
 
-    public UserDTO validateUser(String id) {
-        UserDTO findUserInfo = userDomainService.findById(id);
-        if (findUserInfo == null) {
-            userRepository.insertUser(findUserInfo);
-        }
+    public UserDTO validateUser(KakaoUserDTO kakaoInfo) {
+//        if (findUserInfo == null) {
+        // 회원가입
+        User userInfo = userRepository.save(new User(1L,
+                kakaoInfo.getId(),
+                kakaoInfo.getKakaoNickName(),
+                "",
+                kakaoInfo.getEmail(),
+                kakaoInfo.getAge(),
+                kakaoInfo.getGender(),
+                0,
+                0,
+                1,
+                false,
+                kakaoInfo.getAccess_Token(),
+                kakaoInfo.getRefresh_Token()));
+        UserDTO findUserInfo = new UserDTO();
+//        userDomainService.findById(kakaoInfo.getId());
+        findUserInfo.setUserNo(userInfo.getUserNo());
+        findUserInfo.setId(userInfo.getId());
+        findUserInfo.setKakaoNickName(userInfo.getKakaoNickName());
+        findUserInfo.setServiceNickName(userInfo.getServiceNickName());
+        findUserInfo.setEmail(userInfo.getEmail());
+        findUserInfo.setAge(userInfo.getAge());
+        findUserInfo.setGender(userInfo.getGender());
+        findUserInfo.setReport_count(userInfo.getReport_count());
+        findUserInfo.setReview_count(userInfo.getReview_count());
+        findUserInfo.setGrade(userInfo.getGrade());
+        findUserInfo.setBlacklist_status(userInfo.isBlacklist_status());
+        findUserInfo.setAccess_Token(kakaoInfo.getAccess_Token());
+        findUserInfo.setRefresh_Token(kakaoInfo.getRefresh_Token());
+//        }
         return findUserInfo;
     }
 

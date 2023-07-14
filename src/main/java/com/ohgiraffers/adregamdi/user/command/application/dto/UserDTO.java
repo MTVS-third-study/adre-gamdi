@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDTO {
-    private int userNo;
+    private Long userNo;
     private String id;
     private String kakaoNickName;
     private String serviceNickName;
@@ -21,4 +21,6 @@ public class UserDTO {
     private int review_count;
     private int grade;
     private boolean blacklist_status;
+    private String access_Token;
+    private String refresh_Token;
 }

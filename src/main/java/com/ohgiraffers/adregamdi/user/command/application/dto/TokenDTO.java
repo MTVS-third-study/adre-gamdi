@@ -9,12 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class KakaoUserDTO {
-    private String id;
-    private String kakaoNickName;
-    private String email;
-    private String age;
-    private String gender;
-    private String access_Token;
-    private String refresh_Token;
+public class TokenDTO {
+    String access_Token;
+    String refresh_Token;
 }

@@ -1,6 +1,5 @@
 package com.ohgiraffers.adregamdi.user.command.application.service;
 
-import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
 import com.ohgiraffers.adregamdi.user.command.domain.repository.UserRepository;
 import com.ohgiraffers.adregamdi.user.command.domain.service.UserDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,11 @@ public class UserService {
         this.userDomainService = userDomainService;
     }
 
-    public int login(UserDTO userInfo) {
-        UserDTO findUserInfo = userDomainService.findById(userInfo.getId());
-        if (userInfo == findUserInfo) {
-            return 1;
-        }
-        return userRepository.insertUser(userInfo);
-    }
+//    public int login(UserDTO userInfo) {
+//        UserDTO findUserInfo = userDomainService.findById(userInfo.getId());
+//        if (userInfo == findUserInfo) {
+//            return 1;
+//        }
+//        return userRepository.insertUser(userInfo);
+//    }
 }
