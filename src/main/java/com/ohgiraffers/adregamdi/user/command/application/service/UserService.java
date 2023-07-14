@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public int login(UserDTO userInfo) {
-        UserDTO findUserInfo = userDomainService.findOneUser(userInfo.getId());
+        UserDTO findUserInfo = userDomainService.findById(userInfo.getId());
         if (userInfo == findUserInfo) {
             return 1;
         }

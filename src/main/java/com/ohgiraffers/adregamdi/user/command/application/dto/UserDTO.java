@@ -10,10 +10,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDTO {
+    private int userNo;
     private String id;
     private String kakaoNickName;
     private String serviceNickName;
     private String email;
     private String age;
     private String gender;
+    private int report_count;
+    private int review_count;
+    private int grade;
+    private boolean blacklist_status;
 }

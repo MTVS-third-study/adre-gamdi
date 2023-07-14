@@ -122,35 +122,4 @@ public class KakaoQueryInfraService {
         return userInfo;
     }
 
-    public void logout(String token) {
-        String reqURL = "https://kapi.kakao.com/v1/user/logout";
-
-        try {
-            URL url = new URL(reqURL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization", "Bearer " + token);
-
-            int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-            StringBuilder result = new StringBuilder();
-            String line = "";
-
-            while ((line = br.readLine()) != null) {
-                result.append(line);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-//    public UserDTO findOneUser(String id) {
-//        return userFindService.findOneUser(id);
-//    }
-
 }

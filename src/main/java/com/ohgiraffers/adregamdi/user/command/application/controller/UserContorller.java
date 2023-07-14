@@ -12,5 +12,5 @@ public class UserContorller {
     public UserContorller(UserService userService) {
         this.userService = userService;
     }
-    
+
 }
