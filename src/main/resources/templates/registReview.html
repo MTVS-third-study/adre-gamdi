@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/reviewStarPoint.css" rel="stylesheet"/>
+</head>
+<body>
+    <h1>리뷰 페이지</h1>
+
+    <form action="registReview" name="review" id="review" method="post" encType="multipart/form-data">
+        <div class="reviewStarPoint">
+            <fieldset>
+                <span class="text-bold">별점을 선택해주세요</span>
+                <input type="radio" name="starPoint" value="5" id="rate1"><label
+                    for="rate1">★</label>
+                <input type="radio" name="starPoint" value="4" id="rate2"><label
+                    for="rate2">★</label>
+                <input type="radio" name="starPoint" value="3" id="rate3"><label
+                    for="rate3">★</label>
+                <input type="radio" name="starPoint" value="2" id="rate4"><label
+                    for="rate4">★</label>
+                <input type="radio" name="starPoint" value="1" id="rate5"><label
+                    for="rate5">★</label>
+            </fieldset>
+        </div>
+
+        <div class="reviewContents">
+                <input type="file" name="imageFile" accept="image/*"><br>
+            <textarea name="reviewContent" type="text" id="reviewContent" placeholder="리뷰 내용을 입력해주세요"></textarea>
+        </div>
+        <input type="submit" name="등록하기">
+    </form>
+</body>
+</html>
