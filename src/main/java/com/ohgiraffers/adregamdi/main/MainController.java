@@ -32,5 +32,6 @@ public class MainController {
         return "schedule";
     }
 
-
+    @GetMapping("myPage")
+    public String goMyPage(){return "myPage";}
 }
