@@ -6,6 +6,7 @@ import com.ohgiraffers.adregamdi.review.domain.service.CreateReviewService;
 import com.ohgiraffers.adregamdi.review.domain.service.UpdateReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ReviewService {
@@ -21,8 +22,10 @@ public class ReviewService {
         this.deleteReviewService = deleteReviewService;
     }
 
-    public void insertReview(ReviewDTO reviewDTO) {
-        createReviewService.createReview(reviewDTO);
+    public void insertReview(ReviewDTO reviewDTO, MultipartFile imageFile) {
+
+        createReviewService.insertReviewImage(reviewDTO, imageFile);
+        createReviewService.saveReview(reviewDTO);
     }
 
     public void updateReview() {

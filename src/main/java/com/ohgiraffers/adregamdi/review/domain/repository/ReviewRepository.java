@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ReviewRepository {
     public void saveReviewInDB(ReviewDTO reviewDTO) {
-        Review review = new Review(reviewDTO.getReviewNo(), reviewDTO.getLikeNum(),
-                reviewDTO.getStarPoint(), reviewDTO.getReviewImage(),
+        Review review = new Review(reviewDTO.getReviewNo(), reviewDTO.getLikeNum(), reviewDTO.getStarPoint(),
+                reviewDTO.getOriginReviewImageName(), reviewDTO.getSavedReviewImageName(),
                 reviewDTO.getReviewContent(), reviewDTO.getRegDate(),
                 reviewDTO.getReviewWriterNo(), reviewDTO.getReviewPlaceNo());
     }

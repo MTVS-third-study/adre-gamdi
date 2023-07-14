@@ -36,28 +36,8 @@ public class ReviewController {
         @PostMapping("registReview")
         public String registReview(ReviewDTO reviewDTO, @RequestParam MultipartFile imageFile) {
 
-                String root = "C:\\app-file";
-                String filePath = root + "/uploadFiles";
+                reviewService.insertReview(reviewDTO, imageFile);
 
-                File dir = new File(filePath);
-                if (!dir.exists()) {
-                        dir.mkdirs();
-                }
-
-                String originFileName = imageFile.getOriginalFilename();
-                System.out.println("originFileName = " + originFileName);
-                String ext = originFileName.substring(originFileName.lastIndexOf("."));
-                System.out.println("ext = " + ext);
-                String savedName = UUID.randomUUID().toString().replaceAll("-", "") + ext;
-                System.out.println("savedName = " + savedName);
-
-                try {
-                        imageFile.transferTo(new File(filePath + "/" + savedName));
-                } catch (IOException e) {
-                        new File(filePath + "/" + savedName).delete();
-                }
-
-                reviewService.insertReview(reviewDTO);
                 return "placeReviews";
         }
 }

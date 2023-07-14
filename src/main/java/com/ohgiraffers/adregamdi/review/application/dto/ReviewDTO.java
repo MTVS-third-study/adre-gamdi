@@ -15,7 +15,8 @@ public class ReviewDTO {
     private int reviewNo;   // 기본 키
     private int likeNum;
     private int starPoint;
-    private String reviewImage;
+    private String originReviewImageName;
+    private String savedReviewImageName;
     private String reviewContent;
     private Date regDate;
     private ReviewWriterNo reviewWriterNo;
