@@ -15,8 +15,6 @@ public class DataService {
     }
 
     public void getPlaceData() {
-
         dataDomainService.getPlaceData();
-
     }
 }
