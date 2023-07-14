@@ -81,15 +81,15 @@ body{
 .scheduleBtn{
     border: none;
     background: none;
-    margin-top: 190px;
 }
 
 .volcano{
-display: none;
+    display: block;
+    margin-top: 130px;
 }
 
 .volcanoBoom{
-    display: block;
+    display: none;
 }
 
 .logo{
