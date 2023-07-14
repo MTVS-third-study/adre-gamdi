@@ -35,5 +35,4 @@ public class User {
     private int grade;
     //    @Column
     private boolean blacklist_status;
-    
 }
