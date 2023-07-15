@@ -27,7 +27,7 @@ public class OAuthService {
         return validateUser(kakaoInfo);
     }
 
-    public UserDTO validateUser(KakaoUserDTO kakaoInfo) {
+    private UserDTO validateUser(KakaoUserDTO kakaoInfo) {
         // 회원가입
         User userInfo = userRepository.save(new User(1L,
                 kakaoInfo.getId(),
@@ -59,7 +59,7 @@ public class OAuthService {
         return findUserInfo;
     }
 
-    public void logout(String token) { // 로그아웃
+    public void kakaoLogout(String token) { // 로그아웃
         kakaoDomainService.logout(token);
     }
 }
