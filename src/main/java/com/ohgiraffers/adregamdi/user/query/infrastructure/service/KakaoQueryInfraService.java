@@ -1,13 +1,11 @@
-package com.ohgiraffers.adregamdi.user.command.infrastructure.service;
+package com.ohgiraffers.adregamdi.user.query.infrastructure.service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
+import com.ohgiraffers.adregamdi.user.command.application.dto.KakaoUserDTO;
+import com.ohgiraffers.adregamdi.user.command.application.dto.TokenDTO;
 import com.ohgiraffers.adregamdi.user.command.domain.exception.UserException;
-import com.ohgiraffers.adregamdi.user.command.domain.service.UserDomainService;
-import com.ohgiraffers.adregamdi.user.query.application.service.UserFindService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -15,21 +13,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @Service
-public class UserInfraService implements UserDomainService {
-    private final UserFindService userFindService;
-
-    @Autowired
-    public UserInfraService(UserFindService userFindService) {
-        this.userFindService = userFindService;
-    }
-
-    //
-    @Override
-    public String getKakaoAccessToken(String code) {
+public class KakaoQueryInfraService {
+    public TokenDTO getKakaoAccessToken(String code) {
         String access_Token = "";
         String refresh_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
-
+        TokenDTO token = null;
         try {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -67,7 +56,7 @@ public class UserInfraService implements UserDomainService {
 
             access_Token = element.getAsJsonObject().get("access_token").getAsString();
             refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
-
+            token = new TokenDTO(access_Token, refresh_Token);
             System.out.println("access_token : " + access_Token);
             System.out.println("refresh_token : " + refresh_Token);
 
@@ -76,22 +65,21 @@ public class UserInfraService implements UserDomainService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return access_Token;
+        return token;
     }
 
-    @Override
-    public UserDTO getKakaoUserInfo(String token) {
+    public KakaoUserDTO getKakaoUserInfo(TokenDTO token) {
         String reqURL = "https://kapi.kakao.com/v2/user/me";
-        UserDTO userInfo = null;
+        KakaoUserDTO userInfo = null;
 
         //access_token을 이용하여 사용자 정보 조회
         try {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            System.out.println("token = " + token);
+            System.out.println("token = " + token.getAccess_Token());
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
-            conn.setRequestProperty("Authorization", "Bearer " + token); //전송할 header 작성, access_token전송
+            conn.setRequestProperty("Authorization", "Bearer " + token.getAccess_Token()); //전송할 header 작성, access_token전송
 
             //결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
@@ -117,16 +105,17 @@ public class UserInfraService implements UserDomainService {
             String id = element.getAsJsonObject().get("id").getAsString();
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
             String email = userException.solveNullPointerException("email", kakao_account);
-            String age = userException.solveNullPointerException("age", kakao_account);
+            String age = userException.solveNullPointerException("age_range", kakao_account);
             String gender = userException.solveNullPointerException("gender", kakao_account);
 
-            userInfo = new UserDTO();
+            userInfo = new KakaoUserDTO();
             userInfo.setId(id);
             userInfo.setKakaoNickName(nickname);
-            userInfo.setServiceNickName("");
             userInfo.setEmail(email);
             userInfo.setAge(age);
             userInfo.setGender(gender);
+            userInfo.setAccess_Token(token.getAccess_Token());
+            userInfo.setRefresh_Token(token.getRefresh_Token());
 
             br.close();
 
@@ -136,36 +125,4 @@ public class UserInfraService implements UserDomainService {
         return userInfo;
     }
 
-    @Override
-    public void logout(String token) {
-        String reqURL = "https://kapi.kakao.com/v1/user/logout";
-
-        try {
-            URL url = new URL(reqURL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization", "Bearer " + token);
-
-            int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-            StringBuilder result = new StringBuilder();
-            String line = "";
-
-            while ((line = br.readLine()) != null) {
-                result.append(line);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public UserDTO findOneUser(String id) {
-        return userFindService.findOneUser(id);
-    }
 }
