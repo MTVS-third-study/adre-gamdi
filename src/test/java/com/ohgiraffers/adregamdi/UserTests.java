@@ -9,14 +9,14 @@ public class UserTests {
     @Test
     @DisplayName("UserVO 동등 객체 판단 테스트")
     void equalTest() {
-        UserVO userDTO1 = UserVO.builder()
+        UserVO userVO1 = UserVO.builder()
                 .id("1")
                 .kakaoNickName("q")
                 .serviceNickName("q")
                 .email("q")
                 .gender("q")
                 .build();
-        UserVO userDTO2 = UserVO.builder()
+        UserVO userVO2 = UserVO.builder()
                 .id("1")
                 .kakaoNickName("q")
                 .serviceNickName("q")
@@ -24,7 +24,7 @@ public class UserTests {
                 .gender("q")
                 .build();
 
-        boolean compare = userDTO1.equals(userDTO2);
+        boolean compare = userVO1.equals(userVO2);
 
         Assertions.assertTrue(compare);
     }
