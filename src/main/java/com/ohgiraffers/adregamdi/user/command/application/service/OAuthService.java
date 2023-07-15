@@ -28,7 +28,6 @@ public class OAuthService {
     }
 
     public UserDTO validateUser(KakaoUserDTO kakaoInfo) {
-//        if (findUserInfo == null) {
         // 회원가입
         User userInfo = userRepository.save(new User(1L,
                 kakaoInfo.getId(),
@@ -44,7 +43,6 @@ public class OAuthService {
                 kakaoInfo.getAccess_Token(),
                 kakaoInfo.getRefresh_Token()));
         UserDTO findUserInfo = new UserDTO();
-//        userDomainService.findById(kakaoInfo.getId());
         findUserInfo.setUserNo(userInfo.getUserNo());
         findUserInfo.setId(userInfo.getId());
         findUserInfo.setKakaoNickName(userInfo.getKakaoNickName());
@@ -58,7 +56,6 @@ public class OAuthService {
         findUserInfo.setBlacklist_status(userInfo.isBlacklist_status());
         findUserInfo.setAccess_Token(kakaoInfo.getAccess_Token());
         findUserInfo.setRefresh_Token(kakaoInfo.getRefresh_Token());
-//        }
         return findUserInfo;
     }
 

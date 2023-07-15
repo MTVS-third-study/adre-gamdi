@@ -105,7 +105,7 @@ public class KakaoQueryInfraService {
             String id = element.getAsJsonObject().get("id").getAsString();
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
             String email = userException.solveNullPointerException("email", kakao_account);
-            String age = userException.solveNullPointerException("age", kakao_account);
+            String age = userException.solveNullPointerException("age_range", kakao_account);
             String gender = userException.solveNullPointerException("gender", kakao_account);
 
             userInfo = new KakaoUserDTO();
