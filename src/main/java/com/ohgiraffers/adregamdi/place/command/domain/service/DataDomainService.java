@@ -97,11 +97,15 @@ public class DataDomainService {
                     String categoryCode = "";
                     String categoryName = "";
                     if (contentsCd == null) {
+                        categoryCode = "";
+                        categoryName = "";
+                    } else {
                         categoryCode = (String) contentsCd.getOrDefault("value", "");
                         categoryName = (String) contentsCd.getOrDefault("label", "");
                     }
                     System.out.println("categoryCode = " + categoryCode);
                     System.out.println("categoryName = " + categoryName);
+
 
                     // 설명. items - title
                     String title = (String) item.getOrDefault("title", "");
@@ -110,14 +114,18 @@ public class DataDomainService {
                     // 설명. items - region1cd
                     JSONObject region1cd = (JSONObject) item.getOrDefault("region1cd", "");
                     // 설명. items - region1cd - value, label
-                    String siCode="";
-                    String siName="";
-                    if (region1cd != null) {
-                        siCode = (String) region1cd.getOrDefault("value", "");
-                        siName = (String) region1cd.getOrDefault("label", "");
+                    String cityCode = "";
+                    String cityName = "";
+                    if (region1cd == null) {
+                        cityCode = "";
+                        cityName = "";
+                    } else {
+                        cityCode = (String) region1cd.getOrDefault("value", "");
+                        cityName = (String) region1cd.getOrDefault("label", "");
                     }
-                    System.out.println("siCode = " + siCode);
-                    System.out.println("siName = " + siName);
+                    System.out.println("siCode = " + cityCode);
+                    System.out.println("siName = " + cityName);
+
                     // 설명. items - region2cd
                     JSONObject region2cd = (JSONObject) item.get("region2cd");
                     int dongCode = 0;

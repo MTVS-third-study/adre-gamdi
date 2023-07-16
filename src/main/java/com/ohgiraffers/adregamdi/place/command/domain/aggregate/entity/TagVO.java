@@ -4,19 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "TBL_TAG")
-public class Tag {
+@Embeddable
+public class TagVO {
 
-    @Id
-    @Column(name = "TAG_NO")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, name = "tag_no")
     private Long tagNo;
-    @Column(name = "TAG_NAME")
-    private String tagName;
 }
