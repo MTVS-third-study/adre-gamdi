@@ -18,29 +18,29 @@ public class User {
     @Column(name = "USER_NO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userNo;
-    @Column
+    @Column(name = "ID")
     private String id;
-    @Column
+    @Column(name = "KAKAO_NICKNAME")
     private String kakaoNickName;
-    @Column
+    @Column(name = "SERVICE_NICKNAME")
     private String serviceNickName;
-    @Column
+    @Column(name = "EMAIL")
     private String email;
-    @Column
+    @Column(name = "AGE")
     private String age;
-    @Column
+    @Column(name = "GENDER")
     private String gender;
-    @Column
+    @Column(name = "REPORT_COUNT")
     private int report_count;
-    @Column
+    @Column(name = "REVIEW_COUNT")
     private int review_count;
-    @Column
+    @Column(name = "GRADE")
     private int grade;
-    @Column
+    @Column(name = "BLACKLIST_STATUS")
     private boolean blacklist_status;
-    @Column
+    @Column(name = "ACCESS_TOKEN")
     private String access_Token;
-    @Column
+    @Column(name = "REFRESH_TOKEN")
     private String refresh_Token;
 
 //    public User update(String id, String kakaoNickName, String serviceNickName, String email, String age, String gender) {
