@@ -15,12 +15,5 @@ public class UserService {
         this.userRepository = userRepository;
         this.userDomainService = userDomainService;
     }
-
-//    public int login(UserDTO userInfo) {
-//        UserDTO findUserInfo = userDomainService.findById(userInfo.getId());
-//        if (userInfo == findUserInfo) {
-//            return 1;
-//        }
-//        return userRepository.insertUser(userInfo);
-//    }
+    
 }

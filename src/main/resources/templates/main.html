@@ -1,72 +1,83 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/html">
 <head>
-    <link rel="stylesheet" href="/css/main.css">
+    <link href="/css/main.css" rel="stylesheet">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Title</title>
 </head>
 <body>
 <div id="Wrapper1">
 
-    <div class = "UpperBar">
+    <div class="UpperBar">
 
-            <img src="/images/goodlogo.png" class="logo">
+        <img class="logo" src="/images/goodlogo.png">
 
-            <img src="/images/Adregamdi.png" class="siteName">
+        <img class="siteName" src="/images/Adregamdi.png">
 
-      <a href="placeReviews">장소리뷰 페이지</a>
+        <a href="placeReviews">장소리뷰 페이지</a>
+
         <div class="loginBox">
+            <th:block th:if="${session.loginUser == null}">
+
+                <div class="loginBtn">
+                    <button class="upperBtn" id="loginBtn" type="button">로그인</button>
+                </div>
+
+            </th:block>
             <th:block th:if="${session.loginUser != null}">
                 <div class="myPageBtn">
-                    <button type="button" class="upperBtn" onclick="location.href='/myPage'">마이 페이지</button>
+                    <button class="upperBtn" onclick="location.href='/myPage'" type="button">마이 페이지</button>
                 </div>
-            </th:block>
-            <th:block th:if="${session.loginUser == null}">
-                <div class="loginBtn">
-                 <button type="button" class="upperBtn" onclick="location.href='/login'">로그인</button>
-                </div>
-            </th:block>
-            <th:block th:if="${session.loginUser != null}">
                 <div class="logoutBtn">
-                    <button type="button" class="upperBtn" onclick="location.href='/logout'">로그아웃</button>
+                    <button class="upperBtn"
+                            onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:8080/oauth/kakao/logout'"
+                            type="button">
+                        로그아웃
+                    </button>
                 </div>
             </th:block>
         </div>
     </div>
     <div class="bottomSpace">
         <th:block th:if="${session.loginUser != null}">
-
-            <img src="/images/volcanoBoom.png" alt="" class="volcanoBoom">
-            <button type="button" class="scheduleBtn" onclick="location.href='/schedule'">
-                <img src="/images/volcano.png" alt="스케줄" class="volcano">
+            <img alt="" class="volcanoBoom" src="/images/volcanoBoom.png">
+            <button class="scheduleBtn" onclick="location.href='/schedule'" type="button">
+                <img alt="스케줄" class="volcano" src="/images/volcano.png">
             </button>
         </th:block>
         <th:block th:if="${session.loginUser == null}">
-            <img src="/images/volcano.png" class="notLoginVolcano">
+            <img class="notLoginVolcano" src="/images/volcano.png">
         </th:block>
     </div>
 </div>
 
 <div id="modal">
-    <div class="modal-content">
-        <h2>모달창 제목</h2>
-        <p>모달창 내용</p>
-        <button id="open-modal">열기</button>
-        <button id="close-modal">닫기</button>
+    <div align="center" class="modal-content">
+        <h2>로그인</h2>
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&redirect_uri=http://localhost:8080/oauth/kakao/login&response_type=code"
+           id="kakao-login-btn">
+            <img alt="카카오 로그인 버튼" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+                 width="222"/>
+        </a>
     </div>
 </div>
-  
+
 </body>
 <script>
+
+</script>
+<script>
     const modal = document.getElementById("modal");
-    const openModalBtn = document.getElementById("open-modal");
+    const openLoginBtn = document.getElementById("loginBtn");
     const closeModalBtn = document.getElementById("close-modal");
+
     // 모달창 열기
-    openModalBtn.addEventListener("click", () => {
+    openLoginBtn.addEventListener("click", () => {
         modal.style.display = "block";
         document.body.style.overflow = "hidden"; // 스크롤바 제거
     });
+
     // 모달창 닫기
     closeModalBtn.addEventListener("click", () => {
         modal.style.display = "none";
