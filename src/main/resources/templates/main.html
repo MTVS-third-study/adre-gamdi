@@ -16,34 +16,38 @@
         <img class="siteName" src="/images/Adregamdi.png">
 
         <a href="placeReviews">장소리뷰 페이지</a>
+
         <div class="loginBox">
-            <th:block th:if="${session.loginUser != null}">
-                <div class="myPageBtn">
-                    <button type="button" class="upperBtn" onclick="location.href='/myPage'">마이 페이지</button>
-                </div>
-            </th:block>
             <th:block th:if="${session.loginUser == null}">
+
                 <div class="loginBtn">
                     <button class="upperBtn" id="loginBtn" type="button">로그인</button>
                 </div>
+
             </th:block>
             <th:block th:if="${session.loginUser != null}">
+                <div class="myPageBtn">
+                    <button class="upperBtn" onclick="location.href='/myPage'" type="button">마이 페이지</button>
+                </div>
                 <div class="logoutBtn">
-                    <button type="button" class="upperBtn" onclick="location.href='/logout'">로그아웃</button>
+                    <button class="upperBtn"
+                            onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:8080/oauth/kakao/logout'"
+                            type="button">
+                        로그아웃
+                    </button>
                 </div>
             </th:block>
         </div>
     </div>
     <div class="bottomSpace">
         <th:block th:if="${session.loginUser != null}">
-
-            <img src="/images/volcanoBoom.png" alt="" class="volcanoBoom">
-            <button type="button" class="scheduleBtn" onclick="location.href='/schedule'">
-                <img src="/images/volcano.png" alt="스케줄" class="volcano">
+            <img alt="" class="volcanoBoom" src="/images/volcanoBoom.png">
+            <button class="scheduleBtn" onclick="location.href='/schedule'" type="button">
+                <img alt="스케줄" class="volcano" src="/images/volcano.png">
             </button>
         </th:block>
         <th:block th:if="${session.loginUser == null}">
-            <img src="/images/volcano.png" class="notLoginVolcano">
+            <img class="notLoginVolcano" src="/images/volcano.png">
         </th:block>
     </div>
 </div>
@@ -60,6 +64,9 @@
 </div>
 
 </body>
+<script>
+
+</script>
 <script>
     const modal = document.getElementById("modal");
     const openLoginBtn = document.getElementById("loginBtn");
