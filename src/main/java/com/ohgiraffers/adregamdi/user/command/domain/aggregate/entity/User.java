@@ -42,15 +42,5 @@ public class User {
     private String access_Token;
     @Column(name = "REFRESH_TOKEN")
     private String refresh_Token;
-
-//    public User update(String id, String kakaoNickName, String serviceNickName, String email, String age, String gender) {
-//        this.id = id;
-//        this.kakaoNickName = kakaoNickName;
-//        this.serviceNickName = serviceNickName;
-//        this.email = email;
-//        this.age = age;
-//        this.gender = gender;
-//        return this;
-//    }
-
+    
 }
