@@ -40,6 +40,10 @@ public class OAuthController {
         System.out.println("test = " + test.getEmail());
         System.out.println("test = " + test.getAge());
         System.out.println("test = " + test.getGender());
+//        oAuthService.logout(loginUser.getAccess_Token()); // 로그아웃
+//        session.removeAttribute("loginUser");
+
+        response.sendRedirect("http://localhost:8080");
         response.sendRedirect("http://localhost:8080"); // 메인 페이지로
     }
 
