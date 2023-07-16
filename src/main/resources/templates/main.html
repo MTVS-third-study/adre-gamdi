@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
 <head>
     <link rel="stylesheet" href="/css/main.css">
     <meta charset="UTF-8">
@@ -17,22 +17,34 @@
 
       <a href="placeReviews">장소리뷰 페이지</a>
         <div class="loginBox">
-            <div class="myPageBtn">
-                <button type="button" class="upperBtn" onclick="location.href='/myPage'">마이 페이지</button>
-            </div>
-            <div class="upperBtn">
-            <button type="button" class="upperBtn" onclick="location.href='/login'">로그인</button>
-            </div>
+            <th:block th:if="${session.loginUser != null}">
+                <div class="myPageBtn">
+                    <button type="button" class="upperBtn" onclick="location.href='/myPage'">마이 페이지</button>
+                </div>
+            </th:block>
+            <th:block th:if="${session.loginUser == null}">
+                <div class="loginBtn">
+                 <button type="button" class="upperBtn" onclick="location.href='/login'">로그인</button>
+                </div>
+            </th:block>
+            <th:block th:if="${session.loginUser != null}">
+                <div class="logoutBtn">
+                    <button type="button" class="upperBtn" onclick="location.href='/logout'">로그아웃</button>
+                </div>
+            </th:block>
         </div>
     </div>
     <div class="bottomSpace">
-        <div class="scheduleBtnDiv">
+        <th:block th:if="${session.loginUser != null}">
 
+            <img src="/images/volcanoBoom.png" alt="" class="volcanoBoom">
             <button type="button" class="scheduleBtn" onclick="location.href='/schedule'">
                 <img src="/images/volcano.png" alt="스케줄" class="volcano">
-                <img src="/images/volcanoBoom.png" alt="" class="volcanoBoom">
             </button>
-        </div>
+        </th:block>
+        <th:block th:if="${session.loginUser == null}">
+            <img src="/images/volcano.png" class="notLoginVolcano">
+        </th:block>
     </div>
 </div>
 
