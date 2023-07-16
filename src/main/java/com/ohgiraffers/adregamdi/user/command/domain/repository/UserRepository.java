@@ -6,9 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-//    int insertUser(UserDTO userInfo);
-//
-//    void updateUser();
-//
-//    void deleteUser();
+
 }

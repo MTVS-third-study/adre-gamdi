@@ -1,6 +1,9 @@
 package com.ohgiraffers.adregamdi.review.domain.aggregate.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

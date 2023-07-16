@@ -22,12 +22,12 @@ public class OAuthService {
         this.userRepository = userRepository;
     }
 
-    public UserDTO kakaoLogin(String code) {
-        KakaoUserDTO kakaoInfo = kakaoDomainService.getKakaoUserInfo(code); // 카카오
+    public UserDTO kakaoLogin(String code) { // 카카오 로그인
+        KakaoUserDTO kakaoInfo = kakaoDomainService.getKakaoUserInfo(code);
         return validateUser(kakaoInfo);
     }
 
-    public UserDTO validateUser(KakaoUserDTO kakaoInfo) {
+    private UserDTO validateUser(KakaoUserDTO kakaoInfo) {
         // 회원가입
         User userInfo = userRepository.save(new User(1L,
                 kakaoInfo.getId(),
@@ -59,7 +59,7 @@ public class OAuthService {
         return findUserInfo;
     }
 
-    public void logout(String token) { // 로그아웃
+    public void kakaoLogout(String token) { // 카카오 로그아웃
         kakaoDomainService.logout(token);
     }
 }

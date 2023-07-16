@@ -20,7 +20,7 @@ import java.util.UUID;
 @RequestMapping("/*")
 public class ReviewController {
 
-    private ReviewService reviewService;
+    private final ReviewService reviewService;
 
     @Autowired
     public ReviewController(ReviewService reviewService) {

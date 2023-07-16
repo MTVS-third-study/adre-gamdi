@@ -1,8 +1,8 @@
 package com.ohgiraffers.adregamdi.review.application.service;
 
 import com.ohgiraffers.adregamdi.review.application.dto.ReviewDTO;
-import com.ohgiraffers.adregamdi.review.domain.service.DeleteReviewService;
 import com.ohgiraffers.adregamdi.review.domain.service.CreateReviewService;
+import com.ohgiraffers.adregamdi.review.domain.service.DeleteReviewService;
 import com.ohgiraffers.adregamdi.review.domain.service.UpdateReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +16,9 @@ import java.io.PrintWriter;
 @Service
 public class ReviewService {
 
-    private CreateReviewService createReviewService;
-    private UpdateReviewService updateReviewService;
-    private DeleteReviewService deleteReviewService;
+    private final CreateReviewService createReviewService;
+    private final UpdateReviewService updateReviewService;
+    private final DeleteReviewService deleteReviewService;
 
     @Autowired
     public ReviewService(CreateReviewService createReviewService, UpdateReviewService updateReviewService, DeleteReviewService deleteReviewService) {

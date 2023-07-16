@@ -3,7 +3,6 @@ package com.ohgiraffers.adregamdi.review.application.dto;
 import com.ohgiraffers.adregamdi.review.domain.aggregate.entity.ReviewPlaceNo;
 import com.ohgiraffers.adregamdi.review.domain.aggregate.entity.ReviewWriterNo;
 import lombok.*;
-import org.springframework.lang.NonNull;
 
 import java.sql.Timestamp;
 import java.util.Date;

@@ -2,19 +2,16 @@ package com.ohgiraffers.adregamdi.user.query.application.service;
 
 import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
 import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
-import com.ohgiraffers.adregamdi.user.query.infrastructure.repository.UserFindInfraRepository;
 import com.ohgiraffers.adregamdi.user.query.infrastructure.repository.UserQueryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserQueryService {
-    private final UserFindInfraRepository userFindInfraRepository;
     private final UserQueryRepository userQueryRepository;
 
     @Autowired
-    public UserQueryService(UserFindInfraRepository userFindInfraRepository, UserQueryRepository userQueryRepository) {
-        this.userFindInfraRepository = userFindInfraRepository;
+    public UserQueryService(UserQueryRepository userQueryRepository) {
         this.userQueryRepository = userQueryRepository;
     }
 
