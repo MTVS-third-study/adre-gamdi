@@ -40,20 +40,16 @@ public class OAuthController {
         System.out.println("test = " + test.getEmail());
         System.out.println("test = " + test.getAge());
         System.out.println("test = " + test.getGender());
-        oAuthService.kakaoLogout(loginUser.getAccess_Token()); // 로그아웃
-        session.removeAttribute("loginUser");
-
-        response.sendRedirect("http://localhost:8080");
+        response.sendRedirect("http://localhost:8080"); // 메인 페이지로
     }
 
-
-//    @GetMapping("kakao/logout")
-//    public void kakaoLogout(HttpSession session, HttpServletResponse response) throws IOException {
-//        String token = (String) session.getAttribute("kakaoToken");
-//        oAuthService.logout(token); // 로그아웃
-//        session.removeAttribute("loginUser");
-//        response.sendRedirect("http://localhost:8080");
-//    }
+    @GetMapping("kakao/logout")
+    public void kakaoLogout(HttpSession session, HttpServletResponse response) throws IOException {
+        String token = (String) session.getAttribute("kakaoToken");
+        oAuthService.kakaoLogout(token); // 로그아웃
+        session.removeAttribute("loginUser");
+        response.sendRedirect("http://localhost:8080"); // 메인 페이지로
+    }
 
 //    // 네이버
 //    @ResponseBody
