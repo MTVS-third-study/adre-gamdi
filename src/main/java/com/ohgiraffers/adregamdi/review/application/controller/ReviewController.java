@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/*")
@@ -41,10 +43,12 @@ public class ReviewController {
 
         if (reviewService.insertReview(reviewDTO, imageFile, model)) {
             reviewService.alert("리뷰가 등록되었습니다.", response);
+
             return "placeReviews";
 
         } else {
-            reviewService.alert("다시작성.", response);
+            reviewService.alert("리뷰 등록에 실패하였습니다.", response);
+
             return "registReview";
         }
     }

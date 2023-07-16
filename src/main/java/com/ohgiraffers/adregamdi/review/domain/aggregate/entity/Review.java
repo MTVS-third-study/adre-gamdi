@@ -29,6 +29,8 @@ public class Review {
     @Column
     private String savedReviewImageName;
     @Column
+    private String imageFilePath;
+    @Column
     private String reviewContent;
     @Column(name = "regDate", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp regDate;
