@@ -1,15 +1,17 @@
 package com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity;
 
-import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.Address;
-import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.Coordinate;
+import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
 @Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 @Table(name= "TBL_PLACE")
 public class Place {
 
@@ -21,22 +23,21 @@ public class Place {
     private String placeName;
 
     /* 지역 분류 */
-    @Column(nullable = false, name = "CATEGORY_NO")
-    private int categoryNo;
-    @Column(name = "CITY_NO")
-    private int cityNo;
-    @Column(name = "DONG_NO")
-    private int dongNo;
+    @Embedded
+    private CategoryVO categoryVO;
+    @Embedded
+    private CityVO cityVO;
+    @Embedded
+    private DongVO dongVO;
 
     /* 가게 정보 */
-    @Column(name = "INTRODUCTION")
     private String introduction;
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
     @Embedded
-    private Coordinate coordinate;
+    private CoordinateVO coordinateVO;
     @Embedded
-    private Address address;
+    private AddressVO addressVO;
 
     /* 이미지 관련 */
     @Column(name = "IMAGE_PATH")
