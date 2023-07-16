@@ -26,7 +26,7 @@ public class OAuthController {
         this.oAuthService = oAuthService;
     }
 
-    // 카카오
+    // 카카오 로그인
     @GetMapping("kakao/login")
     public void kakaoCallback(@RequestParam String code, HttpSession session
             , HttpServletResponse response) throws IOException {
@@ -43,10 +43,11 @@ public class OAuthController {
         response.sendRedirect("http://localhost:8080"); // 메인 페이지로
     }
 
+    // 카카오 로그아웃
     @GetMapping("kakao/logout")
     public void kakaoLogout(HttpSession session, HttpServletResponse response) throws IOException {
         String token = (String) session.getAttribute("kakaoToken");
-        oAuthService.kakaoLogout(token); // 로그아웃
+        oAuthService.kakaoLogout(token);
         session.removeAttribute("loginUser");
         response.sendRedirect("http://localhost:8080"); // 메인 페이지로
     }
