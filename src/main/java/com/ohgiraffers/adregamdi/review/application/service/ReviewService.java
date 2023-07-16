@@ -29,10 +29,9 @@ public class ReviewService {
 
     public boolean insertReview(ReviewDTO reviewDTO, MultipartFile imageFile, Model model) {
 
-        if (createReviewService.isNotNull(reviewDTO, imageFile, model) && createReviewService.insertReviewImage(reviewDTO, imageFile)) {
+        if (createReviewService.isNotNull(reviewDTO, imageFile, model) && createReviewService.insertReviewImage(reviewDTO, imageFile, model)) {
+
             createReviewService.saveReview(reviewDTO);
-            System.out.println(createReviewService.insertReviewImage(reviewDTO, imageFile));
-            System.out.println(createReviewService.isNotNull(reviewDTO, imageFile, model));
             return true;
         }
         return false;
