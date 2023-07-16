@@ -1,6 +1,7 @@
 package com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity;
 
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.PlaceVO;
+import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.TagVO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
