@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class KakaoUserDTO {
-    private String id;
+    private String kakaoId;
     private String kakaoNickName;
     private String email;
     private String age;
