@@ -18,14 +18,14 @@ public class UserQueryService {
     public UserDTO findById(String id) { // 현재 유저 조회
         User user;
         try {
-            user = userQueryRepository.findById(id);
+            user = userQueryRepository.findByKakaoId(id);
         } catch (NullPointerException ne) {
             ne.printStackTrace();
             return new UserDTO();
         }
         return new UserDTO(
                 user.getUserNo(),
-                user.getId(),
+                user.getKakaoId(),
                 user.getKakaoNickName(),
                 user.getServiceNickName(),
                 user.getEmail(),
@@ -34,9 +34,8 @@ public class UserQueryService {
                 user.getReport_count(),
                 user.getReview_count(),
                 user.getGrade(),
-                user.isBlacklist_status(),
-                user.getAccess_Token(),
-                user.getRefresh_Token());
+                user.isBlacklist_status()
+        );
     }
 }
 
