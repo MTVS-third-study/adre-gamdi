@@ -30,7 +30,7 @@ public class OAuthService {
     private UserDTO validateUser(KakaoUserDTO kakaoInfo) {
         User userInfo;
         UserDTO findUserInfo = userDomainService.findByKakaoId(kakaoInfo.getKakaoId());
-        if (findUserInfo == null) { // 회원가입
+        if (findUserInfo.getUserNo() == null) { // 회원가입
             userInfo = userRepository.save(new User(1L,
                     kakaoInfo.getKakaoId(),
                     kakaoInfo.getKakaoNickName(),

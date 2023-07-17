@@ -16,11 +16,8 @@ public class UserQueryService {
     }
 
     public UserDTO findByKakaoId(String kakaoId) { // 현재 유저 조회
-        User user;
-        try {
-            user = userQueryRepository.findByKakaoId(kakaoId);
-        } catch (NullPointerException ne) {
-            ne.printStackTrace();
+        User user = userQueryRepository.findByKakaoId(kakaoId);
+        if (user == null) {
             return new UserDTO();
         }
         return new UserDTO(
