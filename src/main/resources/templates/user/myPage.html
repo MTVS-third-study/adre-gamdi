@@ -4,13 +4,6 @@
     <meta charset="UTF-8">
     <title>마이페이지</title>
 </head>
-<script>
-    history.pushState(null, null, location.href);
-
-    window.onpopstate = function () {
-        history.go(1);
-    };
-</script>
 <body>
 <th:block th:if="${session.loginUser == null}">
     <script language="javascript">
