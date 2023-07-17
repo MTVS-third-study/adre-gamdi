@@ -14,6 +14,6 @@ import javax.persistence.Embeddable;
 public class CityVO {
 
     @Column(nullable = false, name = "CITY_NO")
-    private Long cityNo;
+    private int cityNo;
 
 }

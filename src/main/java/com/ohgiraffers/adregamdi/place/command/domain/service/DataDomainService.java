@@ -12,8 +12,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -24,33 +23,7 @@ public class DataDomainService {
         return key;
     }
 
-    // 데이터 수집 로직
-    public void getPlaceData() {
-
-        // 필기. 세션에 저장된 아이디가 관리자인지 구분해서 예외 처리
-
-        String key = getOpenAPIKey();
-        int[] categoryNo = {1, 2, 3, 4}; // 1- 관광지, 2 - 쇼핑, 3 - 숙박, 4- 음식점, 6 - 테마 여행
-        int currentPage = 1;
-        int totalPage = 0;
-
-        for (int i = 0; i < categoryNo.length; i++) {
-                getPlaceDataTotalPage(key, currentPage, categoryNo[i]);
-            for (int j = currentPage; j <= totalPage; j++) {
-                JSONArray placeInfo = getPlaceInfosInPage(key, j, categoryNo[i]);   // 페이지 당 items(여러 장소 정보)
-
-                for (int k = 0; k < placeInfo.size(); k++) {
-                    JSONObject item = (JSONObject) placeInfo.get(k);    // 한 장소
-                    parsePlaceInfo(item, k);    // 한 장소의 정보들
-                    List<String> tagList = parseAllTags(item); // 한 장소의 태그들
-                }
-
-            }
-                currentPage = 1;
-        }
-    }
-
-    private int getPlaceDataTotalPage(String key, int currentPage, int categoryNo) {
+    public int getPlaceDataTotalPage(String key, int currentPage, int categoryNo) {
         int totalPage;
         try {
             URL url = new URL("http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=" + key + "&locale=kr&category=c" + categoryNo + "&page=" + currentPage);
@@ -74,7 +47,7 @@ public class DataDomainService {
         return totalPage;
     }
 
-    private JSONArray getPlaceInfosInPage(String key, int currentPage, int categoryNo) {
+    public JSONArray getPlaceInfosInPage(String key, int currentPage, int categoryNo) {
 
             try {
                 URL url = new URL("http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=" + key + "&locale=kr&category=c" + categoryNo + "&page=" + currentPage);
@@ -104,103 +77,117 @@ public class DataDomainService {
         // , latitude, longitude, postcode, phoneno, 'repPhoto'
     }
 
-    private void parsePlaceInfo(JSONObject item) {
+    public Map<String, String> parsePlaceInfo(JSONObject item) {
 
-            // 설명. items - contentscd
-            JSONObject contentsCd = (JSONObject) item.getOrDefault("contentscd", "");
-            // 설명. items - contentscd - value, label
-            String categoryCode = "";
-            String categoryName = "";
-            if (contentsCd == null) {
-                categoryCode = "";
-                categoryName = "";
-            } else {
-                categoryCode = (String) contentsCd.getOrDefault("value", "");
-                categoryName = (String) contentsCd.getOrDefault("label", "");
+        Map<String, String> placeInfo = new HashMap<>();
+        // 설명. items - contentscd
+        JSONObject contentsCd = (JSONObject) item.getOrDefault("contentscd", "");
+        // 설명. items - contentscd - value, label
+        String categoryCode = "";
+        String categoryName = "";
+        if (contentsCd == null) {
+            categoryCode = "";
+            categoryName = "";
+        } else {
+            categoryCode = (String) contentsCd.getOrDefault("value", "");
+            categoryName = (String) contentsCd.getOrDefault("label", "");
+        }
+        placeInfo.put("categoryCode", categoryCode);
+        placeInfo.put("categoryName", categoryName);
+        System.out.println("categoryCode = " + categoryCode);
+        System.out.println("categoryName = " + categoryName);
+
+
+        // 설명. items - title
+        String title = (String) item.getOrDefault("title", "");
+        placeInfo.put("title", title);
+        System.out.println("title = " + title);
+
+        // 설명. items - region1cd
+        JSONObject region1cd = (JSONObject) item.getOrDefault("region1cd", "");
+        // 설명. items - region1cd - value, label
+        String cityName = "";
+        if (region1cd == null) {
+            cityName = "";
+        } else {
+            cityName = (String) region1cd.getOrDefault("label", "");
+        }
+        placeInfo.put("cityName", cityName);
+        System.out.println("cityName = " + cityName);
+
+        // 설명. items - region2cd
+        JSONObject region2cd = (JSONObject) item.getOrDefault("region2cd", "");
+        int dongCode = 0;
+        String dongName = "";
+        if (region2cd != null) {
+            dongCode = Integer.parseInt(String.valueOf(region2cd.getOrDefault("value", 0)));
+            dongName = (String) region2cd.getOrDefault("label", "");
+        }
+        placeInfo.put("dongCode", String.valueOf(dongCode));
+        placeInfo.put("dongName", dongName);
+        // 설명. items - region2cd - value, label
+        System.out.println("dongCode = " + dongCode);
+        System.out.println("dongName = " + dongName);
+
+        // 설명. items - address, roadaddress, postcode, phoneno
+        String address = (String) item.getOrDefault("address", "");
+        String roadAddress = (String) item.getOrDefault("roadaddress", "");
+        String postCode = (String) item.getOrDefault("postcode", "");
+        String phoneNo = (String) item.getOrDefault("phoneno", "");
+        placeInfo.put("address", address);
+        placeInfo.put("roadAddress", roadAddress);
+        placeInfo.put("postCode", postCode);
+        placeInfo.put("phoneNo", phoneNo);
+        System.out.println("address = " + address);
+        System.out.println("roadAddress = " + roadAddress);
+        System.out.println("postCode = " + postCode);
+        System.out.println("phoneNo = " + phoneNo);
+
+        // 설명. items - introduction
+        String introduction = (String) item.getOrDefault("introduction", "");
+        placeInfo.put("introduction", introduction);
+        System.out.println("introduction = " + introduction);
+
+        // 설명. items - latitude, longitude
+        double lat = 0;
+        double lng = 0;
+        if (item.get("latitude") != null) {
+            lat = Double.parseDouble(String.valueOf(item.get("latitude")));
+        } else {
+            lat = 0;
+        }
+        if (item.get("longitude") != null) {
+            lng = Double.parseDouble(String.valueOf(item.get("longitude")));
+        } else {
+            lng = 0;
+        }
+        placeInfo.put("lat", String.valueOf(lat));
+        placeInfo.put("lng", String.valueOf(lng));
+        System.out.println("lat = " + lat);
+        System.out.println("lng = " + lng);
+
+        // 설명. items - repPhoto
+        JSONObject repPhoto = (JSONObject) item.getOrDefault("repPhoto", "");
+        String imagePath = "";
+        String thumbnailPath = "";
+        if (repPhoto != null) {
+            // 설명. items - repPhoto - photoid
+            JSONObject photoId = (JSONObject) repPhoto.getOrDefault("photoid", "");
+            // 설명. items - repPhoto - photoid - imgpath, thumbnailpath
+            if (photoId != null) {
+                imagePath = (String) photoId.getOrDefault("imgpath", "");
+                thumbnailPath = (String) photoId.getOrDefault("thumbnailpath", "");
             }
-            System.out.println("categoryCode = " + categoryCode);
-            System.out.println("categoryName = " + categoryName);
+        }
+        placeInfo.put("imagePath",imagePath);
+        placeInfo.put("thumbnailPath", thumbnailPath);
+        System.out.println("imagePath = " + imagePath);
+        System.out.println("thumbnailpath = " + thumbnailPath);
 
-
-            // 설명. items - title
-            String title = (String) item.getOrDefault("title", "");
-            System.out.println("title = " + title);
-
-            // 설명. items - region1cd
-            JSONObject region1cd = (JSONObject) item.getOrDefault("region1cd", "");
-            // 설명. items - region1cd - value, label
-            String cityCode = "";
-            String cityName = "";
-            if (region1cd == null) {
-                cityCode = "";
-                cityName = "";
-            } else {
-                cityCode = (String) region1cd.getOrDefault("value", "");
-                cityName = (String) region1cd.getOrDefault("label", "");
-            }
-            System.out.println("siCode = " + cityCode);
-            System.out.println("siName = " + cityName);
-
-            // 설명. items - region2cd
-            JSONObject region2cd = (JSONObject) item.get("region2cd");
-            int dongCode = 0;
-            String dongName = "";
-            if (region2cd != null) {
-                dongCode = Integer.parseInt(String.valueOf(region2cd.getOrDefault("value", 0)));
-                dongName = (String) region2cd.getOrDefault("label", "");
-            }
-            // 설명. items - region2cd - value, label
-            System.out.println("dongCode = " + dongCode);
-            System.out.println("dongName = " + dongName);
-
-            // 설명. items - address, roadaddress, postcode, phoneno
-            String address = (String) item.getOrDefault("address", "");
-            String roadAddress = (String) item.getOrDefault("roadaddress", "");
-            String postCode = (String) item.getOrDefault("postcode", "");
-            String phoneNo = (String) item.getOrDefault("phoneno", "");
-            System.out.println("address = " + address);
-            System.out.println("roadAddress = " + roadAddress);
-            System.out.println("postCode = " + postCode);
-            System.out.println("phoneNo = " + phoneNo);
-
-            // 설명. items - introduction
-            String introduction = (String) item.getOrDefault("introduction", "");
-            System.out.println("introduction = " + introduction);
-
-            // 설명. items - latitude, longitude
-            double lat = 0;
-            double lng = 0;
-            if (item.get("latitude") != null) {
-                lat = Double.parseDouble(String.valueOf(item.get("latitude")));
-            } else {
-                lat = 0;
-            }
-            if (item.get("longitude") != null) {
-                lng = Double.parseDouble(String.valueOf(item.get("longitude")));
-            } else {
-                lng = 0;
-            }
-            System.out.println("lat = " + lat);
-            System.out.println("lng = " + lng);
-
-            // 설명. items - repPhoto
-            JSONObject repPhoto = (JSONObject) item.getOrDefault("repPhoto", "");
-            String imagePath = "";
-            String thumbnailPath = "";
-            if (repPhoto != null) {
-                // 설명. items - repPhoto - photoid
-                JSONObject photoId = (JSONObject) repPhoto.getOrDefault("photoid", "");
-                // 설명. items - repPhoto - photoid - imgpath, thumbnailpath
-                if (photoId != null) {
-                    imagePath = (String) photoId.getOrDefault("imgpath", "");
-                    thumbnailPath = (String) photoId.getOrDefault("thumbnailpath", "");
-                }
-            }
-            System.out.println("imagePath = " + imagePath);
-            System.out.println("thumbnailpath = " + thumbnailPath);
+        return placeInfo;
     }
 
-    private List<String> parseAllTags(JSONObject item) {
+    public List<String> parseAllTags(JSONObject item) {
         String[] allTags;
         if (item.get("alltag") == null) {
             allTags = new String[0];

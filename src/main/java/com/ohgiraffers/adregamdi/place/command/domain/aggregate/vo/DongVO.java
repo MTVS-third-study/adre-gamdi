@@ -14,5 +14,5 @@ import javax.persistence.Embeddable;
 public class DongVO {
 
     @Column(nullable = false, name = "dong_no")
-    private Long dongNo;
+    private int dongNo;
 }

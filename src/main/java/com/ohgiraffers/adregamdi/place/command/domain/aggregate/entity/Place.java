@@ -1,25 +1,22 @@
 package com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity;
 
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@ToString
 @Table(name= "TBL_PLACE")
 public class Place {
 
     @Id
-    @Column(name = "PLACE_NO")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int placeNo;
-    @Column(nullable = false, name = "PLACE_NAME")
+    private Long placeNo;
+    @Column(nullable = false)
     private String placeName;
 
     /* 지역 분류 */
@@ -32,23 +29,44 @@ public class Place {
 
     /* 가게 정보 */
     private String introduction;
-    @Column(name = "PHONE_NUMBER")
+    @Column
     private String phoneNumber;
     @Embedded
     private CoordinateVO coordinateVO;
-    @Embedded
-    private AddressVO addressVO;
+    @Column
+    private String postCode;
+    @Column
+    private String placeAddress;
+    @Column
+    private String roadPlaceAddress;
+
 
     /* 이미지 관련 */
-    @Column(name = "IMAGE_PATH")
+    @Column
     private String imagePath;
-    @Column(name = "THUMBNAIL_PATH")
+    @Column
     private String thumbnailPath;
 
     /* 별점, 리뷰 */
-    @Column(name = "AVERAGE_STARPOINT")
+    @Column
     private double averageStarPoint;
-    @Column(name = "REVIEW_COUNT")
+    @Column
     private int reviewCount;
 
+    public Place(String placeName, CategoryVO categoryVO, CityVO cityVO, DongVO dongVO, String introduction, String phoneNumber, CoordinateVO coordinateVO, String postCode, String placeAddress, String roadPlaceAddress, String imagePath, String thumbnailPath, double averageStarPoint, int reviewCount) {
+        this.placeName = placeName;
+        this.categoryVO = categoryVO;
+        this.cityVO = cityVO;
+        this.dongVO = dongVO;
+        this.introduction = introduction;
+        this.phoneNumber = phoneNumber;
+        this.coordinateVO = coordinateVO;
+        this.postCode = postCode;
+        this.placeAddress = placeAddress;
+        this.roadPlaceAddress = roadPlaceAddress;
+        this.imagePath = imagePath;
+        this.thumbnailPath = thumbnailPath;
+        this.averageStarPoint = averageStarPoint;
+        this.reviewCount = reviewCount;
+    }
 }

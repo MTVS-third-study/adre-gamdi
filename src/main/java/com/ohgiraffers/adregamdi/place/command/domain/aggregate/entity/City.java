@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "TBL_CITY")
 public class City {
@@ -18,6 +17,10 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cityNo;
 
-    @Column(name = "CITY_NAME")
+    @Column(name = "CITY_NAME", unique = true)
     private String cityName;
+
+    public City(String cityName) {
+        this.cityName = cityName;
+    }
 }

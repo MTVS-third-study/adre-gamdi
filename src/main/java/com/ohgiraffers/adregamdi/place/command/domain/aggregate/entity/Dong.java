@@ -15,9 +15,8 @@ public class Dong {
 
     @Id
     @Column(name = "DONG_NO")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long dongNo;
+    private int dongNo;
 
-    @Column(name = "DONG_NAME")
+    @Column(name = "DONG_NAME",unique = true)
     private String dongName;
 }

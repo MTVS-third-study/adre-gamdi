@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "TBL_PLACETAGS")
 public class PlaceTags {
@@ -26,4 +25,8 @@ public class PlaceTags {
     @Embedded
     private TagVO tagVO;
 
+    public PlaceTags(PlaceVO placeVO, TagVO tagVO) {
+        this.placeVO = placeVO;
+        this.tagVO = tagVO;
+    }
 }
