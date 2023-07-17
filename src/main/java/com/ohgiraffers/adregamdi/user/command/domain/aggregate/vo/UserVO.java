@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 @Builder
 @EqualsAndHashCode
 public class UserVO {
-    private String id;
+    private String kakaoId;
     private String kakaoNickName;
     private String serviceNickName;
     private String email;

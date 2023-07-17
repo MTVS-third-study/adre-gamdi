@@ -1,19 +1,24 @@
 package com.ohgiraffers.adregamdi.review.application.service;
 
 import com.ohgiraffers.adregamdi.review.application.dto.ReviewDTO;
-import com.ohgiraffers.adregamdi.review.domain.service.DeleteReviewService;
 import com.ohgiraffers.adregamdi.review.domain.service.CreateReviewService;
+import com.ohgiraffers.adregamdi.review.domain.service.DeleteReviewService;
 import com.ohgiraffers.adregamdi.review.domain.service.UpdateReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Service
 public class ReviewService {
 
-    private CreateReviewService createReviewService;
-    private UpdateReviewService updateReviewService;
-    private DeleteReviewService deleteReviewService;
+    private final CreateReviewService createReviewService;
+    private final UpdateReviewService updateReviewService;
+    private final DeleteReviewService deleteReviewService;
 
     @Autowired
     public ReviewService(CreateReviewService createReviewService, UpdateReviewService updateReviewService, DeleteReviewService deleteReviewService) {
@@ -22,10 +27,14 @@ public class ReviewService {
         this.deleteReviewService = deleteReviewService;
     }
 
-    public void insertReview(ReviewDTO reviewDTO, MultipartFile imageFile) {
+    public boolean insertReview(ReviewDTO reviewDTO, MultipartFile imageFile, Model model) {
 
-        createReviewService.insertReviewImage(reviewDTO, imageFile);
-        createReviewService.saveReview(reviewDTO);
+        if (createReviewService.isNotNull(reviewDTO, imageFile, model) && createReviewService.insertReviewImage(reviewDTO, imageFile, model)) {
+
+            createReviewService.saveReview(reviewDTO);
+            return true;
+        }
+        return false;
     }
 
     public void updateReview() {
@@ -34,5 +43,14 @@ public class ReviewService {
 
     public void deleteReview() {
         deleteReviewService.deleteReview();
+    }
+
+    public void alert(String notice, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html; charset=utf-8");
+        PrintWriter out = response.getWriter();
+        out.println("<script type='text/javascript'>");
+        out.println("alert('" + notice + "');");
+        out.println("</script>");
+        out.flush();
     }
 }

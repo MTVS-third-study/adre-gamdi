@@ -3,6 +3,7 @@ package com.ohgiraffers.adregamdi.user.command.infrastructure.service;
 import com.ohgiraffers.adregamdi.user.command.application.dto.KakaoUserDTO;
 import com.ohgiraffers.adregamdi.user.command.domain.service.KakaoDomainService;
 import com.ohgiraffers.adregamdi.user.query.application.service.KakaoQueryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -15,6 +16,7 @@ import java.net.URL;
 public class KakaoDomainServiceImpl implements KakaoDomainService {
     private final KakaoQueryService kakaoQueryService;
 
+    @Autowired
     public KakaoDomainServiceImpl(KakaoQueryService kakaoQueryService) {
         this.kakaoQueryService = kakaoQueryService;
     }

@@ -22,9 +22,6 @@ class AdreGamdiApplicationTests {
 //            System.out.println(tag);
 //            System.out.println(tag.length());
 //        }
-
-        Object str = "1234";
-        System.out.println(Double.valueOf(String.valueOf(str)));
     }
 
 }

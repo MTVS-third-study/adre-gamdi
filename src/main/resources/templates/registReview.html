@@ -11,7 +11,7 @@
     <form action="registReview" name="review" id="review" method="post" encType="multipart/form-data">
         <div class="reviewStarPoint">
             <fieldset>
-                <span class="text-bold">별점을 선택해주세요</span>
+<!--                <span class="text-bold">별점을 선택해주세요</span>-->
                 <input type="radio" name="starPoint" value="5" id="rate1"><label
                     for="rate1">★</label>
                 <input type="radio" name="starPoint" value="4" id="rate2"><label
@@ -23,13 +23,31 @@
                 <input type="radio" name="starPoint" value="1" id="rate5"><label
                     for="rate5">★</label>
             </fieldset>
+            <span th:text="${ nullStarPoint }" style="color:red;"></span>
         </div>
 
         <div class="reviewContents">
-                <input type="file" name="imageFile" accept="image/*"><br>
-            <textarea name="reviewContent" type="text" id="reviewContent" placeholder="리뷰 내용을 입력해주세요"></textarea>
+                <input type="file" name="imageFile" id="imageFile" accept="image/jpg, image/jpeg, image/png" onchange="readURL(this);">
+                <span th:text="${ incorrectExtension }" style="color:red;"></span>
+            <br>
+            <img id="preview" style="width: 200px; height: 200px"/><br>
+            <textarea name="reviewContent" type="text" id="reviewContent" placeholder="리뷰 내용을 입력해주세요"></textarea><br>
+            <span th:text="${ nullContent }" style="color:red;"></span>
         </div>
         <input type="submit" name="등록하기">
     </form>
 </body>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').src = "";
+        }
+    }
+</script>
 </html>

@@ -109,13 +109,11 @@ public class KakaoQueryInfraService {
             String gender = userException.solveNullPointerException("gender", kakao_account);
 
             userInfo = new KakaoUserDTO();
-            userInfo.setId(id);
+            userInfo.setKakaoId(id);
             userInfo.setKakaoNickName(nickname);
             userInfo.setEmail(email);
             userInfo.setAge(age);
             userInfo.setGender(gender);
-            userInfo.setAccess_Token(token.getAccess_Token());
-            userInfo.setRefresh_Token(token.getRefresh_Token());
 
             br.close();
 

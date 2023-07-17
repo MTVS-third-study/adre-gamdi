@@ -22,44 +22,43 @@ public class OAuthService {
         this.userRepository = userRepository;
     }
 
-    public UserDTO kakaoLogin(String code) {
-        KakaoUserDTO kakaoInfo = kakaoDomainService.getKakaoUserInfo(code); // 카카오
+    public UserDTO kakaoLogin(String code) { // 카카오 로그인
+        KakaoUserDTO kakaoInfo = kakaoDomainService.getKakaoUserInfo(code);
         return validateUser(kakaoInfo);
     }
 
-    public UserDTO validateUser(KakaoUserDTO kakaoInfo) {
-        // 회원가입
-        User userInfo = userRepository.save(new User(1L,
-                kakaoInfo.getId(),
-                kakaoInfo.getKakaoNickName(),
-                "",
-                kakaoInfo.getEmail(),
-                kakaoInfo.getAge(),
-                kakaoInfo.getGender(),
-                0,
-                0,
-                1,
-                false,
-                kakaoInfo.getAccess_Token(),
-                kakaoInfo.getRefresh_Token()));
-        UserDTO findUserInfo = new UserDTO();
-        findUserInfo.setUserNo(userInfo.getUserNo());
-        findUserInfo.setId(userInfo.getId());
-        findUserInfo.setKakaoNickName(userInfo.getKakaoNickName());
-        findUserInfo.setServiceNickName(userInfo.getServiceNickName());
-        findUserInfo.setEmail(userInfo.getEmail());
-        findUserInfo.setAge(userInfo.getAge());
-        findUserInfo.setGender(userInfo.getGender());
-        findUserInfo.setReport_count(userInfo.getReport_count());
-        findUserInfo.setReview_count(userInfo.getReview_count());
-        findUserInfo.setGrade(userInfo.getGrade());
-        findUserInfo.setBlacklist_status(userInfo.isBlacklist_status());
-        findUserInfo.setAccess_Token(kakaoInfo.getAccess_Token());
-        findUserInfo.setRefresh_Token(kakaoInfo.getRefresh_Token());
+    private UserDTO validateUser(KakaoUserDTO kakaoInfo) {
+        User userInfo;
+        UserDTO findUserInfo = userDomainService.findByKakaoId(kakaoInfo.getKakaoId());
+        if (findUserInfo.getUserNo() == null) { // 회원가입
+            userInfo = userRepository.save(new User(1L,
+                    kakaoInfo.getKakaoId(),
+                    kakaoInfo.getKakaoNickName(),
+                    "",
+                    kakaoInfo.getEmail(),
+                    kakaoInfo.getAge(),
+                    kakaoInfo.getGender(),
+                    0,
+                    0,
+                    1,
+                    false
+            ));
+            findUserInfo.setUserNo(userInfo.getUserNo());
+            findUserInfo.setKakaoId(userInfo.getKakaoId());
+            findUserInfo.setKakaoNickName(userInfo.getKakaoNickName());
+            findUserInfo.setServiceNickName(userInfo.getServiceNickName());
+            findUserInfo.setEmail(userInfo.getEmail());
+            findUserInfo.setAge(userInfo.getAge());
+            findUserInfo.setGender(userInfo.getGender());
+            findUserInfo.setReport_count(userInfo.getReport_count());
+            findUserInfo.setReview_count(userInfo.getReview_count());
+            findUserInfo.setGrade(userInfo.getGrade());
+            findUserInfo.setBlacklist_status(userInfo.isBlacklist_status());
+        }
         return findUserInfo;
     }
 
-    public void logout(String token) { // 로그아웃
+    public void kakaoLogout(String token) { // 카카오 로그아웃
         kakaoDomainService.logout(token);
     }
 }

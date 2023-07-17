@@ -5,6 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserDomainService {
-
-    UserDTO findById(String id);
+    UserDTO findByKakaoId(String kakaoId);
 }

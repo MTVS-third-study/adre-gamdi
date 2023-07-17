@@ -16,8 +16,8 @@ public class UserDomainServiceImpl implements UserDomainService {
     }
 
     @Override
-    public UserDTO findById(String id) {
-        return userQueryService.findById(id);
+    public UserDTO findByKakaoId(String kakaoId) {
+        return userQueryService.findByKakaoId(kakaoId);
     }
 
 }

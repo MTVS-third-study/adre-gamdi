@@ -15,11 +15,11 @@ import javax.persistence.*;
 @Table(name = "TBL_USER")
 public class User {
     @Id
-    @Column(name = "USER_NO")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userNo;
     @Column
-    private String id;
+    private String kakaoId;
     @Column
     private String kakaoNickName;
     @Column
@@ -38,19 +38,4 @@ public class User {
     private int grade;
     @Column
     private boolean blacklist_status;
-    @Column
-    private String access_Token;
-    @Column
-    private String refresh_Token;
-
-//    public User update(String id, String kakaoNickName, String serviceNickName, String email, String age, String gender) {
-//        this.id = id;
-//        this.kakaoNickName = kakaoNickName;
-//        this.serviceNickName = serviceNickName;
-//        this.email = email;
-//        this.age = age;
-//        this.gender = gender;
-//        return this;
-//    }
-
 }
