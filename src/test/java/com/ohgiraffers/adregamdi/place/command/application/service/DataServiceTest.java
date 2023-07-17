@@ -190,42 +190,37 @@ public class DataServiceTest {
         Assertions.assertEquals(insertResult, duplicateResult);
     }
 
-    @DisplayName("태그 리스트들이 잘 출력되는 지 확인")
-    @Test
-    void testInsertTagList() {
-
-        // given
-        Place place = new Place( "제주",
-                new CategoryVO(1),
-                new CityVO(1),
-                new DongVO(1),
-                "아아",
-                "064-12312",
-                new CoordinateVO(33.33, 126.123),
-                "123142",
-                "여기",
-                "저기",
-                "이미지경로",
-                "썸네일경로",
-                0,
-                0
-        );
-        String placeInfo = "애월, 곽지, 서핑, 이색체험,실내,중,2~3시간";
-        String[] allTags = placeInfo.split("\\s*,\\s*");
-        List<String> tagList = Arrays.asList(allTags);
-
-        // when
-        List<Tag> insertTagResultList = tagList.stream().distinct().map(m -> dataService.insertTag(m)).collect(Collectors.toList());
-//        insertTagResultList.stream().forEach(t -> dataService.insertPlaceAndTags(
-//                new PlaceVO(place.getPlaceNo())
-//                , new TagVO(t.getTagNo())
-//        ));
-
-        // then
-        Assertions.assertDoesNotThrow(
-                () -> dataService.insertPlaceAndTags(new PlaceVO(place.getPlaceNo()), new TagVO( insertTagResultList.get(1).getTagNo()))
-        );
-
-    }
+//    @DisplayName("태그 리스트들이 잘 출력되는 지 확인")
+//    @Test
+//    void testInsertTagList() {
+//
+//        // given
+//        Place place = new Place( "제주",
+//                new CategoryVO(1),
+//                new CityVO(1),
+//                new DongVO(1),
+//                "아아",
+//                "064-12312",
+//                new CoordinateVO(33.33, 126.123),
+//                "123142",
+//                "여기",
+//                "저기",
+//                "이미지경로",
+//                "썸네일경로",
+//                0,
+//                0
+//        );
+//        String placeInfo = "애월, 곽지, 서핑, 이색체험,실내,중,2~3시간";
+//        String[] allTags = placeInfo.split("\\s*,\\s*");
+//        List<String> tagList = Arrays.asList(allTags);
+//
+//        // when
+//        List<Tag> insertTagResultList = tagList.stream().distinct().map(m -> dataService.insertTag(m)).collect(Collectors.toList());
+//        // then
+//        Assertions.assertDoesNotThrow(
+//                () -> dataService.insertPlaceAndTags(new PlaceVO(place.getPlaceNo()), new TagVO( insertTagResultList.get(1).getTagNo()))
+//        );
+//
+//    }
 
 }

@@ -28,6 +28,7 @@ public class Place {
     private DongVO dongVO;
 
     /* 가게 정보 */
+    @Column(columnDefinition = "LONGTEXT")
     private String introduction;
     @Column
     private String phoneNumber;

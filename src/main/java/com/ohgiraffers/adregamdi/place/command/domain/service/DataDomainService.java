@@ -58,12 +58,9 @@ public class DataDomainService {
                 JSONObject jsonObject = (JSONObject) jsonParser.parse(result);
 
                 JSONArray placeInfo = (JSONArray) jsonObject.get("items");
-                System.out.println("placeInfo = " + placeInfo);
-                System.out.println("placeInfo.size() = " + placeInfo.size());
 
                 return placeInfo;
 
-//                parsePlace(placeInfo);
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             } catch (UnsupportedEncodingException e) {
@@ -73,8 +70,6 @@ public class DataDomainService {
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
-        // items에서 필요한 것들 alltag, 'contentscd', title, 'region1cd', 'region2cd', address, roadaddress, introduction
-        // , latitude, longitude, postcode, phoneno, 'repPhoto'
     }
 
     public Map<String, String> parsePlaceInfo(JSONObject item) {
@@ -94,14 +89,11 @@ public class DataDomainService {
         }
         placeInfo.put("categoryCode", categoryCode);
         placeInfo.put("categoryName", categoryName);
-        System.out.println("categoryCode = " + categoryCode);
-        System.out.println("categoryName = " + categoryName);
-
+        System.out.println("categoryCode = " + categoryCode);   // 진행 상황 알기 위해 일부러 남겨둠!
 
         // 설명. items - title
         String title = (String) item.getOrDefault("title", "");
         placeInfo.put("title", title);
-        System.out.println("title = " + title);
 
         // 설명. items - region1cd
         JSONObject region1cd = (JSONObject) item.getOrDefault("region1cd", "");
@@ -113,7 +105,6 @@ public class DataDomainService {
             cityName = (String) region1cd.getOrDefault("label", "");
         }
         placeInfo.put("cityName", cityName);
-        System.out.println("cityName = " + cityName);
 
         // 설명. items - region2cd
         JSONObject region2cd = (JSONObject) item.getOrDefault("region2cd", "");
@@ -123,11 +114,9 @@ public class DataDomainService {
             dongCode = Integer.parseInt(String.valueOf(region2cd.getOrDefault("value", 0)));
             dongName = (String) region2cd.getOrDefault("label", "");
         }
+        // 설명. items - region2cd - value, label
         placeInfo.put("dongCode", String.valueOf(dongCode));
         placeInfo.put("dongName", dongName);
-        // 설명. items - region2cd - value, label
-        System.out.println("dongCode = " + dongCode);
-        System.out.println("dongName = " + dongName);
 
         // 설명. items - address, roadaddress, postcode, phoneno
         String address = (String) item.getOrDefault("address", "");
@@ -138,15 +127,10 @@ public class DataDomainService {
         placeInfo.put("roadAddress", roadAddress);
         placeInfo.put("postCode", postCode);
         placeInfo.put("phoneNo", phoneNo);
-        System.out.println("address = " + address);
-        System.out.println("roadAddress = " + roadAddress);
-        System.out.println("postCode = " + postCode);
-        System.out.println("phoneNo = " + phoneNo);
 
         // 설명. items - introduction
         String introduction = (String) item.getOrDefault("introduction", "");
         placeInfo.put("introduction", introduction);
-        System.out.println("introduction = " + introduction);
 
         // 설명. items - latitude, longitude
         double lat = 0;
@@ -163,8 +147,6 @@ public class DataDomainService {
         }
         placeInfo.put("lat", String.valueOf(lat));
         placeInfo.put("lng", String.valueOf(lng));
-        System.out.println("lat = " + lat);
-        System.out.println("lng = " + lng);
 
         // 설명. items - repPhoto
         JSONObject repPhoto = (JSONObject) item.getOrDefault("repPhoto", "");
@@ -181,8 +163,6 @@ public class DataDomainService {
         }
         placeInfo.put("imagePath",imagePath);
         placeInfo.put("thumbnailPath", thumbnailPath);
-        System.out.println("imagePath = " + imagePath);
-        System.out.println("thumbnailpath = " + thumbnailPath);
 
         return placeInfo;
     }

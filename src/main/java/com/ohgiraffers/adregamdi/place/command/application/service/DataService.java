@@ -68,7 +68,7 @@ public class DataService {
                         City city = insertCity(new City(placeInfos.get("cityName")));
                         Dong dong = insertDong(new Dong(Integer.parseInt(placeInfos.get("dongCode")), placeInfos.get("dongName")));
                         Place place = insertPlace(new Place(
-                                placeInfos.get("placeName"),
+                                placeInfos.get("title"),
                                 new CategoryVO(category.getCategoryNo()),
                                 new CityVO(city.getCityNo()),
                                 new DongVO(dong.getDongNo()),
@@ -91,10 +91,11 @@ public class DataService {
                                 , new TagVO(t.getTagNo())
                         ));
                     }
-
+                    currentPage = j + 1;
                 }
                 currentPage = 1;
             }
+        System.out.println("완료");
     }
 
     public PlaceTags insertPlaceAndTags(PlaceVO placeVO, TagVO tagVO) {
