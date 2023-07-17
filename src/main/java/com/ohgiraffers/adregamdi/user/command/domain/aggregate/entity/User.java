@@ -15,42 +15,27 @@ import javax.persistence.*;
 @Table(name = "TBL_USER")
 public class User {
     @Id
-    @Column(name = "USER_NO")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userNo;
-    @Column(name = "ID")
-    private String id;
-    @Column(name = "KAKAO_NICKNAME")
+    @Column
+    private String kakaoId;
+    @Column
     private String kakaoNickName;
-    @Column(name = "SERVICE_NICKNAME")
+    @Column
     private String serviceNickName;
-    @Column(name = "EMAIL")
+    @Column
     private String email;
-    @Column(name = "AGE")
+    @Column
     private String age;
-    @Column(name = "GENDER")
+    @Column
     private String gender;
-    @Column(name = "REPORT_COUNT")
+    @Column
     private int report_count;
-    @Column(name = "REVIEW_COUNT")
+    @Column
     private int review_count;
-    @Column(name = "GRADE")
+    @Column
     private int grade;
-    @Column(name = "BLACKLIST_STATUS")
+    @Column
     private boolean blacklist_status;
-    @Column(name = "ACCESS_TOKEN")
-    private String access_Token;
-    @Column(name = "REFRESH_TOKEN")
-    private String refresh_Token;
-
-//    public User update(String id, String kakaoNickName, String serviceNickName, String email, String age, String gender) {
-//        this.id = id;
-//        this.kakaoNickName = kakaoNickName;
-//        this.serviceNickName = serviceNickName;
-//        this.email = email;
-//        this.age = age;
-//        this.gender = gender;
-//        return this;
-//    }
-
 }

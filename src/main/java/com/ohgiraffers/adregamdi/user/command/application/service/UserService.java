@@ -15,5 +15,8 @@ public class UserService {
         this.userRepository = userRepository;
         this.userDomainService = userDomainService;
     }
-    
+
+    public Long deleteUser(String id) {
+        return userRepository.deleteByKakaoId(id);
+    }
 }

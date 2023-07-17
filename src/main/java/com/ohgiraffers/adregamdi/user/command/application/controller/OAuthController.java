@@ -1,6 +1,5 @@
 package com.ohgiraffers.adregamdi.user.command.application.controller;
 
-import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
 import com.ohgiraffers.adregamdi.user.command.application.service.OAuthService;
 import com.ohgiraffers.adregamdi.user.command.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +29,8 @@ public class OAuthController {
     @GetMapping("kakao/login")
     public void kakaoCallback(@RequestParam String code, HttpSession session
             , HttpServletResponse response) throws IOException {
-        UserDTO loginUser = oAuthService.kakaoLogin(code);
-        session.setAttribute("kakaoToken", loginUser.getAccess_Token());
-        session.setAttribute("loginUser", loginUser);
-        UserDTO test = (UserDTO) session.getAttribute("loginUser");
-        System.out.println("test = " + test.getId());
-        System.out.println("test = " + test.getKakaoNickName());
-        System.out.println("test = " + test.getServiceNickName());
-        System.out.println("test = " + test.getEmail());
-        System.out.println("test = " + test.getAge());
-        System.out.println("test = " + test.getGender());
+        session.setAttribute("service", "kakao");
+        session.setAttribute("loginUser", oAuthService.kakaoLogin(code));
         response.sendRedirect("http://localhost:8080"); // 메인 페이지로
     }
 
@@ -49,6 +40,7 @@ public class OAuthController {
 //        String token = (String) session.getAttribute("kakaoToken");
 //        oAuthService.kakaoLogout(token);
         session.removeAttribute("loginUser");
+        session.removeAttribute("service");
         response.sendRedirect("http://localhost:8080"); // 메인 페이지로
     }
 
@@ -60,4 +52,5 @@ public class OAuthController {
 //
 //        System.out.println(oAuthService.getKakaoAccessToken(code));
 //    }
+
 }
