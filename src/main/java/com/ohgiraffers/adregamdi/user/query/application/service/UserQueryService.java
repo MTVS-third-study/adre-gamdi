@@ -15,10 +15,10 @@ public class UserQueryService {
         this.userQueryRepository = userQueryRepository;
     }
 
-    public UserDTO findById(String id) { // 현재 유저 조회
+    public UserDTO findByKakaoId(String kakaoId) { // 현재 유저 조회
         User user;
         try {
-            user = userQueryRepository.findByKakaoId(id);
+            user = userQueryRepository.findByKakaoId(kakaoId);
         } catch (NullPointerException ne) {
             ne.printStackTrace();
             return new UserDTO();
