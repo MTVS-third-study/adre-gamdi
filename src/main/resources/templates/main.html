@@ -30,6 +30,9 @@
                 <div class="myPageBtn">
                     <button class="upperBtn" onclick="location.href='/myPage'" type="button">마이 페이지</button>
                 </div>
+                <div class="adminPageBtn">
+                    <button class="upperBtn" onclick="location.href='/adminPage'" type="button">관리자 페이지</button>
+                </div>
                 <th:block th:if="${session.service.equals('kakao')}">
                     <div class="logoutBtn">
                         <button class="upperBtn"

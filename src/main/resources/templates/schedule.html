@@ -1,288 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Title</title>
     <!-- 설명. 카카오맵 api appkey-->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68b6fbdf7ad018b34a2bab823e0f11ae&libraries=services"></script>
-    <link rel="stylesheet" href="css/schedule.css" type="text/css"/>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68b6fbdf7ad018b34a2bab823e0f11ae&libraries=services"
+    ></script>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/schedule.css" type="text/css" />
+    <link rel="stylesheet" href="/css/kakao.css" />
+
 </head>
+
 <body>
-    <div class="schedule-container">
-        <div class="schedule-list">
-
-            <a href="/#"><img src="images/logo.png" style="height: 60px; width: 60px"/></a>
-
-            <div id="menu_wrap" class="bg_white">
-                <div class="option">
-                    <div>
-                        <form onsubmit="searchPlaces(); return false;">
-                                키워드 : <input type="text" id="keyword" size="15" >
-                                <button id="searchKeyword" type="button">검색하기</button>
-                        </form>
-<!--                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
-                    </div>
+<div class="schedule-container">
+    <div class="schedule-list" id="schedule_wrap" >
+        <!-- <a href="/#"><img src="images/logo.png" style="height: 60px; width: 60px"/></a> -->
+        <!-- 검색 box -->
+        <div id="menu_wrap" class="bg_white menu_wrap" style="display: block">
+            <div class="option">
+                <div>
+                    <form onsubmit="searchPlaces(); return false;" class="searchBox">
+                        키워드 : <input type="text" id="keyword" size="15" />
+                        <button id="searchKeyword" type="button">검색하기</button>
+                    </form>
+                    <!--                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
                 </div>
-                <hr>
-                <ul id="placesList"></ul>
-                <div id="pagination"></div>
             </div>
+            <hr />
+            <ul id="placesList" class="placeList"></ul>
+            <div id="pagination"></div>
         </div>
 
-        <div id="map" class="schedule-map" style="width: 65%; height: 100vh;"></div>
+
+        <!-- 일정 box-->
+        <div id="day_wrap" class="bg_white menu_wrap" >
+            <div class="option">
+                <div>
+                    <form onsubmit="searchPlaces(); return false;" class="searchBox">
+                        키워드 : <input type="text" id="keyword" size="15" />
+                        <button id="searchKeyword" type="button" class="serchBtn">
+                            검색하기
+                        </button>
+                    </form>
+                    <!--                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
+                </div>
+            </div>
+            <hr />
+            <div class="scheduleBox">
+                <select
+                        name="day"
+                        id=""
+                        class="daySelect form-select"
+                        aria-label="Default select example"
+                >
+                    <option value="allday">전체일정</option>
+                    <option value="1day">1일차</option>
+                    <option value="2day">2일차</option>
+                    <option value="3day">3일차</option>
+                </select>
+                <div class="dayScheduleWrapper">
+                    <div class="daySchedule">
+                        <div class="daynum">
+                            <div class="numCircle">1</div>
+                            <div class="dashLine"></div>
+                            <div class="numCircle">2</div>
+                            <div class="dashLine"></div>
+                            <div class="numCircle">3</div>
+                            <div class="dashLine"></div>
+                            <div class="numCircle">4</div>
+                        </div>
+
+                        <div class="wayPoint">
+                            <div class="km">200km</div>
+                            <div class="km">100km</div>
+                            <div class="km">300km</div>
+                        </div>
+                        <div class="dayContents">
+                            <div class="">제주국수</div>
+                            <div class="">제주국수</div>
+                            <div class="">제주국수</div>
+                            <div class="">제주국수</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="BtnBox">
+            <button class="homeBtn">
+                <img src="/images/home_house_icon.png" alt="" />
+                <p>홈</p>
+            </button>
+            <button class="myScheduleBtn" >
+                <img src="/images/schedule_icon.png" alt="" />
+                <p>일정</p>
+            </button>
+            <button class="imgBtn" >
+                <img src="/images/plus.png" alt="" />
+                <p>new</p>
+            </button>
+        </div>
     </div>
 
-<script type="text/javascript">
+    <!-- 상세 box -->
+    <div id="info_wrap" class="bg_white menu_wrap" >
+        <div class="imgBox">
+            <img src="/images/images.jpg" alt="" />
+            <div class="titleBox">
+                <span>판교제2테크노밸리 기업지원허브</span>
+                <p>기업단지</p>
+            </div>
+            <hr />
+            <div class="infoBox">
+                <nav class="navBar">
+                    <li id="infoNav">정보</li>
+                    <li id="reviewNav">리뷰</li>
+                </nav>
+                <hr />
+                <div class="infoContents">
+                    <div class="info">
+                        <p>
+                            <img src="/images/phone.png" alt="" />
+                            <span>010-3333-1232</span>
+                        </p>
 
-        // 필기. 현 지도 경계 좌표 얻기, 이동범위 제한 두기 위한 메소드
-        // function getMapBounds () {
-        //     let mapBounds = map.getBounds();
-        //
-        //     console.log(mapBounds.toString());
-        // }
+                        <p>
+                            <img src="/images/marker.png" alt="" />
+                            <span>경기도 성남시 수정구 </span>
+                        </p>
+                        <p>
+                            <img src="/images/info.png" alt="" /><span
+                        >넓은 매장과 탁트인 뷰
+                  </span>
+                        </p>
+                    </div>
+                    <hr />
+                    <div class="addBtn">
+                        <button class="scheduleAdd">일정 추가</button>
+                    </div>
+                </div>
 
-        // 설명. 지도 그리기
-        let container = document.getElementById("map");
-        let options = {
-            center: new kakao.maps.LatLng(33.350701, 126.470667),
-            level: 9
-        };
-        let map = new kakao.maps.Map(container, options);
-        map.setMaxLevel(9);    // 필기. 지도 축소 최대치 설정
+                <div class="reviewContainer">
+                    <div class="reviewHeader">
+                        <div class="totlaPoint">
+                            <span>3.8</span>
+                        </div>
+                        <div class="reiewBtnBox">
+                            <button class="reviewBtn">
+                                <img src="./img/reviewAdd.png" alt="" />리뷰 작성
+                            </button>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="contents">
+                        <div><img src="" alt="" /><span>JM</span></div>
+                        <div><img src="" alt="" />별점</div>
+                        <div class="reviewContents">
+                            <p>
+                                분위기 사먹으러 가세요. 음식은 쏘쏘인데, 식사보단 커피하러
+                                가시는걸 추천요. 양껏 먹는집은 아니에요ㅎㅎ 주말은 웨이팅
+                                있으니, 미리가서 대기 하셔야되요. 분위기는 좋아요
+                            </p>
+                        </div>
+                        <div class="reviewImg">
+                            <img src="/images/images.jpg" alt="" />
+                        </div>
+                    </div>
+                    <div class="csBox">
+                        <div class="like white">
+                            <img src="/images/whiteLie.png" alt="" /><span>1</span>
+                        </div>
+                        <div class="like black">
+                            <img src="/images/blackLike.png" alt="" /><span>2</span>
+                        </div>
+                        <div class="report">
+                            <img src="/images/siren.png" alt="" /><span>신고</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // 설명. 지도 이동 범위 제한
-        let pos1 = new kakao.maps.LatLng(33.267592591415585, 126.36804268520386);
-        let pos2 = new kakao.maps.LatLng(33.51146178682043, 126.6927795140894);
-        let bounds = new kakao.maps.LatLngBounds(pos1, pos2);
-        let constrainBounds = function () {
-            let center = map.getCenter();
 
-            let clipLat, clipLng, sw, ne;
-            if (!bounds.contain(center)) {
+    <div id="map" class="schedule-map" style="width: 65%; height: 100vh;"></div>
+</div>
 
-                sw = bounds.getSouthWest();
-                ne = bounds.getNorthEast();
-
-                clipLat = Math.min(Math.max(sw.getLat(), center.getLat()), ne.getLat());
-                clipLng = Math.min(Math.max(sw.getLng(), center.getLng()), ne.getLng());
-
-                map.setCenter(new kakao.maps.LatLng(clipLat, clipLng));
-            }
-        };
-        kakao.maps.event.addListener( map, 'drag', constrainBounds);
-        kakao.maps.event.addListener( map, 'zoom_changed', constrainBounds);
-
-        // 필기. 마커를 담을 배열입니다
-        let markers = [];
-
-        // 설명. 장소 검색 객체
-        const ps = new kakao.maps.services.Places();
-
-        // 설명. 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성
-        const infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
-        // 설명. 키워드로 장소를 검색합니다.
-        const searchForm = document.getElementById("searchKeyword");
-                searchForm?.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    searchPlaces();
-                });
-
-        // 설명. 장소 검색 메소드
-        function searchPlaces() {
-
-            const keyword = document.getElementById('keyword').value;
-
-            if (!keyword.replace(/^\s+|\s+$/g, '')) {
-                alert('키워드를 입력해주세요!');
-                return false;
-            }
-
-            // 설명. 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-            ps.keywordSearch( keyword, placesSearchCB);
-        }
-
-        // 설명. 장소 검색이 완료됐을 때 호출되는 콜백함수 입니다.
-        function placesSearchCB(data, status, pagination) {
-            if (status === kakao.maps.services.Status.OK) {
-
-                // 정상적으로 검색이 완료됐으면
-                // 검색 목록과 마커를 표출합니다
-                displayPlaces(data);
-
-                // 페이지 번호를 표출합니다
-                displayPagination(pagination);
-
-            } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-
-                alert('검색 결과가 존재하지 않습니다.');
-                return;
-
-            } else if (status === kakao.maps.services.Status.ERROR) {
-
-                alert('검색 결과 중 오류가 발생했습니다.');
-                return;
-
-            }
-        }
-
-        // 필기. 검색 결과 목록과 마커를 표출하는 함수입니다
-        function displayPlaces(places) {
-
-            let listEl = document.getElementById('placesList'),
-                menuEl = document.getElementById('menu_wrap'),
-                fragment = document.createDocumentFragment(),
-                bounds = new kakao.maps.LatLngBounds(),
-                listStr = '';
-
-            // 검색 결과 목록에 추가된 항목들을 제거합니다
-            removeAllChildNods(listEl);
-
-            // 지도에 표시되고 있는 마커를 제거합니다
-            removeMarker();
-
-            for ( let i=0; i<places.length; i++ ) {
-
-                // 마커를 생성하고 지도에 표시합니다
-                let placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
-                    marker = addMarker(placePosition, i),
-                    itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
-
-                // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-                // LatLngBounds 객체에 좌표를 추가합니다
-                bounds.extend(placePosition);
-
-                // 마커와 검색결과 항목에 mouseover 했을 때
-                // 해당 장소에 인포윈도우에 장소명을 표시합니다
-                // mouseout 했을 때는 인포윈도우를 닫습니다
-                (function(marker, title) {
-                    kakao.maps.event.addListener(marker, 'mouseover', function() {
-                        displayInfowindow(marker, title);
-                    });
-
-                    kakao.maps.event.addListener(marker, 'mouseout', function() {
-                        infowindow.close();
-                    });
-
-                    itemEl.onmouseover =  function () {
-                        displayInfowindow(marker, title);
-                    };
-
-                    itemEl.onmouseout =  function () {
-                        infowindow.close();
-                    };
-                })(marker, places[i].place_name);
-
-                fragment.appendChild(itemEl);
-            }
-
-            // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
-            listEl.appendChild(fragment);
-            menuEl.scrollTop = 0;
-
-            // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-            map.setBounds(bounds);
-        }
-
-        // 설명. 검색결과 항목을 Element로 반환하는 함수입니다
-        function getListItem(index, places) {
-
-            let el = document.createElement('li'),
-                itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
-                    '<div class="info">' +
-                    '   <h5>' + places.place_name + '</h5>';
-
-            if (places.road_address_name) {
-                itemStr += '    <span>' + places.road_address_name + '</span>' +
-                    '   <span class="jibun gray">' +  places.address_name  + '</span>';
-            } else {
-                itemStr += '    <span>' +  places.address_name  + '</span>';
-            }
-
-            itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-                '</div>';
-
-            el.innerHTML = itemStr;
-            el.className = 'item';
-
-            return el;
-        }
-
-        // 설명. 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-        function addMarker(position, idx, title) {
-            let imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-                imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
-                imgOptions =  {
-                    spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-                    spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-                    offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-                },
-                markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-                marker = new kakao.maps.Marker({
-                    position: position, // 마커의 위치
-                    image: markerImage
-                });
-
-            marker.setMap(map); // 설명. 지도 위에 마커를 표출합니다
-            markers.push(marker);  // 설명. 배열에 생성된 마커를 추가합니다
-
-            return marker;
-        }
-
-        // 설명. 지도 위에 표시되고 있는 마커를 모두 제거합니다
-        function removeMarker() {
-            for ( let i = 0; i < markers.length; i++ ) {
-                markers[i].setMap(null);
-            }
-            markers = [];
-        }
-
-        // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
-        function displayPagination(pagination) {
-            let paginationEl = document.getElementById('pagination'),
-                fragment = document.createDocumentFragment(),
-                i;
-
-            // 기존에 추가된 페이지번호를 삭제합니다
-            while (paginationEl.hasChildNodes()) {
-                paginationEl.removeChild (paginationEl.lastChild);
-            }
-
-            for (i=1; i<=pagination.last; i++) {
-                let el = document.createElement('a');
-                el.href = "#";
-                el.innerHTML = i;
-
-                if (i===pagination.current) {
-                    el.className = 'on';
-                } else {
-                    el.onclick = (function(i) {
-                        return function() {
-                            pagination.gotoPage(i);
-                        }
-                    })(i);
-                }
-
-                fragment.appendChild(el);
-            }
-            paginationEl.appendChild(fragment);
-        }
-
-        // 설명. 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
-        // 설명. 인포윈도우에 장소명을 표시합니다
-        function displayInfowindow(marker, title) {
-            let content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
-
-            infowindow.setContent(content);
-            infowindow.open(map, marker);
-        }
-
-        // 설명. 검색결과 목록의 자식 Element를 제거하는 함수입니다
-        function removeAllChildNods(el) {
-            while (el.hasChildNodes()) {
-                el.removeChild (el.lastChild);
-            }
-        }
-</script>
+<script src="/js/kakaomap.js"></script>
+<script src="/js/shcedule.js"></script>
 </body>
 </html>
