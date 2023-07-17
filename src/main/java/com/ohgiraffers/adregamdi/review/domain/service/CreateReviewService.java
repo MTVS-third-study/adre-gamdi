@@ -2,7 +2,9 @@ package com.ohgiraffers.adregamdi.review.domain.service;
 
 import com.ohgiraffers.adregamdi.review.application.dto.ReviewDTO;
 import com.ohgiraffers.adregamdi.review.domain.aggregate.entity.Review;
+import com.ohgiraffers.adregamdi.review.domain.aggregate.entity.ReviewWriterNo;
 import com.ohgiraffers.adregamdi.review.domain.repository.ReviewRepository;
+import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -22,11 +24,12 @@ public class CreateReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public void saveReview(ReviewDTO reviewDTO) {
+    public void saveReview(ReviewDTO reviewDTO, Long userNo) {
+        ReviewWriterNo reviewWriterNo = new ReviewWriterNo(userNo);
 
         Review review = new Review(reviewDTO.getReviewNo(), reviewDTO.getLikeNum(), reviewDTO.getStarPoint(),
                 reviewDTO.getOriginReviewImageName(), reviewDTO.getSavedReviewImageName(),
-                reviewDTO.getImageFilePath(), reviewDTO.getReviewContent(), reviewDTO.getRegDate());
+                reviewDTO.getImageFilePath(), reviewDTO.getReviewContent(), reviewDTO.getRegDate(), reviewWriterNo, );
 
         reviewRepository.save(review);
 

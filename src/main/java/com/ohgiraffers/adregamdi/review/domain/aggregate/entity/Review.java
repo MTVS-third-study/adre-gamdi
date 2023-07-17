@@ -32,14 +32,10 @@ public class Review {
     private String imageFilePath;
     @Column
     private String reviewContent;
-    @Column(name = "regDate", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "REG_DATE", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp regDate;
-
-
-////    @Embedded
-//    @Column(nullable = true)
-//    private ReviewWriterNo reviewWriterNo;
-////    @Embedded
-//    @Column
-//    private ReviewPlaceNo reviewPlaceNo;
+    @Embedded
+    private ReviewWriterNo reviewWriterNo;
+    @Embedded
+    private ReviewPlaceNo reviewPlaceNo;
 }
