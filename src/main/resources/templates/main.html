@@ -6,24 +6,25 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Title</title>
 </head>
+<script>
+    history.pushState(null, null, location.href);
+
+    window.onpopstate = function () {
+        history.go(1);
+    };
+</script>
 <body>
 <div id="Wrapper1">
 
     <div class="UpperBar">
-
         <img class="logo" src="/images/goodlogo.png">
-
         <img class="siteName" src="/images/Adregamdi.png">
-
         <a href="placeReviews">장소리뷰 페이지</a>
-
         <div class="loginBox">
             <th:block th:if="${session.loginUser == null}">
-
                 <div class="loginBtn">
                     <button class="upperBtn" id="loginBtn" type="button">로그인</button>
                 </div>
-
             </th:block>
             <th:block th:if="${session.loginUser != null}">
                 <div class="myPageBtn">
@@ -32,16 +33,28 @@
                 <div class="adminPageBtn">
                     <button class="upperBtn" onclick="location.href='/adminPage'" type="button">관리자 페이지</button>
                 </div>
-                <div class="logoutBtn">
-                    <button class="upperBtn"
-                            onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:8080/oauth/kakao/logout'"
-                            type="button">
-                        로그아웃
-                    </button>
-                </div>
+                <th:block th:if="${session.service.equals('kakao')}">
+                    <div class="logoutBtn">
+                        <button class="upperBtn"
+                                onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:8080/oauth/kakao/logout'"
+                                type="button">
+                            로그아웃
+                        </button>
+                    </div>
+                </th:block>
+                <th:block th:if="${session.service.equals('naver')}">
+                    <div class="logoutBtn">
+                        <button class="upperBtn"
+                                onclick="location.href=''"
+                                type="button">
+                            로그아웃
+                        </button>
+                    </div>
+                </th:block>
             </th:block>
         </div>
     </div>
+
     <div class="bottomSpace">
         <th:block th:if="${session.loginUser != null}">
             <img alt="" class="volcanoBoom" src="/images/volcanoBoom.png">

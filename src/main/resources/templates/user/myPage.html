@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+</head>
+<script>
+    history.pushState(null, null, location.href);
+
+    window.onpopstate = function () {
+        history.go(1);
+    };
+</script>
+<body>
+<th:block th:if="${session.loginUser == null}">
+    <script language="javascript">
+        parent.location.replace("http://localhost:8080");
+    </script>
+</th:block>
+<h1> 마이 페이지 입니다.</h1>
+<button class="upperBtn" onclick="location.href='/user/deleteForm'" type="button">회원탈퇴</button>
+</body>
+</html>

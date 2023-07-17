@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class UserDTO {
     private Long userNo;
-    private String id;
+    private String kakaoId;
     private String kakaoNickName;
     private String serviceNickName;
     private String email;
@@ -22,8 +22,6 @@ public class UserDTO {
     private int review_count;
     private int grade;
     private boolean blacklist_status;
-    private String access_Token;
-    private String refresh_Token;
 
     public static UserDTO of(User user){
         UserDTO userDTO=new UserDTO();

@@ -13,25 +13,14 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("login")
-    public String login() {
-        return "kakao/loginForm";
-    }
-
-//    @GetMapping("logout")
-//    public String logout(HttpSession session) {
-//        String token = (String) session.getAttribute("kakaoToken");
-//        if () {
-//            return "kakao/logout";
-//        }
-//        return "naver/logout";
-//    }
-
     @GetMapping("schedule")
     public String goSchedule() {
         return "schedule";
     }
 
     @GetMapping("myPage")
-    public String goMyPage(){return "myPage";}
+    public String goMyPage() {
+        return "user/myPage";
+    }
+
 }
