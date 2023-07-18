@@ -41,7 +41,7 @@ class DataQueryServiceTest {
     void testCheckNullFindCategoryResultWhenNoResult() {
 
         // given
-        String categoryName = "소소소";
+        String categoryName = "소소소견";
 
         // when
         Category result = dataQueryService.findCategoryByCategoryName(categoryName);
