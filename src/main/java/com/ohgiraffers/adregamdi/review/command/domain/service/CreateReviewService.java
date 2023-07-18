@@ -25,6 +25,7 @@ public class CreateReviewService {
     public void saveReview(ReviewDTO reviewDTO) {
 //        Review review = EntityManager.find()
 
+
         Review review = new Review(reviewDTO.getReviewNo(), reviewDTO.getLikeNum(), reviewDTO.getStarPoint(),
                 reviewDTO.getOriginReviewImageName(), reviewDTO.getSavedReviewImageName(),
                 reviewDTO.getImageFilePath(), reviewDTO.getReviewContent(), reviewDTO.getRegDate());

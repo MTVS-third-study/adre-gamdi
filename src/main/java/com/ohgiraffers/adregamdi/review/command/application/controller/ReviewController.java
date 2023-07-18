@@ -5,7 +5,6 @@ import com.ohgiraffers.adregamdi.review.command.application.service.ReviewServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,15 +25,16 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("placeReviews")
-    public String placeReviewsPage() {
-        return "placeReviews";
-    }
+//    @GetMapping("placeReviews")
+//    public String placeReviewsPage() {
+//        return "placeReviews";
+//    }
 
-    @GetMapping("registReview")
-    public String registReviewPage() {
-        return "registReview";
-    }
+//    @GetMapping("registReview")
+//    public String registReviewPage() {
+//        return "registReview";
+//    }
+
 
     @PostMapping("registReview")
     public String registReview(ReviewDTO reviewDTO, @RequestParam MultipartFile imageFile,
@@ -44,12 +44,12 @@ public class ReviewController {
         if (reviewService.insertReview(reviewDTO, imageFile, model)) {
             reviewService.alert("리뷰가 등록되었습니다.", response);
 
-            return "placeReviews";
+            return "redirect:/schedule";
 
         } else {
-            reviewService.alert("리뷰 등록에 실패하였습니다.", response);
+//            reviewService.alert("리뷰 등록에 실패하였습니다.", response);
 
-            return "registReview";
+            return "redirect:/";
         }
     }
 }
