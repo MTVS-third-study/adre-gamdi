@@ -15,8 +15,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/** <pre>
+ *  url 요청 시 openAPI에서 데이터를 전송 받음과 동시에 DB에 유효성과 insert를 진행하는 로직
+ * </pre>
+ */
 @Service
-@Transactional
 public class DataService {
 
     private final PlaceAPIService placeAPIService;
@@ -43,6 +46,7 @@ public class DataService {
         this.placeTagsRepository = placeTagsRepository;
     }
 
+    @Transactional
     public void getPlaceData() {
 
             // 필기. 세션에 저장된 아이디가 관리자인지 구분해서 예외 처리
