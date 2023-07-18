@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+</head>
+<body>
+<th:block th:if="${session.loginUser == null}">
+    <script language="javascript">
+        parent.location.replace("http://localhost:8080");
+    </script>
+</th:block>
+<form action="user/updateNickName" method="post">
+    <th:block th:if="${session.loginUser.getServiceNickName() == ''}">
+        <h3 th:text="${session.loginUser.getKakaoNickName()}"></h3>님의 마이페이지
+    </th:block>
+    <th:block th:if="${session.loginUser.getServiceNickName() != ''}">
+        <h3 th:text="${session.loginUser.getServiceNickName()}"></h3>님의 마이페이지
+    </th:block>
+    <label>
+        <input id="changeNickName" name="nickName" type="text">
+    </label>
+    <button type="submit">닉네임 변경하기</button>
+</form>
+<br>
+<button class="upperBtn" onclick="location.href='/user/deleteForm'" type="button">회원탈퇴</button>
+</body>
+</html>
