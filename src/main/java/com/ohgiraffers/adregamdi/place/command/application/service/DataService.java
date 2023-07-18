@@ -64,6 +64,7 @@ public class DataService {
                     JSONArray placeInfoArray = dataDomainService.getPlaceInfosInPage(key, j, categoryNo[i]);   // 페이지 당 items(여러 장소 정보)
 
                     int placeInfoArraySize = placeInfoArray.size();
+                    System.out.println("placeInfoArraySize = " + placeInfoArraySize);
                     for (int k = 0; k < placeInfoArraySize; k++) {
                         JSONObject item = (JSONObject) placeInfoArray.get(k);    // 한 장소
 
@@ -77,13 +78,13 @@ public class DataService {
                                 new CityVO(city.getCityNo()),
                                 new DongVO(dong.getDongNo()),
                                 placeInfos.get("introduction"),
-                                placeInfos.get("phoneNumber"),
+                                placeInfos.get("phoneNo"),
                                 new CoordinateVO(Double.parseDouble(placeInfos.get("lat")), Double.parseDouble(placeInfos.get("lng"))),
                                 placeInfos.get("postCode"),
                                 placeInfos.get("address"),
                                 placeInfos.get("roadAddress"),
                                 placeInfos.get("imagePath"),
-                                placeInfos.get("thumbnailpath"),
+                                placeInfos.get("thumbnailPath"),
                                 0,
                                 0
                         ));
@@ -108,10 +109,10 @@ public class DataService {
 
     public Place insertPlace(Place place) {
 
-        Place findResult = placeAPIService.findPlaceByPlaceNameAndRoadPlaceAddress(place.getPlaceName(), place.getRoadPlaceAddress());
-        if (findResult != null) {
-            return findResult;
-        }
+//        Place findResult = placeAPIService.findPlaceByPlaceNameAndRoadPlaceAddress(place.getPlaceName(), place.getRoadPlaceAddress());
+//        if (findResult != null) {
+//            return findResult;
+//        }
         return placeRepository.save(place);
     }
 
@@ -119,7 +120,7 @@ public class DataService {
 
         Dong findResult = placeAPIService.findDongByDongName(dong.getDongName());
         if (findResult != null) {
-            return findResult;
+            return null;
         }
         return dongRepository.save(dong);
     }
@@ -128,7 +129,7 @@ public class DataService {
 
         City findResult = placeAPIService.findCityByCityName(city.getCityName());
         if (findResult != null) {
-            return findResult;
+            return null;
         }
         return cityRepository.save(city);
     }
@@ -136,7 +137,7 @@ public class DataService {
     public Category insertCategory(Category category) {
         Category findResult = placeAPIService.findCategoryByCategoryName(category.getCategoryName()); // 중복 확인
         if (findResult != null) {
-            return findResult;
+            return null;
         }
         return categoryRepository.save(category);
     }
