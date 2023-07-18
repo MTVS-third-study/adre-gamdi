@@ -6,7 +6,6 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class ScheduleDTO {
 
     private String scheduleName;

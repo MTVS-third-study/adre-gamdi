@@ -120,7 +120,7 @@ public class DataService {
 
         Dong findResult = placeAPIService.findDongByDongName(dong.getDongName());
         if (findResult != null) {
-            return null;
+            return findResult;
         }
         return dongRepository.save(dong);
     }
@@ -129,7 +129,7 @@ public class DataService {
 
         City findResult = placeAPIService.findCityByCityName(city.getCityName());
         if (findResult != null) {
-            return null;
+            return findResult;
         }
         return cityRepository.save(city);
     }
@@ -137,7 +137,7 @@ public class DataService {
     public Category insertCategory(Category category) {
         Category findResult = placeAPIService.findCategoryByCategoryName(category.getCategoryName()); // 중복 확인
         if (findResult != null) {
-            return null;
+            return findResult;
         }
         return categoryRepository.save(category);
     }
