@@ -1,11 +1,10 @@
 package com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -24,19 +23,20 @@ public class ScheduleDayVO {
     public ScheduleDayVO() {
     }
 
-    public ScheduleDayVO(String startDay, String endDay, Long dayAndNight) {
+    public ScheduleDayVO(String startDay, String endDay) {
         this.startDay = startDay;
         this.endDay = endDay;
         this.dayAndNight = getDayAndNight(startDay,endDay);
     }
 
     private Long getDayAndNight(String startDay, String endDay) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date format1 = null;
         Date format2 = null;
         try {
-            format1 = (Date) new SimpleDateFormat("yyyy-MM-dd").parse(startDay);
-            format2 = (Date) new SimpleDateFormat("yyyy-MM-dd").parse(endDay);
+            format1 = dateFormat.parse(startDay);
+            format2 = dateFormat.parse(endDay);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
