@@ -89,7 +89,7 @@ public class DataService {
                                 0
                         ));
 
-                        List<String> tagList = dataDomainService.parseAllTags(item); // 한 장소의 태그들
+                        List<String> tagList = dataDomainService.parseAllTagsWithValidCheck(item); // 한 장소의 태그들
                         List<Tag> insertTagResultList = tagList.stream().distinct().map(m -> insertTag(m)).collect(Collectors.toList()); // 태그 insert 결과 객체를 리스트로 저장
                         insertTagResultList.stream().forEach(t -> insertPlaceAndTags(
                                 new PlaceVO(place.getPlaceNo())
