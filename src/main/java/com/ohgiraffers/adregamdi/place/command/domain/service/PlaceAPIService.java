@@ -2,6 +2,8 @@ package com.ohgiraffers.adregamdi.place.command.domain.service;
 
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.*;
 
+import java.util.List;
+
 public interface PlaceAPIService {
 
 
@@ -10,4 +12,5 @@ public interface PlaceAPIService {
     City findCityByCityName(String cityName);
     Dong findDongByDongName(String dongName);
     Place findPlaceByPlaceNameAndRoadPlaceAddress(String placeName, String roadPlaceAddress);
+    Place findPlaceByPlaceNo(Long placeNo);
 }

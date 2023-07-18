@@ -6,6 +6,9 @@ import com.ohgiraffers.adregamdi.place.query.application.service.DataQueryServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+
 @Component
 public class PlaceInfraAPIService implements PlaceAPIService {
 
@@ -38,5 +41,10 @@ public class PlaceInfraAPIService implements PlaceAPIService {
     @Override
     public Place findPlaceByPlaceNameAndRoadPlaceAddress(String placeName, String roadPlaceAddress) {
         return dataQueryService.findPlaceByPlaceNameAndRoadPlaceAddress(placeName,roadPlaceAddress);
+    }
+
+    @Override
+    public Place findPlaceByPlaceNo(Long placeNo) {
+        return dataQueryService.findPlaceByPlaceNo(placeNo);
     }
 }

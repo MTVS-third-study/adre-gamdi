@@ -5,6 +5,8 @@ import com.ohgiraffers.adregamdi.place.query.infra.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DataQueryService {
 
@@ -13,18 +15,22 @@ public class DataQueryService {
     private final CityQueryRepository cityQueryRepository;
     private final DongQueryRepository dongQueryRepository;
     private final TagQueryRepository tagQueryRepository;
+    private final PlaceRepository placeRepository;
+
 
     @Autowired
     public DataQueryService(PlaceQueryRepository placeQueryRepository,
                             CategoryQueryRepository categoryQueryRepository,
                             CityQueryRepository cityQueryRepository,
                             DongQueryRepository dongQueryRepository,
-                            TagQueryRepository tagQueryRepository) {
+                            TagQueryRepository tagQueryRepository,
+                            PlaceRepository placeRepository) {
         this.placeQueryRepository = placeQueryRepository;
         this.categoryQueryRepository = categoryQueryRepository;
         this.cityQueryRepository = cityQueryRepository;
         this.dongQueryRepository = dongQueryRepository;
         this.tagQueryRepository = tagQueryRepository;
+        this.placeRepository = placeRepository;
     }
 
     public Tag findTagByTagName(String tagName) {
@@ -51,4 +57,13 @@ public class DataQueryService {
         Place result = placeQueryRepository.findPlaceByPlaceNameAndRoadPlaceAddress(placeName, roadPlaceAddress);
         return result;
     }
+    public List<Place> findAllPlace(){
+        List<Place> placeList = placeRepository.findAll();
+        return placeList;
+    }
+    public Place findPlaceByPlaceNo(Long placeNo){
+        Place result = placeRepository.findPlaceByPlaceNo(placeNo);
+        return result;
+    }
+
 }
