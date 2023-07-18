@@ -5,11 +5,7 @@ import lombok.*;
 
 import java.sql.Timestamp;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+
 public class ReviewDetailDTO {
 
 //    private int reviewNo;   // 기본 키
