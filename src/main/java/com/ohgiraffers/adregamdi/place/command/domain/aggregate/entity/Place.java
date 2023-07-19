@@ -34,6 +34,10 @@ public class Place {
     private String phoneNumber;
     @Embedded
     private CoordinateVO coordinateVO;
+
+//    @Column( columnDefinition = "GEOMETRY")
+//    private Point point;
+
     @Column
     private String postCode;
     @Column
@@ -47,6 +51,7 @@ public class Place {
     private String imagePath;
     @Column
     private String thumbnailPath;
+
 
     /* 별점, 리뷰 */
     @Column

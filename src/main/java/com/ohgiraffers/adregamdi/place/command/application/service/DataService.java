@@ -64,6 +64,7 @@ public class DataService {
                     JSONArray placeInfoArray = dataDomainService.getPlaceInfosInPage(key, j, categoryNo[i]);   // 페이지 당 items(여러 장소 정보)
 
                     int placeInfoArraySize = placeInfoArray.size();
+                    System.out.println("placeInfoArraySize = " + placeInfoArraySize);
                     for (int k = 0; k < placeInfoArraySize; k++) {
                         JSONObject item = (JSONObject) placeInfoArray.get(k);    // 한 장소
 
@@ -77,18 +78,18 @@ public class DataService {
                                 new CityVO(city.getCityNo()),
                                 new DongVO(dong.getDongNo()),
                                 placeInfos.get("introduction"),
-                                placeInfos.get("phoneNumber"),
+                                placeInfos.get("phoneNo"),
                                 new CoordinateVO(Double.parseDouble(placeInfos.get("lat")), Double.parseDouble(placeInfos.get("lng"))),
                                 placeInfos.get("postCode"),
                                 placeInfos.get("address"),
                                 placeInfos.get("roadAddress"),
                                 placeInfos.get("imagePath"),
-                                placeInfos.get("thumbnailpath"),
+                                placeInfos.get("thumbnailPath"),
                                 0,
                                 0
                         ));
 
-                        List<String> tagList = dataDomainService.parseAllTags(item); // 한 장소의 태그들
+                        List<String> tagList = dataDomainService.parseAllTagsWithValidCheck(item); // 한 장소의 태그들
                         List<Tag> insertTagResultList = tagList.stream().distinct().map(m -> insertTag(m)).collect(Collectors.toList()); // 태그 insert 결과 객체를 리스트로 저장
                         insertTagResultList.stream().forEach(t -> insertPlaceAndTags(
                                 new PlaceVO(place.getPlaceNo())
@@ -108,10 +109,10 @@ public class DataService {
 
     public Place insertPlace(Place place) {
 
-        Place findResult = placeAPIService.findPlaceByPlaceNameAndRoadPlaceAddress(place.getPlaceName(), place.getRoadPlaceAddress());
-        if (findResult != null) {
-            return findResult;
-        }
+//        Place findResult = placeAPIService.findPlaceByPlaceNameAndRoadPlaceAddress(place.getPlaceName(), place.getRoadPlaceAddress());
+//        if (findResult != null) {
+//            return findResult;
+//        }
         return placeRepository.save(place);
     }
 

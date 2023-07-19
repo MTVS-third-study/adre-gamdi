@@ -5,6 +5,8 @@ import com.ohgiraffers.adregamdi.place.query.infra.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DataQueryService {
 
@@ -13,6 +15,8 @@ public class DataQueryService {
     private final CityQueryRepository cityQueryRepository;
     private final DongQueryRepository dongQueryRepository;
     private final TagQueryRepository tagQueryRepository;
+
+
 
     @Autowired
     public DataQueryService(PlaceQueryRepository placeQueryRepository,
@@ -51,4 +55,7 @@ public class DataQueryService {
         Place result = placeQueryRepository.findPlaceByPlaceNameAndRoadPlaceAddress(placeName, roadPlaceAddress);
         return result;
     }
+
+
+
 }

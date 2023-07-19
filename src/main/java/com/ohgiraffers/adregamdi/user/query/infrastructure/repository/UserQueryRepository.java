@@ -11,3 +11,5 @@ import javax.transaction.Transactional;
 public interface UserQueryRepository extends JpaRepository<User, Long> {
     User findByKakaoId(String kakaoId);
 }
+
+// 배치 프로그램..!
