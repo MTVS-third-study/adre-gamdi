@@ -15,7 +15,7 @@ public class DataQueryService {
     private final CityQueryRepository cityQueryRepository;
     private final DongQueryRepository dongQueryRepository;
     private final TagQueryRepository tagQueryRepository;
-    private final PlaceRepository placeRepository;
+
 
 
     @Autowired
@@ -23,14 +23,12 @@ public class DataQueryService {
                             CategoryQueryRepository categoryQueryRepository,
                             CityQueryRepository cityQueryRepository,
                             DongQueryRepository dongQueryRepository,
-                            TagQueryRepository tagQueryRepository,
-                            PlaceRepository placeRepository) {
+                            TagQueryRepository tagQueryRepository) {
         this.placeQueryRepository = placeQueryRepository;
         this.categoryQueryRepository = categoryQueryRepository;
         this.cityQueryRepository = cityQueryRepository;
         this.dongQueryRepository = dongQueryRepository;
         this.tagQueryRepository = tagQueryRepository;
-        this.placeRepository = placeRepository;
     }
 
     public Tag findTagByTagName(String tagName) {
@@ -57,13 +55,7 @@ public class DataQueryService {
         Place result = placeQueryRepository.findPlaceByPlaceNameAndRoadPlaceAddress(placeName, roadPlaceAddress);
         return result;
     }
-    public List<Place> findAllPlace(){
-        List<Place> placeList = placeRepository.findAll();
-        return placeList;
-    }
-    public Place findPlaceByPlaceNo(Long placeNo){
-        Place result = placeRepository.findPlaceByPlaceNo(placeNo);
-        return result;
-    }
+
+
 
 }

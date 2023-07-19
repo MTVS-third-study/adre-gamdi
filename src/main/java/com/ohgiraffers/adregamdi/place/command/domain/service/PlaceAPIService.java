@@ -12,5 +12,4 @@ public interface PlaceAPIService {
     City findCityByCityName(String cityName);
     Dong findDongByDongName(String dongName);
     Place findPlaceByPlaceNameAndRoadPlaceAddress(String placeName, String roadPlaceAddress);
-    Place findPlaceByPlaceNo(Long placeNo);
 }

@@ -43,8 +43,5 @@ public class PlaceInfraAPIService implements PlaceAPIService {
         return dataQueryService.findPlaceByPlaceNameAndRoadPlaceAddress(placeName,roadPlaceAddress);
     }
 
-    @Override
-    public Place findPlaceByPlaceNo(Long placeNo) {
-        return dataQueryService.findPlaceByPlaceNo(placeNo);
-    }
+
 }

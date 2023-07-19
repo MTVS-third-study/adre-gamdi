@@ -5,12 +5,13 @@
 <mapper namespace="com.ohgiraffers.adregamdi.place.query.infra.repository.PlaceMapper">
 
     <resultMap id="placeResultMap1" type="com.ohgiraffers.adregamdi.place.query.domain.entity.SearchPlace" autoMapping="false">
-        <id property="placeNo" column="PLACE_NO"/>
-        <result property="placeName" column="PLACE_NAME"/>
-        <result property="placeAddress" column="PLACE_ADDRESS"/>
-        <result property="roadPlaceAddress" column="ROAD_PLACE_ADDRESS"/>
+        <id property="placeNo" column="place_no"/>
+        <result property="placeName" column="place_name"/>
+        <result property="placeAddress" column="place_address"/>
+        <result property="roadPlaceAddress" column="road_place_address"/>
     </resultMap>
-    <select id="searchMapByKeyword" resultMap="placeResultMap1">
+
+    <select id="searchPlace" resultMap="placeResultMap1" parameterType="String">
         SELECT
             PLACE_NO
         ,   PLACE_NAME

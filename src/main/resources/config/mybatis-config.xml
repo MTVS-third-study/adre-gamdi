@@ -5,7 +5,6 @@
 <configuration>
     <properties resource="application.properties"/>
 
-
     <mappers>
        <package name="mybatis.mappers"/>
    </mappers>
