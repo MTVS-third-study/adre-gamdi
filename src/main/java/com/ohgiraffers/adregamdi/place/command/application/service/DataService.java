@@ -64,7 +64,6 @@ public class DataService {
                     JSONArray placeInfoArray = dataDomainService.getPlaceInfosInPage(key, j, categoryNo[i]);   // 페이지 당 items(여러 장소 정보)
 
                     int placeInfoArraySize = placeInfoArray.size();
-                    System.out.println("placeInfoArraySize = " + placeInfoArraySize);
                     for (int k = 0; k < placeInfoArraySize; k++) {
                         JSONObject item = (JSONObject) placeInfoArray.get(k);    // 한 장소
 

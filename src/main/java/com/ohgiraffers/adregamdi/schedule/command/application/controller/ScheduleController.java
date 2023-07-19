@@ -18,8 +18,9 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
     @PostMapping("insertSchedule")
-    public void insertSchedule(ScheduleDTO scheduleDTO) {
+    public String insertSchedule(ScheduleDTO scheduleDTO) {
         scheduleService.insertSchedule(scheduleDTO);
+        return "redirect:/schedule";
     }
 
 }
