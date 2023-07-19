@@ -167,12 +167,21 @@ public class DataDomainService {
         return placeInfo;
     }
 
-    public List<String> parseAllTags(JSONObject item) {
+    public List<String> parseAllTagsWithValidCheck(JSONObject item) {
         String[] allTags;
         if (item.get("alltag") == null) {
             allTags = new String[0];
         } else {
             allTags = ((String) item.get("alltag")).split("\\s*,\\s*"); // ',' 앞 뒤로 공백 제거
+            System.out.println("allTags = " + Arrays.toString(allTags));
+            for (int i = 0; i < allTags.length; i++) {
+                String tag = allTags[i];
+                tag = tag.replaceAll("\\s+", ""); // 전체 공백 제거
+                if (tag.isEmpty()) {continue;}
+
+                tag = tag.replaceAll("[^\\p{IsAlphabetic}\\p{IsDigit}\\p{IsHangul}~%&]", "");
+                allTags[i] = tag;
+            }
         }
         return Arrays.asList(allTags);
     }

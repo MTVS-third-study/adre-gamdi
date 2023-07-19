@@ -15,8 +15,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/** <pre>
+ *  url 요청 시 openAPI에서 데이터를 전송 받음과 동시에 DB에 유효성과 insert를 진행하는 로직
+ * </pre>
+ */
 @Service
-@Transactional
 public class DataService {
 
     private final PlaceAPIService placeAPIService;
@@ -43,6 +46,7 @@ public class DataService {
         this.placeTagsRepository = placeTagsRepository;
     }
 
+    @Transactional
     public void getPlaceData() {
 
             // 필기. 세션에 저장된 아이디가 관리자인지 구분해서 예외 처리
@@ -60,6 +64,7 @@ public class DataService {
                     JSONArray placeInfoArray = dataDomainService.getPlaceInfosInPage(key, j, categoryNo[i]);   // 페이지 당 items(여러 장소 정보)
 
                     int placeInfoArraySize = placeInfoArray.size();
+                    System.out.println("placeInfoArraySize = " + placeInfoArraySize);
                     for (int k = 0; k < placeInfoArraySize; k++) {
                         JSONObject item = (JSONObject) placeInfoArray.get(k);    // 한 장소
 
@@ -73,18 +78,18 @@ public class DataService {
                                 new CityVO(city.getCityNo()),
                                 new DongVO(dong.getDongNo()),
                                 placeInfos.get("introduction"),
-                                placeInfos.get("phoneNumber"),
+                                placeInfos.get("phoneNo"),
                                 new CoordinateVO(Double.parseDouble(placeInfos.get("lat")), Double.parseDouble(placeInfos.get("lng"))),
                                 placeInfos.get("postCode"),
                                 placeInfos.get("address"),
                                 placeInfos.get("roadAddress"),
                                 placeInfos.get("imagePath"),
-                                placeInfos.get("thumbnailpath"),
+                                placeInfos.get("thumbnailPath"),
                                 0,
                                 0
                         ));
 
-                        List<String> tagList = dataDomainService.parseAllTags(item); // 한 장소의 태그들
+                        List<String> tagList = dataDomainService.parseAllTagsWithValidCheck(item); // 한 장소의 태그들
                         List<Tag> insertTagResultList = tagList.stream().distinct().map(m -> insertTag(m)).collect(Collectors.toList()); // 태그 insert 결과 객체를 리스트로 저장
                         insertTagResultList.stream().forEach(t -> insertPlaceAndTags(
                                 new PlaceVO(place.getPlaceNo())
@@ -104,10 +109,10 @@ public class DataService {
 
     public Place insertPlace(Place place) {
 
-        Place findResult = placeAPIService.findPlaceByPlaceNameAndRoadPlaceAddress(place.getPlaceName(), place.getRoadPlaceAddress());
-        if (findResult != null) {
-            return findResult;
-        }
+//        Place findResult = placeAPIService.findPlaceByPlaceNameAndRoadPlaceAddress(place.getPlaceName(), place.getRoadPlaceAddress());
+//        if (findResult != null) {
+//            return findResult;
+//        }
         return placeRepository.save(place);
     }
 
