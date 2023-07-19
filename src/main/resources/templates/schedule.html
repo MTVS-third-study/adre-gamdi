@@ -56,7 +56,7 @@
         </div>
         <div id="menu_wrap" class="bg_white menu_wrap">
             <hr />
-            <ul id="" class="placeList">
+            <ul  class="placeList">
                 <li>
                     <div>
                         <h4>음식점</h4>
@@ -71,7 +71,7 @@
 
 
             </ul>
-            <div id="">
+            <div >
                 <span>1</span>
                 <span>2</span>
                 <span>3</span>
@@ -89,24 +89,24 @@
                 <div class="selectBox">
                     <select name="day" id="" class="daySelect form-select" aria-label="Default select example">
                         <option value="allday">전체일정</option>
-                        <option value="1day" th:each="${dayList}">1일차</option>
+                        <option value="1day" >1일차</option>
 
                     </select>
                     <button class="saveBtn">저장</button>
                 </div>
                 <div class="dayScheduleWrapper">
                     <ul id="placesList" class="dayList">
-                        <li th:each="${placeList}">
+                        <li >
                             <div>
                                 <img src="/images/daylistnum.png" alt=""><span class="listnum">1</span>
-                                <p th:text="${placeName}">음식점</p>
+                                <p >음식점</p>
 
-                                <span th:text="${placeAddr}"></span>
+                                <span ></span>
 
                             </div>
                             <div class="dayPicture">
-                                <img th:src="${imgurl}" alt="">
-                                <p class="nextPlace" >다음 장소까지: <p th:text="${placeKM}">200</p>km</p>
+                                <img  alt="">
+                                <p class="nextPlace" >다음 장소까지: <p >200</p>km</p>
                             </div>
                         </li>
                         <hr>
@@ -127,8 +127,8 @@
             <div class="imgBox">
                 <img src="/images/images.jpg" alt="" />
                 <div class="titleBox">
-                    <span th:text="${placeName}">판교제2테크노밸리 기업지원허브</span>
-                    <p th:text="${plactCategory}">기업단지</p>
+                    <span >판교제2테크노밸리 기업지원허브</span>
+                    <p >기업단지</p>
                 </div>
             </div>
             <hr />
@@ -142,15 +142,15 @@
                     <div class="info">
                         <p>
                             <img src="/images/phone.png" alt="" />
-                            <span th:text="${placeNumber}">010-3333-1232</span>
+                            <span >010-3333-1232</span>
                         </p>
 
                         <p>
                             <img src="/images/marker.png" alt="" />
-                            <span th:text="${placeAddr}">경기도 성남시 수정구 </span>
+                            <span >경기도 성남시 수정구 </span>
                         </p>
                         <p>
-                            <img src="/images/info.png" alt="" /><span th:text="${placeInfo}">넓은 매장과 탁트인 뷰
+                            <img src="/images/info.png" alt="" /><span >넓은 매장과 탁트인 뷰
                 </span>
                         </p>
                     </div>
@@ -163,7 +163,7 @@
                 <div class="reviewContainer">
                     <div class="reviewHeader">
                         <div class="totlaPoint">
-                            <span th:text="${placeStarpoint}">3.8</span>
+                            <span >3.8</span>
                         </div>
                         <div class="reiewBtnBox">
                             <button class="reviewBtn">
@@ -175,12 +175,12 @@
                     <div class="reviewContentsBox">
                         <div class="reviewBox">
                             <div class="userinfoBox">
-                                <div class="userid"><img src="" alt="" /><span th:text="${userName}">JM</span></div>
-                                <div class="reviewStarPoint" th:text="${reviewstarpoint}"><img src="" alt="" />별점</div>
+                                <div class="userid"><img src="" alt="" /><span >JM</span></div>
+                                <div class="reviewStarPoint"><img src="" alt="" />별점</div>
                             </div>
 
                             <div class="reviewContents">
-                                <p th:text="${reviewInfo}">
+                                <p >
                                     분위기 사먹으러 가세요. 음식은 쏘쏘인데, 식사보단 커피하러
                                     가시는걸 추천요. 양껏 먹는집은 아니에요ㅎㅎ 주말은 웨이팅
                                     있으니, 미리가서 대기 하셔야되요. 분위기는 좋아요
