@@ -1,6 +1,8 @@
 package com.ohgiraffers.adregamdi.review.command.domain.service;
 
 import com.ohgiraffers.adregamdi.review.command.application.dto.ReviewDTO;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewPlaceNo;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewWriterNo;
 import com.ohgiraffers.adregamdi.review.command.domain.repository.ReviewRepository;
 import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -22,13 +25,14 @@ public class CreateReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public void saveReview(ReviewDTO reviewDTO) {
-//        Review review = EntityManager.find()
+    public void saveReview(ReviewDTO reviewDTO, Long userId, Long placeId) {
 
+        ReviewWriterNo reviewWriterNo = new ReviewWriterNo(userId);
+        ReviewPlaceNo reviewPlaceNo = new ReviewPlaceNo(placeId);
 
         Review review = new Review(reviewDTO.getReviewNo(), reviewDTO.getLikeNum(), reviewDTO.getStarPoint(),
                 reviewDTO.getOriginReviewImageName(), reviewDTO.getSavedReviewImageName(),
-                reviewDTO.getImageFilePath(), reviewDTO.getReviewContent(), reviewDTO.getRegDate());
+                reviewDTO.getImageFilePath(), reviewDTO.getReviewContent(), reviewDTO.getRegDate(), reviewWriterNo, reviewPlaceNo);
 
         reviewRepository.save(review);
 

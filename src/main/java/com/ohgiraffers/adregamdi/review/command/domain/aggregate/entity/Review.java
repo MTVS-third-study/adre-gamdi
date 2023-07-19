@@ -34,8 +34,9 @@ public class Review {
     private String reviewContent;
     @Column(name = "REG_DATE", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp regDate;
-//    @Embedded
-//    private ReviewWriterNo reviewWriterNo;
-//    @Embedded
-//    private ReviewPlaceNo reviewPlaceNo;
+    @Embedded
+    private ReviewWriterNo reviewWriterNo;
+    @Embedded
+    private ReviewPlaceNo reviewPlaceNo;
+
 }

@@ -1,13 +1,16 @@
 package com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity;
 
-import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Embeddable
-public class ReviewWriterNo {
+public class ReviewWriterNo implements Serializable {
 
+    @Column(name = "user_no")
     private Long reviewWriterNo;
 
-
+    protected ReviewWriterNo(){};
+    public ReviewWriterNo(Long reviewWriterNo) {
+    this.reviewWriterNo = reviewWriterNo;
+}
 }

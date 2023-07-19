@@ -19,10 +19,11 @@
 <!--            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"-->
 <!--            crossorigin="anonymous"-->
 <!--    />-->
+
     <link rel="stylesheet" href="/css/schedule.css" type="text/css" />
-
-
+    <link rel="stylesheet" href="/css/registReview.css" type="text/css" />
 </head>
+
 
 <body>
 <div class="schedule-container">
@@ -233,7 +234,7 @@
 
             </div>
 
-            <div class="reviewContents">
+            <div class="reviewContents1">
                 <input type="file" name="imageFile" id="imageFile" accept="image/jpg, image/jpeg, image/png"
                        onchange="readURL(this);"><br>
                 <span th:text="${ incorrectExtension }" style="color:red;"></span>

@@ -1,13 +1,18 @@
 package com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity;
 
-import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.Place;
-import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Embeddable
-public class ReviewPlaceNo {
+public class ReviewPlaceNo implements Serializable {
 
-    private int reviewPlaceNo;
+    @Column(name = "place_no")
+    private Long reviewPlaceNo;
+
+    protected ReviewPlaceNo() {}
+
+    public ReviewPlaceNo(Long reviewPlaceNo) {
+        this.reviewPlaceNo = reviewPlaceNo;
+    }
 
 }

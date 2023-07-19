@@ -21,6 +21,6 @@ public class ReviewDTO {
     private String imageFilePath;
     private String reviewContent;
     private Timestamp regDate;
-//    private ReviewWriterNo reviewWriterNo;
-//    private ReviewPlaceNo reviewPlaceNo;
+    private ReviewWriterNo reviewWriterNo;
+    private ReviewPlaceNo reviewPlaceNo;
 }
