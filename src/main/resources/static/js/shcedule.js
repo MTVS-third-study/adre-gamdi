@@ -3,43 +3,59 @@ let infoNav = document.getElementById("infoNav");
 let reviewNav = document.getElementById("reviewNav");
 let infoContents = document.getElementsByClassName("infoContents");
 let reviewContainer = document.getElementsByClassName("reviewContainer");
-
+let imgBox=document.getElementsByClassName("imgBox")
 infoNav.addEventListener("click", () => {
     infoContents[0].style.display = "block";
     reviewContainer[0].style.display = "none";
+    imgBox[0].style.display="block"
+
 });
 reviewNav.addEventListener("click", () => {
     infoContents[0].style.display = "none";
     reviewContainer[0].style.display = "block";
+    imgBox[0].style.display="none"
 });
 
 // 지도 사이드바 설정 js
 let menuWrap = document.getElementById("menu_wrap");
 let dayWrap = document.getElementById("day_wrap");
-let homeBtn = document.getElementsByClassName("homeBtn");
-let myScheduleBtn = document.getElementsByClassName("myScheduleBtn");
-let imgBtn = document.getElementsByClassName("imgBtn");
 let infoWrap = document.getElementById("info_wrap");
+let homeBtn = document.getElementById("homeBtn");
+let myScheduleBtn = document.getElementById("myScheduleBtn");
+let imgBtn = document.getElementById("imgBtn");
 let BtnBox = document.getElementsByClassName("BtnBox");
+let option=document.getElementsByClassName("option")
+homeBtn.addEventListener("click", () => {
+    console.log(1)
 
-homeBtn[0].addEventListener("click", () => {
-    console.log(homeBtn[0])
-    menuWrap.style.display = "block";
-    dayWrap.style.display = "none";
-    infoWrap.style.display="none";
+
+    menuWrap.style.display="block"
+    dayWrap.style.display="none"
+    infoWrap.style.display="none"
+    option[0].style.display="block";
+
 });
-myScheduleBtn[0].addEventListener("click", () => {
-    console.log(myScheduleBtn[0])
-    menuWrap.style.display = "none";
+
+myScheduleBtn.addEventListener("click", () => {
+
+    console.log(2)
+
     dayWrap.style.display = "block";
+    menuWrap.style.display = "none";
     infoWrap.style.display="none";
+    option[0].style.display="block";
+
+
 });
-imgBtn[0].addEventListener("click", () => {
-    console.log(imgBtn[0])
+imgBtn.addEventListener("click", () => {
+    console.log(3)
+
     infoWrap.style.display = "block";
     menuWrap.style.display = "none";
     dayWrap.style.display = "none";
     BtnBox[0].style.display = "none";
+    option[0].style.display="none";
+
 });
 
 // 상세 페이지 일정추가
@@ -49,4 +65,5 @@ scheduleAdd[0].addEventListener("click", () => {
     dayWrap.style.display = "block";
     infoWrap.style.display = "none";
     BtnBox[0].style.display = "block";
+    option[0].style.display="block";
 });
