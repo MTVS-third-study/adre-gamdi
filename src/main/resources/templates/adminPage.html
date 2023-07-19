@@ -59,7 +59,7 @@
                 <table>
                     <thead>
                     <tr>
-                        <th class="pin"> </th>
+
                         <th>userNo</th>
                         <th>ID</th>
                         <th>kakaoNickName</th>
@@ -74,12 +74,11 @@
                     </tr>
                     </thead>
 
-                    <tbody>
                     <tr th:each="user:${userList}">
 
+
                         <th th:text="${user.userNo}"/>
-                        <th th:text="${user.userNo}"/>
-                        <th th:text="${user.id}"/>
+                        <th th:text="${user.kakaoId}"/>
                         <td th:text="${user.kakaoNickName}"/>
                         <td th:text="${user.serviceNickName}"/>
                         <td th:text="${user.email}"/>
@@ -90,7 +89,8 @@
                         <td th:text="${user.grade}"/>
                         <td th:text="${user.blacklist_status}"/>
                     </tr>
-                    </tbody>
+                    </tbody><tbody>
+
                 </table>
 
             </div>

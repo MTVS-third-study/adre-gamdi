@@ -13,114 +13,123 @@
             type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68b6fbdf7ad018b34a2bab823e0f11ae&libraries=services"
     ></script>
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-            crossorigin="anonymous"
-    />
+<!--    <link-->
+<!--            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"-->
+<!--            rel="stylesheet"-->
+<!--            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"-->
+<!--            crossorigin="anonymous"-->
+<!--    />-->
     <link rel="stylesheet" href="/css/schedule.css" type="text/css" />
-    <link rel="stylesheet" href="/css/kakao.css" />
+
 
 </head>
 
 <body>
 <div class="schedule-container">
-    <div class="schedule-list" id="schedule_wrap" >
+    <div class="schedule-list" id="schedule_wrap">
         <!-- <a href="/#"><img src="images/logo.png" style="height: 60px; width: 60px"/></a> -->
         <!-- 검색 box -->
-        <div id="menu_wrap" class="bg_white menu_wrap" style="display: block">
-            <div class="option">
-                <div>
-                    <form onsubmit="searchPlaces(); return false;" class="searchBox">
-                        키워드 : <input type="text" id="keyword" size="15" />
-                        <button id="searchKeyword" type="button">검색하기</button>
-                    </form>
-                    <!--                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
-                </div>
+
+        <div class="option">
+            <div>
+                <form  class="searchBox">
+                    <input type="text" placeholder="검색어를 입력해주세요" class="keyword" />
+                    <button  class="searchKeyword" type="button"><img src="/images/search.png" alt=""></button>
+
+                </form>
+                <!--                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
             </div>
+            <div class="BtnBox">
+                <button class="homeBtn" id="homeBtn" >
+                    <img src="/images/home_house_icon.png" alt="" />
+                    <p>홈</p>
+                </button>
+                <button class="myScheduleBtn" id="myScheduleBtn">
+                    <img src="/images/schedule_icon.png" alt="" />
+                    <p>일정</p>
+                </button>
+                <button class="imgBtn" id="imgBtn" >
+                    <img src="/images/plus.png" alt="" />
+                    <p>new</p>
+                </button>
+            </div>
+        </div>
+        <div id="menu_wrap" class="bg_white menu_wrap">
             <hr />
-            <ul id="placesList" class="placeList"></ul>
-            <div id="pagination"></div>
+            <ul id="" class="placeList">
+                <li>
+                    <div>
+                        <h4>음식점</h4>
+                        <p>카테고리</p>
+                        <span>색달동 2864-10</span>
+                        <span>020-5574-44848</span>
+                    </div>
+                    <img src="/images/marker.png" alt="">
+                </li>
+                <hr>
+
+
+
+            </ul>
+            <div id="">
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+            </div>
         </div>
 
 
         <!-- 일정 box-->
-        <div id="day_wrap" class="bg_white menu_wrap" >
-            <div class="option">
-                <div>
-                    <form onsubmit="searchPlaces(); return false;" class="searchBox">
-                        키워드 : <input type="text" id="keyword" size="15" />
-                        <button id="searchKeyword" type="button" class="serchBtn">
-                            검색하기
-                        </button>
-                    </form>
-                    <!--                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
-                </div>
-            </div>
+        <div id="day_wrap" class="bg_white day_wrap">
+
+
+
             <hr />
             <div class="scheduleBox">
-                <select
-                        name="day"
-                        id=""
-                        class="daySelect form-select"
-                        aria-label="Default select example"
-                >
-                    <option value="allday">전체일정</option>
-                    <option value="1day">1일차</option>
-                    <option value="2day">2일차</option>
-                    <option value="3day">3일차</option>
-                </select>
-                <div class="dayScheduleWrapper">
-                    <div class="daySchedule">
-                        <div class="daynum">
-                            <div class="numCircle">1</div>
-                            <div class="dashLine"></div>
-                            <div class="numCircle">2</div>
-                            <div class="dashLine"></div>
-                            <div class="numCircle">3</div>
-                            <div class="dashLine"></div>
-                            <div class="numCircle">4</div>
-                        </div>
+                <div class="selectBox">
+                    <select name="day" id="" class="daySelect form-select" aria-label="Default select example">
+                        <option value="allday">전체일정</option>
+                        <option value="1day" th:each="${dayList}">1일차</option>
 
-                        <div class="wayPoint">
-                            <div class="km">200km</div>
-                            <div class="km">100km</div>
-                            <div class="km">300km</div>
-                        </div>
-                        <div class="dayContents">
-                            <div class="">제주국수</div>
-                            <div class="">제주국수</div>
-                            <div class="">제주국수</div>
-                            <div class="">제주국수</div>
-                        </div>
-                    </div>
+                    </select>
+                    <button class="saveBtn">저장</button>
+                </div>
+                <div class="dayScheduleWrapper">
+                    <ul id="placesList" class="dayList">
+                        <li th:each="${placeList}">
+                            <div>
+                                <img src="/images/daylistnum.png" alt=""><span class="listnum">1</span>
+                                <p th:text="${placeName}">음식점</p>
+
+                                <span th:text="${placeAddr}"></span>
+
+                            </div>
+                            <div class="dayPicture">
+                                <img th:src="${imgurl}" alt="">
+                                <p class="nextPlace" >다음 장소까지: <p th:text="${placeKM}">200</p>km</p>
+                            </div>
+                        </li>
+                        <hr>
+
+
+
+
+
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="BtnBox">
-            <button class="homeBtn">
-                <img src="/images/home_house_icon.png" alt="" />
-                <p>홈</p>
-            </button>
-            <button class="myScheduleBtn" >
-                <img src="/images/schedule_icon.png" alt="" />
-                <p>일정</p>
-            </button>
-            <button class="imgBtn" >
-                <img src="/images/plus.png" alt="" />
-                <p>new</p>
-            </button>
-        </div>
-    </div>
 
-    <!-- 상세 box -->
-    <div id="info_wrap" class="bg_white menu_wrap" >
-        <div class="imgBox">
-            <img src="/images/images.jpg" alt="" />
-            <div class="titleBox">
-                <span>판교제2테크노밸리 기업지원허브</span>
-                <p>기업단지</p>
+
+
+        <!-- 상세 box -->
+        <div id="info_wrap" class="bg_white menu_wrap">
+            <div class="imgBox">
+                <img src="/images/images.jpg" alt="" />
+                <div class="titleBox">
+                    <span th:text="${placeName}">판교제2테크노밸리 기업지원허브</span>
+                    <p th:text="${plactCategory}">기업단지</p>
+                </div>
             </div>
             <hr />
             <div class="infoBox">
@@ -133,17 +142,16 @@
                     <div class="info">
                         <p>
                             <img src="/images/phone.png" alt="" />
-                            <span>010-3333-1232</span>
+                            <span th:text="${placeNumber}">010-3333-1232</span>
                         </p>
 
                         <p>
                             <img src="/images/marker.png" alt="" />
-                            <span>경기도 성남시 수정구 </span>
+                            <span th:text="${placeAddr}">경기도 성남시 수정구 </span>
                         </p>
                         <p>
-                            <img src="/images/info.png" alt="" /><span
-                        >넓은 매장과 탁트인 뷰
-                  </span>
+                            <img src="/images/info.png" alt="" /><span th:text="${placeInfo}">넓은 매장과 탁트인 뷰
+                </span>
                         </p>
                     </div>
                     <hr />
@@ -155,47 +163,58 @@
                 <div class="reviewContainer">
                     <div class="reviewHeader">
                         <div class="totlaPoint">
-                            <span>3.8</span>
+                            <span th:text="${placeStarpoint}">3.8</span>
                         </div>
                         <div class="reiewBtnBox">
                             <button class="reviewBtn">
-                                <img src="./img/reviewAdd.png" alt="" />리뷰 작성
+                                <img src="/images/reviewAdd.png" alt="" />리뷰 작성
                             </button>
                         </div>
                     </div>
                     <hr />
-                    <div class="contents">
-                        <div><img src="" alt="" /><span>JM</span></div>
-                        <div><img src="" alt="" />별점</div>
-                        <div class="reviewContents">
-                            <p>
-                                분위기 사먹으러 가세요. 음식은 쏘쏘인데, 식사보단 커피하러
-                                가시는걸 추천요. 양껏 먹는집은 아니에요ㅎㅎ 주말은 웨이팅
-                                있으니, 미리가서 대기 하셔야되요. 분위기는 좋아요
-                            </p>
+                    <div class="reviewContentsBox">
+                        <div class="reviewBox">
+                            <div class="userinfoBox">
+                                <div class="userid"><img src="" alt="" /><span th:text="${userName}">JM</span></div>
+                                <div class="reviewStarPoint" th:text="${reviewstarpoint}"><img src="" alt="" />별점</div>
+                            </div>
+
+                            <div class="reviewContents">
+                                <p th:text="${reviewInfo}">
+                                    분위기 사먹으러 가세요. 음식은 쏘쏘인데, 식사보단 커피하러
+                                    가시는걸 추천요. 양껏 먹는집은 아니에요ㅎㅎ 주말은 웨이팅
+                                    있으니, 미리가서 대기 하셔야되요. 분위기는 좋아요
+
+                                </p>
+                            </div>
+                            <div class="reviewImg">
+                                <img src="/images/images.jpg" alt="" />
+                            </div>
+                            <div class="csBox">
+                                <div class="like white">
+                                    <img src="/images/whiteLie.png" alt="" /><span>1</span>
+                                </div>
+                                <div class="like black">
+                                    <img src="/images/blackLike.png" alt="" /><span>2</span>
+                                </div>
+                                <div class="report">
+                                    <img src="/images/siren.png" alt="" /><span>신고</span>
+                                </div>
+                            </div>
+                            <hr>
+
                         </div>
-                        <div class="reviewImg">
-                            <img src="/images/images.jpg" alt="" />
-                        </div>
+
                     </div>
-                    <div class="csBox">
-                        <div class="like white">
-                            <img src="/images/whiteLie.png" alt="" /><span>1</span>
-                        </div>
-                        <div class="like black">
-                            <img src="/images/blackLike.png" alt="" /><span>2</span>
-                        </div>
-                        <div class="report">
-                            <img src="/images/siren.png" alt="" /><span>신고</span>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-
-
     <div id="map" class="schedule-map" style="width: 65%; height: 100vh;"></div>
+</div>
+
+
 </div>
 
 <script src="/js/kakaomap.js"></script>

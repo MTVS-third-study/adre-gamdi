@@ -19,14 +19,14 @@ body {
     height: 100vh;
     width: 100%;
     margin: 0;
+    overflow: hidden;
 }
 
 .schedule-list {
-    display: flex;
-    flex-direction: column;
+
     float: none;
-    width: 25%;
-    background-color: #f6fdf8;
+    width: 500px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
 }
 
 .schedule-content {
@@ -40,7 +40,9 @@ body {
     overflow: auto;
 }
 .searchBox {
-    margin: 30px 0;
+    width: 400px;
+    margin: 30px auto;
+    text-align: center;
 }
 .serchBtn {
     border-radius: 5px;
@@ -49,99 +51,166 @@ body {
     border: none;
     color: white;
     background-color: green;
+
+
 }
 .BtnBox {
-    position: relative;
-    top: 803px;
-    left: 45px;
-    width: 350px;
 
+    width: 400px;
+    margin: 20px auto;
+    text-align: center;
     z-index: 2;
     display: block;
 }
 .BtnBox > button {
     border: none;
     background-color: transparent;
-    margin: 0 40px;
+    margin-right: 40px;
     cursor: pointer;
 }
 .BtnBox > button > p {
-    font-size: 15px;
+    font-size: 12px;
 }
 .BtnBox > button > img {
-    width: 30px;
+    width: 20px;
+
 }
-.BtnBox > span {
-    border: none;
-    background-color: transparent;
-    margin: 0 40px;
-    cursor: pointer;
-}
-.BtnBox > span > p {
-    font-size: 15px;
-}
-.BtnBox > span > img {
-    width: 30px;
-}
+
 /* 검색 */
 #menu_wrap {
-    display: none;
-}
-
-/* 일정 box */
-#day_wrap {
     display: block;
 }
-.daySelect {
-    text-align: center;
-    width: 300px;
-    margin: 50px auto;
-}
-.daySchedule {
-    background-color: gray;
-    display: flex;
-}
-.numCircle {
-    width: 20px;
-    border-radius: 50%;
-    background-color: palevioletred;
-    text-align: center;
-    margin: 20px;
-}
-.dashLine {
-    width: 5px;
+.keyword{
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    border-radius: 16px ;
+    z-index: 4;
+    width: 350px;
     height: 40px;
-    border-left: dotted;
+    padding: 11px 106px 11px 30px;
+    font-weight: bold;
     margin: 0 auto;
 }
-
-.daynum {
+.searchKeyword{
+    width: 20px;
+    border: none;
+    background-color: transparent;
     display: inline-block;
-    /* background-color: aqua; */
-    margin-left: 40px;
+    float: right;
+    position: relative;
+    top: 10px;
+    left: -50px;
 }
-.wayPoint {
-    margin: 0 20px;
 
-    /* background-color: blanchedalmond; */
+.searchKeyword>img{
+    width: 20px;
+
+    cursor: pointer;
+
 }
-.km {
-    margin: 75px 0;
+.placeList{
+    height: 70vh;
+    overflow-y: scroll;
 }
-.dayContents {
-    /* background-color: aquamarine; */
-    font-size: 20px;
+.placeList::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+}
+
+.placeList::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
+}
+
+.placeList::-webkit-scrollbar-track {
+
+}
+.placeList>li{
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+}
+.placeList>li>img{
+    width: 84px;
+    height: 84px;
+    border-radius: 5px;
+    background-color: gray;
+}
+/* 일정 box */
+
+#day_wrap {
+    display:none;
+}
+.scheduleBox{
+    width: 500px;
+}
+.selectBox{
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.saveBtn{
+    width: 50px;
+    height: 25px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid blue;
+    color: blue;
+    position: relative;
+    top: 10px;
+    left: 73px;
+
+}
+.daySelect {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    border-radius: 16px;
+    z-index: 4;
+    width: 200px;
+    height: 40px;
+    padding: 11px 50px 11px 30px;
     font-weight: bold;
     text-align: center;
-    margin-left: 40px;
+    margin: 30px auto;
 }
-.dayContents > div:first-child {
-    margin-top: 15px;
-}
-.dayContents > div {
-    margin-bottom: 65px;
+.daySelect>option{
+    text-align: left;
 }
 
+.dayList{
+    height: 70vh;
+    overflow-y: scroll;
+}
+.dayList>li{
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    line-height: 30px;
+}
+.dayList>li>.dayPicture>img{
+    width: 84px;
+    height: 84px;
+    border-radius: 5px;
+    background-color: gray;
+}
+.dayList>li>.dayPicture>span{
+    font-size: 12px;
+}
+.dayList>li>div>p{
+    font-size: 20px;
+}
+.dayList>li>div>.nextPlace{
+    font-size: 11px;
+    color: gray;
+    opacity: 0,5;
+
+}
+.listnum{
+    position: relative;
+    top: -13px;
+    left: -23px;
+
+}
 /* 상세 box */
 
 .imgBox > img {
@@ -149,10 +218,13 @@ body {
 }
 .titleBox {
     padding: 10px 20px;
+    line-height: 30px;
 }
 .titleBox > span {
-    font-size: 23px;
+    font-size: 20px;
+    font-weight: bold;
 }
+
 hr {
     width: 100%;
     border-bottom: 0px;
@@ -161,13 +233,13 @@ hr {
 }
 
 .navBar {
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-around;
 }
 .navBar > li {
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     color: #70757a;
     cursor: pointer;
 }
@@ -175,11 +247,12 @@ hr {
     display: none;
 }
 .infoContents {
-    margin-top: 30px;
-    display: none;
+    margin-top: 10px;
+    display: block;
+    line-height: 80px;
 }
 .infoContents > .info > p {
-    margin-left: 30px;
+    margin-left: 70px;
 }
 .infoContents > .info > p > img {
     width: 25px;
@@ -187,7 +260,9 @@ hr {
 .infoContents > .info > p > span {
     font-size: 15px;
     color: #70757a;
-    margin-left: 40px;
+    margin-left: 80px;
+    position: relative;
+    top: -7px;
 }
 .addBtn {
     width: 200px;
@@ -202,6 +277,7 @@ hr {
     background-color: transparent;
     border: 1px solid blue;
     color: blue;
+    cursor: pointer;
 }
 
 /* 리뷰 */
@@ -211,6 +287,21 @@ hr {
 }
 .reviewContainer {
     display: none;
+
+
+}
+.reviewContentsBox{
+    height: 80vh;
+    overflow-y: scroll;
+}
+.reviewContentsBox::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+
+}
+
+.reviewContentsBox::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
 }
 .reviewHeader {
     margin-top: 30px;
@@ -227,19 +318,30 @@ hr {
     background-color: transparent;
     border: 1px solid blue;
     color: blue;
+    margin-bottom: 30px;
 }
 #infoNav:hover {
     color: blue;
-    border-bottom: 1px solid blue;
+
+    border-bottom: 5px solid blue;
+
 }
 #reviewNav:hover {
     color: blue;
-    border-bottom: 1px solid blue;
+    border-bottom: 5px solid blue;
 }
 .reviewBtn > img {
     width: 15px;
     margin-right: 14px;
 }
+
+.reviewBox>.userinfoBox{
+    margin: 30px 0 10px 30px;
+}
+.userinfoBox>div{
+    margin-bottom: 10px;
+}
+
 .reviewContents > img {
     width: 15px;
     margin-right: 10px;
@@ -248,26 +350,43 @@ hr {
     font-size: 11px;
     font-weight: bold;
     line-height: 19px;
-    overflow: hidden;
+    overflow-y: scroll;
+    width: 350px;
+    height: 50px;
+    margin: 30px 0 30px 30px;
+}
+.reviewContents::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+}
+
+.reviewContents::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
 }
 .reviewImg > img {
     width: 100%;
 }
+.white>img{
+    position: relative;
+}
+.black>img{
+    position: relative;
+}
 .csBox {
     display: flex;
-    margin-top: 30px;
-    margin-left: 40px;
+    margin: 10px 0 20px 10px;
 }
 .csBox > div {
     margin-right: 30px;
 }
 .csBox > div > img {
-    width: 20px;
+    width: 13px;
     margin-right: 15px;
 }
 .csBox > div > span {
     position: relative;
-    top: 4px;
+    top: -2px;
+    font-size: 10px;
 }
 .white {
     display: none;
