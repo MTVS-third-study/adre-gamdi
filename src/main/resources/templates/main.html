@@ -68,12 +68,18 @@
 </div>
 
 <div id="modal">
-    <div align="center" class="modal-content">
-        <h2>로그인</h2>
+    <div align="center" class="modal-content"
+         style="width: 300px; height: 300px; font-size: 30px;
+         border-width: thick; border-radius: 7px;
+         color: black;
+         /*-webkit-text-stroke: 2px black;*/
+         background-color: lightblue; border-color: black;">
+        <h3 style="margin-bottom: 20px">로그인</h3>
         <a href="https://kauth.kakao.com/oauth/authorize?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&redirect_uri=http://localhost:8080/oauth/kakao/login&response_type=code"
            id="kakao-login-btn">
-            <img alt="카카오 로그인 버튼" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
-                 width="222"/>
+            <img alt="카카오 로그인 버튼"
+                 src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+                 width="250"/>
         </a>
     </div>
 </div>
@@ -90,13 +96,13 @@
     // 모달창 열기
     openLoginBtn.addEventListener("click", () => {
         modal.style.display = "block";
-        document.body.style.overflow = "hidden"; // 스크롤바 제거
+        // document.body.style.overflow = "hidden"; // 스크롤바 제거
     });
 
     // 모달창 닫기
     closeModalBtn.addEventListener("click", () => {
         modal.style.display = "none";
-        document.body.style.overflow = "auto"; // 스크롤바 보이기
+        // document.body.style.overflow = "auto"; // 스크롤바 보이기
     });
 </script>
 </html>
