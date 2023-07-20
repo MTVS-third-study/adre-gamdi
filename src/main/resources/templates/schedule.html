@@ -32,9 +32,9 @@
 
         <div class="option">
             <div>
-                <form  class="searchBox">
-                    <input type="text" placeholder="검색어를 입력해주세요" class="keyword" />
-                    <button  class="searchKeyword" type="button"><img src="/images/search.png" alt=""></button>
+                <form action="/placeQuery/searchPlace" class="searchBox">
+                    <input type="text" placeholder="검색어를 입력해주세요" class="keyword" name="searchKeyword" method="GET"/>
+                    <button class="searchKeyword" type="button"><img src="/images/search.png" alt=""></button>
 
                 </form>
                 <!--                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
@@ -57,15 +57,16 @@
         <div id="menu_wrap" class="bg_white menu_wrap">
             <hr />
             <ul  class="placeList">
-                <li>
+                <li th:each="place:${placeList}">
                     <div>
-                        <h4>음식점</h4>
+                        <h4 th:text="${place.getPlaceName()}"></h4>
                         <p>카테고리</p>
                         <span>색달동 2864-10</span>
                         <span>020-5574-44848</span>
                     </div>
-                    <img src="/images/marker.png" alt="">
+                    <img th:src="/images/marker.png" alt="">
                 </li>
+
                 <hr>
 
 
