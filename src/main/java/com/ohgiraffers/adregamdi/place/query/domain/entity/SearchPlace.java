@@ -172,5 +172,25 @@ public class SearchPlace {
         this.reviewCount = reviewCount;
     }
 
-
+    @Override
+    public String toString() {
+        return "SearchPlace{" +
+                "placeNo=" + placeNo +
+                ", placeName='" + placeName + '\'' +
+                ", categoryNo=" + categoryNo +
+                ", cityNo=" + cityNo +
+                ", dongNo=" + dongNo +
+                ", introduction='" + introduction + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", postCode='" + postCode + '\'' +
+                ", placeAddress='" + placeAddress + '\'' +
+                ", roadPlaceAddress='" + roadPlaceAddress + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", thumbnailPath='" + thumbnailPath + '\'' +
+                ", averageStarPoint=" + averageStarPoint +
+                ", reviewCount=" + reviewCount +
+                '}';
+    }
 }
