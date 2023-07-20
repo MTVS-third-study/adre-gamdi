@@ -18,9 +18,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = " UPDATE TBL_USER "
             + " SET SERVICE_NICK_NAME = :nickName "
             + " WHERE USER_NO = :userNo", nativeQuery = true)
-    void updateNickName(@Param("nickName") String nickName, @Param("userNo") Long userNo) throws Exception;
+    int updateNickName(@Param("nickName") String nickName, @Param("userNo") Long userNo) throws Exception;
 
     // 카카오 아이디로 유저 삭제
-    void deleteByKakaoId(String id);
+    Long deleteByKakaoId(String id);
 
 }

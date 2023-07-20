@@ -22,8 +22,12 @@ public class UserService {
 
     // 닉네임 변경
     public UserDTO updateNickName(String nickName, UserDTO userInfo) throws Exception {
-        userRepository.updateNickName(nickName, userInfo.getUserNo());
-        return userDomainService.findByKakaoId(userInfo.getKakaoId());
+        int result = userRepository.updateNickName(nickName, userInfo.getUserNo());
+
+        if (result == 1) { // 닉네임 변경 성공 시
+            return userDomainService.findByKakaoId(userInfo.getKakaoId());
+        }
+        return new UserDTO(); // 변경 실패 시
     }
 
     // 회원 탈퇴
@@ -31,9 +35,12 @@ public class UserService {
         Long kakaoId = kakaoDomainService.unlinkKakao(token); // 카카오 연결끊기
 
         if (kakaoId != 0L) { // 카카오 연결끊기 성공 시
-            userRepository.deleteByKakaoId(String.valueOf(kakaoId));
-            return 1;
+            Long result = userRepository.deleteByKakaoId(String.valueOf(kakaoId));
+
+            if (result != 0L) { // DB에서 유저 정보 삭제 성공 시
+                return 1;
+            }
         }
-        return 0; // 실패 시
+        return 0; // 연결끊기, 유저 정보 삭제 실패 시
     }
 }
