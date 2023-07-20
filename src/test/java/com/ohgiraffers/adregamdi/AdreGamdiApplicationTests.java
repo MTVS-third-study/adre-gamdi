@@ -17,7 +17,9 @@ class AdreGamdiApplicationTests {
     @Test
     public static void main(String[] args) {
 
-
+        Object userNo = 1L;
+        Long userNom = Long.valueOf(String.valueOf(userNo));
+        System.out.println("userNom = " + userNom);
     }
 
 }

@@ -22,8 +22,8 @@ public class Place {
     /* 지역 분류 */
     @Embedded
     private CategoryVO categoryVO;
-    @Embedded
-    private CityVO cityVO;
+    @ManyToOne
+    private City cityVO;
     @Embedded
     private DongVO dongVO;
 

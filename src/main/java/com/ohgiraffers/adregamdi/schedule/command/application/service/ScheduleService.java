@@ -8,6 +8,7 @@ import com.ohgiraffers.adregamdi.schedule.query.application.service.ScheduleQuer
 import com.ohgiraffers.adregamdi.user.query.application.service.UserQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ScheduleService {
@@ -29,6 +30,7 @@ public class ScheduleService {
         this.userQueryService = userQueryService;
     }
 
+    @Transactional
     public Schedule insertSchedule(ScheduleDTO scheduleDTO) {
         Long userNo = userQueryService.findByKakaoId(scheduleDTO.getKakaoId()).getUserNo();
         scheduleDTO.setUserNo(userNo);

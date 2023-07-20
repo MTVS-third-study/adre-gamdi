@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface PlaceAPIService {
 
-
     Category findCategoryByCategoryName(String categoryName);
     Tag findTagByTagName(String tagName);
     City findCityByCityName(String cityName);

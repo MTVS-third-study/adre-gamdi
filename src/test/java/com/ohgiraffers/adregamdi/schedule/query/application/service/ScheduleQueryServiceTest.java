@@ -5,6 +5,7 @@ import com.ohgiraffers.adregamdi.schedule.command.application.service.ScheduleSe
 import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.entity.Schedule;
 import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.ScheduleUserNoVO;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
@@ -23,23 +24,24 @@ class ScheduleQueryServiceTest {
     @Autowired
     private ScheduleService scheduleService;
 
+
+    @DisplayName("userNo로 카테고리 조회 테스트")
     @Test
     void loadMyScheduleList() {
 
         // given
         ScheduleDTO schedule = new ScheduleDTO(
                 "제주제주",
-                1L,
+                10L,
                 "kakao@duam.net",
                 "2023-07-07",
                 "2023-07-08"
         );
+        Long userNo = 1L;
 
-        // when
-        Schedule insertResult = scheduleService.insertSchedule(schedule);
-        scheduleQueryService.loadMyScheduleList(schedule.getUserNo());
-
-        // then
-//        Assertions.assertEquals();
+        // when & then
+        Assertions.assertDoesNotThrow(
+                () -> scheduleQueryService.loadMyScheduleList(userNo)
+        );
     }
 }

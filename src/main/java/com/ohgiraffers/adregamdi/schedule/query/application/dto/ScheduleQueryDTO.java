@@ -11,6 +11,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ScheduleQueryDTO {
 
-    private String kakaoId;
+    private Long scheduleNo;
+    private Long userNo;
+    private String scheduleName;
+    private String startDay;
+    private String endDay;
+    private Long dayAndNight;
+
 
 }
