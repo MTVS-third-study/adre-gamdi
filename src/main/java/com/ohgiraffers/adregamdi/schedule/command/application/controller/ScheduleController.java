@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/schedule/*")
 public class ScheduleController {
@@ -18,7 +20,7 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
     @PostMapping("insertSchedule")
-    public String insertSchedule(ScheduleDTO scheduleDTO) {
+    public String insertSchedule(ScheduleDTO scheduleDTO, HttpSession session) {
         scheduleService.insertSchedule(scheduleDTO);
         return "redirect:/schedule";
     }

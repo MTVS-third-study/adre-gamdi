@@ -1,6 +1,7 @@
 package com.ohgiraffers.adregamdi.schedule.query.application.controller;
 
 import com.ohgiraffers.adregamdi.schedule.command.application.controller.ScheduleController;
+import com.ohgiraffers.adregamdi.schedule.command.application.dto.ScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.query.application.dto.ScheduleQueryDTO;
 import com.ohgiraffers.adregamdi.schedule.query.application.service.ScheduleQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,9 @@ public class ScheduleQueryController {
     /* 설명. 내 일정 불러오기 */
     @GetMapping("mySchedule")
     public String loadMySchedule(HttpSession httpSession, Model model) {
-        Long userNo = Long.valueOf(String.valueOf(httpSession.getAttribute("userNo")));
-        model.addAttribute("myScheduleList",scheduleQueryService.loadMyScheduleList(userNo));
+        ScheduleQueryDTO scheduleQueryDTO = (ScheduleQueryDTO) httpSession.getAttribute("loginUser");
+//        Long userNo = 1L;
+        model.addAttribute("myScheduleList",scheduleQueryService.loadMyScheduleList(scheduleQueryDTO.getUserNo()));
         return "/scheduleResult";
     }
 

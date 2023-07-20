@@ -1,5 +1,6 @@
 package com.ohgiraffers.adregamdi.place.query.domain.entity;
 
+
 public class SearchPlace {
 
     private Long placeNo;
