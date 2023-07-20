@@ -45,8 +45,9 @@ public class OAuthController {
             session.removeAttribute("loginUser");
             session.removeAttribute("service");
             response.sendRedirect("http://localhost:8080"); // 메인 페이지로
+        } else {
+            response.sendRedirect("errorPage"); // 로그아웃 실패 시 에러 페이지로
         }
-        response.sendRedirect("errorPage"); // 로그아웃 실패 시 에러 페이지로
     }
 
 //    // 네이버 로그인
