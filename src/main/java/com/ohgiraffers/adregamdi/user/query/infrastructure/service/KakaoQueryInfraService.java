@@ -14,6 +14,8 @@ import java.net.URL;
 
 @Service
 public class KakaoQueryInfraService {
+
+    // 카카오 액세스 토큰 발급
     public TokenDTO getKakaoAccessToken(String code) {
         String access_Token = "";
         String refresh_Token = "";
@@ -68,6 +70,7 @@ public class KakaoQueryInfraService {
         return token;
     }
 
+    // 카카오 유저 정보 조회
     public KakaoUserDTO getKakaoUserInfo(TokenDTO token) {
         String reqURL = "https://kapi.kakao.com/v2/user/me";
         KakaoUserDTO userInfo = null;
@@ -114,6 +117,8 @@ public class KakaoQueryInfraService {
             userInfo.setEmail(email);
             userInfo.setAge(age);
             userInfo.setGender(gender);
+            userInfo.setAccess_Token(token.getAccess_Token());
+            userInfo.setRefresh_Token(token.getRefresh_Token());
 
             br.close();
 
