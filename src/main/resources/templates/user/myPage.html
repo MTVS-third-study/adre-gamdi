@@ -12,16 +12,20 @@
 </th:block>
 <form action="user/updateNickName" method="post">
     <th:block th:if="${session.loginUser.getServiceNickName() == ''}">
-        <h3 th:text="${session.loginUser.getKakaoNickName()}"></h3>님의 마이페이지
+        <span th:text="${session.loginUser.getKakaoNickName()}"></span>
+        <span>님의 마이페이지</span>
     </th:block>
     <th:block th:if="${session.loginUser.getServiceNickName() != ''}">
-        <h3 th:text="${session.loginUser.getServiceNickName()}"></h3>님의 마이페이지
+        <spna th:text="${session.loginUser.getServiceNickName()}"></spna>
+        <span>님의 마이페이지</span>
     </th:block>
+    <br>
     <label>
         <input id="changeNickName" name="nickName" type="text">
     </label>
     <button type="submit">닉네임 변경하기</button>
 </form>
+<button onclick="location.href='/main'">홈으로 가기</button>
 <br>
 <button class="upperBtn" onclick="location.href='/user/deleteForm'" type="button">회원탈퇴</button>
 </body>
