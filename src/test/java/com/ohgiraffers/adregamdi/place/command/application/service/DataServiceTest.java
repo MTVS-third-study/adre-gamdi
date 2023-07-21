@@ -1,9 +1,10 @@
 package com.ohgiraffers.adregamdi.place.command.application.service;
 
+import com.ohgiraffers.adregamdi.category.command.domain.aggregate.entity.Category;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.*;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.*;
 import com.ohgiraffers.adregamdi.place.command.domain.service.DataDomainService;
-import org.json.simple.JSONObject;
+import com.ohgiraffers.adregamdi.tag.command.domain.aggregate.entity.Tag;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @SpringBootTest
 @AutoConfigureDataJpa

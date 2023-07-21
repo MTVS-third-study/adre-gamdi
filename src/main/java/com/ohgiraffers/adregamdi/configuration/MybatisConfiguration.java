@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.common;
+package com.ohgiraffers.adregamdi.configuration;
 
 
 import org.apache.ibatis.annotations.Mapper;

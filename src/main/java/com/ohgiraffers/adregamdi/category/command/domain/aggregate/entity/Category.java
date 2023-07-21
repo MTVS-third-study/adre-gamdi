@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity;
+package com.ohgiraffers.adregamdi.category.command.domain.aggregate.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

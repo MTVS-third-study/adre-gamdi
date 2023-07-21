@@ -1,12 +1,12 @@
 package com.ohgiraffers.adregamdi.place.command.infra.service;
 
+import com.ohgiraffers.adregamdi.category.command.domain.aggregate.entity.Category;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.*;
 import com.ohgiraffers.adregamdi.place.command.domain.service.PlaceAPIService;
 import com.ohgiraffers.adregamdi.place.query.application.service.DataQueryService;
+import com.ohgiraffers.adregamdi.tag.command.domain.aggregate.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 
 @Component

@@ -1,7 +1,7 @@
 package com.ohgiraffers.adregamdi.place.query.application.service;
 
 import com.ohgiraffers.adregamdi.place.command.application.service.DataService;
-import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.Category;
+import com.ohgiraffers.adregamdi.category.command.domain.aggregate.entity.Category;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.City;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.Dong;
 import org.junit.jupiter.api.Assertions;

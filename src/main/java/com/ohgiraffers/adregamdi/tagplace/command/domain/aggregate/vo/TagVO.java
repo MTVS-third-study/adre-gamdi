@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo;
+package com.ohgiraffers.adregamdi.tagplace.command.domain.aggregate.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +11,8 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class PlaceVO {
+public class TagVO {
 
-    @Column(nullable = false, name = "place_no")
-    private Long placeNo;
-
+    @Column(nullable = false, name = "tag_no")
+    private Long tagNo;
 }
