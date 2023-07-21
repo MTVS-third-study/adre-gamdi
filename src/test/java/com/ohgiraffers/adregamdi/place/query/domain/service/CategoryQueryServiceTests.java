@@ -17,6 +17,6 @@ public class CategoryQueryServiceTests {
     void testFindCategory(int num){
         String categoryName = categoryQueryService.findCategoryNameByCategoryNo(num);
         System.out.println("categoryName = " + categoryName);
-        Assertions.assertEquals(categoryName, "식당");
+        Assertions.assertEquals(categoryName, "음식점");
     }
 }

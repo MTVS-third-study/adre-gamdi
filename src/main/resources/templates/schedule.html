@@ -60,11 +60,11 @@
                 <li th:each="place:${placeList}">
                     <div>
                         <h4 th:text="${place.getPlaceName()}"></h4>
-                        <p>카테고리</p>
-                        <span>색달동 2864-10</span>
-                        <span>020-5574-44848</span>
+                        <p th:text="${place.getCategoryName()}"></p>
+                        <span th:text="${place.getPlaceAddress()}"></span><br>
+                        <span th:text="${place.getPhoneNumber()}"></span>
                     </div>
-                    <img src="/images/marker.png" alt="">
+                    <img th:src="${place.thumbnailPath}" alt="">
                 </li>
 
                 <hr>

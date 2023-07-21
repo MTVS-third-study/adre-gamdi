@@ -23,7 +23,7 @@ public class PlaceQueryServiceTests {
 
         Assertions.assertDoesNotThrow(
                 () -> {
-                    List<SearchPlace> places = placeQueryService.findPlaceByKeyword(keyword);
+                    List<PlaceDTO> places = placeQueryService.findPlaceByKeyword(keyword);
                     places.forEach(System.out::println);
                 }
         );
