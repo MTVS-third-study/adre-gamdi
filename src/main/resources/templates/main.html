@@ -62,7 +62,7 @@
                 <div class="myPageBtn">
                     <button class="upperBtn" onclick="location.href='/myPage'" type="button">마이 페이지</button>
                 </div>
-                <th:block th:if="${session.loginUser.getGrade() == 1}">
+                <th:block th:if="${session.loginUser.getGrade() == -1}">
                     <div class="adminPageBtn">
                         <button class="upperBtn" onclick="location.href='/adminPage'" type="button">관리자 페이지</button>
                     </div>
