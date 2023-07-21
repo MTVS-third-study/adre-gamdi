@@ -1,9 +1,12 @@
 package com.ohgiraffers.adregamdi.place.command.application.service;
 
 import com.ohgiraffers.adregamdi.category.command.domain.aggregate.entity.Category;
+import com.ohgiraffers.adregamdi.cityanddong.command.domain.aggregate.entity.City;
+import com.ohgiraffers.adregamdi.cityanddong.command.domain.aggregate.entity.Dong;
+import com.ohgiraffers.adregamdi.data.command.application.service.DataService;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.*;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.*;
-import com.ohgiraffers.adregamdi.place.command.domain.service.DataDomainService;
+import com.ohgiraffers.adregamdi.data.command.domain.service.DataDomainService;
 import com.ohgiraffers.adregamdi.tag.command.domain.aggregate.entity.Tag;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
