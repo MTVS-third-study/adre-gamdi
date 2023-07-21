@@ -105,12 +105,10 @@ public class DataService {
     public CategoryDTO insertCategory(String categoryName) {
 
         CategoryDTO findResult = dataAPIService.findCategoryByCategoryName(categoryName);
-        System.out.println("findResult = " + findResult);
         if (findResult != null) {
             return findResult;
         }
         CategoryDTO insertedCategory = dataAPIService.insertCategory(categoryName);
-        System.out.println("insertedCategory = " + insertedCategory);
         return insertedCategory;
     }
 
@@ -128,7 +126,6 @@ public class DataService {
     public DongDTO insertDong(int dongCode, String dongName) {
 
         DongDTO findResult = dataAPIService.findDongByDongName(dongName);
-        System.out.println("findResult = " + findResult);
         if (findResult != null) {
             return findResult;
         }

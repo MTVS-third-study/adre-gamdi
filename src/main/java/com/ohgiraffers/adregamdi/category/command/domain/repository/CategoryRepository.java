@@ -5,5 +5,4 @@ import com.ohgiraffers.adregamdi.category.command.domain.aggregate.entity.Catego
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    Category findByCategoryName(String categoryName);
 }

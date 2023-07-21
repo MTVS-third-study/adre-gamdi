@@ -22,6 +22,9 @@ public class CategoryQueryService {
 
     public CategoryDTO findCategoryByCategoryName(String categoryName) {
         Category findedCategory = categoryQueryRepository.findCategoryByCategoryName(categoryName);
+        if (findedCategory == null) {
+            return new CategoryDTO(0,"");
+        }
         return new CategoryDTO(
                 findedCategory.getCategoryNo(),
                 findedCategory.getCategoryName()
