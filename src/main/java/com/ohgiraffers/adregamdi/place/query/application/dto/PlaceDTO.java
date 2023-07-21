@@ -1,10 +1,9 @@
-package com.ohgiraffers.adregamdi.place.query.domain.entity;
+package com.ohgiraffers.adregamdi.place.query.application.dto;
 
-public class SearchPlace {
-
+public class PlaceDTO {
     private Long placeNo;
     private String placeName;
-    private int categoryNo;
+    private String categoryName;
     private int cityNo;
     private int dongNo;
     private String introduction;
@@ -19,16 +18,16 @@ public class SearchPlace {
     private double averageStarPoint;
     private int reviewCount;
 
-    public SearchPlace() {
+    public PlaceDTO() {
     }
 
-    public SearchPlace(Long placeNo, String placeName, int categoryNo, int cityNo, int dongNo,
-                       String introduction, String phoneNumber, double latitude, double longitude,
-                       String postCode, String placeAddress, String roadPlaceAddress, String imagePath,
-                       String thumbnailPath, double averageStarPoint, int reviewCount) {
+    public PlaceDTO(Long placeNo, String placeName, String categoryName, int cityNo,
+                    int dongNo, String introduction, String phoneNumber, double latitude,
+                    double longitude, String postCode, String placeAddress, String roadPlaceAddress,
+                    String imagePath, String thumbnailPath, double averageStarPoint, int reviewCount) {
         this.placeNo = placeNo;
         this.placeName = placeName;
-        this.categoryNo = categoryNo;
+        this.categoryName = categoryName;
         this.cityNo = cityNo;
         this.dongNo = dongNo;
         this.introduction = introduction;
@@ -48,124 +47,124 @@ public class SearchPlace {
         return placeNo;
     }
 
-    public String getPlaceName() {
-        return placeName;
-    }
-
-    public int getCategoryNo() {
-        return categoryNo;
-    }
-
-    public int getCityNo() {
-        return cityNo;
-    }
-
-    public int getDongNo() {
-        return dongNo;
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public String getPostCode() {
-        return postCode;
-    }
-
-    public String getPlaceAddress() {
-        return placeAddress;
-    }
-
-    public String getRoadPlaceAddress() {
-        return roadPlaceAddress;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public String getThumbnailPath() {
-        return thumbnailPath;
-    }
-
-    public double getAverageStarPoint() {
-        return averageStarPoint;
-    }
-
-    public int getReviewCount() {
-        return reviewCount;
-    }
-
     public void setPlaceNo(Long placeNo) {
         this.placeNo = placeNo;
+    }
+
+    public String getPlaceName() {
+        return placeName;
     }
 
     public void setPlaceName(String placeName) {
         this.placeName = placeName;
     }
 
-    public void setCategoryNo(int categoryNo) {
-        this.categoryNo = categoryNo;
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public int getCityNo() {
+        return cityNo;
     }
 
     public void setCityNo(int cityNo) {
         this.cityNo = cityNo;
     }
 
+    public int getDongNo() {
+        return dongNo;
+    }
+
     public void setDongNo(int dongNo) {
         this.dongNo = dongNo;
+    }
+
+    public String getIntroduction() {
+        return introduction;
     }
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public double getLatitude() {
+        return latitude;
     }
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
+    public double getLongitude() {
+        return longitude;
+    }
+
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getPostCode() {
+        return postCode;
     }
 
     public void setPostCode(String postCode) {
         this.postCode = postCode;
     }
 
+    public String getPlaceAddress() {
+        return placeAddress;
+    }
+
     public void setPlaceAddress(String placeAddress) {
         this.placeAddress = placeAddress;
+    }
+
+    public String getRoadPlaceAddress() {
+        return roadPlaceAddress;
     }
 
     public void setRoadPlaceAddress(String roadPlaceAddress) {
         this.roadPlaceAddress = roadPlaceAddress;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getThumbnailPath() {
+        return thumbnailPath;
     }
 
     public void setThumbnailPath(String thumbnailPath) {
         this.thumbnailPath = thumbnailPath;
     }
 
+    public double getAverageStarPoint() {
+        return averageStarPoint;
+    }
+
     public void setAverageStarPoint(double averageStarPoint) {
         this.averageStarPoint = averageStarPoint;
+    }
+
+    public int getReviewCount() {
+        return reviewCount;
     }
 
     public void setReviewCount(int reviewCount) {
@@ -174,10 +173,10 @@ public class SearchPlace {
 
     @Override
     public String toString() {
-        return "SearchPlace{" +
+        return "PlaceDTO{" +
                 "placeNo=" + placeNo +
                 ", placeName='" + placeName + '\'' +
-                ", categoryNo=" + categoryNo +
+                ", categoryName='" + categoryName + '\'' +
                 ", cityNo=" + cityNo +
                 ", dongNo=" + dongNo +
                 ", introduction='" + introduction + '\'' +

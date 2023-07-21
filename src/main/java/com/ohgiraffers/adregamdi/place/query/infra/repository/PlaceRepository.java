@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 
-//public interface PlaceRepository extends JpaRepository<Place, Long> {
+//public interface PlaceRepository{
+
+
+
 
 
 //   Place findPlaceByPlaceNo(Long placeNo);

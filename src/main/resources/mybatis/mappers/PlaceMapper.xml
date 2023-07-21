@@ -7,19 +7,52 @@
     <resultMap id="placeResultMap1" type="com.ohgiraffers.adregamdi.place.query.domain.entity.SearchPlace" autoMapping="false">
         <id property="placeNo" column="place_no"/>
         <result property="placeName" column="place_name"/>
+        <result property="categoryNo" column="category_no"/>
+        <result property="cityNo" column="city_no"/>
+        <result property="dongNo" column="dong_no"/>
+        <result property="introduction" column="introduction"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="postCode" column="post_code"/>
         <result property="placeAddress" column="place_address"/>
         <result property="roadPlaceAddress" column="road_place_address"/>
+        <result property="imagePath" column="image_path"/>
+        <result property="thumbnailPath" column="thumbnail_path"/>
+        <result property="averageStarPoint" column="average_star_point"/>
+        <result property="reviewCount" column="review_count"/>
     </resultMap>
+
 
     <select id="searchPlace" resultMap="placeResultMap1" parameterType="String">
         SELECT
             PLACE_NO
         ,   PLACE_NAME
+        ,   CATEGORY_NO
+        ,   CITY_NO
+        ,   DONG_NO
+        ,   INTRODUCTION
+        ,   PHONE_NUMBER
+        ,   LATITUDE
+        ,   LONGITUDE
+        ,   POST_CODE
         ,   PLACE_ADDRESS
         ,   ROAD_PLACE_ADDRESS
+        ,   IMAGE_PATH
+        ,   THUMBNAIL_PATH
+        ,   AVERAGE_STAR_POINT
+        ,   REVIEW_COUNT
         FROM TBL_PLACE
         WHERE PLACE_NAME LIKE CONCAT('%',#{keyword},'%')
         ORDER BY PLACE_NAME
     </select>
-    
+
+    <select id="findCategoryNameByCategoryNo" resultType="string" parameterType="_int">
+        SELECT
+            CATEGORY_NAME
+        FROM TBL_CATEGORY
+        WHERE CATEGORY = #{categoryNo}
+    </select>
+
+
 </mapper>
