@@ -63,8 +63,8 @@
                 <li th:each="place:${placeList}">
 
                     <div>
-                        <h4 th:text="${place.getPlaceName()}"></h4>
-                        <p th:text="${place.getCategoryName()}"></p>
+                        <h4 th:text="${place.getPlaceName()}"></h4><br>
+                        <p th:text="${place.getCategoryName()}"></p><br>
                         <span th:text="${place.getPlaceAddress()}"></span><br>
                         <span th:text="${place.getPhoneNumber()}"></span>
                     </div>
