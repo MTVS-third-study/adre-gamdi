@@ -51,13 +51,11 @@
                 <div class="center-title">
                     <th:block th:if="${session.loginUser.getServiceNickName() == ''}">
                         <span class="user-title" th:text="${session.loginUser.getKakaoNickName()}"></span>
-                        <span style="color: transparent;
-                        -webkit-text-stroke: 2px black;"> 님 환영합니다!</span>
+                        <span> 님 환영합니다!</span>
                     </th:block>
                     <th:block th:if="${session.loginUser.getServiceNickName() != ''}">
                         <span class="user-title" th:text="${session.loginUser.getServiceNickName()}"></span>
-                        <span style="color: transparent;
-                        -webkit-text-stroke: 1px black;"> 님 환영합니다!</span>
+                        <span> 님 환영합니다!</span>
                     </th:block>
                 </div>
 
@@ -107,7 +105,7 @@
 <div id="modal">
     <div align="center" class="modal-content" id="login-modal">
         <h3 id="login-title">로그인</h3>
-        <a href="https://kauth.kakao.com/oauth/authorize?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&redirect_uri=http://localhost:8080/oauth/kakao/login&response_type=code"
+        <a href=" https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=dd52d3a258bf3ccbc37de832dfecd0d4&redirect_uri=http://localhost:8080/oauth/kakao/login&prompt=login"
            id="kakao-login-btn">
             <img alt="카카오 로그인 버튼"
                  src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
