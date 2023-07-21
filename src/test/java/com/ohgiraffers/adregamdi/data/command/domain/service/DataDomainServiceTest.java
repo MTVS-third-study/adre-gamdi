@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.place.command.domain.service;
+package com.ohgiraffers.adregamdi.data.command.domain.service;
 
 import com.ohgiraffers.adregamdi.data.command.domain.service.DataDomainService;
 import org.json.simple.JSONObject;

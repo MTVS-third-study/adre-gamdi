@@ -9,7 +9,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class TagDataDTO {
+public class PlaceTagsDataDTO {
+
+    private Long placeNo;
+    /* 태그 */
     private Long tagNo;
-    private String tagName;
 }

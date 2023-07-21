@@ -6,6 +6,7 @@ import com.ohgiraffers.adregamdi.cityanddong.command.application.dto.CityDTO;
 import com.ohgiraffers.adregamdi.cityanddong.command.application.dto.DongDTO;
 import com.ohgiraffers.adregamdi.cityanddong.command.application.service.CityService;
 import com.ohgiraffers.adregamdi.data.command.application.dto.DataDTO;
+import com.ohgiraffers.adregamdi.data.command.application.dto.PlaceTagsDataDTO;
 import com.ohgiraffers.adregamdi.data.command.application.dto.TagDataDTO;
 import com.ohgiraffers.adregamdi.data.command.domain.service.DataAPIService;
 import com.ohgiraffers.adregamdi.data.command.domain.service.DataDomainService;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /** <pre>
  *  url 요청 시 openAPI에서 데이터를 전송 받음과 동시에 DB에 유효성과 insert를 진행하는 로직
@@ -28,20 +30,11 @@ public class DataService {
     private final DataAPIService dataAPIService;
     private final DataDomainService dataDomainService;
 
-    private final CategoryService categoryService;
-
-    private final CityService cityService;
-
-
     @Autowired
     public DataService(DataAPIService dataAPIService,
-                       DataDomainService dataDomainService,
-                       CategoryService categoryService,
-                       CityService cityService) {
+                       DataDomainService dataDomainService) {
         this.dataAPIService = dataAPIService;
         this.dataDomainService = dataDomainService;
-        this.categoryService = categoryService;
-        this.cityService = cityService;
     }
 
     @Transactional
@@ -67,40 +60,19 @@ public class DataService {
 
                         Map<String, String> placeInfos = dataDomainService.parsePlaceInfo(item);    // 한 장소의 정보들
                         DataDTO dataDTO = new DataDTO();
-                        TagDataDTO tagDataDTO = new TagDataDTO();
-//                        Category category = insertCategory(new Category(placeInfos.get("categoryName")));
-//                        City city = insertCity(new City(placeInfos.get("cityName")));
-//                        Dong dong = insertDong(new Dong(Integer.parseInt(placeInfos.get("dongCode")), placeInfos.get("dongName")));
-//                        Place place = insertPlace(new Place(
-//                                placeInfos.get("title"),
-//                                new CategoryVO(category.getCategoryNo()),
-//                                new CityVO(city.getCityNo()),
-//                                new DongVO(dong.getDongNo()),
-//                                placeInfos.get("introduction"),
-//                                placeInfos.get("phoneNo"),
-//                                new CoordinateVO(Double.parseDouble(placeInfos.get("lat")), Double.parseDouble(placeInfos.get("lng"))),
-//                                placeInfos.get("postCode"),
-//                                placeInfos.get("address"),
-//                                placeInfos.get("roadAddress"),
-//                                placeInfos.get("imagePath"),
-//                                placeInfos.get("thumbnailPath"),
-//                                0,
-//                                0
-//                        ));
-//                        List<Tag> insertTagResultList = tagList.stream().distinct().map(m -> insertTag(m)).collect(Collectors.toList()); // 태그 insert 결과 객체를 리스트로 저장
-//                        insertTagResultList.stream().forEach(t -> insertPlaceAndTags(
-//                                new PlaceVO(place.getPlaceNo())
-//                                , new TagVO(t.getTagNo())
-//                        ));
                         /* 카테고리*/
-                        insertCategory(placeInfos.get("categoryName"));
+                        dataDTO.setCategoryNo(
+                            insertCategory(placeInfos.get("categoryName")).getCategoryNo()
+                        );
                         dataDTO.setCategoryName(placeInfos.get("categoryName"));
                         /* 도시 */
-                        insertCity(placeInfos.get("cityName")); // 새로운 도시가 있다면 insert
+                        dataDTO.setCityNo(
+                                insertCity(placeInfos.get("cityName")).getCityNo()
+                        );
                         dataDTO.setCityName(placeInfos.get("cityName"));
                         /* 동 */
                         insertDong(Integer.parseInt(placeInfos.get("dongCode")), placeInfos.get("dongName"));
-                        dataDTO.setDongCode(Integer.parseInt(placeInfos.get("dongCode"));
+                        dataDTO.setDongCode(Integer.parseInt(placeInfos.get("dongCode")));
                         dataDTO.setDongName(placeInfos.get("dongName"));
 
                         dataDTO.setPlaceName(placeInfos.get("title"));
@@ -113,9 +85,15 @@ public class DataService {
                         dataDTO.setRoadAddress(placeInfos.get("roadAddress"));
                         dataDTO.setImagePath(placeInfos.get("imagePath"));
                         dataDTO.setThumbnailPath(placeInfos.get("thumbnailPath"));
+                        Long insertedPlaceNo = insertPlace(dataDTO);
 
                         List<String> tagList = dataDomainService.parseAllTagsWithValidCheck(item); // 한 장소의 태그들
-                        tagDataDTO.setTagList(tagList);
+                        List<TagDataDTO> insertTagResultList = tagList.stream().distinct().map(m -> insertTag(m)).collect(Collectors.toList()); // 태그 insert 결과 객체를 리스트로 저장
+                        insertTagResultList.stream().forEach(t -> insertPlaceAndTags(
+                                insertedPlaceNo,
+                                t.getTagNo()
+                        ));
+
                     }
                     currentPage = j + 1;
                 }
@@ -128,64 +106,51 @@ public class DataService {
 
         CategoryDTO findResult = dataAPIService.findCategoryByCategoryName(categoryName);
         if (findResult != null) {
-            return ";
+            return findResult;
         }
-
         CategoryDTO insertedCategory = dataAPIService.insertCategory(categoryName);
-        if (insertedCategory == null) {
-            return "fail";
-        }
-        return "success";
+        return insertedCategory;
     }
 
-    public String insertCity(String cityName) {
+    public CityDTO insertCity(String cityName) {
 
-        CityQueryDTO findResult = dataAPIService.findCityByCityName(cityName);
-        if (findResult != null) {
-            return "already exists";
-        }
-
-        CityDTO insertedCity = dataAPIService.insertCity(cityName);
-        if (insertedCity == null) {
-            return "fail";
-        }
-        return "success";
-    }
-
-    public String insertDong(int dongCode, String dongName) {
-
-        DongQueryDTO findResult = dataAPIService.findDongByDongName(dongName);
-        if (findResult != null) {
-            return "already exists";
-        }
-
-        DongDTO insertedDong = dataAPIService.insertDong(new DongDTO(dongCode, dongName));
-        if (insertedDong == null) {
-            return "fail";
-        }
-        return "success";
-    }
-
-    public Place insertPlace(DataDTO dataDTO) {
-        dataAPIService.insertPlace(dataDTO);
-        return null;
-    }
-
-
-
-
-    public PlaceTags insertPlaceAndTags(PlaceVO placeVO, TagVO tagVO) {
-        return placeTagsRepository.save(new PlaceTags(placeVO, tagVO));
-    }
-
-    public Tag insertTag(String tagName) { // 중복 제외 태그 insert
-
-        Tag findResult = dataAPIService.findTagByTagName(tagName);
+        CityDTO findResult = dataAPIService.findCityByCityName(cityName);
         if (findResult != null) {
             return findResult;
         }
 
-        return tagRepository.save(new Tag(tagName));
+        CityDTO insertedCity = dataAPIService.insertCity(cityName);
+        return insertedCity;
+    }
+
+    public DongDTO insertDong(int dongCode, String dongName) {
+
+        DongDTO findResult = dataAPIService.findDongByDongName(dongName);
+        if (findResult != null) {
+            return findResult;
+        }
+
+        DongDTO insertedDong = dataAPIService.insertDong(new DongDTO(dongCode, dongName));
+        return insertedDong;
+    }
+
+    public Long insertPlace(DataDTO dataDTO) {
+        Long insertedPlaceNo = dataAPIService.insertPlace(dataDTO);
+        return insertedPlaceNo;
+    }
+
+    public TagDataDTO insertTag(String tagName) { // 중복 제외 태그 insert
+
+        TagDataDTO findResult = dataAPIService.findTagByTagName(tagName);
+        if (findResult != null) {
+            return findResult;
+        }
+        TagDataDTO insertedTag = dataAPIService.insertTag(tagName);
+        return insertedTag;
+    }
+
+    public Long insertPlaceAndTags(Long placeNo, Long tagNo) {
+        return dataAPIService.insertPlaceAndTags(new PlaceTagsDataDTO(placeNo, tagNo));
     }
 
 }

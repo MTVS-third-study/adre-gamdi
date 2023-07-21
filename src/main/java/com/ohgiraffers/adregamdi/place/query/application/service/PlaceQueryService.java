@@ -1,7 +1,6 @@
 package com.ohgiraffers.adregamdi.place.query.application.service;
 
-import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.Place;
-import com.ohgiraffers.adregamdi.place.query.application.dto.PlaceDTO;
+import com.ohgiraffers.adregamdi.place.command.application.dto.PlaceDTO;
 import com.ohgiraffers.adregamdi.place.query.domain.entity.SearchPlace;
 import com.ohgiraffers.adregamdi.place.query.domain.service.CategoryQueryService;
 import com.ohgiraffers.adregamdi.place.query.infra.repository.PlaceMapper;

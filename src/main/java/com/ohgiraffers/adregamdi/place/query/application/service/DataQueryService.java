@@ -7,6 +7,7 @@ import com.ohgiraffers.adregamdi.cityanddong.query.infra.repository.CityQueryRep
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.*;
 import com.ohgiraffers.adregamdi.place.query.infra.repository.*;
 import com.ohgiraffers.adregamdi.tag.command.domain.aggregate.entity.Tag;
+import com.ohgiraffers.adregamdi.tag.query.infra.repository.TagQueryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

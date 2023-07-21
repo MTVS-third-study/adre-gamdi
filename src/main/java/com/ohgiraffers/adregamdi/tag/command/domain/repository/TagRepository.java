@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.place.command.domain.repository;
+package com.ohgiraffers.adregamdi.tag.command.domain.repository;
 
 import com.ohgiraffers.adregamdi.tag.command.domain.aggregate.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;

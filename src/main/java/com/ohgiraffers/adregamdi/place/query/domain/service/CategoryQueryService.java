@@ -1,6 +1,5 @@
 package com.ohgiraffers.adregamdi.place.query.domain.service;
 
-import com.ohgiraffers.adregamdi.place.query.infra.repository.CategoryQueryRepository;
 import com.ohgiraffers.adregamdi.place.query.infra.repository.PlaceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

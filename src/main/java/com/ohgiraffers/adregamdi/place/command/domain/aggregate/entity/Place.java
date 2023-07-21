@@ -60,6 +60,10 @@ public class Place {
     @Column
     private int reviewCount;
 
+    public Place(Long placeNo) {
+        this.placeNo = placeNo;
+    }
+
     public Place(String placeName, CategoryVO categoryVO, CityVO cityVO, DongVO dongVO, String introduction, String phoneNumber, CoordinateVO coordinateVO, String postCode, String placeAddress, String roadPlaceAddress, String imagePath, String thumbnailPath, double averageStarPoint, int reviewCount) {
         this.placeName = placeName;
         this.categoryVO = categoryVO;

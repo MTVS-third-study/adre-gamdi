@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.place.query.application.dto;
+package com.ohgiraffers.adregamdi.place.command.application.dto;
 
 public class PlaceDTO {
     private Long placeNo;

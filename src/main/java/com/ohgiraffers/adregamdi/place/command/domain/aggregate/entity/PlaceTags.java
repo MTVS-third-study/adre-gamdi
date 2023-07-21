@@ -23,4 +23,8 @@ public class PlaceTags {
     @Embedded
     private TagVO tagVO;
 
+    public PlaceTags(Place place, TagVO tagVO) {
+        this.place = place;
+        this.tagVO = tagVO;
+    }
 }
