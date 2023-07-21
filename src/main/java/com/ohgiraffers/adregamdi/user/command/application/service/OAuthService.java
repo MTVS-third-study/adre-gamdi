@@ -22,15 +22,18 @@ public class OAuthService {
         this.userRepository = userRepository;
     }
 
-    public UserDTO kakaoLogin(String code) { // 카카오 로그인
+    // 카카오 로그인
+    public UserDTO kakaoLogin(String code) {
         KakaoUserDTO kakaoInfo = kakaoDomainService.getKakaoUserInfo(code);
         return validateUser(kakaoInfo);
     }
 
+    // 유저 유효성 검사
     private UserDTO validateUser(KakaoUserDTO kakaoInfo) {
         User userInfo;
         UserDTO findUserInfo = userDomainService.findByKakaoId(kakaoInfo.getKakaoId());
-        if (findUserInfo.getUserNo() == null) { // 회원가입
+
+        if (findUserInfo.getUserNo() == null) { // 카카오에서 조회한 유저가 DB에 없다면 회원가입
             userInfo = userRepository.save(new User(1L,
                     kakaoInfo.getKakaoId(),
                     kakaoInfo.getKakaoNickName(),
@@ -55,10 +58,14 @@ public class OAuthService {
             findUserInfo.setGrade(userInfo.getGrade());
             findUserInfo.setBlacklist_status(userInfo.isBlacklist_status());
         }
+        findUserInfo.setAccess_Token(kakaoInfo.getAccess_Token());
+        findUserInfo.setRefresh_Token(kakaoInfo.getRefresh_Token());
         return findUserInfo;
     }
 
-    public void kakaoLogout(String token) { // 카카오 로그아웃
-        kakaoDomainService.logout(token);
+    // 카카오 로그아웃
+    public Long kakaoLogout(String token) {
+        return kakaoDomainService.logout(token);
     }
+
 }

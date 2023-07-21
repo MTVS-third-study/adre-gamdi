@@ -5,5 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserDomainService {
+
+    // 카카오 아이디로 유저 정보 조회
     UserDTO findByKakaoId(String kakaoId);
 }
