@@ -10,4 +10,6 @@ import java.util.List;
 public interface PlaceMapper {
     List<SearchPlace> searchPlace(String keyword);
 
+    String findCategoryNameByCategoryNo(int categoryNo);
+
 }

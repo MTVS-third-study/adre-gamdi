@@ -6,7 +6,12 @@ import org.springframework.stereotype.Service;
 @Service
 public interface KakaoDomainService {
 
+    // 카카오 유저 정보 조회
     KakaoUserDTO getKakaoUserInfo(String code);
 
-    void logout(String token);
+    // 카카오 로그아웃
+    Long logout(String token);
+
+    // 카카오 연결끊기
+    Long unlinkKakao(String token);
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Title</title>
     <!-- 설명. 카카오맵 api appkey-->
     <script
@@ -19,10 +19,11 @@
 <!--            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"-->
 <!--            crossorigin="anonymous"-->
 <!--    />-->
+
     <link rel="stylesheet" href="/css/schedule.css" type="text/css" />
-
-
+    <link rel="stylesheet" href="/css/registReview.css" type="text/css" />
 </head>
+
 
 <body>
 <div class="schedule-container">
@@ -32,12 +33,12 @@
 
         <div class="option">
             <div>
-                <form  class="searchBox">
-                    <input type="text" placeholder="검색어를 입력해주세요" class="keyword" />
-                    <button  class="searchKeyword" type="button"><img src="/images/search.png" alt=""></button>
+                <form action="/placeQuery/searchPlace" class="searchBox">
+                    <input type="text" placeholder="검색어를 입력해주세요" class="keyword" name="searchKeyword" method="GET"/>
+                    <button class="searchKeyword" type="button"><img src="/images/search.png" alt=""></button>
 
                 </form>
-                <!--                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
+<!--                                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
             </div>
             <div class="BtnBox">
                 <button class="homeBtn" id="homeBtn" >
@@ -57,15 +58,16 @@
         <div id="menu_wrap" class="bg_white menu_wrap">
             <hr />
             <ul  class="placeList">
-                <li>
+                <li th:each="place:${placeList}">
                     <div>
-                        <h4>음식점</h4>
-                        <p>카테고리</p>
-                        <span>색달동 2864-10</span>
-                        <span>020-5574-44848</span>
+                        <h4 th:text="${place.getPlaceName()}"></h4>
+                        <p th:text="${place.getCategoryName()}"></p>
+                        <span th:text="${place.getPlaceAddress()}"></span><br>
+                        <span th:text="${place.getPhoneNumber()}"></span>
                     </div>
-                    <img src="/images/marker.png" alt="">
+                    <img th:src="${place.thumbnailPath}" alt="">
                 </li>
+
                 <hr>
 
 
@@ -211,6 +213,57 @@
             </div>
         </div>
     </div>
+    <div class="modal">
+    <div class="modal_body">리뷰 작성하기
+        <form action="registReview" name="review" id="review" method="post" encType="multipart/form-data">
+            <button class="closeBtn">닫기</button>
+
+            <div class="reviewStarPoint">
+                <fieldset>
+                    <input type="radio" name="starPoint" value="5" id="rate1"><label
+                        for="rate1">★</label>
+                    <input type="radio" name="starPoint" value="4" id="rate2"><label
+                        for="rate2">★</label>
+                    <input type="radio" name="starPoint" value="3" id="rate3"><label
+                        for="rate3">★</label>
+                    <input type="radio" name="starPoint" value="2" id="rate4"><label
+                        for="rate4">★</label>
+                    <input type="radio" name="starPoint" value="1" id="rate5"><label
+                        for="rate5">★</label><br>
+                    <span th:text="${ nullStarPoint }" style="color:red;"></span>
+                </fieldset><br>
+
+            </div>
+
+            <div class="reviewContents1">
+                <input type="file" name="imageFile" id="imageFile" accept="image/jpg, image/jpeg, image/png"
+                       onchange="readURL(this);"><br>
+                <span th:text="${ incorrectExtension }" style="color:red;"></span>
+                <br>
+                <img id="preview" style="width: 200px; height: 200px"/><br>
+                <br>
+                <textarea name="reviewContent" type="text" id="reviewContent"
+                          placeholder="리뷰 내용을 입력해주세요"></textarea><br>
+                <span th:text="${ nullContent }" style="color:red;"></span>
+            </div>
+            <input type="submit" value="등록하기">
+        </form>
+
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById('preview').src = e.target.result;
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    document.getElementById('preview').src = "";
+                }
+            }
+        </script>
+    </div>
+</div>
     <div id="map" class="schedule-map" style="width: 65%; height: 100vh;"></div>
 </div>
 
@@ -219,5 +272,20 @@
 
 <script src="/js/kakaomap.js"></script>
 <script src="/js/shcedule.js"></script>
+<script>
+    const modal = document.querySelector('.modal');
+    const btnOpenPopup = document.querySelector('.reviewBtn');
+    const closeModalBtn = document.querySelector('.closeBtn')
+
+    btnOpenPopup.addEventListener('click', () => {
+        modal.style.display = 'block';
+        document.body.style.overflow = "hidden"; // 스크롤바 제거
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto"; // 스크롤바 보이기
+    });
+</script>
 </body>
 </html>
