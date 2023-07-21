@@ -5,6 +5,28 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Title</title>
+    <style>
+        #login-modal {
+            width: 300px;
+            height: 300px;
+            font-size: 30px;
+            border-width: thick;
+            border-radius: 7px;
+            color: black;
+            background-color: lightblue;
+            border-color: black;
+        }
+
+        #login-title {
+            margin-bottom: 20px;
+        }
+
+        .center-title {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <script>
     history.pushState(null, null, location.href);
@@ -19,7 +41,6 @@
     <div class="UpperBar">
         <img class="logo" src="/images/goodlogo.png">
         <img class="siteName" src="/images/Adregamdi.png">
-        <a href="placeReviews">장소리뷰 페이지</a>
         <div class="loginBox">
             <th:block th:if="${session.loginUser == null}">
                 <div class="loginBtn">
@@ -27,12 +48,27 @@
                 </div>
             </th:block>
             <th:block th:if="${session.loginUser != null}">
+                <div class="center-title">
+                    <th:block th:if="${session.loginUser.getServiceNickName() == ''}">
+                        <span class="user-title" th:text="${session.loginUser.getKakaoNickName()}"></span>
+                        <span style="color: transparent;
+                        -webkit-text-stroke: 2px black;"> 님 환영합니다!</span>
+                    </th:block>
+                    <th:block th:if="${session.loginUser.getServiceNickName() != ''}">
+                        <span class="user-title" th:text="${session.loginUser.getServiceNickName()}"></span>
+                        <span style="color: transparent;
+                        -webkit-text-stroke: 1px black;"> 님 환영합니다!</span>
+                    </th:block>
+                </div>
+
                 <div class="myPageBtn">
                     <button class="upperBtn" onclick="location.href='/myPage'" type="button">마이 페이지</button>
                 </div>
-                <div class="adminPageBtn">
-                    <button class="upperBtn" onclick="location.href='/adminPage'" type="button">관리자 페이지</button>
-                </div>
+                <th:block th:if="${session.loginUser.getGrade() == 1}">
+                    <div class="adminPageBtn">
+                        <button class="upperBtn" onclick="location.href='/adminPage'" type="button">관리자 페이지</button>
+                    </div>
+                </th:block>
                 <th:block th:if="${session.service.equals('kakao')}">
                     <div class="logoutBtn">
                         <button class="upperBtn"
@@ -69,12 +105,13 @@
 </div>
 
 <div id="modal">
-    <div align="center" class="modal-content">
-        <h2>로그인</h2>
+    <div align="center" class="modal-content" id="login-modal">
+        <h3 id="login-title">로그인</h3>
         <a href="https://kauth.kakao.com/oauth/authorize?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&redirect_uri=http://localhost:8080/oauth/kakao/login&response_type=code"
            id="kakao-login-btn">
-            <img alt="카카오 로그인 버튼" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
-                 width="222"/>
+            <img alt="카카오 로그인 버튼"
+                 src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+                 width="250"/>
         </a>
     </div>
 </div>
@@ -91,13 +128,13 @@
     // 모달창 열기
     openLoginBtn.addEventListener("click", () => {
         modal.style.display = "block";
-        document.body.style.overflow = "hidden"; // 스크롤바 제거
+        // document.body.style.overflow = "hidden"; // 스크롤바 제거
     });
 
     // 모달창 닫기
-    closeModalBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto"; // 스크롤바 보이기
-    });
+    // openLoginBtn.addEventListener("click", () => {
+    //     modal.style.display = "none";
+    //     // document.body.style.overflow = "auto"; // 스크롤바 보이기
+    // });
 </script>
 </html>

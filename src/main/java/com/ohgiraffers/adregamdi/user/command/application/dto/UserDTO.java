@@ -21,6 +21,20 @@ public class UserDTO {
     private int review_count;
     private int grade;
     private boolean blacklist_status;
+    private String access_Token;
+    private String refresh_Token;
 
-
+    public UserDTO(Long userNo, String kakaoId, String kakaoNickName, String serviceNickName, String email, String age, String gender, int report_count, int review_count, int grade, boolean blacklist_status) {
+        this.userNo = userNo;
+        this.kakaoId = kakaoId;
+        this.kakaoNickName = kakaoNickName;
+        this.serviceNickName = serviceNickName;
+        this.email = email;
+        this.age = age;
+        this.gender = gender;
+        this.report_count = report_count;
+        this.review_count = review_count;
+        this.grade = grade;
+        this.blacklist_status = blacklist_status;
+    }
 }

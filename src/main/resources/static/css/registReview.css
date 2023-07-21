@@ -1,0 +1,79 @@
+#review fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+#review fieldset legend{
+    text-align: right;
+}
+#review input[type=radio]{
+    display: none;
+}
+#review label{
+    font-size: 2em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#review label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#review label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#review input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#reviewContent {
+    width: 90%;
+    height: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    font-size: 12px;
+    resize: none;
+}
+
+.closeBtn {
+    position : relative;
+    left: 250px;
+    bottom: 50px;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 600px;
+    height: 700px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+}
+
+
