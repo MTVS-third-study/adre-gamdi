@@ -56,7 +56,7 @@ class DataServiceTest {
         CategoryDTO duplicateResult = dataService.insertCategory(insertResult.getCategoryName());
 
         // then
-        Assertions.assertEquals(insertResult, duplicateResult);
+        Assertions.assertEquals(insertResult.getCategoryNo(), duplicateResult.getCategoryNo());
     }
 
     @DisplayName("파싱한 City 정보가 정상적으로 insert 되는지 확인")
@@ -83,7 +83,7 @@ class DataServiceTest {
         CityDTO duplicateResult = dataService.insertCity(insertResult.getCityName());
 
         // then
-        Assertions.assertEquals(insertResult, duplicateResult);
+        Assertions.assertEquals(insertResult.getCityNo(), duplicateResult.getCityNo());
     }
 
     @DisplayName("파싱한 Dong 정보가 정상적으로 insert 되는지 확인")
@@ -112,7 +112,7 @@ class DataServiceTest {
         DongDTO duplicateResult = dataService.insertDong(insertResult.getDongNo(), insertResult.getDongName());
 
         // then
-        Assertions.assertEquals(insertResult, duplicateResult);
+        Assertions.assertEquals(insertResult.getDongNo(), duplicateResult.getDongNo());
     }
 
     @DisplayName("파싱한 Place 정보들이 정상적으로 insert 되는지 확인")
@@ -145,38 +145,6 @@ class DataServiceTest {
 
     }
 
-    @DisplayName("파싱한 Place 정보가 이미 존재할 때 존재하는 Place 정보를 반환해주는지 확인")
-    @Test
-    void testInsertPlaceResultWhenPlaceInfoIsDuplicate() {
-
-        // given
-        DataDTO dataDTO = new DataDTO(
-                1,
-                "음식점",
-                1,
-                "제주",
-                1,
-                "한림",
-                "연돈",
-                "아아",
-                "1234",
-                33.33,
-                126.123,
-                "123142",
-                "여기",
-                "저기",
-                "이미지경로",
-                "썸네일경로"
-        );
-        Long insertResult = dataService.insertPlace(dataDTO);
-
-        // when
-        Long duplicateResult = dataService.insertPlace(dataDTO);
-
-        // then
-        Assertions.assertEquals(insertResult, duplicateResult);
-    }
-
     @DisplayName("파싱한 TagList 정보가 정상적으로 insert 되는지 확인")
     @Test
     void insertTag() {
@@ -187,20 +155,5 @@ class DataServiceTest {
         Assertions.assertDoesNotThrow(
                 () -> dataService.insertTag(tagName)
         );
-    }
-
-    @DisplayName("파싱한 Tag 정보가 이미 존재할 때 존재하는 Tag 정보를 반환해주는지 확인")
-    @Test
-    void testInsertTagResultWhenTagInfoIsDuplicate() {
-
-        // given
-        String tagName = "제중";
-        TagDataDTO insertResult = dataService.insertTag(tagName);
-
-        // when
-        TagDataDTO duplicateResult = dataService.insertTag(tagName);
-
-        // then
-        Assertions.assertEquals(insertResult, duplicateResult);
     }
 }

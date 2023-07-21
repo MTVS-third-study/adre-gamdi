@@ -17,7 +17,6 @@ public class CityQueryService {
     public CityDTO findCityByCityName(String cityName) {
 
         City result = cityQueryRepository.findCityByCityName(cityName);
-
         return new CityDTO(
                 result.getCityNo(),
                 result.getCityName()

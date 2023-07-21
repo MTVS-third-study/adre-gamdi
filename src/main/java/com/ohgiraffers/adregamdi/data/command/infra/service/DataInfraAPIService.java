@@ -15,7 +15,6 @@ import com.ohgiraffers.adregamdi.data.command.application.dto.TagDataDTO;
 import com.ohgiraffers.adregamdi.data.command.domain.service.DataAPIService;
 import com.ohgiraffers.adregamdi.place.command.application.service.PlaceService;
 import com.ohgiraffers.adregamdi.place.command.application.service.PlaceTagsService;
-import com.ohgiraffers.adregamdi.place.query.application.service.DataQueryService;
 import com.ohgiraffers.adregamdi.tag.command.application.service.TagService;
 import com.ohgiraffers.adregamdi.tag.query.application.service.TagQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DataInfraAPIService implements DataAPIService {
-
-    private final DataQueryService dataQueryService;
 
     private final CategoryQueryService categoryQueryService;
     private final CategoryService categoryService;
@@ -43,8 +40,7 @@ public class DataInfraAPIService implements DataAPIService {
     private final PlaceTagsService placeTagsService;
 
     @Autowired
-    public DataInfraAPIService(DataQueryService dataQueryService,
-                               CategoryQueryService categoryQueryService,
+    public DataInfraAPIService(CategoryQueryService categoryQueryService,
                                CategoryService categoryService,
                                CityQueryService cityQueryService,
                                CityService cityService,
@@ -54,7 +50,6 @@ public class DataInfraAPIService implements DataAPIService {
                                TagQueryService tagQueryService,
                                TagService tagService,
                                PlaceTagsService placeTagsService) {
-        this.dataQueryService = dataQueryService;
         this.categoryQueryService = categoryQueryService;
         this.categoryService = categoryService;
         this.cityQueryService = cityQueryService;

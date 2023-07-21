@@ -17,7 +17,7 @@ public class PlaceTags {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long placeTagsNo;
 
-    @ManyToOne
+    @ManyToOne()
     private Place place;
 
     @Embedded

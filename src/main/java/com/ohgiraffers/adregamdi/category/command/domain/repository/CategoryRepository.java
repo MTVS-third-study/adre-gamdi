@@ -5,5 +5,5 @@ import com.ohgiraffers.adregamdi.category.command.domain.aggregate.entity.Catego
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    CategoryDTO insertCategory(Category category);
+    Category findByCategoryName(String categoryName);
 }

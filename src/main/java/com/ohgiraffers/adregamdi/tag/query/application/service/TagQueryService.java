@@ -18,6 +18,9 @@ public class TagQueryService {
 
     public TagDataDTO findTagByTagName(String tagName) {
         Tag result = tagQueryRepository.findByTagName(tagName);
+        if (result == null) {
+            return null;
+        }
         return new TagDataDTO(
                 result.getTagNo(),
                 result.getTagName()

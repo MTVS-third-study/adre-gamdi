@@ -17,6 +17,14 @@ public class CategoryService {
     }
 
     public CategoryDTO insertCategory(String categoryName) {
-        return categoryRepository.insertCategory(new Category(categoryName));
+        Category insertCategory = categoryRepository.findByCategoryName(categoryName);
+        System.out.println("insertCategory = " + insertCategory);
+        if (insertCategory == null){
+            return null;
+        }
+        return new CategoryDTO(
+                insertCategory.getCategoryNo(),
+                insertCategory.getCategoryName()
+        );
     }
 }

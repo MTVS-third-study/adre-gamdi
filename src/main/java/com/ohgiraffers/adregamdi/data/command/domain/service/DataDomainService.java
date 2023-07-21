@@ -85,6 +85,7 @@ public class DataDomainService {
             categoryName = (String) contentsCd.getOrDefault("label", "");
         }
         placeInfo.put("categoryName", categoryName);
+        System.out.println("categoryName = " + categoryName);
 
         // 설명. items - title
         String title = (String) item.getOrDefault("title", "");

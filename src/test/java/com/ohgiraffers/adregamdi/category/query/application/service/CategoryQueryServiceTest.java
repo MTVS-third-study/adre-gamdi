@@ -5,6 +5,8 @@ import com.ohgiraffers.adregamdi.category.command.domain.aggregate.entity.Catego
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,9 +41,17 @@ class CategoryQueryServiceTest {
 
         // when
         CategoryDTO result = categoryQueryService.findCategoryByCategoryName(categoryName);
-
+        System.out.println("result = " + result);
         // then
         Assertions.assertNull(result);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = 4)
+    void testFindCategory(int num){
+        String categoryName = categoryQueryService.findCategoryNameByCategoryNo(num);
+        System.out.println("categoryName = " + categoryName);
+        Assertions.assertEquals(categoryName, "음식점");
     }
 
 }
