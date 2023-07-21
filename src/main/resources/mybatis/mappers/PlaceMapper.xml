@@ -26,22 +26,22 @@
 
     <select id="searchPlace" resultMap="placeResultMap1" parameterType="String">
         SELECT
-            PLACE_NO
-        ,   PLACE_NAME
-        ,   CATEGORY_NO
-        ,   CITY_NO
-        ,   DONG_NO
-        ,   INTRODUCTION
-        ,   PHONE_NUMBER
-        ,   LATITUDE
-        ,   LONGITUDE
-        ,   POST_CODE
-        ,   PLACE_ADDRESS
-        ,   ROAD_PLACE_ADDRESS
-        ,   IMAGE_PATH
-        ,   THUMBNAIL_PATH
-        ,   AVERAGE_STAR_POINT
-        ,   REVIEW_COUNT
+               PLACE_NO
+             , PLACE_NAME
+             , CATEGORY_NO
+             , CITY_NO
+             , DONG_NO
+             , INTRODUCTION
+             , PHONE_NUMBER
+             , LATITUDE
+             , LONGITUDE
+             , POST_CODE
+             , PLACE_ADDRESS
+             , ROAD_PLACE_ADDRESS
+             , IMAGE_PATH
+             , THUMBNAIL_PATH
+             , AVERAGE_STAR_POINT
+             , REVIEW_COUNT
         FROM TBL_PLACE
         WHERE PLACE_NAME LIKE CONCAT('%',#{keyword},'%')
         ORDER BY PLACE_NAME

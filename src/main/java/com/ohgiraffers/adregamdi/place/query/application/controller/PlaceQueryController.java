@@ -26,8 +26,7 @@ public class PlaceQueryController {
     public String searchPlace(@RequestParam("searchKeyword") String keyword, Model model){
         List<PlaceDTO> placeList = placeQueryService.findPlaceByKeyword(keyword);
         model.addAttribute("placeList", placeList);
-        System.out.println("keyword = " + keyword);
-        placeList.forEach(System.out::println);
+
         return "schedule";
     }
 }
