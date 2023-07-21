@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class OAuthController {
     // 카카오 로그인
     @GetMapping("kakao/login")
     public void kakaoCallback(@RequestParam String code, HttpSession session
-            , HttpServletResponse response) throws IOException {
+            , HttpServletRequest request, HttpServletResponse response) throws IOException {
         session.setAttribute("service", "kakao");
         session.setAttribute("loginUser", oAuthService.kakaoLogin(code));
         response.sendRedirect("http://localhost:8080"); // 메인 페이지로
