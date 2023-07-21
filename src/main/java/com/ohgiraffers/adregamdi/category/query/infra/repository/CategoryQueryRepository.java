@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.place.query.infra.repository;
+package com.ohgiraffers.adregamdi.category.query.infra.repository;
 
 import com.ohgiraffers.adregamdi.category.command.domain.aggregate.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

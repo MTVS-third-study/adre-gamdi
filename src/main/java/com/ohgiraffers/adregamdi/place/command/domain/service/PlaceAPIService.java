@@ -9,9 +9,5 @@ import com.ohgiraffers.adregamdi.tag.command.domain.aggregate.entity.Tag;
 public interface PlaceAPIService {
 
 
-    Category findCategoryByCategoryName(String categoryName);
-    Tag findTagByTagName(String tagName);
-    City findCityByCityName(String cityName);
-    Dong findDongByDongName(String dongName);
-    Place findPlaceByPlaceNameAndRoadPlaceAddress(String placeName, String roadPlaceAddress);
+
 }

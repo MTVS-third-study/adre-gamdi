@@ -1,4 +1,4 @@
-package com.ohgiraffers.adregamdi.place.query.infra.repository;
+package com.ohgiraffers.adregamdi.cityanddong.query.infra.repository;
 
 import com.ohgiraffers.adregamdi.cityanddong.command.domain.aggregate.entity.City;
 import org.springframework.data.jpa.repository.JpaRepository;

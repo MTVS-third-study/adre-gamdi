@@ -21,29 +21,7 @@ public class PlaceInfraAPIService implements PlaceAPIService {
         this.dataQueryService = dataQueryService;
     }
 
-    @Override
-    public Category findCategoryByCategoryName(String categoryName) {
-        return dataQueryService.findCategoryByCategoryName(categoryName);
-    }
-    @Override
-    public City findCityByCityName(String cityName) {
-        return dataQueryService.findCityByCityName(cityName);
-    }
 
-    @Override
-    public Dong findDongByDongName(String dongName) {
-        return dataQueryService.findDongByDongName(dongName);
-    }
-
-    @Override
-    public Tag findTagByTagName(String tagName) {
-        return dataQueryService.findTagByTagName(tagName);
-    }
-
-    @Override
-    public Place findPlaceByPlaceNameAndRoadPlaceAddress(String placeName, String roadPlaceAddress) {
-        return dataQueryService.findPlaceByPlaceNameAndRoadPlaceAddress(placeName,roadPlaceAddress);
-    }
 
 
 }

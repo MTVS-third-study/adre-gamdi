@@ -78,18 +78,13 @@ public class DataDomainService {
         // 설명. items - contentscd
         JSONObject contentsCd = (JSONObject) item.getOrDefault("contentscd", "");
         // 설명. items - contentscd - value, label
-        String categoryCode = "";
         String categoryName = "";
         if (contentsCd == null) {
-            categoryCode = "";
             categoryName = "";
         } else {
-            categoryCode = (String) contentsCd.getOrDefault("value", "");
             categoryName = (String) contentsCd.getOrDefault("label", "");
         }
-        placeInfo.put("categoryCode", categoryCode);
         placeInfo.put("categoryName", categoryName);
-        System.out.println("categoryCode = " + categoryCode);   // 진행 상황 알기 위해 일부러 남겨둠!
 
         // 설명. items - title
         String title = (String) item.getOrDefault("title", "");

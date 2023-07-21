@@ -10,10 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
-public class PlaceServiceTests {
+public class PlaceQueryServiceTests {
 
     @Autowired
-    private PlaceService placeService;
+    private PlaceQueryService placeQueryService;
 
     @ParameterizedTest
     @ValueSource(strings = {"연돈", "식당"})
@@ -21,7 +21,7 @@ public class PlaceServiceTests {
 
         Assertions.assertDoesNotThrow(
                 () -> {
-                    List<SearchPlace> places = placeService.findPlaceByKeyword(keyword);
+                    List<SearchPlace> places = placeQueryService.findPlaceByKeyword(keyword);
                     places.forEach(System.out::println);
                 }
         );

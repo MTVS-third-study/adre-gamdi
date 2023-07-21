@@ -1,7 +1,6 @@
 package com.ohgiraffers.adregamdi.data.command.application.dto;
 
 import lombok.*;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -10,12 +9,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DataDto {
+public class DataDTO {
 
     /* 카테고리*/
+    private int categoryNo;
     private String categoryName;
 
     /* 도시 */
+    private int cityNo;
     private String cityName;
 
     /* 동 */
@@ -33,8 +34,5 @@ public class DataDto {
     private String roadAddress;
     private String imagePath;
     private String thumbnailPath;
-
-    /* 태그 */
-    private List<String> tagList;
 
 }
