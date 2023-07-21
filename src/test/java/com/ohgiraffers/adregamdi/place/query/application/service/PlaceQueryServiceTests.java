@@ -1,6 +1,7 @@
 package com.ohgiraffers.adregamdi.place.query.application.service;
 
 import com.ohgiraffers.adregamdi.place.query.application.dto.PlaceDTO;
+import com.ohgiraffers.adregamdi.place.query.domain.entity.SearchPlace;
 import com.ohgiraffers.adregamdi.place.query.domain.service.CategoryQueryService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,8 +16,6 @@ public class PlaceQueryServiceTests {
 
     @Autowired
     private PlaceQueryService placeQueryService;
-    @Autowired
-    private CategoryQueryService categoryQueryService;
 
     @ParameterizedTest
     @ValueSource(strings = {"연돈", "돈가스"})
@@ -24,11 +23,12 @@ public class PlaceQueryServiceTests {
 
         Assertions.assertDoesNotThrow(
                 () -> {
-                    List<PlaceDTO> places = placeQueryService.findPlaceByKeyword(keyword);
+                    List<SearchPlace> places = placeQueryService.findPlaceByKeyword(keyword);
                     places.forEach(System.out::println);
                 }
         );
 
     }
+
 
 }
