@@ -21,25 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("deleteForm")
-    public String goDeleteUser() {
-        return "user/deleteForm";
-    }
-
-    @PostMapping("deleteUser")
-    public String deleteUser(HttpSession session) {
-        Long result = userService.deleteUser(((UserDTO) session.getAttribute("loginUser")).getKakaoId());
-        System.out.println("result = " + result);
-        session.removeAttribute("loginUser");
-        session.removeAttribute("service");
-        return "redirect:/";
-    }
-
-    @PostMapping("deleteNo")
-    public String deleteNo() {
-        return "redirect:/myPage";
-    }
-
+    // 닉네임 변경
     @PostMapping("updateNickName")
     public String updateNickName(HttpServletRequest request, HttpSession session) throws Exception {
         String nickName = request.getParameter("nickName");
@@ -47,5 +29,32 @@ public class UserController {
         session.setAttribute("loginUser", userService.updateNickName(nickName, loginUser));
         return "redirect:/myPage";
     }
+
+    // 회원탈퇴 페이지로 이동
+    @GetMapping("deleteForm")
+    public String goDeleteUser() {
+        return "user/deleteForm";
+    }
+
+    // 회원탈퇴 예
+    @PostMapping("deleteUser")
+    public String deleteUser(HttpSession session) {
+        String token = ((UserDTO) session.getAttribute("loginUser")).getAccess_Token();
+        int result = userService.deleteUser(token);
+
+        if (result == 1) { // 탈퇴 성공
+            session.removeAttribute("loginUser");
+            session.removeAttribute("service");
+            return "redirect:/";
+        }
+        return "errorPage"; // 탈퇴 실패 시 에러페이지로
+    }
+
+    // 회원탈퇴 아니오
+    @PostMapping("deleteNo")
+    public String deleteNo() {
+        return "redirect:/myPage";
+    }
+
 
 }

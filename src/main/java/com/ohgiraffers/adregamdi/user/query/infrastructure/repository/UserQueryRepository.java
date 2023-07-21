@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface UserQueryRepository extends JpaRepository<User, Long> {
+
+    // 카카오 아이디로 유저 정보 조회
     User findByKakaoId(String kakaoId);
 }
 

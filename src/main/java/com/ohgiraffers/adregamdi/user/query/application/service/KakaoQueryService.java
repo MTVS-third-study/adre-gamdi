@@ -15,16 +15,19 @@ public class KakaoQueryService {
         this.kakaoQueryInfraService = kakaoQueryInfraService;
     }
 
+    // 카카오 인증 유효성 검사
     public KakaoUserDTO validateKakaoCertification(String code) {
         TokenDTO token = getKakaoAccessToken(code);
         return getKakaoUserInfo(token);
     }
 
-    public TokenDTO getKakaoAccessToken(String code) {
+    // 카카오 액세스 토큰 발급
+    private TokenDTO getKakaoAccessToken(String code) {
         return kakaoQueryInfraService.getKakaoAccessToken(code);
     }
 
-    public KakaoUserDTO getKakaoUserInfo(TokenDTO token) {
+    // 카카오 유저 정보 조회
+    private KakaoUserDTO getKakaoUserInfo(TokenDTO token) {
         return kakaoQueryInfraService.getKakaoUserInfo(token);
     }
 }
