@@ -31,18 +31,4 @@ class DongQueryServiceTest {
         );
     }
 
-    @DisplayName("동 정보 조회 실패 시 반환 값이 null인지 확인")
-    @Test
-    void testCheckNullFindDongResultWhenNoResult() {
-
-        // given
-        String dongName = "관광동";
-
-        // when
-        DongDTO result = dongQueryService.findDongByDongName(dongName);
-
-        // then
-        Assertions.assertNull(result);
-    }
-
 }

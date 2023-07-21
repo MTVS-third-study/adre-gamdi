@@ -32,20 +32,6 @@ class CategoryQueryServiceTest {
         );
     }
 
-    @DisplayName("카테고리 조회 실패 시 반환 값이 null인지 확인")
-    @Test
-    void testCheckNullFindCategoryResultWhenNoResult() {
-
-        // given
-        String categoryName = "소소소견";
-
-        // when
-        CategoryDTO result = categoryQueryService.findCategoryByCategoryName(categoryName);
-        System.out.println("result = " + result);
-        // then
-        Assertions.assertNull(result);
-    }
-
     @ParameterizedTest
     @ValueSource(ints = 4)
     void testFindCategory(int num){

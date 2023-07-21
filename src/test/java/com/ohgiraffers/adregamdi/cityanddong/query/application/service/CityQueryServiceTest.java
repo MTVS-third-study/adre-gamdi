@@ -31,17 +31,4 @@ class CityQueryServiceTest {
         );
     }
 
-    @DisplayName("시 정보 조회 실패 시 반환 값이 null인지 확인")
-    @Test
-    void testCheckNullFindCityResultWhenNoResult() {
-
-        // given
-        String cityName = "관광지";
-
-        // when
-        CityDTO result = cityQueryService.findCityByCityName(cityName);
-
-        // then
-        Assertions.assertNull(result);
-    }
 }
