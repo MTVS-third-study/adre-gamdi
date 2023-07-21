@@ -36,7 +36,6 @@
                 <form action="/placeQuery/searchPlace" class="searchBox">
                     <input type="text" placeholder="검색어를 입력해주세요" class="keyword" name="searchKeyword" method="GET"/>
                     <button class="searchKeyword" type="button"><img src="/images/search.png" alt=""></button>
-
                 </form>
 <!--                                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
             </div>
@@ -58,7 +57,11 @@
         <div id="menu_wrap" class="bg_white menu_wrap">
             <hr />
             <ul  class="placeList">
+                <div align="center" th:if="${decide == true}">
+                        <h3>검색 결과가 없습니다.</h3>
+                </div>
                 <li th:each="place:${placeList}">
+
                     <div>
                         <h4 th:text="${place.getPlaceName()}"></h4>
                         <p th:text="${place.getCategoryName()}"></p>
@@ -67,7 +70,6 @@
                     </div>
                     <img th:src="${place.thumbnailPath}" alt="">
                 </li>
-
                 <hr>
 
 
