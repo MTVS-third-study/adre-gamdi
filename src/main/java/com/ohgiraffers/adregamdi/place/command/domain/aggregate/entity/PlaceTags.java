@@ -1,8 +1,6 @@
 package com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity;
 
-import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.PlaceVO;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.TagVO;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,14 +17,14 @@ public class PlaceTags {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long placeTagsNo;
 
-    @Embedded
-    private PlaceVO placeVO;
+    @ManyToOne
+    private Place place;
 
     @Embedded
     private TagVO tagVO;
 
-    public PlaceTags(PlaceVO placeVO, TagVO tagVO) {
-        this.placeVO = placeVO;
+    public PlaceTags(Place place, TagVO tagVO) {
+        this.place = place;
         this.tagVO = tagVO;
     }
 }
