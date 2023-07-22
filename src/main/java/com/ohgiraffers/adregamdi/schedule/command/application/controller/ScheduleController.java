@@ -2,7 +2,6 @@ package com.ohgiraffers.adregamdi.schedule.command.application.controller;
 
 import com.ohgiraffers.adregamdi.schedule.command.application.dto.ScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.command.application.service.ScheduleService;
-import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
