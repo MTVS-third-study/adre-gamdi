@@ -1,5 +1,7 @@
 package com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity;
 
+import com.ohgiraffers.adregamdi.cityanddong.command.domain.aggregate.entity.City;
+import com.ohgiraffers.adregamdi.cityanddong.command.domain.aggregate.entity.Dong;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.*;
 import lombok.*;
 
@@ -8,7 +10,6 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-@ToString
 @Table(name= "TBL_PLACE")
 public class Place {
 
@@ -58,6 +59,10 @@ public class Place {
     private double averageStarPoint;
     @Column
     private int reviewCount;
+
+    public Place(Long placeNo) {
+        this.placeNo = placeNo;
+    }
 
     public Place(String placeName, CategoryVO categoryVO, CityVO cityVO, DongVO dongVO, String introduction, String phoneNumber, CoordinateVO coordinateVO, String postCode, String placeAddress, String roadPlaceAddress, String imagePath, String thumbnailPath, double averageStarPoint, int reviewCount) {
         this.placeName = placeName;
