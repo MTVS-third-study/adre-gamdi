@@ -1,13 +1,12 @@
 package com.ohgiraffers.adregamdi.schedule.query.application.service;
 
+import com.ohgiraffers.adregamdi.schedule.command.application.dto.ScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.entity.Schedule;
 import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.ScheduleUserNoVO;
-import com.ohgiraffers.adregamdi.schedule.query.application.dto.ScheduleQueryDTO;
 import com.ohgiraffers.adregamdi.schedule.query.infra.repository.ScheduleQueryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,13 +20,14 @@ public class ScheduleQueryService {
         this.scheduleQueryRepository = scheduleQueryRepository;
     }
 
-    public List<ScheduleQueryDTO> loadMyScheduleList(Long userNo) {
-        ScheduleUserNoVO userNoVO = new ScheduleUserNoVO(userNo);
-        List<Schedule> myScheduleListResult = scheduleQueryRepository.findAllByScheduleUserNoVO(userNoVO);
-        ScheduleQueryDTOEntityMapper entityDtoMapper = new ScheduleQueryDTOEntityMapper();
+    public List<ScheduleDTO> loadMyScheduleList(Long userNo) {
+        List<Schedule> myScheduleListResult = scheduleQueryRepository.findAllByScheduleUserNoVO(
+                new ScheduleUserNoVO(userNo)
+        );
 
-        List<ScheduleQueryDTO> myScheduleList = myScheduleListResult.stream().
-                map(i -> entityDtoMapper.scheduleToScheduleQueryDTO(i)).
+        ScheduleQueryDTOEntitySwap swap = new ScheduleQueryDTOEntitySwap();
+        List<ScheduleDTO> myScheduleList = myScheduleListResult.stream().
+                map(i -> swap.scheduleToScheduleDTO(i)).
                 collect(Collectors.toList());
 
         return myScheduleList;
