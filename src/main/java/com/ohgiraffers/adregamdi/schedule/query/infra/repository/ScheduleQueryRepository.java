@@ -1,6 +1,7 @@
 package com.ohgiraffers.adregamdi.schedule.query.infra.repository;
 
 import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.entity.Schedule;
+import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.ScheduleUserNoVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
