@@ -50,31 +50,81 @@ myScheduleBtn.addEventListener("click", () => {
 imgBtn.addEventListener("click", () => {
     console.log(3)
 
+    infoWrap.style.display = "block";
+    menuWrap.style.display = "none";
+    dayWrap.style.display = "none";
+    BtnBox[0].style.display = "none";
+    option[0].style.display="none";
 
 });
 
-// 상세 페이지 일정추가
+// 상세페이지
 let scheduleAdd = document.getElementsByClassName("scheduleAdd");
-let placeList=document.getElementsByClassName("placeList")
+let placeItme=document.getElementsByClassName("placeItem")
+let placeList=document.querySelectorAll("#placeList>li")
 scheduleAdd[0].addEventListener("click", () => {
     dayWrap.style.display = "block";
     infoWrap.style.display = "none";
     BtnBox[0].style.display = "block";
     option[0].style.display="block";
 });
+
 for(let i=0 ;i<placeList.length ;i++){
 
+    placeItme[i].addEventListener("click",()=>{
 
-    placeList[i].addEventListener("click",()=>{
-        fetch('https://jsonplaceholder.typicode.com/posts/1')
+        fetch('/placeQuery/placeInfo')
             .then((response) => response.json())
             .then((json) => console.log(json));
         infoWrap.style.display = "block";
         menuWrap.style.display = "none";
         dayWrap.style.display = "none";
-        BtnBox[0].style.display = "none";
         option[0].style.display="none";
     })
 
+}
 
+// Btnmouseover
+
+
+homeBtn.addEventListener("mouseover",()=>{
+    homeBtn.classList.add('add')
+})
+homeBtn.addEventListener("mouseleave",()=>{
+    homeBtn.classList.remove('add')
+})
+
+myScheduleBtn.addEventListener("mouseover",()=>{
+    myScheduleBtn.classList.add('add')
+})
+myScheduleBtn.addEventListener("mouseleave",()=>{
+    myScheduleBtn.classList.remove('add')
+})
+
+imgBtn.addEventListener("mouseover",()=>{
+    imgBtn.classList.add('add')
+})
+imgBtn.addEventListener("mouseleave",()=>{
+    imgBtn.classList.remove('add')
+})
+// userInfoBox
+
+let userImgBox=document.getElementsByClassName("userImgBox")
+let hideUserInfoBox=document.getElementsByClassName("hideUserInfoBox")
+let hideUserInfoBoxItem=document.querySelectorAll(".hideUserInfoBox>li")
+
+userImgBox[0].addEventListener("click",()=>{
+    hideUserInfoBox[0].style.display="block";
+})
+
+for(let i=0 ;i<hideUserInfoBoxItem.length;i++){
+    hideUserInfoBoxItem[i].addEventListener("mouseover",()=>{
+        hideUserInfoBoxItem[i].style.backgroundColor="#70757a"
+    })
+    hideUserInfoBoxItem[i].addEventListener("mouseleave",()=>{
+        hideUserInfoBoxItem[i].style.backgroundColor="transparent"
+    })
+    hideUserInfoBoxItem[i].addEventListener("click",()=>{
+        hideUserInfoBox[0].style.display="none";
+    })
 }

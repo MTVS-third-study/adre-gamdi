@@ -194,3 +194,9 @@ body{
     text-decoration: none;
     cursor: pointer;
 }
+/*모바일 반응형 */
+@media all and(max-width: 790px){
+    .mainTitleBox{
+        display: none;
+    }
+}
