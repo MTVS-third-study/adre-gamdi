@@ -2,8 +2,6 @@ package com.ohgiraffers.adregamdi.schedule.query.application.service;
 
 import com.ohgiraffers.adregamdi.schedule.command.application.dto.ScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.command.application.service.ScheduleService;
-import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.entity.Schedule;
-import com.ohgiraffers.adregamdi.schedule.query.application.dto.ScheduleQueryDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,11 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureDataJpa

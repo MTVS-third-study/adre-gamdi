@@ -30,7 +30,6 @@ class ScheduleServiceTest {
         ScheduleDTO schedule = new ScheduleDTO(
                 "제주제주",
                 null,
-                "kakao@duam.net",
                 "2023-07-07",
                 "2023-07-08"
         );

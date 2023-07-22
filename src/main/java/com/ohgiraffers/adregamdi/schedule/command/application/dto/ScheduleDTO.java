@@ -21,6 +21,13 @@ public class ScheduleDTO {
 
     private String dayAndNight;
 
+    public ScheduleDTO(String scheduleName, Long userNo, String startDay, String endDay) {
+        this.scheduleName = scheduleName;
+        this.userNo = userNo;
+        this.startDay = startDay;
+        this.endDay = endDay;
+    }
+
     public ScheduleDTO(String scheduleName, Long userNo, String startDay, String endDay, String dayAndNight) {
         this.scheduleName = scheduleName;
         this.userNo = userNo;
