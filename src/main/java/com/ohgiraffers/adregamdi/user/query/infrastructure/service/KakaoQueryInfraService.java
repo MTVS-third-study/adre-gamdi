@@ -3,16 +3,16 @@ package com.ohgiraffers.adregamdi.user.query.infrastructure.service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.ohgiraffers.adregamdi.common.annotation.InfraService;
 import com.ohgiraffers.adregamdi.user.command.application.dto.KakaoUserDTO;
 import com.ohgiraffers.adregamdi.user.command.application.dto.TokenDTO;
 import com.ohgiraffers.adregamdi.user.command.domain.exception.UserException;
-import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-@Service
+@InfraService
 public class KakaoQueryInfraService {
 
     // 카카오 액세스 토큰 발급
@@ -106,6 +106,7 @@ public class KakaoQueryInfraService {
 
             UserException userException = new UserException();
             String id = element.getAsJsonObject().get("id").getAsString();
+            String profile = properties.getAsJsonObject().get("profile_image").getAsString();
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
             String email = userException.solveNullPointerException("email", kakao_account);
             String age = userException.solveNullPointerException("age_range", kakao_account);
@@ -113,6 +114,7 @@ public class KakaoQueryInfraService {
 
             userInfo = new KakaoUserDTO();
             userInfo.setKakaoId(id);
+            userInfo.setKakaoProfileImage(profile);
             userInfo.setKakaoNickName(nickname);
             userInfo.setEmail(email);
             userInfo.setAge(age);
