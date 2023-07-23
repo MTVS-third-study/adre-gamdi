@@ -4,9 +4,8 @@ import com.ohgiraffers.adregamdi.category.command.application.dto.CategoryDTO;
 import com.ohgiraffers.adregamdi.cityanddong.command.application.dto.CityDTO;
 import com.ohgiraffers.adregamdi.cityanddong.command.application.dto.DongDTO;
 import com.ohgiraffers.adregamdi.data.command.application.dto.DataDTO;
-import com.ohgiraffers.adregamdi.data.command.application.dto.PlaceTagsDataDTO;
-import com.ohgiraffers.adregamdi.data.command.application.dto.TagDataDTO;
-import com.ohgiraffers.adregamdi.tag.command.domain.aggregate.entity.Tag;
+import com.ohgiraffers.adregamdi.place.command.application.dto.PlaceTagsDTO;
+import com.ohgiraffers.adregamdi.tag.command.application.dto.TagDTO;
 
 public interface DataAPIService {
 
@@ -21,9 +20,9 @@ public interface DataAPIService {
 
     Long insertPlace(DataDTO dataDTO);
 
-    TagDataDTO findTagByTagName(String tagName);
+    TagDTO findTagByTagName(String tagName);
 
-    TagDataDTO insertTag(String tagName);
+    TagDTO insertTag(String tagName);
 
-    Long insertPlaceAndTags(PlaceTagsDataDTO placeTagsDataDTO);
+    Long insertPlaceAndTags(PlaceTagsDTO placeTagsDTO);
 }

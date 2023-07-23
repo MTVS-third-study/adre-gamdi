@@ -31,4 +31,18 @@ class CityQueryServiceTest {
         );
     }
 
+    @DisplayName("시 조회 시 null일 때 예외처리 잘 되는지 테스트")
+    @Test
+    void testFindCityNameByCityNo() {
+
+        //given
+        int cityNo = 5;
+
+        // when & then
+        Assertions.assertDoesNotThrow(
+                () -> cityQueryService.findCityByCityNo(cityNo)
+        );
+
+    }
+
 }

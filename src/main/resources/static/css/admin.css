@@ -11,126 +11,131 @@ a {
 }
 
 
-/* header */
-header{
-    display: inline-block;
-    background-color: antiquewhite;
-    width: 100%;
-    height: 20%;
-
-}
-header>h1{
-    /* float: left; */
-    margin-left: 20px;
-}
-nav{
-    /* float: right; */
-    margin-right: 40px;
-    margin-top: 10px;
-
-}
-nav>a{
-    margin-right: 20px;
-}
-
 /* main */
 main{
-    display: flex
-}
-.UpperBar {
-    width: 100%;
-    height: 90px;
-    justify-content: center;
-    background-color: rgba(255,255,255,0.5);
-
-    z-index: 1;
-}
-.mainlogo {
-
-}
-.loginBox{
-
-    float: right;
-    margin: 20px;
     display: flex;
-
-}
-.loginBox div{
-    margin-left: 30px;
-}
-.myPageBtn div{
-    margin-left: 10px;
-}
-
-.upperBtn{
-    border: none;
-    background:#FFAA40;
-    box-shadow: 0px 0px 0px 0px #A66615;
-    display: block;
-    width: 120px;
-    padding: 0;
-    font-weight: 600;
-    text-align: center;
-    line-height: 50px;
-    color: black;
-    border-radius: 5px;
-    transition-duration: 0.2s ;
-
-}
-.logo{
-    height: 60px;
-    width: 60px;
-    position: relative;
-    bottom: 5px;
-    left: 15px;
-}
-.upperBtn:hover{
-    background-color: white;
-    box-shadow: 0 3px 6px 0 rgba(0,0,0,0.24), 0 5px 10px 0 rgba(0,0,0,0.19);
+    background-color: #f5f5f9;
+    color: #697a8d;
 }
 .menuList{
     width: 200px;
     margin:0 auto;
     margin-top: 65%;
     font-weight: bold;
-    font-size:30px
+    font-size:30px;
+
 }
 .menuList li{
     margin-top: 100px;
-   cursor: pointer;
 }
 .sideMenu{
-
+    background-color: white;
     border-right: 1px solid black;
     height: 100vh;
-    width: 20%;
-
+    width: 300px;
+    text-align: center;
 }
+.on{
+    color: #696cff;
+    border-bottom: 2px solid #696cff;
+
+    animation: linemove 1s alternate;
+}
+
+@keyframes linemove1 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#adminBtn{
+    font-size: 50px;
+    width: 300px;
+    margin-top:30px;
+    text-align: center;
+    color: #566a7f;
+}
+#adminBtn>img{
+    float: left;
+    position: relative;
+    top: 12px;
+    left: 30px;
+    width: 40px;
+}
+/* #adminBtn>li */
 .contents{
+
 
     width: 80%;
     height: 100vh;
+    margin: 0 auto;
+
+}
+.contentsWrap{
+    width: 100%;
+
+    border: 1px solid black;
+
+    border-radius: 10px;
+
+    margin:50px auto;
 }
 
+.tableHeader{
+    width: 100%;
+    height: 40px;
+
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid black;
+    background-color: #FFf;
+}
+.tableHeader>p{
+    position: relative;
+    top: 10px;
+    left: 20px;
+}
+.tableHeader>p>img{
+    width: 20px;
+    margin-right: 15px;
+    position: relative;
+    top: 3px;
+}
+.tableHeader>p>span{
+    width: 300px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+    color: #696cff;
+}
 .userList{
 
     width: 100%;
 
+    overflow-y: scroll;
+    overflow-x: hidden;
 
 }
-.userList>h3{
+.userList::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+}
+
+.userList::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
+}
+.contents>h3{
     width: 300px;
     margin: 50px auto;
     text-align: center;
+    font-size: 40px;
 }
 .blackList{
     display: none;
 }
-.blackList>h3{
-    width: 300px;
-    margin: 50px auto;
-    text-align: center;
-}
+
 .reportList{
     display: none;
 }
@@ -141,15 +146,17 @@ main{
 }
 /* content table */
 table {
+    width: 100%;
     border-collapse: collapse;
     border: 0;
-    margin: 80px auto;
+    margin: 0px auto;
 }
 th,
 td {
     border: 1px solid #aaa;
     background-clip: padding-box;
     scroll-snap-align: start;
+    background-color: #FFf;
 }
 tbody tr:last-child th,
 tbody tr:last-child td {
