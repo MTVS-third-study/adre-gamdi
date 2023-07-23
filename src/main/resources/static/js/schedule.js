@@ -120,13 +120,40 @@ let keyword = document.querySelector(".keyword")
 let keywordValue='';
 keyword.addEventListener("keyup",(e)=>{
 
-       keywordValue=JSON.stringify(keyword.value);
         if(e.keyCode===13){
-            console.log(typeof(keywordValue))
+       keywordValue=JSON.stringify(keyword.value);
+
             fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
                 .then( response => response.json())
-                .then((data) => {
-                    console.log(data)
+                .then(json => {
+
+                    json=json.respPlaceList;
+                    let html='';
+                   json.forEach((obj,idx)=>{
+                       if(!json.length){
+                           console.log("등록된 값이없습니다")
+                       }else{
+
+                           console.log(obj);
+                           html+=`
+                        <li class="placeItem">
+                    <div class="placeContents">
+                    <div class="placeInfo">
+                        <p id="placeNo" style="display: none">${obj.placeNo}</p>
+                        <h4>${obj.placeName}</h4>
+                        <p>${obj.categoryName}</p>
+                        <span  class="placeAddr">${obj.placeAddress}</span><br>
+                        <span>${obj.phoneNumber}</span>
+                    </div>
+                    <img src="${obj.imagePath}" alt="">
+                    </div>
+                <hr>
+                </li>`;
+
+                       }
+
+                   })
+                    document.getElementById("placeList").innerHTML=html;
 
                 }).catch(error=>{
                 console.log(error)
@@ -137,8 +164,35 @@ searchKeyword.addEventListener("click",()=>{
 
     fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
         .then( response => response.json())
-        .then((data) => {
-            console.log(data)
+        .then(json => {
+
+            json=json.respPlaceList;
+            let html='';
+            json.forEach((obj,idx)=>{
+                if(!json.length){
+                    console.log("등록된 값이없습니다")
+                }else{
+
+                    console.log(obj);
+                    html+=`
+                        <li class="placeItem">
+                    <div class="placeContents">
+                    <div class="placeInfo">
+                        <p id="placeNo" style="display: none">${obj.placeNo}</p>
+                        <h4>${obj.placeName}</h4>
+                        <p>${obj.categoryName}</p>
+                        <span  class="placeAddr">${obj.placeAddress}</span><br>
+                        <span>${obj.phoneNumber}</span>
+                    </div>
+                    <img src="${obj.imagePath}" alt="">
+                    </div>
+                <hr>
+                </li>`;
+
+                }
+
+            })
+            document.getElementById("placeList").innerHTML=html;
 
         }).catch(error=>{
             console.log(error)
