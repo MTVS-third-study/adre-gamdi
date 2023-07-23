@@ -1,59 +1,110 @@
 package com.ohgiraffers.adregamdi.review.command.application.service;
 
-import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.Place;
 import com.ohgiraffers.adregamdi.review.command.application.dto.ReviewDTO;
-import com.ohgiraffers.adregamdi.review.command.domain.service.CreateReviewService;
-import com.ohgiraffers.adregamdi.review.command.domain.service.DeleteReviewService;
-import com.ohgiraffers.adregamdi.review.command.domain.service.UpdateReviewService;
-import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.Review;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewPlaceNo;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewWriter;
+import com.ohgiraffers.adregamdi.review.command.domain.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.UUID;
 
 @Service
 public class ReviewService {
 
-    private final CreateReviewService createReviewService;
-    private final UpdateReviewService updateReviewService;
-    private final DeleteReviewService deleteReviewService;
+    private ReviewRepository reviewRepository;
 
     @Autowired
-    public ReviewService(CreateReviewService createReviewService, UpdateReviewService updateReviewService, DeleteReviewService deleteReviewService) {
-        this.createReviewService = createReviewService;
-        this.updateReviewService = updateReviewService;
-        this.deleteReviewService = deleteReviewService;
+    public ReviewService(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
     }
 
-    public boolean insertReview(ReviewDTO reviewDTO, MultipartFile imageFile, Model model, Long userId, Long placeId) {
+    public boolean insertReview(ReviewDTO reviewDTO, MultipartFile imageFile, Model model,
+                                Long userNo, String userName, Long placeNo) {
 
-        if (createReviewService.isNotNull(reviewDTO, imageFile, model) && createReviewService.insertReviewImage(reviewDTO, imageFile, model)) {
+        if (insertReviewImage(reviewDTO, imageFile)) {
 
-            createReviewService.saveReview(reviewDTO, userId, placeId);
+            ReviewWriter reviewWriter = new ReviewWriter(userNo, userName);
+            ReviewPlaceNo reviewPlaceNo = new ReviewPlaceNo(placeNo);
+
+            Review review = new Review(reviewDTO.getReviewNo(), reviewDTO.getLikeNum(), reviewDTO.getStarPoint(),
+                    reviewDTO.getOriginReviewImageName(), reviewDTO.getSavedReviewImageName(),
+                    reviewDTO.getImageFilePath(), reviewDTO.getReviewContent(), reviewDTO.getRegDate(), reviewWriter, reviewPlaceNo);
+
+            reviewRepository.save(review);
             return true;
         }
+
         return false;
     }
 
-    public void updateReview() {
-        updateReviewService.updateReview();
+    public void updateReview(@PathVariable("reviewNo") Review review) {
+        reviewRepository.save(review);
     }
 
-    public void deleteReview() {
-        deleteReviewService.deleteReview();
+    public void deleteReview(int reviewNo) {
+        reviewRepository.deleteById(reviewNo);
     }
 
-    public void alert(String notice, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html; charset=utf-8");
-        PrintWriter out = response.getWriter();
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + notice + "');");
-        out.println("</script>");
-        out.flush();
+    private boolean insertReviewImage(ReviewDTO reviewDTO, MultipartFile imageFile) {
+
+        String filePath = System.getProperty("user.dir") + "/src/main/resources/static/images/reviewImages/"; //user.dir은 프로젝트 경로
+
+        File dir = new File(filePath);
+        if (!dir.exists()) {
+            dir.mkdirs();   //폴더 없을 시 자동으로 하위폴더 생성
+        }
+
+        String originFileName = imageFile.getOriginalFilename();  //원본 파일 이름
+        String ext = originFileName.substring(originFileName.lastIndexOf(".") + 1); //파일 확장자
+        String savedName = UUID.randomUUID().toString().replaceAll("-", "") + "." + ext; //저장되는 이름
+
+        try {
+            if (!ext.equals("jpg") && !ext.equals("jpeg") && !ext.equals("png")) {
+                return false;
+            }
+
+            imageFile.transferTo(new File(filePath + savedName));
+            reviewDTO.setOriginReviewImageName(originFileName);
+            reviewDTO.setSavedReviewImageName(savedName);
+            reviewDTO.setImageFilePath(filePath);
+
+        } catch (IOException e) {
+            new File(filePath + savedName).delete();  //업로드 후 DB저장 중 오류났을 때 업로드된 이미지 삭제해줌
+
+        }
+        return true;
     }
+
+
+//    private boolean isNotNull(ReviewDTO reviewDTO, Model model) {
+//        if (!reviewDTO.getReviewContent().equals("") && reviewDTO.getStarPoint() != 0
+//                && reviewDTO.getOriginReviewImageName() != null) {
+//            return true;
+//        }
+//
+//        if (reviewDTO.getReviewContent().equals("")) {
+//            model.addAttribute("nullContent", "리뷰 내용은 필수 입력값입니다.");
+//        }
+//
+//        if (reviewDTO.getStarPoint() == 0) {
+//            model.addAttribute("nullStarPoint", "별점을 선택해주세요");
+//        }
+//
+//        if (reviewDTO.getOriginReviewImageName() == null) {
+//
+//            model.addAttribute("incorrectExtension", "jpg, jpeg, png형식의 이미지 파일을 올려주세요.");
+//        }
+//
+//        return false;
+//    }
+
+
+
 }

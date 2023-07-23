@@ -1,7 +1,7 @@
 package com.ohgiraffers.adregamdi.review.command.application.dto;
 
 import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewPlaceNo;
-import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewWriterNo;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewWriter;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -21,6 +21,6 @@ public class ReviewDTO {
     private String imageFilePath;
     private String reviewContent;
     private Timestamp regDate;
-    private ReviewWriterNo reviewWriterNo;
+    private ReviewWriter reviewWriter;
     private ReviewPlaceNo reviewPlaceNo;
 }
