@@ -1,5 +1,6 @@
 package com.ohgiraffers.adregamdi.user.command.application.dto;
 
+import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.enumtype.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.Setter;
 public class UserDTO {
     private Long userNo;
     private String kakaoId;
+    private String kakaoProfileImage;
     private String kakaoNickName;
     private String serviceNickName;
     private String email;
@@ -23,10 +25,12 @@ public class UserDTO {
     private boolean blacklist_status;
     private String access_Token;
     private String refresh_Token;
+    private Role role;
 
-    public UserDTO(Long userNo, String kakaoId, String kakaoNickName, String serviceNickName, String email, String age, String gender, int report_count, int review_count, int grade, boolean blacklist_status) {
+    public UserDTO(Long userNo, String kakaoId, String kakaoProfileImage, String kakaoNickName, String serviceNickName, String email, String age, String gender, int report_count, int review_count, int grade, boolean blacklist_status, Role role) {
         this.userNo = userNo;
         this.kakaoId = kakaoId;
+        this.kakaoProfileImage = kakaoProfileImage;
         this.kakaoNickName = kakaoNickName;
         this.serviceNickName = serviceNickName;
         this.email = email;
@@ -36,5 +40,6 @@ public class UserDTO {
         this.review_count = review_count;
         this.grade = grade;
         this.blacklist_status = blacklist_status;
+        this.role = role;
     }
 }

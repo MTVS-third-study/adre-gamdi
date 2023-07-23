@@ -20,7 +20,7 @@ class ScheduleQueryServiceTest {
     @Autowired
     private ScheduleService scheduleService;
 
-    @DisplayName("userNo로 카테고리 조회 테스트")
+    @DisplayName("userNo로 내 일정 조회 테스트")
     @Test
     void loadMyScheduleList() {
 
