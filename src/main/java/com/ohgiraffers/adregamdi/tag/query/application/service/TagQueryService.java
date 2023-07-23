@@ -34,4 +34,9 @@ public class TagQueryService {
         }
         return tagName;
     }
+
+    public Long countTagByTagName(String tagName) {
+        Long tagCount = tagQueryRepository.countTagByTagName(tagName);
+        return tagCount;
+    }
 }
