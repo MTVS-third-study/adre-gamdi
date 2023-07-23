@@ -23,6 +23,7 @@ public class UserQueryService {
         return new UserDTO(
                 user.getUserNo(),
                 user.getKakaoId(),
+                user.getKakaoProfileImage(),
                 user.getKakaoNickName(),
                 user.getServiceNickName(),
                 user.getEmail(),
@@ -31,7 +32,30 @@ public class UserQueryService {
                 user.getReport_count(),
                 user.getReview_count(),
                 user.getGrade(),
-                user.isBlacklist_status()
+                user.isBlacklist_status(),
+                user.getRole()
+        );
+    }
+
+    public UserDTO findByUserNo(Long userNo) { // 유저 번호로 유저 조회
+        User user = userQueryRepository.findByUserNo(userNo);
+        if (user == null) {
+            return new UserDTO();
+        }
+        return new UserDTO(
+                user.getUserNo(),
+                user.getKakaoId(),
+                user.getKakaoProfileImage(),
+                user.getKakaoNickName(),
+                user.getServiceNickName(),
+                user.getEmail(),
+                user.getAge(),
+                user.getGender(),
+                user.getReport_count(),
+                user.getReview_count(),
+                user.getGrade(),
+                user.isBlacklist_status(),
+                user.getRole()
         );
     }
 }

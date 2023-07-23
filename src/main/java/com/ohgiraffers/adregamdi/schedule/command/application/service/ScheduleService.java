@@ -2,13 +2,19 @@ package com.ohgiraffers.adregamdi.schedule.command.application.service;
 
 import com.ohgiraffers.adregamdi.schedule.command.application.dto.ScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.entity.Schedule;
+import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.ScheduleDayVO;
+import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.ScheduleUserNoVO;
 import com.ohgiraffers.adregamdi.schedule.command.domain.repository.ScheduleRepository;
 import com.ohgiraffers.adregamdi.schedule.command.domain.service.ScheduleDomainService;
 import com.ohgiraffers.adregamdi.schedule.query.application.service.ScheduleQueryService;
+import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
+import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
 import com.ohgiraffers.adregamdi.user.query.application.service.UserQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class ScheduleService {
 
@@ -29,13 +35,27 @@ public class ScheduleService {
         this.userQueryService = userQueryService;
     }
 
-    public Schedule insertSchedule(ScheduleDTO scheduleDTO) {
-        Long userNo = userQueryService.findByKakaoId(scheduleDTO.getKakaoId()).getUserNo();
-        scheduleDTO.setUserNo(userNo);
-        ScheduleDTOEntityMapper dtoEntityMapper = new ScheduleDTOEntityMapper();
+    public ScheduleDTO insertSchedule(ScheduleDTO scheduleDTO) {
+        Schedule insertedSchedule = scheduleRepository.save(new Schedule(
+                new ScheduleUserNoVO(scheduleDTO.getUserNo()),
+                scheduleDTO.getScheduleName(),
+                new ScheduleDayVO(scheduleDTO.getStartDay(), scheduleDTO.getEndDay())
+        ));
 
-        Schedule schedule = dtoEntityMapper.scheduleDTOtoScedule(scheduleDTO);
+        return new ScheduleDTO(
+                insertedSchedule.getScheduleName(),
+                insertedSchedule.getScheduleUserNoVO().getUserNo(),
+                insertedSchedule.getScheduleDayVO().getStartDay(),
+                insertedSchedule.getScheduleDayVO().getEndDay(),
+                insertedSchedule.getScheduleDayVO().getDayAndNight()
+        );
+    }
 
-        return scheduleRepository.save(schedule);
+    public void updateSchedule(ScheduleDTO scheduleDTO) {
+
+    }
+
+    public void deleteSchedule(Long scheduleNo) {
+        scheduleRepository.deleteById(scheduleNo);
     }
 }

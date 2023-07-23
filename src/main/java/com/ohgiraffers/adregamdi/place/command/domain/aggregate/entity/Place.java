@@ -6,9 +6,8 @@ import lombok.*;
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@ToString
 @Table(name= "TBL_PLACE")
 public class Place {
 
@@ -58,6 +57,10 @@ public class Place {
     private double averageStarPoint;
     @Column
     private int reviewCount;
+
+    public Place(Long placeNo) {
+        this.placeNo = placeNo;
+    }
 
     public Place(String placeName, CategoryVO categoryVO, CityVO cityVO, DongVO dongVO, String introduction, String phoneNumber, CoordinateVO coordinateVO, String postCode, String placeAddress, String roadPlaceAddress, String imagePath, String thumbnailPath, double averageStarPoint, int reviewCount) {
         this.placeName = placeName;

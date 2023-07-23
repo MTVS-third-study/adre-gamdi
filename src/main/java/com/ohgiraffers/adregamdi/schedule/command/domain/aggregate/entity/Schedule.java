@@ -2,14 +2,18 @@ package com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.entity;
 
 import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.ScheduleDayVO;
 import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.ScheduleUserNoVO;
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 
-@Entity
-@NoArgsConstructor
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
+@Entity
 @Table(name = "TBL_SCHEDULE")
 public class Schedule {
 

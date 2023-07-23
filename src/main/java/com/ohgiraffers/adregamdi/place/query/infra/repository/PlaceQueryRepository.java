@@ -4,6 +4,5 @@ import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PlaceQueryRepository extends JpaRepository<Place, Long> {
-
-    Place findPlaceByPlaceNameAndRoadPlaceAddress(String placeName, String roadPlaceAddress);
+    Place findByPlaceNo(Long placeNo);
 }

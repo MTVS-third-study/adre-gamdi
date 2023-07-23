@@ -1,8 +1,6 @@
 package com.ohgiraffers.adregamdi.place.query.application.service;
 
-import com.ohgiraffers.adregamdi.place.query.application.dto.PlaceDTO;
-import com.ohgiraffers.adregamdi.place.query.domain.entity.SearchPlace;
-import com.ohgiraffers.adregamdi.place.query.domain.service.CategoryQueryService;
+import com.ohgiraffers.adregamdi.place.command.application.dto.PlaceDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -29,6 +27,5 @@ public class PlaceQueryServiceTests {
         );
 
     }
-
 
 }

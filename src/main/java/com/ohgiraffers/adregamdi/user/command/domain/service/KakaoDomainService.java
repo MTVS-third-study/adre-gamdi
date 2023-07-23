@@ -1,9 +1,9 @@
 package com.ohgiraffers.adregamdi.user.command.domain.service;
 
+import com.ohgiraffers.adregamdi.common.annotation.DomainService;
 import com.ohgiraffers.adregamdi.user.command.application.dto.KakaoUserDTO;
-import org.springframework.stereotype.Service;
 
-@Service
+@DomainService
 public interface KakaoDomainService {
 
     // 카카오 유저 정보 조회

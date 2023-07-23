@@ -31,11 +31,70 @@ body {
     margin: 0;
     overflow: hidden;
 }
+.scheduleSideBar{
+    width: 80px;
+}
+.BtnBox {
 
+
+    margin: 50px auto;
+    text-align: center;
+    z-index: 2;
+    display: block;
+}
+.BtnBox > div {
+    border: none;
+
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+.BtnBox > div > p {
+    font-size: 12px;
+}
+.BtnBox > div > img {
+    width: 30px;
+
+}
+.userImgBox{
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: aqua;
+    margin: 0 auto;
+    position: absolute;
+
+    bottom: -29px;
+
+    left: 20px;
+
+}
+.hideUserInfoBox{
+
+    display: none;
+    width: 100px;
+    height: 60px;
+    border-radius: 5px;
+    background-color: white;
+    text-align: center;
+    float: left;
+    border: 1px thin black;
+    line-height: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    position: absolute;
+    bottom: 61px;
+    left: 44px;
+    font-size: 12px;
+    cursor: pointer;
+
+}
+.hideUserInfoBox>.InfoBoxHr{
+    margin: 0;
+    border-bottom: 1px solid #818384;
+}
 .schedule-list {
 
     float: none;
-    width: 500px;
+    width: 400px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
 }
 
@@ -43,7 +102,12 @@ body {
     display: flex;
     flex: 1;
 }
+.add{
+    background-color: orange;
+    transition: all 1s;
 
+    margin: 0 auto;
+}
 .schedule-map {
     display: flex;
     flex: 1;
@@ -64,27 +128,7 @@ body {
 
 
 }
-.BtnBox {
 
-    width: 400px;
-    margin: 20px auto;
-    text-align: center;
-    z-index: 2;
-    display: block;
-}
-.BtnBox > button {
-    border: none;
-    background-color: transparent;
-    margin-right: 40px;
-    cursor: pointer;
-}
-.BtnBox > button > p {
-    font-size: 12px;
-}
-.BtnBox > button > img {
-    width: 20px;
-
-}
 
 /* 검색 */
 #menu_wrap {
@@ -135,11 +179,10 @@ body {
 
 }
 .placeList>li{
-    display: flex;
-    justify-content: space-around;
+
     margin: 30px 0;
 }
-.placeList>li>img{
+.placeList>li>.placeContents>img{
     width: 84px;
     height: 84px;
     border-radius: 5px;
@@ -149,7 +192,7 @@ body {
     width: 250px;
     height: 120px;
     line-height: 35px;
-
+    font-size: 14px;
 }
 .placeCategory{
     font-size: 7px;
@@ -158,6 +201,13 @@ body {
     width: 250px;
     font-size: 1em;
 
+}
+.placeContents{
+    display: flex;
+    justify-content: space-around;
+}
+.placeAddr{
+    font-size: 11px;
 }
 /* 일정 box */
 
@@ -251,9 +301,11 @@ body {
 
 hr {
     width: 100%;
-    border-bottom: 0px;
+    border: none;
+    border-bottom: 1px solid black;
     text-align: left;
     margin-left: 0px;
+    margin-top: 40px;
 }
 
 .navBar {
@@ -287,6 +339,14 @@ hr {
     margin-left: 80px;
     position: relative;
     top: -7px;
+}
+.infoContentsHr{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: left;
+    margin-left: 0px;
+    margin-top: 15px;
 }
 .addBtn {
     width: 200px;

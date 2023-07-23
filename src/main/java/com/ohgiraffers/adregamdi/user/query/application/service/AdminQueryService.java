@@ -12,15 +12,15 @@ import java.util.stream.Collectors;
 public class AdminQueryService {
     private final AdminRepository adminRepository;
 
-    public AdminQueryService(AdminRepository adminRepository){
-        this.adminRepository=adminRepository;
+    public AdminQueryService(AdminRepository adminRepository) {
+        this.adminRepository = adminRepository;
     }
 
-    public List<UserDTO> findAllUser(){
+    public List<UserDTO> findAllUser() {
 
-        List<User> user=    adminRepository.findAll();
-        List<UserDTO> userList=user.stream()
-                .map(m->new UserDTO(m.getUserNo(),m.getKakaoId(),m.getKakaoNickName(), m.getServiceNickName(),m.getEmail(),m.getAge(),m.getGender(),m.getReport_count(),m.getReview_count(),m.getGrade(),m.isBlacklist_status()))
+        List<User> user = adminRepository.findAll();
+        List<UserDTO> userList = user.stream()
+                .map(m -> new UserDTO(m.getUserNo(), m.getKakaoId(), m.getKakaoProfileImage(), m.getKakaoNickName(), m.getServiceNickName(), m.getEmail(), m.getAge(), m.getGender(), m.getReport_count(), m.getReview_count(), m.getGrade(), m.isBlacklist_status(), m.getRole()))
                 .collect(Collectors.toList());
         return userList;
     }
