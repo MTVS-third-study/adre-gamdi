@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface ReviewQueryRepository extends JpaRepository<Review, Integer> {
 
-    List<Review> findByReviewPlaceNo(ReviewPlaceNo placeNo);
+    List<Review> findAllByReviewPlaceNo(ReviewPlaceNo placeNo);
 }
