@@ -26,4 +26,15 @@ public class DongQueryService {
                 result.getDongName()
         );
     }
+
+    public DongDTO findDongByDongNo(int dongNo) {
+        Dong result = dongQueryRepository.findDongByDongNo(dongNo);
+        if (result == null) {
+            return new DongDTO();
+        }
+        return new DongDTO(
+                result.getDongNo(),
+                result.getDongName()
+        );
+    }
 }

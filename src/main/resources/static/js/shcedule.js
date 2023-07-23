@@ -1,4 +1,4 @@
-//reviwpsge
+// 설명. reviwpage
 let infoNav = document.getElementById("infoNav");
 let reviewNav = document.getElementById("reviewNav");
 let infoContents = document.getElementsByClassName("infoContents");
@@ -16,7 +16,7 @@ reviewNav.addEventListener("click", () => {
     imgBox[0].style.display="none"
 });
 
-// 지도 사이드바 설정 js
+// 설명. 지도 사이드바 설정 js
 let menuWrap = document.getElementById("menu_wrap");
 let dayWrap = document.getElementById("day_wrap");
 let infoWrap = document.getElementById("info_wrap");
@@ -58,9 +58,9 @@ imgBtn.addEventListener("click", () => {
 
 });
 
-// 상세페이지
+// 설명. 상세페이지
 let scheduleAdd = document.getElementsByClassName("scheduleAdd");
-let placeItme=document.getElementsByClassName("placeItem")
+let placeItem=document.getElementsByClassName("placeItem")
 let placeList=document.querySelectorAll("#placeList>li")
 scheduleAdd[0].addEventListener("click", () => {
     dayWrap.style.display = "block";
@@ -71,11 +71,18 @@ scheduleAdd[0].addEventListener("click", () => {
 
 for(let i=0 ;i<placeList.length ;i++){
 
-    placeItme[i].addEventListener("click",()=>{
+    placeItem[i].addEventListener("click",()=>{
+        let placeNo = placeList[i].querySelector("#placeNo").innerText;
 
-        fetch('/placeQuery/placeInfo')
-            .then((response) => response.json())
-            .then((json) => console.log(json));
+        fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
+            .then( response => response.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("예기치 못한 오류가 발생했습니다.");
+            })
         infoWrap.style.display = "block";
         menuWrap.style.display = "none";
         dayWrap.style.display = "none";
@@ -84,9 +91,7 @@ for(let i=0 ;i<placeList.length ;i++){
 
 }
 
-// Btnmouseover
-
-
+// 설명. Btnmouseover
 homeBtn.addEventListener("mouseover",()=>{
     homeBtn.classList.add('add')
 })
@@ -107,7 +112,7 @@ imgBtn.addEventListener("mouseover",()=>{
 imgBtn.addEventListener("mouseleave",()=>{
     imgBtn.classList.remove('add')
 })
-// userInfoBox
+// 설명. userInfoBox
 
 let userImgBox=document.getElementsByClassName("userImgBox")
 let hideUserInfoBox=document.getElementsByClassName("hideUserInfoBox")

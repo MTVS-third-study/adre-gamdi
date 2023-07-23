@@ -1,15 +1,13 @@
-package com.ohgiraffers.adregamdi.data.command.application.dto;
+package com.ohgiraffers.adregamdi.tag.command.application.dto;
 
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class TagDataDTO {
+public class TagDTO {
     private Long tagNo;
     private String tagName;
 }

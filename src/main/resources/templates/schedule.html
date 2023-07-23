@@ -56,14 +56,13 @@
     </div>
     <div class="schedule-list" id="schedule_wrap">
         <!-- <a href="/#"><img src="images/logo.png" style="height: 60px; width: 60px"/></a> -->
-        <!-- 검색 box -->
 
+        <!-- 설명. 검색 box -->
         <div class="option">
             <div>
                 <form action="/placeQuery/searchPlace" class="searchBox">
                     <input type="text" placeholder="검색어를 입력해주세요" class="keyword" name="searchKeyword" method="GET"/>
                     <button class="searchKeyword" type="button"><img src="/images/search.png" alt=""></button>
-
                 </form>
 <!--                                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
             </div>
@@ -75,7 +74,7 @@
                 <li th:each="place:${placeList}" class="placeItem">
                     <div class="placeContents">
                     <div class="placeInfo">
-                        <p th:text="${place.getPlaceNo()}" style="display: none"></p>
+                        <p th:text="${place.getPlaceNo()}" id="placeNo" style="display: none"></p>
                         <h4 th:text="${place.getPlaceName()}"></h4>
                         <p th:text="${place.getCategoryName()}"></p>
                         <span th:text="${place.getPlaceAddress()}" class="placeAddr"></span><br>
@@ -94,7 +93,7 @@
         </div>
 
 
-        <!-- 일정 box-->
+        <!-- 설명. 일정 box-->
         <div id="day_wrap" class="bg_white day_wrap">
 
 

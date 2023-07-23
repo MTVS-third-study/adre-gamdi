@@ -1,6 +1,6 @@
 package com.ohgiraffers.adregamdi.tag.query.application.service;
 
-import com.ohgiraffers.adregamdi.data.command.application.dto.TagDataDTO;
+import com.ohgiraffers.adregamdi.tag.command.application.dto.TagDTO;
 import com.ohgiraffers.adregamdi.tag.query.infra.repository.TagQueryRepository;
 import com.ohgiraffers.adregamdi.tag.command.domain.aggregate.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +16,22 @@ public class TagQueryService {
         this.tagQueryRepository = tagQueryRepository;
     }
 
-    public TagDataDTO findTagByTagName(String tagName) {
+    public TagDTO findTagByTagName(String tagName) {
         Tag result = tagQueryRepository.findByTagName(tagName);
         if (result == null) {
-            return null;
+            return new TagDTO();
         }
-        return new TagDataDTO(
+        return new TagDTO(
                 result.getTagNo(),
                 result.getTagName()
         );
+    }
+
+    public String findTagNameByTagNo(Long tagNo) {
+        String tagName = tagQueryRepository.findTagNameByTagNo(tagNo);
+        if (tagName == null) {
+            tagName ="";
+        }
+        return tagName;
     }
 }
