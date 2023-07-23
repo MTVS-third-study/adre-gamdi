@@ -3,13 +3,16 @@ package com.ohgiraffers.adregamdi.user.command.application.service;
 import com.ohgiraffers.adregamdi.user.command.application.dto.KakaoUserDTO;
 import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
 import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
+import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.enumtype.Role;
 import com.ohgiraffers.adregamdi.user.command.domain.repository.UserRepository;
 import com.ohgiraffers.adregamdi.user.command.domain.service.KakaoDomainService;
 import com.ohgiraffers.adregamdi.user.command.domain.service.UserDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class OAuthService {
     private final UserDomainService userDomainService;
     private final KakaoDomainService kakaoDomainService;
@@ -34,20 +37,22 @@ public class OAuthService {
         UserDTO findUserInfo = userDomainService.findByKakaoId(kakaoInfo.getKakaoId());
 
         if (findUserInfo.getUserNo() == null) { // 카카오에서 조회한 유저가 DB에 없다면 회원가입
-            userInfo = userRepository.save(User.builder()
-                    .kakaoId(kakaoInfo.getKakaoId())
-                    .kakaoNickName(kakaoInfo.getKakaoNickName())
-                    .serviceNickName("")
-                    .email(kakaoInfo.getEmail())
-                    .age(kakaoInfo.getAge())
-                    .gender(kakaoInfo.getGender())
-                    .report_count(0)
-                    .review_count(0)
-                    .grade(1)
-                    .blacklist_status(false)
-                    .build());
+            userInfo = userRepository.save(new User(
+                    kakaoInfo.getKakaoId(),
+                    kakaoInfo.getKakaoProfileImage(),
+                    kakaoInfo.getKakaoNickName(),
+                    "",
+                    kakaoInfo.getEmail(),
+                    kakaoInfo.getAge(),
+                    kakaoInfo.getGender(),
+                    0,
+                    0,
+                    1,
+                    false,
+                    Role.USER));
             findUserInfo.setUserNo(userInfo.getUserNo());
             findUserInfo.setKakaoId(userInfo.getKakaoId());
+            findUserInfo.setKakaoProfileImage(userInfo.getKakaoProfileImage());
             findUserInfo.setKakaoNickName(userInfo.getKakaoNickName());
             findUserInfo.setServiceNickName(userInfo.getServiceNickName());
             findUserInfo.setEmail(userInfo.getEmail());
@@ -57,6 +62,7 @@ public class OAuthService {
             findUserInfo.setReview_count(userInfo.getReview_count());
             findUserInfo.setGrade(userInfo.getGrade());
             findUserInfo.setBlacklist_status(userInfo.isBlacklist_status());
+            findUserInfo.setRole(userInfo.getRole());
         }
         findUserInfo.setAccess_Token(kakaoInfo.getAccess_Token());
         findUserInfo.setRefresh_Token(kakaoInfo.getRefresh_Token());
@@ -67,5 +73,4 @@ public class OAuthService {
     public Long kakaoLogout(String token) {
         return kakaoDomainService.logout(token);
     }
-
 }

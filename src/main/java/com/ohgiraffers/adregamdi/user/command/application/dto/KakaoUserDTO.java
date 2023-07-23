@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class KakaoUserDTO {
     private String kakaoId;
+    private String kakaoProfileImage;
     private String kakaoNickName;
     private String email;
     private String age;
