@@ -23,7 +23,7 @@ public class CategoryQueryService {
     public CategoryDTO findCategoryByCategoryName(String categoryName) {
         Category findedCategory = categoryQueryRepository.findCategoryByCategoryName(categoryName);
         if (findedCategory == null) {
-            return new CategoryDTO(0,"");
+            return new CategoryDTO();
         }
         return new CategoryDTO(
                 findedCategory.getCategoryNo(),
@@ -31,10 +31,23 @@ public class CategoryQueryService {
                 );
     }
 
-    public String findCategoryNameByCategoryNo(int categoryNo){
-        String categoryName = placeMapper.findCategoryNameByCategoryNo(categoryNo);
-        return categoryName;
+    public CategoryDTO findCategoryByCategoryNo(int categoryNo) {
+        Category category = categoryQueryRepository.findCategoryByCategoryNo(categoryNo);
+        if (category == null) {
+            return new CategoryDTO();
+        }
+        return new CategoryDTO(
+                category.getCategoryNo(),
+                category.getCategoryName()
+        );
     }
 
+    public String findCategoryNameByCategoryNo(int categoryNo){
+        String categoryName = placeMapper.findCategoryNameByCategoryNo(categoryNo);
+        if (categoryName == null) {
+            return "-";
+        }
+        return categoryName;
+    }
 
 }

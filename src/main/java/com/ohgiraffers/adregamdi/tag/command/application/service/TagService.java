@@ -1,6 +1,6 @@
 package com.ohgiraffers.adregamdi.tag.command.application.service;
 
-import com.ohgiraffers.adregamdi.data.command.application.dto.TagDataDTO;
+import com.ohgiraffers.adregamdi.tag.command.application.dto.TagDTO;
 import com.ohgiraffers.adregamdi.tag.command.domain.repository.TagRepository;
 import com.ohgiraffers.adregamdi.tag.command.domain.aggregate.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,10 @@ public class TagService {
         this.tagRepository = tagRepository;
     }
 
-    public TagDataDTO insertTag(String tagName) {
+    public TagDTO insertTag(String tagName) {
         Tag insertedTag = tagRepository.save(new Tag());
 
-        return new TagDataDTO(
+        return new TagDTO(
                 insertedTag.getTagNo(),
                 insertedTag.getTagName()
         );

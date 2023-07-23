@@ -10,8 +10,8 @@ import com.ohgiraffers.adregamdi.cityanddong.command.application.service.DongSer
 import com.ohgiraffers.adregamdi.cityanddong.query.application.service.CityQueryService;
 import com.ohgiraffers.adregamdi.cityanddong.query.application.service.DongQueryService;
 import com.ohgiraffers.adregamdi.data.command.application.dto.DataDTO;
-import com.ohgiraffers.adregamdi.data.command.application.dto.PlaceTagsDataDTO;
-import com.ohgiraffers.adregamdi.data.command.application.dto.TagDataDTO;
+import com.ohgiraffers.adregamdi.place.command.application.dto.PlaceTagsDTO;
+import com.ohgiraffers.adregamdi.tag.command.application.dto.TagDTO;
 import com.ohgiraffers.adregamdi.data.command.domain.service.DataAPIService;
 import com.ohgiraffers.adregamdi.place.command.application.service.PlaceService;
 import com.ohgiraffers.adregamdi.place.command.application.service.PlaceTagsService;
@@ -94,17 +94,17 @@ public class DataInfraAPIService implements DataAPIService {
     }
 
     @Override
-    public TagDataDTO findTagByTagName(String tagName) {
+    public TagDTO findTagByTagName(String tagName) {
         return tagQueryService.findTagByTagName(tagName);
     }
 
     @Override
-    public TagDataDTO insertTag(String tagName) {
+    public TagDTO insertTag(String tagName) {
         return tagService.insertTag(tagName);
     }
 
     @Override
-    public Long insertPlaceAndTags(PlaceTagsDataDTO placeTagsDataDTO) {
-        return placeTagsService.insertPlaceAndTags(placeTagsDataDTO);
+    public Long insertPlaceAndTags(PlaceTagsDTO placeTagsDTO) {
+        return placeTagsService.insertPlaceAndTags(placeTagsDTO);
     }
 }
