@@ -1,6 +1,6 @@
 package com.ohgiraffers.adregamdi.place.command.application.service;
 
-import com.ohgiraffers.adregamdi.data.command.application.dto.PlaceTagsDataDTO;
+import com.ohgiraffers.adregamdi.place.command.application.dto.PlaceTagsDTO;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.Place;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.PlaceTags;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.TagVO;
@@ -17,10 +17,10 @@ public class PlaceTagsService {
     public PlaceTagsService(PlaceTagsRepository placeTagsRepository) {
         this.placeTagsRepository = placeTagsRepository;
     }
-    public Long insertPlaceAndTags(PlaceTagsDataDTO placeTagsDataDTO) {
+    public Long insertPlaceAndTags(PlaceTagsDTO placeTagsDTO) {
         PlaceTags result = placeTagsRepository.save(new PlaceTags(
-                new Place(placeTagsDataDTO.getPlaceNo()),
-                new TagVO(placeTagsDataDTO.getTagNo())
+                new Place(placeTagsDTO.getPlaceNo()),
+                new TagVO(placeTagsDTO.getTagNo())
         ));
         return result.getPlaceTagsNo();
     }

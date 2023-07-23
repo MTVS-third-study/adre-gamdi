@@ -18,7 +18,19 @@ public class CityQueryService {
 
         City result = cityQueryRepository.findCityByCityName(cityName);
         if (result == null) {
-            return new CityDTO(0, "");
+            return new CityDTO();
+        }
+        return new CityDTO(
+                result.getCityNo(),
+                result.getCityName()
+        );
+    }
+
+    public CityDTO findCityByCityNo(int cityNo) {
+
+        City result = cityQueryRepository.findCityByCityNo(cityNo);
+        if (result == null) {
+            return new CityDTO();
         }
         return new CityDTO(
                 result.getCityNo(),

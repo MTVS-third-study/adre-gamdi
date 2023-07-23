@@ -1,13 +1,11 @@
 package com.ohgiraffers.adregamdi.data.command.application.service;
 
 import com.ohgiraffers.adregamdi.category.command.application.dto.CategoryDTO;
-import com.ohgiraffers.adregamdi.category.command.application.service.CategoryService;
 import com.ohgiraffers.adregamdi.cityanddong.command.application.dto.CityDTO;
 import com.ohgiraffers.adregamdi.cityanddong.command.application.dto.DongDTO;
-import com.ohgiraffers.adregamdi.cityanddong.command.application.service.CityService;
 import com.ohgiraffers.adregamdi.data.command.application.dto.DataDTO;
-import com.ohgiraffers.adregamdi.data.command.application.dto.PlaceTagsDataDTO;
-import com.ohgiraffers.adregamdi.data.command.application.dto.TagDataDTO;
+import com.ohgiraffers.adregamdi.place.command.application.dto.PlaceTagsDTO;
+import com.ohgiraffers.adregamdi.tag.command.application.dto.TagDTO;
 import com.ohgiraffers.adregamdi.data.command.domain.service.DataAPIService;
 import com.ohgiraffers.adregamdi.data.command.domain.service.DataDomainService;
 import org.json.simple.JSONArray;
@@ -88,7 +86,7 @@ public class DataService {
                         Long insertedPlaceNo = insertPlace(dataDTO);
 
                         List<String> tagList = dataDomainService.parseAllTagsWithValidCheck(item); // 한 장소의 태그들
-                        List<TagDataDTO> insertTagResultList = tagList.stream().distinct().map(m -> insertTag(m)).collect(Collectors.toList()); // 태그 insert 결과 객체를 리스트로 저장
+                        List<TagDTO> insertTagResultList = tagList.stream().distinct().map(m -> insertTag(m)).collect(Collectors.toList()); // 태그 insert 결과 객체를 리스트로 저장
                         insertTagResultList.stream().forEach(t -> insertPlaceAndTags(
                                 insertedPlaceNo,
                                 t.getTagNo()
@@ -139,18 +137,18 @@ public class DataService {
         return insertedPlaceNo;
     }
 
-    public TagDataDTO insertTag(String tagName) { // 중복 제외 태그 insert
+    public TagDTO insertTag(String tagName) { // 중복 제외 태그 insert
 
-        TagDataDTO findResult = dataAPIService.findTagByTagName(tagName);
+        TagDTO findResult = dataAPIService.findTagByTagName(tagName);
         if (findResult != null) {
             return findResult;
         }
-        TagDataDTO insertedTag = dataAPIService.insertTag(tagName);
+        TagDTO insertedTag = dataAPIService.insertTag(tagName);
         return insertedTag;
     }
 
     public Long insertPlaceAndTags(Long placeNo, Long tagNo) {
-        return dataAPIService.insertPlaceAndTags(new PlaceTagsDataDTO(placeNo, tagNo));
+        return dataAPIService.insertPlaceAndTags(new PlaceTagsDTO(placeNo, tagNo));
     }
 
 }

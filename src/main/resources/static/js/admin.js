@@ -21,3 +21,14 @@ reportBtn.addEventListener("click", () => {
     blackList.style.display = "none";
     reportList.style.display = "block";
 });
+
+let menuListItem=document.querySelectorAll("#menuList>div");
+for(let i=0;i<menuListItem.length;i++){
+    console.log(menuListItem[i]);
+    menuListItem[i].addEventListener("mouseover",()=>{
+        menuListItem[i].classList.add("on")
+    })
+    menuListItem[i].addEventListener("mouseleave",()=>{
+        menuListItem[i].classList.remove("on")
+    }  )
+}

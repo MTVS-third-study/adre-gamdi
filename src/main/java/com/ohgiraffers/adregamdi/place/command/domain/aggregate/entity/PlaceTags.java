@@ -18,6 +18,7 @@ public class PlaceTags {
     private Long placeTagsNo;
 
     @ManyToOne
+    @JoinColumn(name = "place_no")
     private Place place;
 
     @Embedded
