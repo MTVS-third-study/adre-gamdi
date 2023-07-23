@@ -1,15 +1,14 @@
 package com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity;
 
-import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.PlaceVO;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.TagVO;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "TBL_PLACETAGS")
 public class PlaceTags {
@@ -19,14 +18,15 @@ public class PlaceTags {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long placeTagsNo;
 
-    @Embedded
-    private PlaceVO placeVO;
+    @ManyToOne
+    @JoinColumn(name = "place_no")
+    private Place place;
 
     @Embedded
     private TagVO tagVO;
 
-    public PlaceTags(PlaceVO placeVO, TagVO tagVO) {
-        this.placeVO = placeVO;
+    public PlaceTags(Place place, TagVO tagVO) {
+        this.place = place;
         this.tagVO = tagVO;
     }
 }

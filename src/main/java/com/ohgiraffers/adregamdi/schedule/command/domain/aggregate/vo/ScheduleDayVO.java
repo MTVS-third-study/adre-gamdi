@@ -18,7 +18,7 @@ public class ScheduleDayVO {
     private String endDay;
 
     @Column
-    private Long dayAndNight;    // 필기. 몇박몇일
+    private String dayAndNight;    // 필기. 몇박몇일
 
     public ScheduleDayVO() {
     }
@@ -29,7 +29,7 @@ public class ScheduleDayVO {
         this.dayAndNight = getDayAndNight(startDay,endDay);
     }
 
-    private Long getDayAndNight(String startDay, String endDay) {
+    private String getDayAndNight(String startDay, String endDay) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date format1 = null;
@@ -44,7 +44,7 @@ public class ScheduleDayVO {
         long diffSec = (format2.getTime() - format1.getTime()) / 1000;
         long diffDay = diffSec / (24*60*60);
 
-        return diffDay;
+        return String.valueOf(diffDay);
     }
 
 }

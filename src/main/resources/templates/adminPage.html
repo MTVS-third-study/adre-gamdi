@@ -1,174 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/admin.css">
 </head>
+
 <body>
-
-    <div class="UpperBar">
-
-        <img class="logo" src="/images/goodlogo.png">
-
-        <img class="siteName" src="/images/Adregamdi.png">
-
-        <a href="placeReviews">장소리뷰 페이지</a>
-
-        <div class="loginBox">
-            <th:block th:if="${session.loginUser == null}">
-
-                <div class="loginBtn">
-                    <button class="upperBtn" id="loginBtn" type="button">로그인</button>
-                </div>
-
-            </th:block>
-            <th:block th:if="${session.loginUser != null}">
-                <div class="myPageBtn">
-                    <button class="upperBtn" onclick="location.href='/myPage'" type="button">마이 페이지</button>
-                </div>
-                <div class="adminPageBtn">
-                    <button class="upperBtn" onclick="location.href='/adminPage'" type="button">관리자 페이지</button>
-                </div>
-                <div class="logoutBtn">
-                    <button class="upperBtn"
-                            onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:8080/oauth/kakao/logout'"
-                            type="button">
-                        로그아웃
-                    </button>
-                </div>
-            </th:block>
-        </div>
-    </div>
 
 <main>
     <div class="sideMenu">
         <div>
-            <ul class="menuList">
-                <div  id="userBtn"><li id="user">전체회원</li></div>
-                <div id="blackBtn"> <li id="black">블랙리스트</li></div>
-                <div  id="reportBtn"> <li id="report">신고리스트</li></div>
+            <div id="adminBtn">
+                <img src="/images/logo.png" alt=""><li id="admin">Admin</li>
+            </div>
+            <ul class="menuList" id="menuList">
+                <div id="userBtn" >
+                    <li id="user" >UserList</li>
+                </div>
+                <div id="blackBtn">
+                    <li id="black">BlackList</li>
+                </div>
+                <div id="reportBtn">
+                    <li id="report">Report</li>
+                </div>
             </ul>
         </div>
     </div>
     <div class="contents">
-        <div class="userList" id="userList">
-            <h3>전체 회원</h3>
-            <div>
-                <table>
-                    <thead>
-                    <tr>
 
-                        <th>userNo</th>
-                        <th>ID</th>
-                        <th>kakaoNickName</th>
-                        <th>serviceNickName</th>
-                        <th>email</th>
-                        <th>age</th>
-                        <th>gender</th>
-                        <th>report_count</th>
-                        <th>review_count</th>
-                        <th>grade</th>
-                        <th>blackList_Status</th>
-                    </tr>
-                    </thead>
+        <div class="contentsWrap">
 
-                    <tr th:each="user:${userList}">
+            <div class="userList" id="userList">
+                <div class="tableHeader"><p><img src="/images/list.png" alt=""><span>User List</span></p></div>
+
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>userNo</th>
+                            <th>ID</th>
+                            <th>kakaoNickName</th>
+                            <th>serviceNickName</th>
+                            <th>email</th>
+                            <th>age</th>
+                            <th>gender</th>
+                            <th>report_count</th>
+                            <th>review_count</th>
+                            <th>grade</th>
+                            <th>blackList_Status</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="user:${userList}">
 
 
-                        <th th:text="${user.userNo}"/>
-                        <th th:text="${user.kakaoId}"/>
-                        <td th:text="${user.kakaoNickName}"/>
-                        <td th:text="${user.serviceNickName}"/>
-                        <td th:text="${user.email}"/>
-                        <td th:text="${user.age}"/>
-                        <td th:text="${user.gender}"/>
-                        <td th:text="${user.report_count}"/>
-                        <td th:text="${user.review_count}"/>
-                        <td th:text="${user.grade}"/>
-                        <td th:text="${user.blacklist_status}"/>
-                    </tr>
-                    </tbody><tbody>
+                            <th th:text="${user.userNo}"/>
+                            <th th:text="${user.kakaoId}"/>
+                            <td th:text="${user.kakaoNickName}"/>
+                            <td th:text="${user.serviceNickName}"/>
+                            <td th:text="${user.email}"/>
+                            <td th:text="${user.age}"/>
+                            <td th:text="${user.gender}"/>
+                            <td th:text="${user.report_count}"/>
+                            <td th:text="${user.review_count}"/>
+                            <td th:text="${user.grade}"/>
+                            <td th:text="${user.blacklist_status}"/>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                </table>
-
+                </div>
             </div>
-        </div>
-        <div class="blackList" id="blackList">
-            <h3>블랙리스트</h3>
-            <div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th class="pin"> </th>
-                        <th>userNo</th>
-                        <th>ID</th>
-                        <th>kakaoNickName</th>
-                        <th>serviceNickName</th>
-                        <th>email</th>
-                        <th>age</th>
-                        <th>gender</th>
-                        <th>report_count</th>
-                        <th>review_count</th>
-                        <th>grade</th>
-                        <th>blackList_Status</th>
+            <div class="blackList" id="blackList">
+                <div class="tableHeader"><p><img src="/images/list.png" alt=""><span>Black List</span></p></div>
 
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>userNo</th>
+                            <th>ID</th>
+                            <th>kakaoNickName</th>
+                            <th>serviceNickName</th>
+                            <th>email</th>
+                            <th>age</th>
+                            <th>gender</th>
+                            <th>report_count</th>
+                            <th>review_count</th>
+                            <th>grade</th>
+                            <th>blackList_Status</th>
+                        </tr>
+                        </thead>
 
-                    </tr>
-                    </thead>
+                        <tbody>
+                        <tr>
+                            <th>Row Header</th>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                        </tr>
+                        <tr>
+                            <th>Row Header</th>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                    <tbody>
-                    <tr>
-                        <th>Row Header</th>
-                        <td>Cell Data</td>
-                        <td>Cell Data</td>
-                        <td>Cell Data</td>
-                        <td>Cell Data</td>
-                        <td>Cell Data</td>
-                        <td>Cell Data</td>
-                    </tr>
-                    <tr>
-                        <th>Row Header</th>
-                        <td>Cell Data</td>
-                        <td>Cell Data</td>
-                        <td>Cell Data</td>
-                        <td>Cell Data</td>
-                        <td>Cell Data</td>
-                        <td>Cell Data</td>
-                    </tr>
-                    </tbody>
-                </table>
-
+                </div>
             </div>
-        </div>
-        <div class="reportList" id="reportList">
-            <h3>신고 내역</h3>
-            <div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th class="pin"> </th>
-                        <th>Col Header</th>
-                        <th>Col Header</th>
-                        <th>Col Header</th>
-                        <th>Col Header</th>
-                        <th>Col Header</th>
-                        <th>Col Header</th>
-                    </tr>
-                    </thead>
+            <div class="reportList" id="reportList">
+                <div class="tableHeader"><p><img src="/images/list.png" alt=""><span>Report</span></p></div>
 
-                    <tbody>
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>userNo</th>
+                            <th>ID</th>
+                            <th>kakaoNickName</th>
+                            <th>serviceNickName</th>
+                            <th>email</th>
+                            <th>age</th>
+                            <th>gender</th>
+                            <th>report_count</th>
+                            <th>review_count</th>
+                            <th>grade</th>
+                            <th>blackList_Status</th>
+                        </tr>
+                        </thead>
 
-                    </tbody>
-                </table>
+                        <tbody>
+                        <tr>
+                            <th>Row Header</th>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                        </tr>
+                        <tr>
+                            <th>Row Header</th>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                            <td>Cell Data</td>
+                        </tr>
+                        </tbody>
+                    </table>
 
+                </div>
             </div>
         </div>
     </div>
-
     </div>
 </main>
 <script defer src="/js/admin.js"></script>
 </body>
+
 </html>
