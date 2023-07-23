@@ -20,7 +20,7 @@ public class MainController {
 
     @GetMapping("myPage")
     public String goMyPage() {
-        return "user/myPage";
+        return "myPage";
     }
 
 
