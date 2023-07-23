@@ -1,13 +1,14 @@
 package com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity;
 
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.TagVO;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "TBL_PLACETAGS")
 public class PlaceTags {
