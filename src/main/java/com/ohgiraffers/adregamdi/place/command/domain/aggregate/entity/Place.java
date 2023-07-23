@@ -1,14 +1,12 @@
 package com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity;
 
-import com.ohgiraffers.adregamdi.cityanddong.command.domain.aggregate.entity.City;
-import com.ohgiraffers.adregamdi.cityanddong.command.domain.aggregate.entity.Dong;
 import com.ohgiraffers.adregamdi.place.command.domain.aggregate.vo.*;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name= "TBL_PLACE")
 public class Place {

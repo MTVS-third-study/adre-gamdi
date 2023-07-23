@@ -18,7 +18,9 @@ public class CityService {
 
     public CityDTO insertCity(String cityName) {
         City insertedCity = cityRepository.save(new City(cityName));
-
+        if (insertedCity == null) {
+            return new CityDTO();
+        }
         return new CityDTO(
             insertedCity.getCityNo(),
             insertedCity.getCityName()
