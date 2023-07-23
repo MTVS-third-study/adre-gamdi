@@ -77,7 +77,7 @@ for(let i=0 ;i<placeList.length ;i++){
         fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
             .then( response => response.json())
             .then((data) => {
-
+                console.log(data)
                 let detailPlaceInfo=data.detailPlaceInfo;
 
             let placeName=document.getElementById("placeName")
@@ -88,7 +88,8 @@ for(let i=0 ;i<placeList.length ;i++){
                 let introduction=document.getElementById("introduction")
 
            placeName.innerText=detailPlaceInfo.placeName;
-
+    let placeLIst=document.querySelectorAll("#placeList>li")
+                placeLIst.length
             // categoryName.innerText=detailPlaceInfo.categoryName;
             phoneNumber.innerText=detailPlaceInfo.phoneNumber;
             placeAddress.innerText=detailPlaceInfo.placeAddress;
@@ -112,6 +113,41 @@ for(let i=0 ;i<placeList.length ;i++){
         option[0].style.display="none";
     })
 }
+//검색 비동기
+let searchBox=document.getElementById("searchBox")
+let searchKeyword=document.getElementById("searchKeyword1")
+let keyword = document.querySelector(".keyword")
+let keywordValue='';
+keyword.addEventListener("keyup",(e)=>{
+
+       keywordValue=JSON.stringify(keyword.value);
+        if(e.keyCode===13){
+            console.log(typeof(keywordValue))
+            fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
+                .then( response => response.json())
+                .then((data) => {
+                    console.log(data)
+
+                }).catch(error=>{
+                console.log(error)
+            })
+        }
+})
+searchKeyword.addEventListener("click",()=>{
+
+    fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
+        .then( response => response.json())
+        .then((data) => {
+            console.log(data)
+
+        }).catch(error=>{
+            console.log(error)
+    })
+})
+
+
+
+
 
 // 설명. Btnmouseover
 homeBtn.addEventListener("mouseover",()=>{
