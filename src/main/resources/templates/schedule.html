@@ -60,10 +60,10 @@
         <!-- 설명. 검색 box -->
         <div class="option">
             <div>
-                <form action="/placeQuery/searchPlace" class="searchBox">
+                <div  class="searchBox" id="searchBox">
                     <input type="text" placeholder="검색어를 입력해주세요" class="keyword" name="searchKeyword" method="GET"/>
-                    <button class="searchKeyword" type="submit"><img src="/images/search.png" alt=""></button>
-                </form>
+                    <button class="searchKeyword" id="searchKeyword1" type="submit"><img src="/images/search.png" alt=""></button>
+                </div>
 <!--                                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
             </div>
 
@@ -71,19 +71,19 @@
         <div id="menu_wrap" class="bg_white menu_wrap">
             <hr />
             <ul class="placeList" id="placeList" >
-                <li th:each="place:${placeList}" class="placeItem">
-                    <div class="placeContents">
-                    <div class="placeInfo">
-                        <p th:text="${place.getPlaceNo()}" id="placeNo" style="display: none"></p>
-                        <h4 th:text="${place.getPlaceName()}"></h4>
-                        <p th:text="${place.getCategoryName()}"></p>
-                        <span th:text="${place.getPlaceAddress()}" class="placeAddr"></span><br>
-                        <span th:text="${place.getPhoneNumber()}"></span>
-                    </div>
-                    <img th:src="${place.thumbnailPath}" alt="">
-                    </div>
-                <hr>
-                </li>
+<!--                <li th:each="place:${placeList}" class="placeItem">-->
+<!--                    <div class="placeContents">-->
+<!--                    <div class="placeInfo">-->
+<!--                        <p th:text="${place.getPlaceNo()}" id="placeNo" style="display: none"></p>-->
+<!--                        <h4 th:text="${place.getPlaceName()}"></h4>-->
+<!--                        <p th:text="${place.getCategoryName()}"></p>-->
+<!--                        <span th:text="${place.getPlaceAddress()}" class="placeAddr"></span><br>-->
+<!--                        <span th:text="${place.getPhoneNumber()}"></span>-->
+<!--                    </div>-->
+<!--                    <img th:src="${place.thumbnailPath}" alt="">-->
+<!--                    </div>-->
+<!--                <hr>-->
+<!--                </li>-->
             </ul>
             <div >
                 <span>1</span>
