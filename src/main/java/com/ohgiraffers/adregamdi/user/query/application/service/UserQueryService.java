@@ -45,6 +45,7 @@ public class UserQueryService {
         return new UserDTO(
                 user.getUserNo(),
                 user.getKakaoId(),
+                user.getKakaoProfileImage(),
                 user.getKakaoNickName(),
                 user.getServiceNickName(),
                 user.getEmail(),
@@ -53,7 +54,8 @@ public class UserQueryService {
                 user.getReport_count(),
                 user.getReview_count(),
                 user.getGrade(),
-                user.isBlacklist_status()
+                user.isBlacklist_status(),
+                user.getRole()
         );
     }
 }
