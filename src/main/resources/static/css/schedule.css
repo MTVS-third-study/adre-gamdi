@@ -175,9 +175,6 @@ body {
     border-radius: 5px;
 }
 
-.placeList::-webkit-scrollbar-track {
-
-}
 .placeList>li{
 
     margin: 30px 0;
@@ -215,7 +212,7 @@ body {
     display:none;
 }
 .scheduleBox{
-    width: 500px;
+    width: 400px;
 }
 .selectBox{
     width: 400px;
@@ -235,17 +232,31 @@ body {
     left: 73px;
 
 }
+.calendar{
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    border-radius: 16px;
+    z-index: 4;
+    width: 240px;
+    height: 40px;
+
+    font-weight: bold;
+    text-align: center;
+    font-size: 11px;
+    margin-left: 10px;
+}
 .daySelect {
     border: none;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
     border-radius: 16px;
     z-index: 4;
-    width: 200px;
+    width: 100px;
     height: 40px;
-    padding: 11px 50px 11px 30px;
+    padding: 0 0 0 10px;
     font-weight: bold;
     text-align: center;
-    margin: 30px auto;
+    margin-top: 20px;
+    margin-left: 10px;
 }
 .daySelect>option{
     text-align: left;
@@ -255,6 +266,15 @@ body {
     height: 70vh;
     overflow-y: scroll;
 }
+.dayList::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+}
+
+.dayList::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
+}
+
 .dayList>li{
     display: flex;
     justify-content: space-around;
@@ -287,8 +307,8 @@ body {
 }
 /* 상세 box */
 
-.imgBox > img {
-    width: 100%;
+#imgPath>img{
+    width: 400px;
 }
 .titleBox {
     padding: 10px 20px;
@@ -299,6 +319,15 @@ body {
     font-weight: bold;
 }
 
+.infoContentsHr {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: left;
+    margin-left: 0px;
+    margin-top:0px;
+
+}
 hr {
     width: 100%;
     border: none;
@@ -309,13 +338,13 @@ hr {
 }
 
 .navBar {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     justify-content: space-around;
 }
 .navBar > li {
     font-size: 14px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #70757a;
     cursor: pointer;
 }
@@ -328,7 +357,7 @@ hr {
     line-height: 80px;
 }
 .infoContents > .info > p {
-    margin-left: 70px;
+    margin-left: 10px;
 }
 .infoContents > .info > p > img {
     width: 25px;
@@ -336,17 +365,15 @@ hr {
 .infoContents > .info > p > span {
     font-size: 15px;
     color: #70757a;
-    margin-left: 80px;
+    margin-left: 10px;
     position: relative;
     top: -7px;
 }
-.infoContentsHr{
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid black;
+#introduction{
+    font-size: 13px;
+
+    font-weight: bold;
     text-align: left;
-    margin-left: 0px;
-    margin-top: 15px;
 }
 .addBtn {
     width: 200px;
@@ -404,12 +431,14 @@ hr {
     color: blue;
     margin-bottom: 30px;
 }
+
 #infoNav:hover {
     color: blue;
 
     border-bottom: 5px solid blue;
 
 }
+
 #reviewNav:hover {
     color: blue;
     border-bottom: 5px solid blue;
