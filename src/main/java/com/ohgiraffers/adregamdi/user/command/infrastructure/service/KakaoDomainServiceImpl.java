@@ -2,11 +2,11 @@ package com.ohgiraffers.adregamdi.user.command.infrastructure.service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.ohgiraffers.adregamdi.common.annotation.InfraService;
 import com.ohgiraffers.adregamdi.user.command.application.dto.KakaoUserDTO;
 import com.ohgiraffers.adregamdi.user.command.domain.service.KakaoDomainService;
 import com.ohgiraffers.adregamdi.user.query.application.service.KakaoQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-@Service
+@InfraService
 public class KakaoDomainServiceImpl implements KakaoDomainService {
     private final KakaoQueryService kakaoQueryService;
 
