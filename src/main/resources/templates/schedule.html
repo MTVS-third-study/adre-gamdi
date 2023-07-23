@@ -60,10 +60,10 @@
         <!-- 설명. 검색 box -->
         <div class="option">
             <div>
-                <form action="/placeQuery/searchPlace" class="searchBox">
+                <div  class="searchBox" id="searchBox">
                     <input type="text" placeholder="검색어를 입력해주세요" class="keyword" name="searchKeyword" method="GET"/>
-                    <button class="searchKeyword" type="button"><img src="/images/search.png" alt=""></button>
-                </form>
+                    <button class="searchKeyword" id="searchKeyword1" type="submit"><img src="/images/search.png" alt=""></button>
+                </div>
 <!--                                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
             </div>
 
@@ -71,19 +71,19 @@
         <div id="menu_wrap" class="bg_white menu_wrap">
             <hr />
             <ul class="placeList" id="placeList" >
-                <li th:each="place:${placeList}" class="placeItem">
-                    <div class="placeContents">
-                    <div class="placeInfo">
-                        <p th:text="${place.getPlaceNo()}" id="placeNo" style="display: none"></p>
-                        <h4 th:text="${place.getPlaceName()}"></h4>
-                        <p th:text="${place.getCategoryName()}"></p>
-                        <span th:text="${place.getPlaceAddress()}" class="placeAddr"></span><br>
-                        <span th:text="${place.getPhoneNumber()}"></span>
-                    </div>
-                    <img th:src="${place.thumbnailPath}" alt="">
-                    </div>
-                <hr>
-                </li>
+<!--                <li th:each="place:${placeList}" class="placeItem">-->
+<!--                    <div class="placeContents">-->
+<!--                    <div class="placeInfo">-->
+<!--                        <p th:text="${place.getPlaceNo()}" id="placeNo" style="display: none"></p>-->
+<!--                        <h4 th:text="${place.getPlaceName()}"></h4>-->
+<!--                        <p th:text="${place.getCategoryName()}"></p>-->
+<!--                        <span th:text="${place.getPlaceAddress()}" class="placeAddr"></span><br>-->
+<!--                        <span th:text="${place.getPhoneNumber()}"></span>-->
+<!--                    </div>-->
+<!--                    <img th:src="${place.thumbnailPath}" alt="">-->
+<!--                    </div>-->
+<!--                <hr>-->
+<!--                </li>-->
             </ul>
             <div >
                 <span>1</span>
@@ -135,10 +135,10 @@
         <!-- 상세 box -->
         <div id="info_wrap" class="bg_white menu_wrap">
             <div class="imgBox">
-                <img src="/images/images.jpg" alt="" />
+                <div  id="imgPath"></div>
                 <div class="titleBox">
-                    <span >판교제2테크노밸리 기업지원허브</span>
-                    <p >기업단지</p>
+                    <span id="placeName"></span>
+                    <p id="=categoryName"></p>
                 </div>
             </div>
             <hr class="infoContentsHr"/>
@@ -148,21 +148,22 @@
                     <li id="reviewNav">리뷰</li>
                 </nav>
                 <hr class="infoContentsHr"/>
+                <p style="margin: 10px">
+                    <span id="introduction"></span>
+                </p>
+                <hr class="infoContentsHr"/>
                 <div class="infoContents">
                     <div class="info">
                         <p>
                             <img src="/images/phone.png" alt="" />
-                            <span >010-3333-1232</span>
+                            <span id="phoneNumber"></span>
                         </p>
 
                         <p>
                             <img src="/images/marker.png" alt="" />
-                            <span >경기도 성남시 수정구 </span>
+                            <span id="placeAddress"> </span>
                         </p>
-                        <p>
-                            <img src="/images/info.png" alt="" /><span >넓은 매장과 탁트인 뷰
-                </span>
-                        </p>
+
                     </div>
                     <hr class="infoContentsHr"/>
                     <div class="addBtn">
@@ -176,7 +177,7 @@
                             <span >3.8</span>
                         </div>
                         <div class="reiewBtnBox">
-                            <button class="reviewBtn" onclick="reviewList(data)">
+                            <button class="reviewBtn">
                                 <img src="/images/reviewAdd.png" alt="" />리뷰 작성
                             </button>
                         </div>
@@ -289,9 +290,9 @@
 </div>
 
 <script src="/js/kakaomap.js"></script>
-<script src="/js/schedule.js"></script>
-<script src="/js/review.js"></script>
+<script  src="/js/schedule.js">
 
+</script>
 <script>
     const modal = document.querySelector('.modal');
     const btnOpenPopup = document.querySelector('.reviewBtn');
