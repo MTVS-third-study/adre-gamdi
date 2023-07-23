@@ -21,6 +21,9 @@ public class DongService {
                 dongDTO.getDongNo(),
                 dongDTO.getDongName()
         ));
+        if (insertedDong == null) {
+            return new DongDTO();
+        }
         return new DongDTO(
                 insertedDong.getDongNo(),
                 insertedDong.getDongName()

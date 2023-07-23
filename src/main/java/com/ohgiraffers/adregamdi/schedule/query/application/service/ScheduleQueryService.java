@@ -6,6 +6,7 @@ import com.ohgiraffers.adregamdi.schedule.query.infra.repository.ScheduleQueryRe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,9 @@ public class ScheduleQueryService {
 
     public List<ScheduleDTO> loadMyScheduleList(Long userNo) {
         List<Schedule> myScheduleListResult = scheduleQueryRepository.findScheduleListByUserNo(userNo);
-
+        if (myScheduleListResult == null){
+            return new ArrayList<>();
+        }
         ScheduleQueryDTOEntitySwap swap = new ScheduleQueryDTOEntitySwap();
         List<ScheduleDTO> myScheduleList = myScheduleListResult.stream().
                 map(i -> swap.scheduleToScheduleDTO(i)).

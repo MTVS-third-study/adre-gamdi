@@ -72,7 +72,7 @@ scheduleAdd[0].addEventListener("click", () => {
 for(let i=0 ;i<placeList.length ;i++){
 
     placeItem[i].addEventListener("click",()=>{
-        let placeNo = placeList[i].querySelector("#placeNo").innerText;
+        let placeNo = placeList[i].querySelector("#placeNo").innerText; // 3030
 
         fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
             .then( response => response.json())
@@ -82,13 +82,16 @@ for(let i=0 ;i<placeList.length ;i++){
             .catch((error) => {
                 console.error(error);
                 alert("예기치 못한 오류가 발생했습니다.");
+                infoWrap.style.display = "none";
+                menuWrap.style.display = "block";
+                dayWrap.style.display = "none";
+                option[0].style.display="block";
             })
         infoWrap.style.display = "block";
         menuWrap.style.display = "none";
         dayWrap.style.display = "none";
         option[0].style.display="none";
     })
-
 }
 
 // 설명. Btnmouseover

@@ -47,6 +47,9 @@ public class PlaceQueryService {
 
     public List<PlaceDTO> findPlaceByKeyword(String keyword){
         List<SearchPlace> noPlaceList = placeMapper.searchPlace(keyword);
+        if (noPlaceList == null) {
+            return new ArrayList<>();
+        }
         List<PlaceDTO> placeList = new ArrayList<>();
         int num = noPlaceList.size() - 1;
         for (int i = 0; i <= num; i++) {
@@ -73,6 +76,9 @@ public class PlaceQueryService {
 
     public ResponsePlaceDTO findPlaceWithTagsByPlaceNo(Long placeNo) {
         Place findedPlace = placeQueryRepository.findByPlaceNo(placeNo);
+        if (findedPlace == null) {
+            return new ResponsePlaceDTO();
+        }
         CategoryDTO category = categoryQueryService.findCategoryByCategoryNo(findedPlace.getCategoryVO().getCategoryNo());
         CityDTO city = cityQueryService.findCityByCityNo(findedPlace.getCityVO().getCityNo());
         DongDTO dong = dongQueryService.findDongByDongNo(findedPlace.getDongVO().getDongNo());

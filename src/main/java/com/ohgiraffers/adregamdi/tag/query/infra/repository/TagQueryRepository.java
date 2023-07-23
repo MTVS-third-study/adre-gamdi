@@ -13,4 +13,6 @@ public interface TagQueryRepository extends JpaRepository<Tag, Long> {
                    "  FROM TBL_TAG " +
                    " WHERE TAG_NO = :tagNo", nativeQuery = true)
     String findTagNameByTagNo(@Param("tagNo") Long tagNo);
+
+    Long countTagByTagName(String tagName);
 }

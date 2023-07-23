@@ -18,9 +18,8 @@ public class CategoryService {
 
     public CategoryDTO insertCategory(String categoryName) {
         Category insertCategory = categoryRepository.save(new Category(categoryName));
-        System.out.println("insertCategory = " + insertCategory);
         if (insertCategory == null){
-            return new CategoryDTO(0,"");
+            return new CategoryDTO();
         }
         return new CategoryDTO(
                 insertCategory.getCategoryNo(),
