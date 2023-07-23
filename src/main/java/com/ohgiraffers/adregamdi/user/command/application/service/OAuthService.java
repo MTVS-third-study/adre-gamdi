@@ -37,19 +37,19 @@ public class OAuthService {
         UserDTO findUserInfo = userDomainService.findByKakaoId(kakaoInfo.getKakaoId());
 
         if (findUserInfo.getUserNo() == null) { // 카카오에서 조회한 유저가 DB에 없다면 회원가입
-            userInfo = userRepository.save(new User(
-                    kakaoInfo.getKakaoId(),
-                    kakaoInfo.getKakaoProfileImage(),
-                    kakaoInfo.getKakaoNickName(),
-                    "",
-                    kakaoInfo.getEmail(),
-                    kakaoInfo.getAge(),
-                    kakaoInfo.getGender(),
-                    0,
-                    0,
-                    1,
-                    false,
-                    Role.USER));
+            userInfo = userRepository.save(new User.Builder()
+                    .kakaoId(kakaoInfo.getKakaoId())
+                    .kakaoProfileImage(kakaoInfo.getKakaoProfileImage())
+                    .kakaoNickName(kakaoInfo.getKakaoNickName())
+                    .serviceNickName("")
+                    .email(kakaoInfo.getEmail())
+                    .age(kakaoInfo.getAge())
+                    .gender(kakaoInfo.getGender())
+                    .report_count(0)
+                    .review_count(0)
+                    .grade(1)
+                    .blacklist_status(false)
+                    .role(Role.USER).build());
             findUserInfo.setUserNo(userInfo.getUserNo());
             findUserInfo.setKakaoId(userInfo.getKakaoId());
             findUserInfo.setKakaoProfileImage(userInfo.getKakaoProfileImage());
