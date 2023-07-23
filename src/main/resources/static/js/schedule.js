@@ -77,7 +77,26 @@ for(let i=0 ;i<placeList.length ;i++){
         fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
             .then( response => response.json())
             .then((data) => {
-                console.log(data);
+
+                let detailPlaceInfo=data.detailPlaceInfo;
+
+            let placeName=document.getElementById("placeName")
+                // let categoryName=document.getElementById("categoryName")
+                let imgPath=document.getElementById("imgPath")
+                let phoneNumber=document.getElementById("phoneNumber")
+                let placeAddress=document.getElementById("placeAddress")
+                let introduction=document.getElementById("introduction")
+
+           placeName.innerText=detailPlaceInfo.placeName;
+
+            // categoryName.innerText=detailPlaceInfo.categoryName;
+            phoneNumber.innerText=detailPlaceInfo.phoneNumber;
+            placeAddress.innerText=detailPlaceInfo.placeAddress;
+            introduction.innerText=detailPlaceInfo.introduction;
+            const imgsrc=`<img src="${detailPlaceInfo.imagePath}">`
+                imgPath.innerHTML=imgsrc;
+
+
             })
             .catch((error) => {
                 console.error(error);
@@ -136,3 +155,23 @@ for(let i=0 ;i<hideUserInfoBoxItem.length;i++){
         hideUserInfoBox[0].style.display="none";
     })
 }
+
+//caleder
+$(function() {
+
+    $('input[name="datefilter"]').daterangepicker({
+        autoUpdateInput: false,
+        locale: {
+            cancelLabel: 'Clear'
+        }
+    });
+
+    $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+    });
+
+    $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+});
