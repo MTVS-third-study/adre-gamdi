@@ -20,9 +20,20 @@ public class AdminQueryService {
 
         List<User> user = adminRepository.findAll();
         List<UserDTO> userList = user.stream()
-                .map(m -> new UserDTO(m.getUserNo(), m.getKakaoId(), m.getKakaoProfileImage(), m.getKakaoNickName(), m.getServiceNickName(), m.getEmail(), m.getAge(), m.getGender(), m.getReport_count(), m.getReview_count(), m.getGrade(), m.isBlacklist_status(), m.getRole()))
+                .map(m -> new UserDTO(m.getUserNo(),
+                        m.getKakaoId(),
+                        m.getKakaoProfileImage(),
+                        m.getKakaoNickName(),
+                        m.getServiceNickName(),
+                        m.getEmail(),
+                        m.getAge(),
+                        m.getGender(),
+                        m.getReport_count(),
+                        m.getReview_count(),
+                        m.getGrade(),
+                        m.isBlacklist_status(),
+                        m.getRole()))
                 .collect(Collectors.toList());
         return userList;
     }
-
 }
