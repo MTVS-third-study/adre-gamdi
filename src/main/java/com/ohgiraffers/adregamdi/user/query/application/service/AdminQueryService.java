@@ -3,6 +3,7 @@ package com.ohgiraffers.adregamdi.user.query.application.service;
 import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
 import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
 import com.ohgiraffers.adregamdi.user.query.infrastructure.repository.AdminRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 public class AdminQueryService {
     private final AdminRepository adminRepository;
 
+    @Autowired
     public AdminQueryService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
     }
