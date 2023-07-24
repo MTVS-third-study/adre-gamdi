@@ -16,8 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@RestController
-@Controller
+@RestController
+//@Controller
 @RequestMapping("/placeQuery")
 public class PlaceQueryController {
 
@@ -26,20 +26,17 @@ public class PlaceQueryController {
     public PlaceQueryController(PlaceQueryService placeQueryService){
         this.placeQueryService = placeQueryService;
     }
-
+    @ResponseBody
     @GetMapping("/searchPlace")
-    public String searchPlace(@RequestParam("searchKeyword") String keyword, Model model, ModelAndView mv){
-
-
+    public  Map<String,List<PlaceDTO>> searchPlace(@RequestParam("searchKeyword") String keyword){
+        keyword = keyword.replaceAll("\"", "");
         List<PlaceDTO> placeList = placeQueryService.findPlaceByKeyword(keyword);
-        boolean decide = true;
 
-        if (placeList.size() == 0) {
-            model.addAttribute("decide",decide);
-        }else {
-            model.addAttribute("placeList", placeList);
-        }
-        return "schedule";
+     Map<String,List<PlaceDTO>> responsePlaceList=new HashMap<>();
+     responsePlaceList.put("respPlaceList",placeList);
+        System.out.println("keyword = " + keyword);
+        placeList.forEach(System.out::println);
+        return responsePlaceList;
     }
 
     @ResponseBody
