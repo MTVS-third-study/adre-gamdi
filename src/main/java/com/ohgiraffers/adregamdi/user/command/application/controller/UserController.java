@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -23,8 +23,7 @@ public class UserController {
 
     // 닉네임 변경
     @PostMapping("updateNickName")
-    public String updateNickName(HttpServletRequest request, HttpSession session) throws Exception {
-        String nickName = request.getParameter("nickName");
+    public String updateNickName(@RequestParam("nickName") String nickName, HttpSession session) throws Exception {
         UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
         session.setAttribute("loginUser", userService.updateNickName(nickName, loginUser));
         return "redirect:/myPage";
