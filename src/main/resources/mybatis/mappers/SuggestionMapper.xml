@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.adregamdi.suggestion.command.infra.repository.SuggestionMapper">
+
+    <resultMap id="suggestionResultMap1" type="com.ohgiraffers.adregamdi.suggestion.command.domain.aggregate.entity.Suggestion" autoMapping="false">
+        <id property="suggestionNo" column="SUGGESTION_NO"/>
+        <result property="userNo" column="USER_NO"/>
+        <result property="suggestion" column="SUGGESTION"/>
+    </resultMap>
+
+
+
+    <insert id="saveSuggestion" parameterType="com.ohgiraffers.adregamdi.suggestion.command.domain.aggregate.entity.Suggestion">
+        INSERT
+               INTO TBL_SUGGESTION
+        (
+               SUGGESTION_NO
+             , USER_NO
+             , SUGGESTION
+        )
+        VALUES
+        (
+               #{suggestionNo}
+             , #{userNo}
+             , #{suggestion}
+        )
+    </insert>
+
+    <delete id="deleteSuggestion" parameterType="com.ohgiraffers.adregamdi.suggestion.command.domain.aggregate.entity.Suggestion">
+        DELETE
+            FROM TBL_SUGGESTION
+        WHERE SUGGESTION_NO = #{suggestionNo}
+    </delete>
+
+</mapper>

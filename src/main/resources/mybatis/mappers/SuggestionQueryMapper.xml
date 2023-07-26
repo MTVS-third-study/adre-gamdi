@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.adregamdi.suggestion.query.infra.repository.SuggestionQueryMapper">
+
+    <select id="findAllSuggestion" resultMap="suggestionResultMap1">
+        SELECT
+                SUGGESTION_NO
+              , USER_NO
+              , SUGGESTION
+        FROM TBL_SUGGESTION
+        ORDER BY SUGGESTION_NO
+    </select>
+
+</mapper>
