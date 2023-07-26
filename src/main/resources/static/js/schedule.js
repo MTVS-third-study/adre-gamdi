@@ -10,10 +10,23 @@ infoNav.addEventListener("click", () => {
     imgBox[0].style.display = "block";
 });
 reviewNav.addEventListener("click", () => {
+    fetch(`reviewController주소?placieNo=${placeNo}`)
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json);
+            console.log(placeNo);
+        })
+        .catch((error) => {
+            console.error(error);
+            alert("예기치 못한 오류가 발생했습니다.");
+            infoWrap.style.display = "none";
+            menuWrap.style.display = "block";
+            dayWrap.style.display = "none";
+            option[0].style.display = "block";
+        });
     infoContents[0].style.display = "none";
     reviewContainer[0].style.display = "block";
     imgBox[0].style.display = "none";
-    fetch(``)
 });
 
 // 설명. 지도 사이드바 설정 js
@@ -34,14 +47,6 @@ homeBtn.addEventListener("click", () => {
     option[0].style.display = "block";
 });
 
-myScheduleBtn.addEventListener("click", () => {
-    console.log(2);
-
-    dayWrap.style.display = "block";
-    menuWrap.style.display = "none";
-    infoWrap.style.display = "none";
-    option[0].style.display = "block";
-});
 imgBtn.addEventListener("click", () => {
     console.log(3);
 
@@ -52,58 +57,6 @@ imgBtn.addEventListener("click", () => {
     option[0].style.display = "none";
 });
 
-// // 설명. 상세페이지
-// let scheduleAdd = document.getElementsByClassName("scheduleAdd");
-// let placeItem = document.getElementsByClassName("placeItem");
-// let placeList = document.querySelectorAll("#placeList>li");
-// scheduleAdd[0].addEventListener("click", () => {
-//     dayWrap.style.display = "block";
-//     infoWrap.style.display = "none";
-//     BtnBox[0].style.display = "block";
-//     option[0].style.display = "block";
-// });
-//
-// for (let i = 0; i < placeList.length; i++) {
-//     placeItem[i].addEventListener("click", () => {
-//         let placeNo = placeList[i].querySelector("#placeNo").innerText; // 3030
-//
-//         fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
-//             .then((response) => response.json())
-//             .then((data) => {
-//                 console.log(data);
-//                 let detailPlaceInfo = data.detailPlaceInfo;
-//
-//                 let placeName = document.getElementById("placeName");
-//                 // let categoryName=document.getElementById("categoryName")
-//                 let imgPath = document.getElementById("imgPath");
-//                 let phoneNumber = document.getElementById("phoneNumber");
-//                 let placeAddress = document.getElementById("placeAddress");
-//                 let introduction = document.getElementById("introduction");
-//
-//                 placeName.innerText = detailPlaceInfo.placeName;
-//                 let placeLIst = document.querySelectorAll("#placeList>li");
-//                 placeLIst.length;
-//                 // categoryName.innerText=detailPlaceInfo.categoryName;
-//                 phoneNumber.innerText = detailPlaceInfo.phoneNumber;
-//                 placeAddress.innerText = detailPlaceInfo.placeAddress;
-//                 introduction.innerText = detailPlaceInfo.introduction;
-//                 const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
-//                 imgPath.innerHTML = imgsrc;
-//             })
-//             .catch((error) => {
-//                 console.error(error);
-//                 alert("예기치 못한 오류가 발생했습니다.");
-//                 infoWrap.style.display = "none";
-//                 menuWrap.style.display = "block";
-//                 dayWrap.style.display = "none";
-//                 option[0].style.display = "block";
-//             });
-//         infoWrap.style.display = "block";
-//         menuWrap.style.display = "none";
-//         dayWrap.style.display = "none";
-//         option[0].style.display = "none";
-//     });
-// }
 //검색 비동기
 let searchBox = document.getElementById("searchBox");
 let searchKeyword = document.getElementById("searchKeyword1");
@@ -148,6 +101,9 @@ keyword.addEventListener("keyup", (e) => {
     }
 });
 searchKeyword.addEventListener("click", () => {
+
+    keywordValue = JSON.stringify(keyword.value);
+
     fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
         .then((response) => response.json())
         .then((json) => {
@@ -157,7 +113,7 @@ searchKeyword.addEventListener("click", () => {
                 if (!json.length) {
                     console.log("등록된 값이없습니다");
                 } else {
-                    console.log(obj);
+
                     html += `
                         <li class="placeItem">
                     <div class="placeContents">
@@ -181,12 +137,11 @@ searchKeyword.addEventListener("click", () => {
             console.log(error);
         });
 });
-
 function addPlaceListClickEvent() {
     // 설명. 상세페이지
     let scheduleAdd = document.getElementsByClassName("scheduleAdd");
-    let placeItem = document.getElementsByClassName("placeItem")
-    let placeList = document.querySelectorAll("#placeList>li")
+    let placeItem = document.getElementsByClassName("placeItem");
+    let placeList = document.querySelectorAll("#placeList>li");
     scheduleAdd[0].addEventListener("click", () => {
         dayWrap.style.display = "block";
         infoWrap.style.display = "none";
@@ -197,29 +152,29 @@ function addPlaceListClickEvent() {
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {
             let placeNo = placeList[i].querySelector("#placeNo").innerText; // 3030
-            console.log(placeNo);
+
             fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
-                .then(response => response.json())
+                .then((response) => response.json())
                 .then((data) => {
-                    console.log(data)
+                    console.log(data);
                     let detailPlaceInfo = data.detailPlaceInfo;
 
-                    let placeName = document.getElementById("placeName")
+                    let placeName = document.getElementById("placeName");
                     // let categoryName=document.getElementById("categoryName")
-                    let imgPath = document.getElementById("imgPath")
-                    let phoneNumber = document.getElementById("phoneNumber")
-                    let placeAddress = document.getElementById("placeAddress")
-                    let introduction = document.getElementById("introduction")
+                    let imgPath = document.getElementById("imgPath");
+                    let phoneNumber = document.getElementById("phoneNumber");
+                    let placeAddress = document.getElementById("placeAddress");
+                    let introduction = document.getElementById("introduction");
 
                     placeName.innerText = detailPlaceInfo.placeName;
+                    let placeLIst = document.querySelectorAll("#placeList>li");
+                    placeLIst.length;
                     // categoryName.innerText=detailPlaceInfo.categoryName;
                     phoneNumber.innerText = detailPlaceInfo.phoneNumber;
                     placeAddress.innerText = detailPlaceInfo.placeAddress;
                     introduction.innerText = detailPlaceInfo.introduction;
-                    const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`
+                    const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
                     imgPath.innerHTML = imgsrc;
-
-
                 })
                 .catch((error) => {
                     console.error(error);
@@ -228,15 +183,14 @@ function addPlaceListClickEvent() {
                     menuWrap.style.display = "block";
                     dayWrap.style.display = "none";
                     option[0].style.display = "block";
-                })
+                });
             infoWrap.style.display = "block";
             menuWrap.style.display = "none";
             dayWrap.style.display = "none";
             option[0].style.display = "none";
-        })
+        });
     }
 }
-
 // 설명. Btnmouseover
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
@@ -286,18 +240,19 @@ let myScheduleModalBody = document.getElementsByClassName(
     "schedule_modal_body"
 );
 let scheduleModify = document.getElementsByClassName("scheduleModify");
-
+//내 일정 모달창
 myScheduleBtn.addEventListener("click", () => {
-    myScheduleModal.style.display = "block";
-    myScheduleModalBody[0].style.display = "block";
-
+    console.log(2);
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
         .then((json) => {
+
+            console.log(json);
             let html = `  <div><h1>나의 일정</h1></div>`;
             json.forEach((obj, idx) => {
-                console.log(json)
-                html += `
+
+                    console.log(json);
+                    html += `
            
              <div class="plan">
             <div class="plan_title">여행 이름 <span><input type="text" placeholder=${obj.scheduleName}></span></div>
@@ -306,16 +261,18 @@ myScheduleBtn.addEventListener("click", () => {
             <div class="schedule_modal_btnBox">
                 <button class="modal_btn scheduleModify">일정 수정</button>
                 <button class="modal_btn">삭제</button>
-            </div>
-            
-                    `
-            })
+            </div>         
+                    `;
+
+            });
             document.getElementById("schedule_modal_body").innerHTML = html;
         })
         .catch((error) => {
             console.log(error);
         });
-
+    myScheduleModal.style.display = "block";
+    myScheduleModalBody[0].style.display = "block";
+})
     myScheduleModal.addEventListener("click", () => {
         myScheduleModal.style.display = "none";
         myScheduleModalBody[0].style.display = "none";
@@ -331,9 +288,8 @@ myScheduleBtn.addEventListener("click", () => {
         myScheduleModalBody[0].style.display = "none";
     });
 
-//caleder
+    //caleder
 
-})
 $(function () {
     $('input[name="datefilter"]').daterangepicker({
         autoUpdateInput: false,
@@ -381,5 +337,3 @@ $(function () {
         }
     );
 });
-
-// 리뷰 불러오기
