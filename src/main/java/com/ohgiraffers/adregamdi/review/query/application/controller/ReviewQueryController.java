@@ -36,7 +36,7 @@ public class ReviewQueryController {
         model.addAttribute("reviewList", reviewList);
 
         Map<String, List<ReviewDTO>> reviewInfo = new HashMap<>();
-        reviewInfo.put("reviewList", reviewList);
+        reviewInfo.put("reviewInfo", reviewList);
 
         return reviewInfo;
 

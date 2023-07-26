@@ -1,8 +1,6 @@
-package com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity;
+package com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;

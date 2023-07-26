@@ -45,7 +45,7 @@
     -webkit-text-stroke-color: #2b2a29;
 }
 
-.star-ratings-fill {
+.starRatingsFill {
     color: #fff58c;
     padding: 0;
     position: absolute;
@@ -57,7 +57,7 @@
     -webkit-text-fill-color: gold;
 }
 
-.star-ratings-base {
+.starRatingsBase {
     color: #aaa9a9;
     z-index: 0;
     padding: 0;

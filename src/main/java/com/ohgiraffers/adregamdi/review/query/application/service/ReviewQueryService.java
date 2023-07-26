@@ -2,7 +2,7 @@ package com.ohgiraffers.adregamdi.review.query.application.service;
 
 import com.ohgiraffers.adregamdi.review.command.application.dto.ReviewDTO;
 import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.Review;
-import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewPlaceNo;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo.ReviewPlaceNo;
 import com.ohgiraffers.adregamdi.review.query.infra.repository.ReviewQueryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +21,9 @@ public class ReviewQueryService {
     }
 
     public List<ReviewDTO> getReviewList(Long reviewPlaceNo) {
-        List<Review> reviewList = reviewQueryRepository.findAllByReviewPlaceNo(new ReviewPlaceNo(reviewPlaceNo));
+        List<Review> reviewList = reviewQueryRepository.findALLByReviewPlaceNo(new ReviewPlaceNo(reviewPlaceNo));
         List<ReviewDTO> reviewDTOList = new ArrayList<>();
+
         for(Review review : reviewList) {
             ReviewDTO reviewDTO = new ReviewDTO();
             reviewDTO.setReviewNo(review.getReviewNo());
@@ -36,7 +37,6 @@ public class ReviewQueryService {
 
             reviewDTOList.add(reviewDTO);
         }
-        reviewDTOList.forEach(System.out::println);
         return reviewDTOList;
     }
 }

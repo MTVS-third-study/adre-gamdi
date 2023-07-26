@@ -2,15 +2,13 @@ package com.ohgiraffers.adregamdi.review.query.application.service;
 
 import com.ohgiraffers.adregamdi.review.command.application.dto.ReviewDTO;
 import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.Review;
-import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewPlaceNo;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo.ReviewPlaceNo;
 import com.ohgiraffers.adregamdi.review.query.infra.repository.ReviewQueryRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
@@ -20,12 +18,14 @@ public class ReviewQueryServiceTests {
     @Autowired
     private ReviewQueryRepository reviewQueryRepository;
 
-    @DisplayName("장소별 리뷰 조회 테스트")
+
+    @DisplayName("장소별 리뷰리스트 DTO로 변환")
     @Test
-    void findAllReviewByPlaceNo(Long reviewPlaceNo) {
-        reviewPlaceNo = 20L;
-        List<Review> reviewList = reviewQueryRepository.findAllByReviewPlaceNo(new ReviewPlaceNo(reviewPlaceNo));
+    void findALLReviewByPlaceNo() {
+
+        List<Review> reviewList = reviewQueryRepository.findALLByReviewPlaceNo(new ReviewPlaceNo(20L));
         List<ReviewDTO> reviewDTOList = new ArrayList<>();
+
         for(Review review : reviewList) {
             ReviewDTO reviewDTO = new ReviewDTO();
             reviewDTO.setReviewNo(review.getReviewNo());
@@ -37,7 +37,7 @@ public class ReviewQueryServiceTests {
             reviewDTO.setReviewWriter(review.getReviewWriter());
             reviewDTO.setReviewPlaceNo(review.getReviewPlaceNo());
 
-            reviewDTOList.add(new reviewDTO);
+            reviewDTOList.add(reviewDTO);
         }
         reviewDTOList.forEach(System.out::println);
 
@@ -50,7 +50,7 @@ public class ReviewQueryServiceTests {
     @Test
     void reviewInfo() {
 
-        List<Review> reviewList = reviewQueryRepository.findAllByReviewPlaceNo(new ReviewPlaceNo(20L));
+        List<Review> reviewList = reviewQueryRepository.findALLByReviewPlaceNo(new ReviewPlaceNo(20L));
 
         Map<String, List<Review>> reviewMap = new HashMap<>();
         reviewMap.put("reviewList", reviewList);

@@ -2,8 +2,8 @@ package com.ohgiraffers.adregamdi.review.command.application.service;
 
 import com.ohgiraffers.adregamdi.review.command.application.dto.ReviewDTO;
 import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.Review;
-import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewPlaceNo;
-import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewWriter;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo.ReviewPlaceNo;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo.ReviewWriter;
 import com.ohgiraffers.adregamdi.review.command.domain.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class ReviewService {
     public boolean insertReview(ReviewDTO reviewDTO, MultipartFile imageFile, Model model,
                                 Long userNo, String userName, Long placeNo) {
 
-        if (insertReviewImage(reviewDTO, imageFile)) {
+        if (insertReviewImage(reviewDTO, imageFile) && isNotNull(reviewDTO, model)) {
 
             ReviewWriter reviewWriter = new ReviewWriter(userNo, userName);
             ReviewPlaceNo reviewPlaceNo = new ReviewPlaceNo(placeNo);
@@ -83,27 +83,27 @@ public class ReviewService {
     }
 
 
-//    private boolean isNotNull(ReviewDTO reviewDTO, Model model) {
-//        if (!reviewDTO.getReviewContent().equals("") && reviewDTO.getStarPoint() != 0
-//                && reviewDTO.getOriginReviewImageName() != null) {
-//            return true;
-//        }
-//
-//        if (reviewDTO.getReviewContent().equals("")) {
-//            model.addAttribute("nullContent", "리뷰 내용은 필수 입력값입니다.");
-//        }
-//
-//        if (reviewDTO.getStarPoint() == 0) {
-//            model.addAttribute("nullStarPoint", "별점을 선택해주세요");
-//        }
-//
-//        if (reviewDTO.getOriginReviewImageName() == null) {
-//
-//            model.addAttribute("incorrectExtension", "jpg, jpeg, png형식의 이미지 파일을 올려주세요.");
-//        }
-//
-//        return false;
-//    }
+    private boolean isNotNull(ReviewDTO reviewDTO, Model model) {
+        if (!reviewDTO.getReviewContent().equals("") && reviewDTO.getStarPoint() != 0
+                && reviewDTO.getOriginReviewImageName() != null) {
+            return true;
+        }
+
+        if (reviewDTO.getReviewContent().equals("")) {
+            model.addAttribute("nullContent", "리뷰 내용은 필수 입력값입니다.");
+        }
+
+        if (reviewDTO.getStarPoint() == 0) {
+            model.addAttribute("nullStarPoint", "별점을 선택해주세요");
+        }
+
+        if (reviewDTO.getOriginReviewImageName() == null) {
+
+            model.addAttribute("incorrectExtension", "jpg, jpeg, png형식의 이미지 파일을 올려주세요.");
+        }
+
+        return false;
+    }
 
 
 

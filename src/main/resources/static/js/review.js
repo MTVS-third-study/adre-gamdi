@@ -1,23 +1,29 @@
 
-    const reviewAdd = document.getElementById("reviewNav")
-    const reviewItem = document.getElementsByClassName("reviewBox")
-    const reviewList = document.querySelectorAll("#reviewContentsBox")
+<!-- 리뷰 작성 모달창 -->
+const modal = document.querySelector('.modal');
+const btnOpenPopup = document.querySelector('.reviewBtn');
+const closeModalBtn = document.querySelector('.closeBtn')
 
-    for (let i = 0; i < reviewList.length; i++) {
+btnOpenPopup.addEventListener('click', () => {
+    modal.style.display = 'block';
+    // document.body.style.overflow = "hidden"; // 스크롤바 제거
+});
 
-        reviewItem[i].addEventListener("click", () => {
-            let reviewNo = reviewList[i].querySelector("#reviewNo").innerText
-            let url = `/placeQuery/reviewInfo??placeNo=${placeNo}`;
+closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+    // document.body.style.overflow = "auto"; // 스크롤바 보이기
+});
 
-            fetch(url)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data);
-                })
-                .catch((error) => {
-                    console.error(error);
-                    alert("예기치 못한 오류 발생")
-                })
-        })
+
+<!-- 리뷰 작성시 이미지 프리뷰 기능 -->
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById('preview').src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        document.getElementById('preview').src = "";
     }
-
+}

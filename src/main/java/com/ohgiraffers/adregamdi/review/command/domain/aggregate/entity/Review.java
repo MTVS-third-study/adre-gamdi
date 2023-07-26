@@ -1,5 +1,7 @@
 package com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity;
 
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo.ReviewPlaceNo;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo.ReviewWriter;
 import lombok.*;
 
 import javax.persistence.*;

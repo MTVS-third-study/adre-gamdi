@@ -32,7 +32,7 @@ public class ReviewController {
 
 
     @PostMapping("/regist")
-    public String registReview(ReviewDTO reviewDTO, @RequestParam MultipartFile imageFile, UserDTO userDTO,
+    public String registReview(ReviewDTO reviewDTO, @RequestParam MultipartFile imageFile,
                                HttpServletResponse response, Model model, HttpSession session) throws IOException {
         Long placeNo = 20L;     //나중에 placeNo 세션에 저장되면 수정해야함
         Long userNo = ((UserDTO) session.getAttribute("loginUser")).getUserNo();

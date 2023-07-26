@@ -1,7 +1,7 @@
 package com.ohgiraffers.adregamdi.review.command.application.dto;
 
-import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewPlaceNo;
-import com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity.ReviewWriter;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo.ReviewPlaceNo;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo.ReviewWriter;
 import lombok.*;
 
 import java.sql.Timestamp;
