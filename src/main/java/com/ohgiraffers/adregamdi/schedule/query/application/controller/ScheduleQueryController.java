@@ -36,6 +36,7 @@ public class ScheduleQueryController {
 //            return "redirect:/schedule";
 //        }
         Long userNo = ((UserDTO) session.getAttribute("loginUser")).getUserNo();
+        System.out.println(userNo);
        List<ScheduleDTO> myScheduleList= scheduleQueryService.loadMyScheduleList(userNo);
        Map<String,List<ScheduleDTO>> respMyScheduleList=new HashMap<>();
        respMyScheduleList.put("myScheduleList",myScheduleList);
