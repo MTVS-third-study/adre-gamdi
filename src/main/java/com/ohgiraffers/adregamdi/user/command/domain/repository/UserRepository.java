@@ -23,4 +23,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // 카카오 아이디로 유저 삭제
     Long deleteByKakaoId(String id);
 
+    // 회원 등급 변경
+    @Modifying
+    @Query(value = "UPDATE TBL_USER"
+            + " SET GRADE = :grade "
+            + " WHERE USER_NO = :userNo", nativeQuery = true)
+    int updateGrade(@Param("grade") int grade, @Param("userNo") Long userNo) throws Exception;
 }
