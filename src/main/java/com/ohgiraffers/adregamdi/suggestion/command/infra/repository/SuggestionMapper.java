@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface SuggestionMapper {
 
-    void saveSuggestion(Long userNo, String suggestionMessage);
+    void saveSuggestion(Long userNo, String suggestion);
 
     void deleteSuggestion(Long suggestionNo);
 

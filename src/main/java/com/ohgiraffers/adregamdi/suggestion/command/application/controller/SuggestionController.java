@@ -36,9 +36,10 @@ public class SuggestionController {
     @PostMapping("/submitMessage")
     public String submitSuggestion(@RequestParam("suggestionMessage") String suggestionMessage,
                                    HttpSession session){
-
-
-        Long userNo = ((UserDTO)(session.getAttribute("loginUser"))).getUserNo();
+        System.out.println(suggestionMessage);
+        System.out.println(session.getAttribute("loginUser"));
+        Long userNo = ((UserDTO)session.getAttribute("loginUser")).getUserNo();
+        System.out.println(userNo);
 
         suggestionCommandService.saveSuggestion(userNo, suggestionMessage);
 

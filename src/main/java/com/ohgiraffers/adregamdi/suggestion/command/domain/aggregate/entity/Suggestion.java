@@ -19,8 +19,8 @@ public class Suggestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long suggestionNo;
 
-    @Embedded
-    private UserNo userNo;
+    @Column
+    private Long userNo;
 
     @Column
     private String suggestion;
