@@ -52,58 +52,58 @@ imgBtn.addEventListener("click", () => {
     option[0].style.display = "none";
 });
 
-// 설명. 상세페이지
-let scheduleAdd = document.getElementsByClassName("scheduleAdd");
-let placeItem = document.getElementsByClassName("placeItem");
-let placeList = document.querySelectorAll("#placeList>li");
-scheduleAdd[0].addEventListener("click", () => {
-    dayWrap.style.display = "block";
-    infoWrap.style.display = "none";
-    BtnBox[0].style.display = "block";
-    option[0].style.display = "block";
-});
-
-for (let i = 0; i < placeList.length; i++) {
-    placeItem[i].addEventListener("click", () => {
-        let placeNo = placeList[i].querySelector("#placeNo").innerText; // 3030
-
-        fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                let detailPlaceInfo = data.detailPlaceInfo;
-
-                let placeName = document.getElementById("placeName");
-                // let categoryName=document.getElementById("categoryName")
-                let imgPath = document.getElementById("imgPath");
-                let phoneNumber = document.getElementById("phoneNumber");
-                let placeAddress = document.getElementById("placeAddress");
-                let introduction = document.getElementById("introduction");
-
-                placeName.innerText = detailPlaceInfo.placeName;
-                let placeLIst = document.querySelectorAll("#placeList>li");
-                placeLIst.length;
-                // categoryName.innerText=detailPlaceInfo.categoryName;
-                phoneNumber.innerText = detailPlaceInfo.phoneNumber;
-                placeAddress.innerText = detailPlaceInfo.placeAddress;
-                introduction.innerText = detailPlaceInfo.introduction;
-                const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
-                imgPath.innerHTML = imgsrc;
-            })
-            .catch((error) => {
-                console.error(error);
-                alert("예기치 못한 오류가 발생했습니다.");
-                infoWrap.style.display = "none";
-                menuWrap.style.display = "block";
-                dayWrap.style.display = "none";
-                option[0].style.display = "block";
-            });
-        infoWrap.style.display = "block";
-        menuWrap.style.display = "none";
-        dayWrap.style.display = "none";
-        option[0].style.display = "none";
-    });
-}
+// // 설명. 상세페이지
+// let scheduleAdd = document.getElementsByClassName("scheduleAdd");
+// let placeItem = document.getElementsByClassName("placeItem");
+// let placeList = document.querySelectorAll("#placeList>li");
+// scheduleAdd[0].addEventListener("click", () => {
+//     dayWrap.style.display = "block";
+//     infoWrap.style.display = "none";
+//     BtnBox[0].style.display = "block";
+//     option[0].style.display = "block";
+// });
+//
+// for (let i = 0; i < placeList.length; i++) {
+//     placeItem[i].addEventListener("click", () => {
+//         let placeNo = placeList[i].querySelector("#placeNo").innerText; // 3030
+//
+//         fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
+//             .then((response) => response.json())
+//             .then((data) => {
+//                 console.log(data);
+//                 let detailPlaceInfo = data.detailPlaceInfo;
+//
+//                 let placeName = document.getElementById("placeName");
+//                 // let categoryName=document.getElementById("categoryName")
+//                 let imgPath = document.getElementById("imgPath");
+//                 let phoneNumber = document.getElementById("phoneNumber");
+//                 let placeAddress = document.getElementById("placeAddress");
+//                 let introduction = document.getElementById("introduction");
+//
+//                 placeName.innerText = detailPlaceInfo.placeName;
+//                 let placeLIst = document.querySelectorAll("#placeList>li");
+//                 placeLIst.length;
+//                 // categoryName.innerText=detailPlaceInfo.categoryName;
+//                 phoneNumber.innerText = detailPlaceInfo.phoneNumber;
+//                 placeAddress.innerText = detailPlaceInfo.placeAddress;
+//                 introduction.innerText = detailPlaceInfo.introduction;
+//                 const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
+//                 imgPath.innerHTML = imgsrc;
+//             })
+//             .catch((error) => {
+//                 console.error(error);
+//                 alert("예기치 못한 오류가 발생했습니다.");
+//                 infoWrap.style.display = "none";
+//                 menuWrap.style.display = "block";
+//                 dayWrap.style.display = "none";
+//                 option[0].style.display = "block";
+//             });
+//         infoWrap.style.display = "block";
+//         menuWrap.style.display = "none";
+//         dayWrap.style.display = "none";
+//         option[0].style.display = "none";
+//     });
+// }
 //검색 비동기
 let searchBox = document.getElementById("searchBox");
 let searchKeyword = document.getElementById("searchKeyword1");
@@ -140,6 +140,7 @@ keyword.addEventListener("keyup", (e) => {
                     }
                 });
                 document.getElementById("placeList").innerHTML = html;
+                addPlaceListClickEvent();
             })
             .catch((error) => {
                 console.log(error);
@@ -174,11 +175,67 @@ searchKeyword.addEventListener("click", () => {
                 }
             });
             document.getElementById("placeList").innerHTML = html;
+            addPlaceListClickEvent();
         })
         .catch((error) => {
             console.log(error);
         });
 });
+
+function addPlaceListClickEvent() {
+    // 설명. 상세페이지
+    let scheduleAdd = document.getElementsByClassName("scheduleAdd");
+    let placeItem = document.getElementsByClassName("placeItem")
+    let placeList = document.querySelectorAll("#placeList>li")
+    scheduleAdd[0].addEventListener("click", () => {
+        dayWrap.style.display = "block";
+        infoWrap.style.display = "none";
+        BtnBox[0].style.display = "block";
+        option[0].style.display = "block";
+    });
+
+    for (let i = 0; i < placeList.length; i++) {
+        placeItem[i].addEventListener("click", () => {
+            let placeNo = placeList[i].querySelector("#placeNo").innerText; // 3030
+            console.log(placeNo);
+            fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data)
+                    let detailPlaceInfo = data.detailPlaceInfo;
+
+                    let placeName = document.getElementById("placeName")
+                    // let categoryName=document.getElementById("categoryName")
+                    let imgPath = document.getElementById("imgPath")
+                    let phoneNumber = document.getElementById("phoneNumber")
+                    let placeAddress = document.getElementById("placeAddress")
+                    let introduction = document.getElementById("introduction")
+
+                    placeName.innerText = detailPlaceInfo.placeName;
+                    // categoryName.innerText=detailPlaceInfo.categoryName;
+                    phoneNumber.innerText = detailPlaceInfo.phoneNumber;
+                    placeAddress.innerText = detailPlaceInfo.placeAddress;
+                    introduction.innerText = detailPlaceInfo.introduction;
+                    const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`
+                    imgPath.innerHTML = imgsrc;
+
+
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert("예기치 못한 오류가 발생했습니다.");
+                    infoWrap.style.display = "none";
+                    menuWrap.style.display = "block";
+                    dayWrap.style.display = "none";
+                    option[0].style.display = "block";
+                })
+            infoWrap.style.display = "block";
+            menuWrap.style.display = "none";
+            dayWrap.style.display = "none";
+            option[0].style.display = "none";
+        })
+    }
+}
 
 // 설명. Btnmouseover
 homeBtn.addEventListener("mouseover", () => {
@@ -237,7 +294,7 @@ myScheduleBtn.addEventListener("click", () => {
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
         .then((json) => {
-            let html=`  <div><h1>나의 일정</h1></div>`;
+            let html = `  <div><h1>나의 일정</h1></div>`;
             json.forEach((obj, idx) => {
                 console.log(json)
                 html += `
@@ -258,7 +315,7 @@ myScheduleBtn.addEventListener("click", () => {
         .catch((error) => {
             console.log(error);
         });
-    ;
+
     myScheduleModal.addEventListener("click", () => {
         myScheduleModal.style.display = "none";
         myScheduleModalBody[0].style.display = "none";
