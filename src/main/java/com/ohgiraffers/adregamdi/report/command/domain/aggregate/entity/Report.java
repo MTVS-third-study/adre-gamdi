@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.Date;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @ToString
 public class Report {

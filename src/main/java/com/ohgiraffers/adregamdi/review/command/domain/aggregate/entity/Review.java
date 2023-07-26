@@ -1,16 +1,15 @@
 package com.ohgiraffers.adregamdi.review.command.domain.aggregate.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo.ReviewPlaceNo;
+import com.ohgiraffers.adregamdi.review.command.domain.aggregate.vo.ReviewWriter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @ToString
 @Table(name = "TBL_REVIEW")
@@ -35,7 +34,7 @@ public class Review {
     @Column(name = "REG_DATE", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp regDate;
     @Embedded
-    private ReviewWriterNo reviewWriterNo;
+    private ReviewWriter reviewWriter;
     @Embedded
     private ReviewPlaceNo reviewPlaceNo;
 

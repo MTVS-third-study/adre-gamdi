@@ -3,17 +3,17 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'neon';
+    font-family: "neon";
     list-style: none;
-
 }
 @font-face {
-    font-family: 'neon';
-    src: url('./images/Yeongdeok\ Snow\ Crab.ttf') format('truetype');
+    font-family: "neon";
+    src: url("./images/Yeongdeok\ Snow\ Crab.ttf") format("truetype");
 }
 @font-face {
-    font-family: 'EF_jejudoldam';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+    font-family: "EF_jejudoldam";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2")
+    format("woff2");
 
     font-style: normal;
 }
@@ -31,12 +31,10 @@ body {
     margin: 0;
     overflow: hidden;
 }
-.scheduleSideBar{
+.scheduleSideBar {
     width: 80px;
 }
 .BtnBox {
-
-
     margin: 50px auto;
     text-align: center;
     z-index: 2;
@@ -53,9 +51,8 @@ body {
 }
 .BtnBox > div > img {
     width: 30px;
-
 }
-.userImgBox{
+.userImgBox {
     width: 40px;
     height: 40px;
     border-radius: 15px;
@@ -66,10 +63,8 @@ body {
     bottom: -29px;
 
     left: 20px;
-
 }
-.hideUserInfoBox{
-
+.hideUserInfoBox {
     display: none;
     width: 100px;
     height: 60px;
@@ -79,30 +74,28 @@ body {
     float: left;
     border: 1px thin black;
     line-height: 30px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
     position: absolute;
     bottom: 61px;
     left: 44px;
     font-size: 12px;
     cursor: pointer;
-
 }
-.hideUserInfoBox>.InfoBoxHr{
+.hideUserInfoBox > .InfoBoxHr {
     margin: 0;
     border-bottom: 1px solid #818384;
 }
 .schedule-list {
-
     float: none;
     width: 400px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
 }
 
 .schedule-content {
     display: flex;
     flex: 1;
 }
-.add{
+.add {
     background-color: orange;
     transition: all 1s;
 
@@ -125,19 +118,16 @@ body {
     border: none;
     color: white;
     background-color: green;
-
-
 }
-
 
 /* 검색 */
 #menu_wrap {
-    display: block;
+    display: none;
 }
-.keyword{
+.keyword {
     border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
-    border-radius: 16px ;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    border-radius: 16px;
     z-index: 4;
     width: 350px;
     height: 40px;
@@ -145,7 +135,7 @@ body {
     font-weight: bold;
     margin: 0 auto;
 }
-.searchKeyword{
+.searchKeyword {
     width: 20px;
     border: none;
     background-color: transparent;
@@ -156,13 +146,12 @@ body {
     left: -50px;
 }
 
-.searchKeyword>img{
+.searchKeyword > img {
     width: 20px;
 
     cursor: pointer;
-
 }
-.placeList{
+.placeList {
     height: 70vh;
     overflow-y: scroll;
 }
@@ -175,52 +164,50 @@ body {
     border-radius: 5px;
 }
 
-.placeList>li{
-
+.placeList > li {
     margin: 30px 0;
 }
-.placeList>li>.placeContents>img{
+.placeList > li > .placeContents > img {
     width: 84px;
     height: 84px;
     border-radius: 5px;
     background-color: gray;
 }
-.placeInfo{
+.placeInfo {
     width: 250px;
     height: 120px;
     line-height: 35px;
     font-size: 14px;
 }
-.placeCategory{
+.placeCategory {
     font-size: 7px;
 }
-.placeAdd{
+.placeAdd {
     width: 250px;
     font-size: 1em;
-
 }
-.placeContents{
+.placeContents {
     display: flex;
     justify-content: space-around;
 }
-.placeAddr{
+.placeAddr {
     font-size: 11px;
 }
 /* 일정 box */
 
 #day_wrap {
-    display:none;
+    display: block;
 }
-.scheduleBox{
+.scheduleBox {
     width: 400px;
 }
-.selectBox{
+.selectBox {
     width: 400px;
     margin: 0 auto;
     text-align: center;
 }
 
-.saveBtn{
+.saveBtn {
     width: 50px;
     height: 25px;
     border-radius: 10px;
@@ -230,11 +217,15 @@ body {
     position: relative;
     top: 10px;
     left: 73px;
-
 }
-.calendar{
+.scheduleSave {
+    float: right;
+    margin-right: 95px;
+    margin-top: 20px;
+}
+.calendar {
     border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
     border-radius: 16px;
     z-index: 4;
     width: 240px;
@@ -247,7 +238,7 @@ body {
 }
 .daySelect {
     border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
     border-radius: 16px;
     z-index: 4;
     width: 100px;
@@ -258,11 +249,11 @@ body {
     margin-top: 20px;
     margin-left: 10px;
 }
-.daySelect>option{
+.daySelect > option {
     text-align: left;
 }
 
-.dayList{
+.dayList {
     height: 70vh;
     overflow-y: scroll;
 }
@@ -275,39 +266,37 @@ body {
     border-radius: 5px;
 }
 
-.dayList>li{
+.dayList > li {
     display: flex;
     justify-content: space-around;
     margin: 20px 0;
     line-height: 30px;
 }
-.dayList>li>.dayPicture>img{
+.dayList > li > .dayPicture > img {
     width: 84px;
     height: 84px;
     border-radius: 5px;
     background-color: gray;
 }
-.dayList>li>.dayPicture>span{
+.dayList > li > .dayPicture > span {
     font-size: 12px;
 }
-.dayList>li>div>p{
+.dayList > li > div > p {
     font-size: 20px;
 }
-.dayList>li>div>.nextPlace{
+.dayList > li > div > .nextPlace {
     font-size: 11px;
     color: gray;
-    opacity: 0,5;
-
+    opacity: 0, 5;
 }
-.listnum{
+.listnum {
     position: relative;
     top: -13px;
     left: -23px;
-
 }
 /* 상세 box */
 
-#imgPath>img{
+#imgPath > img {
     width: 400px;
 }
 .titleBox {
@@ -325,8 +314,7 @@ body {
     border-bottom: 1px solid black;
     text-align: left;
     margin-left: 0px;
-    margin-top:0px;
-
+    margin-top: 0px;
 }
 hr {
     width: 100%;
@@ -369,7 +357,7 @@ hr {
     position: relative;
     top: -7px;
 }
-#introduction{
+#introduction {
     font-size: 13px;
 
     font-weight: bold;
@@ -398,16 +386,13 @@ hr {
 }
 .reviewContainer {
     display: none;
-
-
 }
-.reviewContentsBox{
+.reviewContentsBox {
     height: 80vh;
     overflow-y: scroll;
 }
 .reviewContentsBox::-webkit-scrollbar {
     width: 5px; /*스크롤바의 너비*/
-
 }
 
 .reviewContentsBox::-webkit-scrollbar-thumb {
@@ -436,7 +421,6 @@ hr {
     color: blue;
 
     border-bottom: 5px solid blue;
-
 }
 
 #reviewNav:hover {
@@ -448,10 +432,10 @@ hr {
     margin-right: 14px;
 }
 
-.reviewBox>.userinfoBox{
+.reviewBox > .userinfoBox {
     margin: 30px 0 10px 30px;
 }
-.userinfoBox>div{
+.userinfoBox > div {
     margin-bottom: 10px;
 }
 
@@ -478,11 +462,12 @@ hr {
 }
 .reviewImg > img {
     width: 100%;
+    height: 300px;
 }
-.white>img{
+.white > img {
     position: relative;
 }
-.black>img{
+.black > img {
     position: relative;
 }
 .csBox {
@@ -506,4 +491,93 @@ hr {
 }
 .black {
     display: block;
+}
+
+/* 내 일정불러오는 모달 */
+.myScheduleModal {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.schedule_modal_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: none;
+    width: 600px;
+    height: 700px;
+    z-index: 3;
+    padding: 40px;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+
+    transform: translateX(-50%) translateY(-50%);
+}
+.plan {
+    line-height: 30px;
+    width: 500px;
+    background-color: #fff;
+    color: #696cff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 30px;
+    overflow: scroll;
+}
+
+.plan::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+}
+
+.plan::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
+}
+.plan > div {
+    margin-left: 20px;
+    margin-top: 30px;
+}
+.plan_title {
+    width: 350px;
+}
+.plan_title input {
+    width: 150px;
+    height: 30px;
+    border: none;
+    margin-left: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+.plan_title input::placeholder {
+    font-size: 12px;
+    padding-left: 10px;
+}
+.plan_date > span {
+    margin-left: 20px;
+    color: grey;
+}
+.plan_cnt > span {
+    margin-left: 20px;
+    color: grey;
+}
+.schedule_modal_btnBox {
+    float: right;
+}
+.schedule_modal_btnBox button {
+    border: 1px solid #696cff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(0, 0, 0, 0.02);
+    background-color: transparent;
+    width: 60px;
+    height: 25px;
+    border-radius: 5px;
+    color: #696cff;
+    font-size: 11px;
+    margin-right: 20px;
 }
