@@ -30,14 +30,14 @@ reviewNav.addEventListener("click", () => {
 });
 
 // 설명. 지도 사이드바 설정 js
-let menuWrap = document.getElementById("menu_wrap");
-let dayWrap = document.getElementById("day_wrap");
-let infoWrap = document.getElementById("info_wrap");
-let homeBtn = document.getElementById("homeBtn");
-let myScheduleBtn = document.getElementById("myScheduleBtn");
-let imgBtn = document.getElementById("imgBtn");
-let BtnBox = document.getElementsByClassName("BtnBox");
-let option = document.getElementsByClassName("option");
+let menuWrap = document.getElementById("menu_wrap");    // 검색 list
+let dayWrap = document.getElementById("day_wrap");      // 일정 box
+let infoWrap = document.getElementById("info_wrap");    // 상세 box
+let homeBtn = document.getElementById("homeBtn");       // 홈 버튼
+let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 버튼
+let imgBtn = document.getElementById("imgBtn");         // new 버튼
+let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
+let option = document.getElementsByClassName("option");     // 검색 box
 homeBtn.addEventListener("click", () => {
     console.log(1);
 
@@ -50,19 +50,19 @@ homeBtn.addEventListener("click", () => {
 imgBtn.addEventListener("click", () => {
     console.log(3);
 
-    infoWrap.style.display = "block";
+    infoWrap.style.display = "none";
     menuWrap.style.display = "none";
-    dayWrap.style.display = "none";
-    BtnBox[0].style.display = "none";
+    dayWrap.style.display = "block";
+    BtnBox[0].style.display = "block";
     option[0].style.display = "none";
 });
 
-//검색 비동기
+// 설명. 검색 비동기
 let searchBox = document.getElementById("searchBox");
 let searchKeyword = document.getElementById("searchKeyword1");
 let keyword = document.querySelector(".keyword");
 let keywordValue = "";
-keyword.addEventListener("keyup", (e) => {
+keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤트
     if (e.keyCode === 13) {
         keywordValue = JSON.stringify(keyword.value);
 
@@ -93,6 +93,8 @@ keyword.addEventListener("keyup", (e) => {
                     }
                 });
                 document.getElementById("placeList").innerHTML = html;
+                menuWrap.style.display = "block";
+                dayWrap.style.display = "none";
                 addPlaceListClickEvent();
             })
             .catch((error) => {
@@ -100,7 +102,7 @@ keyword.addEventListener("keyup", (e) => {
             });
     }
 });
-searchKeyword.addEventListener("click", () => {
+searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 이벤트
 
     keywordValue = JSON.stringify(keyword.value);
 
@@ -131,14 +133,17 @@ searchKeyword.addEventListener("click", () => {
                 }
             });
             document.getElementById("placeList").innerHTML = html;
+            menuWrap.style.display = "block";
+            dayWrap.style.display = "none";
             addPlaceListClickEvent();
         })
         .catch((error) => {
             console.log(error);
         });
 });
+
+// 설명. 상세페이지
 function addPlaceListClickEvent() {
-    // 설명. 상세페이지
     let scheduleAdd = document.getElementsByClassName("scheduleAdd");
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
@@ -151,7 +156,7 @@ function addPlaceListClickEvent() {
 
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {
-            let placeNo = placeList[i].querySelector("#placeNo").innerText; // 3030
+            let placeNo = placeList[i].querySelector("#placeNo").innerText;
 
             fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
                 .then((response) => response.json())
@@ -191,6 +196,8 @@ function addPlaceListClickEvent() {
         });
     }
 }
+
+
 // 설명. Btnmouseover
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
@@ -212,8 +219,9 @@ imgBtn.addEventListener("mouseover", () => {
 imgBtn.addEventListener("mouseleave", () => {
     imgBtn.classList.remove("add");
 });
-// 설명. userInfoBox
 
+
+// 설명. userInfoBox
 let userImgBox = document.getElementsByClassName("userImgBox");
 let hideUserInfoBox = document.getElementsByClassName("hideUserInfoBox");
 let hideUserInfoBoxItem = document.querySelectorAll(".hideUserInfoBox>li");
@@ -245,13 +253,21 @@ myScheduleBtn.addEventListener("click", () => {
     console.log(2);
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
-        .then((json) => {
+        .then((data) => {
+            console.log(data);
 
-            console.log(json);
+            if (data.message) { // 에러 메세지가 존재한다면
+                alert(data.message);
+                return;
+            }
+
+            myScheduleModal.style.display = "block";
+            myScheduleModalBody[0].style.display = "block";
+
             let html = `  <div><h1>나의 일정</h1></div>`;
-            json.forEach((obj, idx) => {
+            data.myScheduleList.forEach((obj, idx) => {
 
-                    console.log(json);
+                    console.log(data.myScheduleList);
                     html += `
            
              <div class="plan">
@@ -270,8 +286,6 @@ myScheduleBtn.addEventListener("click", () => {
         .catch((error) => {
             console.log(error);
         });
-    myScheduleModal.style.display = "block";
-    myScheduleModalBody[0].style.display = "block";
 })
     myScheduleModal.addEventListener("click", () => {
         myScheduleModal.style.display = "none";

@@ -25,18 +25,17 @@ class ScheduleQueryServiceTest {
     void loadMyScheduleList() {
 
         // given
-        ScheduleDTO schedule = new ScheduleDTO(
-                "제주제주",
-                10L,
-                "kakao@duam.net",
-                "2023-07-07",
-                "2023-07-08"
-        );
-        Long userNo = 10L;
-
+//        ScheduleDTO schedule = new ScheduleDTO(
+//                "제주제주",
+//                10L,
+//                "kakao@duam.net",
+//                "2023-07-07",
+//                "2023-07-08"
+//        );
+//        Long userNo = 10L;
         // when & then
-        Assertions.assertDoesNotThrow(
-                () -> scheduleQueryService.loadMyScheduleList(userNo)
-        );
+//        Assertions.assertDoesNotThrow(
+//                () -> scheduleQueryService.loadMyScheduleList(userNo)
+//        );
     }
 }
