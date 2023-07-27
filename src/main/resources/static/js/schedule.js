@@ -4,10 +4,12 @@ let reviewNav = document.getElementById("reviewNav");
 let infoContents = document.getElementsByClassName("infoContents");
 let reviewContainer = document.getElementsByClassName("reviewContainer");
 let imgBox = document.getElementsByClassName("imgBox");
+let infoPlace=document.getElementsByClassName("infoPlace")
 infoNav.addEventListener("click", () => {
     infoContents[0].style.display = "block";
     reviewContainer[0].style.display = "none";
     imgBox[0].style.display = "block";
+
 });
 reviewNav.addEventListener("click", () => {
     fetch(`reviewController주소?placieNo=${placeNo}`)
@@ -23,10 +25,13 @@ reviewNav.addEventListener("click", () => {
             menuWrap.style.display = "block";
             dayWrap.style.display = "none";
             option[0].style.display = "block";
+            newDayWrap.style.display="none"
         });
     infoContents[0].style.display = "none";
     reviewContainer[0].style.display = "block";
     imgBox[0].style.display = "none";
+    infoPlace[0].style.display = "none";
+    newDayWrap.style.display="none"
 });
 
 // 설명. 지도 사이드바 설정 js
@@ -38,23 +43,25 @@ let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 �
 let imgBtn = document.getElementById("imgBtn");         // new 버튼
 let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
 let option = document.getElementsByClassName("option");     // 검색 box
+let newDayWrap=document.getElementById("newDay_wrap")
 homeBtn.addEventListener("click", () => {
     console.log(1);
 
     menuWrap.style.display = "block";
     dayWrap.style.display = "none";
     infoWrap.style.display = "none";
-    option[0].style.display = "block";
+    option[0].style.display = "block"; newDayWrap.style.display="none"
 });
 
 imgBtn.addEventListener("click", () => {
     console.log(3);
-
+    newDayWrap.style.display="block"
     infoWrap.style.display = "none";
     menuWrap.style.display = "none";
-    dayWrap.style.display = "block";
+    dayWrap.style.display = "none";
     BtnBox[0].style.display = "block";
-    option[0].style.display = "none";
+    option[0].style.display = "block";
+
 });
 
 // 설명. 검색 비동기
@@ -135,6 +142,7 @@ searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 
             document.getElementById("placeList").innerHTML = html;
             menuWrap.style.display = "block";
             dayWrap.style.display = "none";
+            newDayWrap.style.display="none"
             addPlaceListClickEvent();
         })
         .catch((error) => {
@@ -147,13 +155,23 @@ function addPlaceListClickEvent() {
     let scheduleAdd = document.getElementsByClassName("scheduleAdd");
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
+    let backBtn=document.getElementsByClassName("backBtn")
     scheduleAdd[0].addEventListener("click", () => {
         dayWrap.style.display = "block";
         infoWrap.style.display = "none";
         BtnBox[0].style.display = "block";
         option[0].style.display = "block";
+        newDayWrap.style.display="none"
     });
-
+    backBtn[0].addEventListener("click",()=>{
+        menuWrap.style.display="block"
+        dayWrap.style.display = "none";
+        infoWrap.style.display = "none";
+        BtnBox[0].style.display = "block";
+        option[0].style.display = "block";
+        reviewContainer.style.display="none";
+        newDayWrap.style.display="none"
+    })
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {
             let placeNo = placeList[i].querySelector("#placeNo").innerText;
@@ -180,6 +198,7 @@ function addPlaceListClickEvent() {
                     introduction.innerText = detailPlaceInfo.introduction;
                     const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
                     imgPath.innerHTML = imgsrc;
+
                 })
                 .catch((error) => {
                     console.error(error);
@@ -188,11 +207,16 @@ function addPlaceListClickEvent() {
                     menuWrap.style.display = "block";
                     dayWrap.style.display = "none";
                     option[0].style.display = "block";
+                    reviewContainer.style.display="none";
+                    newDayWrap.style.display="none"
                 });
+
             infoWrap.style.display = "block";
             menuWrap.style.display = "none";
             dayWrap.style.display = "none";
             option[0].style.display = "none";
+            reviewContainer.style.display="none";
+            newDayWrap.style.display="none"
         });
     }
 }
@@ -225,9 +249,11 @@ imgBtn.addEventListener("mouseleave", () => {
 let userImgBox = document.getElementsByClassName("userImgBox");
 let hideUserInfoBox = document.getElementsByClassName("hideUserInfoBox");
 let hideUserInfoBoxItem = document.querySelectorAll(".hideUserInfoBox>li");
+let hideBtn=document.getElementById("hideBtn")
 
 userImgBox[0].addEventListener("click", () => {
     hideUserInfoBox[0].style.display = "block";
+    hideBtn.style.display="block";
 });
 
 for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
@@ -237,11 +263,12 @@ for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
     hideUserInfoBoxItem[i].addEventListener("mouseleave", () => {
         hideUserInfoBoxItem[i].style.backgroundColor = "transparent";
     });
-    hideUserInfoBoxItem[i].addEventListener("click", () => {
-        hideUserInfoBox[0].style.display = "none";
-    });
-}
 
+}
+hideBtn.addEventListener("click", () => {
+    hideUserInfoBox[0].style.display = "none";
+    hideBtn.style.display="none";
+});
 //내 일정 모달창 설정
 let myScheduleModal = document.getElementById("myScheduleModal");
 let myScheduleModalBody = document.getElementsByClassName(
@@ -251,6 +278,12 @@ let scheduleModify = document.getElementsByClassName("scheduleModify");
 //내 일정 모달창
 myScheduleBtn.addEventListener("click", () => {
     console.log(2);
+    infoWrap.style.display = "none";
+    menuWrap.style.display = "none";
+    dayWrap.style.display = "block";
+    BtnBox[0].style.display = "block";
+    option[0].style.display = "block";
+    newDayWrap.style.display="none"
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
         .then((data) => {
@@ -291,63 +324,74 @@ myScheduleBtn.addEventListener("click", () => {
         myScheduleModal.style.display = "none";
         myScheduleModalBody[0].style.display = "none";
     });
-    scheduleModify[0].addEventListener("click", () => {
-        if ((dayWrap.style.display = "none")) {
-            dayWrap.style.display = "block";
-            infoWrap.style.display = "none";
-            menuWrap.style.display = "none";
-        }
+    // scheduleModify[0].addEventListener("click", () => {
+    //     if ((dayWrap.style.display = "none")) {
+    //         dayWrap.style.display = "block";
+    //         infoWrap.style.display = "none";
+    //         menuWrap.style.display = "none";
+    //     }
+    //
+    //     myScheduleModal.style.display = "none";
+    //     myScheduleModalBody[0].style.display = "none";
+    // });
 
-        myScheduleModal.style.display = "none";
-        myScheduleModalBody[0].style.display = "none";
+// 설명. caleder
+// function setCalendar() {
+    let startDate = "";
+    let endDate = "";
+    let dayAndNight = "";
+    $(function () {
+        $('input[name="datefilter"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: "Clear",
+            },
+        });
+
+        $('input[name="datefilter"]').on(
+            "apply.daterangepicker",
+            function (ev, picker) {
+                $(this).val(
+                    picker.startDate.format("MM/DD/YYYY") +
+                    " - " +
+                    picker.endDate.format("MM/DD/YYYY")
+                );
+
+                let startDate =
+                    picker.startDate._d.getUTCFullYear() +
+                    "-" +
+                    (picker.startDate._d.getMonth() +
+                        1) +
+                    "-" +
+                    picker.startDate._d.getDate() +
+                    "";
+                endDate =
+                    picker.endDate._d.getUTCFullYear() +
+                    "-" +
+                    (picker.endDate._d.getMonth() +
+                        1) +
+                    "-" +
+                    picker.endDate._d.getDate() +
+                    "";
+                fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.message) {
+                            alert(data.message);
+                            return;
+                        }
+                        dayAndNight = data.dayAndNight;
+                    });
+            }
+        );
+
+        $('input[name="datefilter"]').on(
+            "cancel.daterangepicker",
+            function (ev, picker) {
+                $(this).val("");
+            }
+        );
     });
+// }
 
-    //caleder
-
-$(function () {
-    $('input[name="datefilter"]').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            cancelLabel: "Clear",
-        },
-    });
-
-    $('input[name="datefilter"]').on(
-        "apply.daterangepicker",
-        function (ev, picker) {
-            $(this).val(
-                picker.startDate.format("MM/DD/YYYY") +
-                " - " +
-                picker.endDate.format("MM/DD/YYYY")
-            );
-
-            let startDate =
-                picker.startDate._d.getMonth() +
-                1 +
-                "" +
-                picker.startDate._d.getDate() +
-                "";
-
-            let endDate =
-                picker.endDate._d.getMonth() +
-                1 +
-                "" +
-                picker.endDate._d.getDate() +
-                "";
-            let result = endDate - startDate;
-            console.log(result);
-            fetch(``)
-                .then((response) => response.json())
-                .then((json) => {
-                    console.log(json);
-                });
-        }
-    );
-
-    $('input[name="datefilter"]').on(
-        "cancel.daterangepicker",
-        function (ev, picker) {
-            $(this).val("");
-        }
-    );
-});
+// 설명. 일정 세우기
