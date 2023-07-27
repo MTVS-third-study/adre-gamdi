@@ -291,63 +291,75 @@ myScheduleBtn.addEventListener("click", () => {
         myScheduleModal.style.display = "none";
         myScheduleModalBody[0].style.display = "none";
     });
-    scheduleModify[0].addEventListener("click", () => {
-        if ((dayWrap.style.display = "none")) {
-            dayWrap.style.display = "block";
-            infoWrap.style.display = "none";
-            menuWrap.style.display = "none";
-        }
+    // scheduleModify[0].addEventListener("click", () => {
+    //     if ((dayWrap.style.display = "none")) {
+    //         dayWrap.style.display = "block";
+    //         infoWrap.style.display = "none";
+    //         menuWrap.style.display = "none";
+    //     }
+    //
+    //     myScheduleModal.style.display = "none";
+    //     myScheduleModalBody[0].style.display = "none";
+    // });
 
-        myScheduleModal.style.display = "none";
-        myScheduleModalBody[0].style.display = "none";
+// 설명. caleder
+// function setCalendar() {
+    let startDate = "";
+    let endDate = "";
+    let dayAndNight = "";
+    $(function () {
+        $('input[name="datefilter"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: "Clear",
+            },
+        });
+
+        $('input[name="datefilter"]').on(
+            "apply.daterangepicker",
+            function (ev, picker) {
+                $(this).val(
+                    picker.startDate.format("MM/DD/YYYY") +
+                    " - " +
+                    picker.endDate.format("MM/DD/YYYY")
+                );
+
+                let startDate =
+                    picker.startDate._d.getUTCFullYear() +
+                    "-" +
+                    (picker.startDate._d.getMonth() +
+                        1) +
+                    "-" +
+                    picker.startDate._d.getDate() +
+                    "";
+                endDate =
+                    picker.endDate._d.getUTCFullYear() +
+                    "-" +
+                    (picker.endDate._d.getMonth() +
+                        1) +
+                    "-" +
+                    picker.endDate._d.getDate() +
+                    "";
+                fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.message) {
+                            alert(data.message);
+                            return;
+                        }
+                        dayAndNight = data.dayAndNight;
+                    });
+            }
+        );
+
+        $('input[name="datefilter"]').on(
+            "cancel.daterangepicker",
+            function (ev, picker) {
+                $(this).val("");
+            }
+        );
     });
+// }
 
-    //caleder
+// 설명. 일정 세우기
 
-$(function () {
-    $('input[name="datefilter"]').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            cancelLabel: "Clear",
-        },
-    });
-
-    $('input[name="datefilter"]').on(
-        "apply.daterangepicker",
-        function (ev, picker) {
-            $(this).val(
-                picker.startDate.format("MM/DD/YYYY") +
-                " - " +
-                picker.endDate.format("MM/DD/YYYY")
-            );
-
-            let startDate =
-                picker.startDate._d.getMonth() +
-                1 +
-                "" +
-                picker.startDate._d.getDate() +
-                "";
-
-            let endDate =
-                picker.endDate._d.getMonth() +
-                1 +
-                "" +
-                picker.endDate._d.getDate() +
-                "";
-            let result = endDate - startDate;
-            console.log(result);
-            fetch(``)
-                .then((response) => response.json())
-                .then((json) => {
-                    console.log(json);
-                });
-        }
-    );
-
-    $('input[name="datefilter"]').on(
-        "cancel.daterangepicker",
-        function (ev, picker) {
-            $(this).val("");
-        }
-    );
-});
