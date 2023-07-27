@@ -44,7 +44,7 @@ public class ScheduleDayVO {
         long diffSec = (format2.getTime() - format1.getTime()) / 1000;
         long diffDay = diffSec / (24*60*60);
 
-        return String.valueOf(diffDay);
+        return String.valueOf(diffDay + 1);
     }
 
 }

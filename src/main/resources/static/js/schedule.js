@@ -380,6 +380,7 @@ const newTravelSchedule = {
                             return;
                         }
                         let dayAndNight = data.dayAndNight;
+                        alert(dayAndNight);
                         newTravelSchedule.startDate=startDate;
                         newTravelSchedule.endDate=endDate;
                         newTravelSchedule.dayAndNight = dayAndNight;
@@ -432,7 +433,7 @@ function showSelectedDaySchedule() {    // 설명. 세부 일정 리스트 조�
                 <li class="dayScheduleList" onclick="selectDaySchedule(${i})">
                     <div class="daySchedule">
                         <h3>${i}일 차 일정</h3>
-                                            <hr>
+                        <hr>
                     </div>
                 </li>
         `
