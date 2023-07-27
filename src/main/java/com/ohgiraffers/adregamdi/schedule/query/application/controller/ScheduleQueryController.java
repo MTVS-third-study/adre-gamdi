@@ -33,6 +33,6 @@ public class ScheduleQueryController {
         }
         Long userNo = ((UserDTO) session.getAttribute("loginUser")).getUserNo();
         response.setMyScheduleList(scheduleQueryService.loadMyScheduleList(userNo));
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        return ResponseEntity.ok(response);
     }
 }
