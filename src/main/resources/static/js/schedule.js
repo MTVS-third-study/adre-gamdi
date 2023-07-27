@@ -257,10 +257,12 @@ myScheduleBtn.addEventListener("click", () => {
             console.log(data);
 
             if (data.message) { // 에러 메세지가 존재한다면
-                console.error(data.message);
+                alert(data.message);
                 return;
             }
 
+            myScheduleModal.style.display = "block";
+            myScheduleModalBody[0].style.display = "block";
 
             let html = `  <div><h1>나의 일정</h1></div>`;
             data.myScheduleList.forEach((obj, idx) => {
@@ -284,8 +286,6 @@ myScheduleBtn.addEventListener("click", () => {
         .catch((error) => {
             console.log(error);
         });
-    myScheduleModal.style.display = "block";
-    myScheduleModalBody[0].style.display = "block";
 })
     myScheduleModal.addEventListener("click", () => {
         myScheduleModal.style.display = "none";
