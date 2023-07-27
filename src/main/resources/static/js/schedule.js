@@ -102,7 +102,7 @@ keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤�
                 document.getElementById("placeList").innerHTML = html;
                 menuWrap.style.display = "block";
                 dayWrap.style.display = "none";
-                scheduleAdd[0].addEventListener( addPlaceOnDay(place))
+                addPlaceListClickEvent();
             })
             .catch((error) => {
                 console.log(error);
@@ -150,8 +150,10 @@ searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 
         });
 });
 
-let scheduleAdd = document.getElementsByClassName("scheduleAdd");
+
 // 설명. 상세페이지
+let scheduleAdd = document.getElementsByClassName("scheduleAdd");
+let detailPlaceInfo = "";
 function addPlaceListClickEvent() {
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
@@ -173,7 +175,7 @@ function addPlaceListClickEvent() {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
-                    let detailPlaceInfo = data.detailPlaceInfo;
+                    detailPlaceInfo = data.detailPlaceInfo;
 
                     let placeName = document.getElementById("placeName");
                     // let categoryName=document.getElementById("categoryName")
@@ -191,6 +193,7 @@ function addPlaceListClickEvent() {
                     introduction.innerText = detailPlaceInfo.introduction;
                     const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
                     imgPath.innerHTML = imgsrc;
+                    // addPlaceOnDay(detailPlaceInfo);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -335,9 +338,6 @@ const newTravelSchedule = {
     dayAndNight: "",
     travelDays: ""
 };
-    let startDate = "";
-    let endDate = "";
-    let dayAndNight = "";
     let daySelect = document.getElementById("daySelect");
     $(function () {
         $('input[name="datefilter"]').daterangepicker({
@@ -356,7 +356,7 @@ const newTravelSchedule = {
                     picker.endDate.format("MM/DD/YYYY")
                 );
 
-                startDate =
+                let startDate =
                     picker.startDate._d.getUTCFullYear() +
                     "-" +
                     (picker.startDate._d.getMonth() +
@@ -364,7 +364,7 @@ const newTravelSchedule = {
                     "-" +
                     picker.startDate._d.getDate() +
                     "";
-                endDate =
+                let endDate =
                     picker.endDate._d.getUTCFullYear() +
                     "-" +
                     (picker.endDate._d.getMonth() +
@@ -379,7 +379,7 @@ const newTravelSchedule = {
                             alert(data.message);
                             return;
                         }
-                        dayAndNight = data.dayAndNight;
+                        let dayAndNight = data.dayAndNight;
                         newTravelSchedule.startDate=startDate;
                         newTravelSchedule.endDate=endDate;
                         newTravelSchedule.dayAndNight = dayAndNight;
@@ -393,6 +393,7 @@ const newTravelSchedule = {
                             `;
                             daySelect.innerHTML = html;
                         }
+                        showSelectedDaySchedule();
                     });
             }
         );
@@ -406,42 +407,66 @@ const newTravelSchedule = {
 
 // 설명. 일정 세우기
 let dayNumber = 1;  // 첫 째날
-let travelDays = [];    // 몇박며칠
-let dailySchedule=[];   // 하루 일정
-let index = 0;
+let travelDays = {};    // 몇박며칠
+scheduleAdd[0].addEventListener("click", () => {    // 설명. 상세 페이지에서 일정추가 버튼 클릭 이벤트
+    console.log("매개변수로 넘어온 Place", detailPlaceInfo);
 
-function addPlaceOnDay(place) {
-    scheduleAdd[0].addEventListener("click", () => {
-        console.log("매개변수로 넘어온 Place", place);
-        dailySchedule[index] = place;
-        console.log("dailySchedule", dailySchedule);
-        index++;
-        travelDays[dayNumber] = dailySchedule;
-        console.log("travelDays", travelDays);
-        dayWrap.style.display = "block";
-        infoWrap.style.display = "none";
-        BtnBox[0].style.display = "block";
-        option[0].style.display = "block";
-    })
-}
+    if (!travelDays[dayNumber]) {
+        travelDays[dayNumber] = [];
+    }
 
-function showSelectedDaySchedule() {
+    travelDays[dayNumber].push(detailPlaceInfo);
+    console.log("travelDays", travelDays);
+    dayWrap.style.display = "block";
+    infoWrap.style.display = "none";
+    BtnBox[0].style.display = "block";
+    option[0].style.display = "block";
+    showSelectedDaySchedule()
+});
+function showSelectedDaySchedule() {    // 설명. 세부 일정 리스트 조회
     dayNumber = daySelect.options[daySelect.selectedIndex].value;
     let html = ``;
-    for (let i = 0; i < travelDays[dayNumber].length; i++) {
-        html += `
-            <li id="dayPlaceList">
-                <div>
-                    <img src="/images/daylistnum.png" alt=""><span class="listnum">${i+1}</span>
-                    <p>${travelDays[dayNumber][i].categoryName}</p>
-                </div>
-                <div class="dayPicture">
-                    <img src="${dailySchedule[dayNumber][i].imgPath}">
-                </div>
-                <hr>
-            </li>
-        `;
-    };
+    if (dayNumber === "allday") {
+        for (let i = 1; i < daySelect.options.length; i++){
+            html += `
+                <li class="dayScheduleList" onclick="selectDaySchedule(${i})">
+                    <div class="daySchedule">
+                        <h3>${i}일 차 일정</h3>
+                                            <hr>
+                    </div>
+                </li>
+        `
+        }
+    }
+    if (travelDays[dayNumber]) {
+        for (let i = 0; i < travelDays[dayNumber].length; i++) {
+            html += `
+                <li id="dayPlaceList">
+                    <div>
+                        <img src="/images/daylistnum.png" alt=""><span class="listnum">${i + 1}</span>
+                        <p>${travelDays[dayNumber][i].categoryName}</p>
+                    </div>
+                    <div class="dayPicture">
+                        <img src="${travelDays[dayNumber][i].imagePath}">
+                    </div>
+                    <p>${travelDays[dayNumber][i].placeName}</p>
+                    <hr>
+                </li>
+            `;
+        }
+    }
     document.getElementById("dayPlacesList").innerHTML = html;
 }
+function selectDaySchedule(day) {   // 설명. 전체 일정에서 일차 별 일정으로 이동 메소드
+    daySelect.value = day;
+    showSelectedDaySchedule();
+};
+let initScheduleBtn = document.getElementsByClassName("dayDelete");
+initScheduleBtn[0].addEventListener("click", () => {
+    let selectedDay = daySelect.options[daySelect.selectedIndex].value;
+    if (selectedDay === "allDay") {
+        travelDays = {};
+    }
+    travelDays[selectedDay] = [];
+});     // 설명. 선택된 날짜 일정 초기화
 
