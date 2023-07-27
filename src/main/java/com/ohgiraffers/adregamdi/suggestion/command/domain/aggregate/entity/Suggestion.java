@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 import javax.persistence.*;
 
 @Getter
@@ -19,10 +20,16 @@ public class Suggestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long suggestionNo;
 
-    @Column
-    private Long userNo;
+
+    @Embedded
+    private UserNo userNo;
 
     @Column
-    private String suggestion;
+    private String suggestionMessage;
 
+
+    public Suggestion(UserNo userNo, String suggestionMessage) {
+        this.userNo = userNo;
+        this.suggestionMessage = suggestionMessage;
+    }
 }

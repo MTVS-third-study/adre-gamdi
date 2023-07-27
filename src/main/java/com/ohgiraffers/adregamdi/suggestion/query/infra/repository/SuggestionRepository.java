@@ -1,12 +1,13 @@
 package com.ohgiraffers.adregamdi.suggestion.query.infra.repository;
 
-
 import com.ohgiraffers.adregamdi.suggestion.command.domain.aggregate.entity.Suggestion;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-@Mapper
-public interface SuggestionQueryMapper {
-    List<Suggestion> findAllSuggestion();
+public interface SuggestionRepository extends JpaRepository<Suggestion, Integer> {
+
+    List<Suggestion> findAll();
+
+
 }

@@ -41,7 +41,7 @@ public class SuggestionController {
 
         Long userNo = ((UserDTO)session.getAttribute("loginUser")).getUserNo();
 
-        suggestionCommandService.saveSuggestion(userNo, suggestionMessage);
+//        suggestionCommandService.saveSuggestion(userNo, suggestionMessage);
 
         return "redirect:/suggestion";
     }

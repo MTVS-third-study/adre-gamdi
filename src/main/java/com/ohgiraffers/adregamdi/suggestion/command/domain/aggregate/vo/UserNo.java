@@ -2,12 +2,17 @@ package com.ohgiraffers.adregamdi.suggestion.command.domain.aggregate.vo;
 
 
 import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
+import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
-public class UserNo {
+@Getter
+@ToString
+public class UserNo implements Serializable {
 
     @Column(name = "user_no")
     private Long userNo;
@@ -17,4 +22,5 @@ public class UserNo {
     public UserNo(Long userNo){
         this.userNo = userNo;
     }
+
 }
