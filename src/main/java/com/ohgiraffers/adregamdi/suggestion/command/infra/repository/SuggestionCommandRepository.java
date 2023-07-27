@@ -7,5 +7,4 @@ public interface SuggestionCommandRepository extends JpaRepository<Suggestion, I
 
     void deleteSuggestionBySuggestionNo(Long suggestionNo);
 
-
 }

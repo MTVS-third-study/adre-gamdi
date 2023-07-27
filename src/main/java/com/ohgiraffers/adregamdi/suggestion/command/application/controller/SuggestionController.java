@@ -1,6 +1,7 @@
 package com.ohgiraffers.adregamdi.suggestion.command.application.controller;
 
 
+import com.ohgiraffers.adregamdi.suggestion.command.application.dto.SuggestionDTO;
 import com.ohgiraffers.adregamdi.suggestion.command.application.service.SuggestionCommandService;
 import com.ohgiraffers.adregamdi.suggestion.command.domain.aggregate.vo.UserNo;
 import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
@@ -40,8 +41,8 @@ public class SuggestionController {
 
 
         Long userNo = ((UserDTO)session.getAttribute("loginUser")).getUserNo();
-
-//        suggestionCommandService.saveSuggestion(userNo, suggestionMessage);
+        SuggestionDTO suggestionDTO = new SuggestionDTO(userNo,suggestionMessage);
+        suggestionCommandService.insertSuggestion(suggestionDTO);
 
         return "redirect:/suggestion";
     }
