@@ -4,6 +4,7 @@ let reviewNav = document.getElementById("reviewNav");
 let infoContents = document.getElementsByClassName("infoContents");
 let reviewContainer = document.getElementsByClassName("reviewContainer");
 let imgBox = document.getElementsByClassName("imgBox");
+let infoPlace=document.getElementsByClassName("infoPlace")
 infoNav.addEventListener("click", () => {
     infoContents[0].style.display = "block";
     reviewContainer[0].style.display = "none";
@@ -27,6 +28,7 @@ reviewNav.addEventListener("click", () => {
     infoContents[0].style.display = "none";
     reviewContainer[0].style.display = "block";
     imgBox[0].style.display = "none";
+    infoPlace[0].style.display = "none";
 });
 
 // 설명. 지도 사이드바 설정 js
@@ -54,7 +56,8 @@ imgBtn.addEventListener("click", () => {
     menuWrap.style.display = "none";
     dayWrap.style.display = "block";
     BtnBox[0].style.display = "block";
-    option[0].style.display = "none";
+    option[0].style.display = "block";
+
 });
 
 // 설명. 검색 비동기
@@ -147,13 +150,22 @@ function addPlaceListClickEvent() {
     let scheduleAdd = document.getElementsByClassName("scheduleAdd");
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
+    let backBtn=document.getElementsByClassName("backBtn")
     scheduleAdd[0].addEventListener("click", () => {
         dayWrap.style.display = "block";
         infoWrap.style.display = "none";
         BtnBox[0].style.display = "block";
         option[0].style.display = "block";
     });
+    backBtn[0].addEventListener("click",()=>{
+        menuWrap.style.display="block"
+        dayWrap.style.display = "none";
+        infoWrap.style.display = "none";
+        BtnBox[0].style.display = "block";
+        option[0].style.display = "block";
+        reviewContainer.style.display="none";
 
+    })
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {
             let placeNo = placeList[i].querySelector("#placeNo").innerText;
@@ -188,11 +200,14 @@ function addPlaceListClickEvent() {
                     menuWrap.style.display = "block";
                     dayWrap.style.display = "none";
                     option[0].style.display = "block";
+                    reviewContainer.style.display="none";
                 });
+
             infoWrap.style.display = "block";
             menuWrap.style.display = "none";
             dayWrap.style.display = "none";
             option[0].style.display = "none";
+            reviewContainer.style.display="none";
         });
     }
 }
@@ -251,6 +266,12 @@ let scheduleModify = document.getElementsByClassName("scheduleModify");
 //내 일정 모달창
 myScheduleBtn.addEventListener("click", () => {
     console.log(2);
+    infoWrap.style.display = "none";
+    menuWrap.style.display = "none";
+    dayWrap.style.display = "block";
+    BtnBox[0].style.display = "block";
+    option[0].style.display = "block";
+
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
         .then((data) => {
@@ -362,4 +383,3 @@ myScheduleBtn.addEventListener("click", () => {
 // }
 
 // 설명. 일정 세우기
-
