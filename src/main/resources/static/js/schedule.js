@@ -9,6 +9,7 @@ infoNav.addEventListener("click", () => {
     infoContents[0].style.display = "block";
     reviewContainer[0].style.display = "none";
     imgBox[0].style.display = "block";
+
 });
 reviewNav.addEventListener("click", () => {
     fetch(`reviewController주소?placieNo=${placeNo}`)
@@ -24,11 +25,13 @@ reviewNav.addEventListener("click", () => {
             menuWrap.style.display = "block";
             dayWrap.style.display = "none";
             option[0].style.display = "block";
+            newDayWrap.style.display="none"
         });
     infoContents[0].style.display = "none";
     reviewContainer[0].style.display = "block";
     imgBox[0].style.display = "none";
     infoPlace[0].style.display = "none";
+    newDayWrap.style.display="none"
 });
 
 // 설명. 지도 사이드바 설정 js
@@ -40,21 +43,22 @@ let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 �
 let imgBtn = document.getElementById("imgBtn");         // new 버튼
 let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
 let option = document.getElementsByClassName("option");     // 검색 box
+let newDayWrap=document.getElementById("newDay_wrap")
 homeBtn.addEventListener("click", () => {
     console.log(1);
 
     menuWrap.style.display = "block";
     dayWrap.style.display = "none";
     infoWrap.style.display = "none";
-    option[0].style.display = "block";
+    option[0].style.display = "block"; newDayWrap.style.display="none"
 });
 
 imgBtn.addEventListener("click", () => {
     console.log(3);
-
+    newDayWrap.style.display="block"
     infoWrap.style.display = "none";
     menuWrap.style.display = "none";
-    dayWrap.style.display = "block";
+    dayWrap.style.display = "none";
     BtnBox[0].style.display = "block";
     option[0].style.display = "block";
 
@@ -138,6 +142,7 @@ searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 
             document.getElementById("placeList").innerHTML = html;
             menuWrap.style.display = "block";
             dayWrap.style.display = "none";
+            newDayWrap.style.display="none"
             addPlaceListClickEvent();
         })
         .catch((error) => {
@@ -158,7 +163,7 @@ function addPlaceListClickEvent() {
         BtnBox[0].style.display = "block";
         option[0].style.display = "block";
         reviewContainer.style.display="none";
-
+        newDayWrap.style.display="none"
     })
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {
@@ -186,7 +191,6 @@ function addPlaceListClickEvent() {
                     introduction.innerText = detailPlaceInfo.introduction;
                     const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
                     imgPath.innerHTML = imgsrc;
-                    addPlaceOnDay(detailPlaceInfo);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -196,6 +200,7 @@ function addPlaceListClickEvent() {
                     dayWrap.style.display = "none";
                     option[0].style.display = "block";
                     reviewContainer.style.display="none";
+                    newDayWrap.style.display="none"
                 });
 
             infoWrap.style.display = "block";
@@ -203,6 +208,7 @@ function addPlaceListClickEvent() {
             dayWrap.style.display = "none";
             option[0].style.display = "none";
             reviewContainer.style.display="none";
+            newDayWrap.style.display="none"
         });
     }
 }
@@ -232,13 +238,14 @@ imgBtn.addEventListener("mouseleave", () => {
 
 
 // 설명. userInfoBox
-
 let userImgBox = document.getElementsByClassName("userImgBox");
 let hideUserInfoBox = document.getElementsByClassName("hideUserInfoBox");
 let hideUserInfoBoxItem = document.querySelectorAll(".hideUserInfoBox>li");
+let hideBtn=document.getElementById("hideBtn")
 
 userImgBox[0].addEventListener("click", () => {
     hideUserInfoBox[0].style.display = "block";
+    hideBtn.style.display="block";
 });
 
 for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
@@ -248,11 +255,12 @@ for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
     hideUserInfoBoxItem[i].addEventListener("mouseleave", () => {
         hideUserInfoBoxItem[i].style.backgroundColor = "transparent";
     });
-    hideUserInfoBoxItem[i].addEventListener("click", () => {
-        hideUserInfoBox[0].style.display = "none";
-    });
-}
 
+}
+hideBtn.addEventListener("click", () => {
+    hideUserInfoBox[0].style.display = "none";
+    hideBtn.style.display="none";
+});
 //내 일정 모달창 설정
 let myScheduleModal = document.getElementById("myScheduleModal");
 let myScheduleModalBody = document.getElementsByClassName(
@@ -267,7 +275,7 @@ myScheduleBtn.addEventListener("click", () => {
     dayWrap.style.display = "block";
     BtnBox[0].style.display = "block";
     option[0].style.display = "block";
-
+    newDayWrap.style.display="none"
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
         .then((data) => {
