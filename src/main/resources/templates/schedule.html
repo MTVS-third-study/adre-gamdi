@@ -98,15 +98,14 @@
             <div class="scheduleBox">
                 <div class="selectBox">
                     <input type="text" name="datefilter" value="" class="calendar" />
-                    <select name="day" id="" class="daySelect form-select" aria-label="Default select example">
+                    <select name="day" id="daySelect" class="daySelect form-select" aria-label="Default select example"
+                            onchange="showSelectedDaySchedule()">
                         <option value="allday">전체일정</option>
-                        <option value="1day" >1일차</option>
-
                     </select>
 
                 </div>
                 <div class="dayScheduleWrapper">
-                    <ul id="placesList" class="dayList">
+                    <ul id="dayPlacesList" class="dayList">
 <!--                        <li >-->
 <!--                            <div>-->
 <!--                                <img src="/images/daylistnum.png" alt=""><span class="listnum">1</span>-->
@@ -130,7 +129,7 @@
 
 
 
-        <!-- 상세 box -->
+        <!-- 설명. 상세 box -->
         <div id="info_wrap" class="bg_white menu_wrap">
             <div class="imgBox">
                 <div  id="imgPath"></div>
