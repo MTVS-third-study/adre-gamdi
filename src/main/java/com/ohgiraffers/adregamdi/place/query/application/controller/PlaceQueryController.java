@@ -35,7 +35,7 @@ public class PlaceQueryController {
      Map<String,List<PlaceDTO>> responsePlaceList=new HashMap<>();
      responsePlaceList.put("respPlaceList",placeList);
         System.out.println("keyword = " + keyword);
-        placeList.forEach(System.out::println);
+//        placeList.forEach(System.out::println);
         return responsePlaceList;
     }
 

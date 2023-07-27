@@ -10,21 +10,34 @@ infoNav.addEventListener("click", () => {
     imgBox[0].style.display = "block";
 });
 reviewNav.addEventListener("click", () => {
+    fetch(`reviewController주소?placieNo=${placeNo}`)
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json);
+            console.log(placeNo);
+        })
+        .catch((error) => {
+            console.error(error);
+            alert("예기치 못한 오류가 발생했습니다.");
+            infoWrap.style.display = "none";
+            menuWrap.style.display = "block";
+            dayWrap.style.display = "none";
+            option[0].style.display = "block";
+        });
     infoContents[0].style.display = "none";
     reviewContainer[0].style.display = "block";
     imgBox[0].style.display = "none";
-    fetch(``)
 });
 
 // 설명. 지도 사이드바 설정 js
-let menuWrap = document.getElementById("menu_wrap");
-let dayWrap = document.getElementById("day_wrap");
-let infoWrap = document.getElementById("info_wrap");
-let homeBtn = document.getElementById("homeBtn");
-let myScheduleBtn = document.getElementById("myScheduleBtn");
-let imgBtn = document.getElementById("imgBtn");
-let BtnBox = document.getElementsByClassName("BtnBox");
-let option = document.getElementsByClassName("option");
+let menuWrap = document.getElementById("menu_wrap");    // 검색 list
+let dayWrap = document.getElementById("day_wrap");      // 일정 box
+let infoWrap = document.getElementById("info_wrap");    // 상세 box
+let homeBtn = document.getElementById("homeBtn");       // 홈 버튼
+let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 버튼
+let imgBtn = document.getElementById("imgBtn");         // new 버튼
+let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
+let option = document.getElementsByClassName("option");     // 검색 box
 homeBtn.addEventListener("click", () => {
     console.log(1);
 
@@ -34,82 +47,22 @@ homeBtn.addEventListener("click", () => {
     option[0].style.display = "block";
 });
 
-myScheduleBtn.addEventListener("click", () => {
-    console.log(2);
-
-    dayWrap.style.display = "block";
-    menuWrap.style.display = "none";
-    infoWrap.style.display = "none";
-    option[0].style.display = "block";
-});
 imgBtn.addEventListener("click", () => {
     console.log(3);
 
-    infoWrap.style.display = "block";
+    infoWrap.style.display = "none";
     menuWrap.style.display = "none";
-    dayWrap.style.display = "none";
-    BtnBox[0].style.display = "none";
+    dayWrap.style.display = "block";
+    BtnBox[0].style.display = "block";
     option[0].style.display = "none";
 });
 
-// 설명. 상세페이지
-let scheduleAdd = document.getElementsByClassName("scheduleAdd");
-let placeItem = document.getElementsByClassName("placeItem");
-let placeList = document.querySelectorAll("#placeList>li");
-scheduleAdd[0].addEventListener("click", () => {
-    dayWrap.style.display = "block";
-    infoWrap.style.display = "none";
-    BtnBox[0].style.display = "block";
-    option[0].style.display = "block";
-});
-
-for (let i = 0; i < placeList.length; i++) {
-    placeItem[i].addEventListener("click", () => {
-        let placeNo = placeList[i].querySelector("#placeNo").innerText; // 3030
-
-        fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                let detailPlaceInfo = data.detailPlaceInfo;
-
-                let placeName = document.getElementById("placeName");
-                // let categoryName=document.getElementById("categoryName")
-                let imgPath = document.getElementById("imgPath");
-                let phoneNumber = document.getElementById("phoneNumber");
-                let placeAddress = document.getElementById("placeAddress");
-                let introduction = document.getElementById("introduction");
-
-                placeName.innerText = detailPlaceInfo.placeName;
-                let placeLIst = document.querySelectorAll("#placeList>li");
-                placeLIst.length;
-                // categoryName.innerText=detailPlaceInfo.categoryName;
-                phoneNumber.innerText = detailPlaceInfo.phoneNumber;
-                placeAddress.innerText = detailPlaceInfo.placeAddress;
-                introduction.innerText = detailPlaceInfo.introduction;
-                const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
-                imgPath.innerHTML = imgsrc;
-            })
-            .catch((error) => {
-                console.error(error);
-                alert("예기치 못한 오류가 발생했습니다.");
-                infoWrap.style.display = "none";
-                menuWrap.style.display = "block";
-                dayWrap.style.display = "none";
-                option[0].style.display = "block";
-            });
-        infoWrap.style.display = "block";
-        menuWrap.style.display = "none";
-        dayWrap.style.display = "none";
-        option[0].style.display = "none";
-    });
-}
-//검색 비동기
+// 설명. 검색 비동기
 let searchBox = document.getElementById("searchBox");
 let searchKeyword = document.getElementById("searchKeyword1");
 let keyword = document.querySelector(".keyword");
 let keywordValue = "";
-keyword.addEventListener("keyup", (e) => {
+keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤트
     if (e.keyCode === 13) {
         keywordValue = JSON.stringify(keyword.value);
 
@@ -140,13 +93,19 @@ keyword.addEventListener("keyup", (e) => {
                     }
                 });
                 document.getElementById("placeList").innerHTML = html;
+                menuWrap.style.display = "block";
+                dayWrap.style.display = "none";
+                addPlaceListClickEvent();
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 });
-searchKeyword.addEventListener("click", () => {
+searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 이벤트
+
+    keywordValue = JSON.stringify(keyword.value);
+
     fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
         .then((response) => response.json())
         .then((json) => {
@@ -156,7 +115,7 @@ searchKeyword.addEventListener("click", () => {
                 if (!json.length) {
                     console.log("등록된 값이없습니다");
                 } else {
-                    console.log(obj);
+
                     html += `
                         <li class="placeItem">
                     <div class="placeContents">
@@ -174,11 +133,70 @@ searchKeyword.addEventListener("click", () => {
                 }
             });
             document.getElementById("placeList").innerHTML = html;
+            menuWrap.style.display = "block";
+            dayWrap.style.display = "none";
+            addPlaceListClickEvent();
         })
         .catch((error) => {
             console.log(error);
         });
 });
+
+// 설명. 상세페이지
+function addPlaceListClickEvent() {
+    let scheduleAdd = document.getElementsByClassName("scheduleAdd");
+    let placeItem = document.getElementsByClassName("placeItem");
+    let placeList = document.querySelectorAll("#placeList>li");
+    scheduleAdd[0].addEventListener("click", () => {
+        dayWrap.style.display = "block";
+        infoWrap.style.display = "none";
+        BtnBox[0].style.display = "block";
+        option[0].style.display = "block";
+    });
+
+    for (let i = 0; i < placeList.length; i++) {
+        placeItem[i].addEventListener("click", () => {
+            let placeNo = placeList[i].querySelector("#placeNo").innerText;
+
+            fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    let detailPlaceInfo = data.detailPlaceInfo;
+
+                    let placeName = document.getElementById("placeName");
+                    // let categoryName=document.getElementById("categoryName")
+                    let imgPath = document.getElementById("imgPath");
+                    let phoneNumber = document.getElementById("phoneNumber");
+                    let placeAddress = document.getElementById("placeAddress");
+                    let introduction = document.getElementById("introduction");
+
+                    placeName.innerText = detailPlaceInfo.placeName;
+                    let placeLIst = document.querySelectorAll("#placeList>li");
+                    placeLIst.length;
+                    // categoryName.innerText=detailPlaceInfo.categoryName;
+                    phoneNumber.innerText = detailPlaceInfo.phoneNumber;
+                    placeAddress.innerText = detailPlaceInfo.placeAddress;
+                    introduction.innerText = detailPlaceInfo.introduction;
+                    const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
+                    imgPath.innerHTML = imgsrc;
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert("예기치 못한 오류가 발생했습니다.");
+                    infoWrap.style.display = "none";
+                    menuWrap.style.display = "block";
+                    dayWrap.style.display = "none";
+                    option[0].style.display = "block";
+                });
+            infoWrap.style.display = "block";
+            menuWrap.style.display = "none";
+            dayWrap.style.display = "none";
+            option[0].style.display = "none";
+        });
+    }
+}
+
 
 // 설명. Btnmouseover
 homeBtn.addEventListener("mouseover", () => {
@@ -201,8 +219,9 @@ imgBtn.addEventListener("mouseover", () => {
 imgBtn.addEventListener("mouseleave", () => {
     imgBtn.classList.remove("add");
 });
-// 설명. userInfoBox
 
+
+// 설명. userInfoBox
 let userImgBox = document.getElementsByClassName("userImgBox");
 let hideUserInfoBox = document.getElementsByClassName("hideUserInfoBox");
 let hideUserInfoBoxItem = document.querySelectorAll(".hideUserInfoBox>li");
@@ -229,18 +248,27 @@ let myScheduleModalBody = document.getElementsByClassName(
     "schedule_modal_body"
 );
 let scheduleModify = document.getElementsByClassName("scheduleModify");
-
+//내 일정 모달창
 myScheduleBtn.addEventListener("click", () => {
-    myScheduleModal.style.display = "block";
-    myScheduleModalBody[0].style.display = "block";
-
+    console.log(2);
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
-        .then((json) => {
-            let html=`  <div><h1>나의 일정</h1></div>`;
-            json.forEach((obj, idx) => {
-                console.log(json)
-                html += `
+        .then((data) => {
+            console.log(data);
+
+            if (data.message) { // 에러 메세지가 존재한다면
+                alert(data.message);
+                return;
+            }
+
+            myScheduleModal.style.display = "block";
+            myScheduleModalBody[0].style.display = "block";
+
+            let html = `  <div><h1>나의 일정</h1></div>`;
+            data.myScheduleList.forEach((obj, idx) => {
+
+                    console.log(data.myScheduleList);
+                    html += `
            
              <div class="plan">
             <div class="plan_title">여행 이름 <span><input type="text" placeholder=${obj.scheduleName}></span></div>
@@ -249,16 +277,16 @@ myScheduleBtn.addEventListener("click", () => {
             <div class="schedule_modal_btnBox">
                 <button class="modal_btn scheduleModify">일정 수정</button>
                 <button class="modal_btn">삭제</button>
-            </div>
-            
-                    `
-            })
+            </div>         
+                    `;
+
+            });
             document.getElementById("schedule_modal_body").innerHTML = html;
         })
         .catch((error) => {
             console.log(error);
         });
-    ;
+})
     myScheduleModal.addEventListener("click", () => {
         myScheduleModal.style.display = "none";
         myScheduleModalBody[0].style.display = "none";
@@ -274,9 +302,8 @@ myScheduleBtn.addEventListener("click", () => {
         myScheduleModalBody[0].style.display = "none";
     });
 
-//caleder
+    //caleder
 
-})
 $(function () {
     $('input[name="datefilter"]').daterangepicker({
         autoUpdateInput: false,
@@ -324,5 +351,3 @@ $(function () {
         }
     );
 });
-
-// 리뷰 불러오기
