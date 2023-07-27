@@ -122,7 +122,7 @@ body {
 
 /* 검색 */
 #menu_wrap {
-    display: none;
+    display: block;
 }
 .keyword {
     border: none;
@@ -196,7 +196,7 @@ body {
 /* 일정 box */
 
 #day_wrap {
-    display: block;
+    display: none;
 }
 .scheduleBox {
     width: 400px;
@@ -370,7 +370,7 @@ hr {
     text-align: center;
 }
 .scheduleAdd {
-    width: 200px;
+    width: 100px;
     height: 40px;
     border-radius: 10px;
     background-color: transparent;
@@ -378,7 +378,19 @@ hr {
     color: blue;
     cursor: pointer;
 }
-
+.backBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid blue;
+    color: blue;
+    cursor: pointer;
+    position: relative;
+    top: 8px;
+    left: -13px;
+}
+.backBtn>img{width: 30px}
 /* 리뷰 */
 .on {
     color: blue;
