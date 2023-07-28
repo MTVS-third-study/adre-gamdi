@@ -32,7 +32,7 @@ public class ScheduleController {
         }
         Long userNo = ((UserDTO)session.getAttribute("loginUser")).getUserNo();
         scheduleDTO.setUserNo(userNo);
-        String insertResult = scheduleService.insertSchedule(scheduleDTO);
+        String insertResult = scheduleService.insertSchedule(scheduleDTO, detailScheduleDTO);
         return ResponseEntity.ok(insertResult);
     }
 

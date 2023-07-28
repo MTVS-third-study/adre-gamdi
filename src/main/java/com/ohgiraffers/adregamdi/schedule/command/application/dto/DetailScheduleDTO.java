@@ -12,6 +12,7 @@ import java.util.Objects;
 @ToString
 public class DetailScheduleDTO {
 
+    private Long scheduleNo;
     private String dayAndNight;
     private Map<String, Objects> travelDays;
 }
