@@ -34,6 +34,8 @@ public class ReviewQueryService {
             reviewDTO.setRegDate(review.getRegDate());
             reviewDTO.setReviewWriter(review.getReviewWriter());
             reviewDTO.setReviewPlaceNo(review.getReviewPlaceNo());
+            reviewDTO.setStarPoint(review.getStarPoint());
+            reviewDTO.setLikeNum(review.getLikeNum());
 
             reviewDTOList.add(reviewDTO);
         }
