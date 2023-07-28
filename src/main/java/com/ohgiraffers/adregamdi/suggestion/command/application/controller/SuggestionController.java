@@ -36,12 +36,18 @@ public class SuggestionController {
 
     @PostMapping("/submitMessage")
     public String submitSuggestion(@RequestParam("suggestionMessage") String suggestionMessage,
+                                   @RequestParam("suggestPostcode") String postCode,
+                                   @RequestParam("suggestRoadAddress") String roadAddress,
+                                   @RequestParam("suggestAddress") String address,
+                                   @RequestParam("suggestDetailAddress") String detailAddress,
+                                   @RequestParam("suggestPlaceName") String placeName,
+                                   @RequestParam("suggestPhoneNumber") String phoneNumber,
                                    HttpSession session){
 
 
 
         Long userNo = ((UserDTO)session.getAttribute("loginUser")).getUserNo();
-        SuggestionDTO suggestionDTO = new SuggestionDTO(userNo,suggestionMessage);
+        SuggestionDTO suggestionDTO = new SuggestionDTO(userNo,placeName,postCode,roadAddress,address,detailAddress,phoneNumber,suggestionMessage);
         suggestionCommandService.insertSuggestion(suggestionDTO);
 
         return "redirect:/suggestion";

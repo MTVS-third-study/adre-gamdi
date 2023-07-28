@@ -29,6 +29,12 @@ public class SuggestionCommandService {
         suggestionCommandRepository.save(
                 new Suggestion(
                         new UserNo(suggestionDTO.getUserNo()),
+                        suggestionDTO.getPlaceName(),
+                        suggestionDTO.getPostCode(),
+                        suggestionDTO.getRoadAddress(),
+                        suggestionDTO.getAddress(),
+                        suggestionDTO.getDetailAddress(),
+                        suggestionDTO.getPhoneNumber(),
                         suggestionDTO.getSuggestionMessage()
                 )
         );
