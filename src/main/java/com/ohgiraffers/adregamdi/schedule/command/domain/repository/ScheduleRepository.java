@@ -4,4 +4,6 @@ import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.entity.Schedu
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
+
+
 }
