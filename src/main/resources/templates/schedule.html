@@ -62,7 +62,6 @@
 
     <!-- 설명. 세컨드 container -->
     <div class="schedule-list" id="schedule_wrap">
-        <!-- <a href="/#"><img src="images/logo.png" style="height: 60px; width: 60px"/></a> -->
 
         <!-- 설명. 검색 box -->
         <div class="option">
@@ -78,20 +77,6 @@
         <div id="menu_wrap" class="bg_white menu_wrap">
             <hr />
             <ul class="placeList" id="placeList" >
-                <!--                <li th:each="place:${placeList}" class="placeItem">-->
-                <!--                    <div class="placeContents">-->
-                <!--                    <div class="placeInfo">-->
-                <!--                        <p th:text="${place.getPlaceNo()}" id="placeNo" style="display: none"></p>-->
-                <!--                        <h4 th:text="${place.getPlaceName()}"></h4>-->
-                <!--                        <p th:text="${place.getCategoryName()}"></p>-->
-                <!--                        <span th:text="${place.getPlaceAddress()}" class="placeAddr"></span><br>-->
-                <!--                        <span th:text="${place.getPhoneNumber()}"></span>-->
-                <!--                    </div>-->
-                <!--                    <img th:src="${place.thumbnailPath}" alt="">-->
-                <!--                    </div>-->
-                <!--                <hr>-->
-                <!--                </li>-->
-
             </ul>
             <div >
                 <span>1</span>
@@ -118,20 +103,6 @@
                 </div>
                 <div class="dayScheduleWrapper">
                     <ul id="dayPlacesList" class="dayList">
-<!--                        <li >-->
-<!--                            <div>-->
-<!--                                <img src="/images/daylistnum.png" alt=""><span class="listnum">1</span>-->
-<!--                                <p >음식점</p>-->
-
-<!--                                <span ></span>-->
-
-<!--                            </div>-->
-<!--                            <div class="dayPicture">-->
-<!--                                <img  alt="">-->
-<!--                                <p class="nextPlace" >다음 장소까지: <p >200</p>km</p>-->
-<!--                            </div>-->
-<!--                        <hr>-->
-<!--                        </li>-->
                     </ul>
 
                         <button class="saveBtn scheduleSave">저장</button>
@@ -140,47 +111,6 @@
                 </div>
             </div>
         </div>
-
-<!--        &lt;!&ndash;설명. new 일정 box &ndash;&gt;-->
-<!--        <div id="newDay_wrap" class="bg_white newDay_wrap">-->
-<!--            <hr />-->
-<!--            <div class="scheduleBox">-->
-<!--                <div class="selectBox">-->
-<!--                    <div><span>여행 이름 : </span>-->
-<!--                    <input type="text" placeholder="일정 이름을 변경해주세요" class="newPlaceName" maxlength="15">-->
-<!--                    </div>-->
-<!--                    <input type="text" name="datefilter" value="" class="calendar" placeholder="날짜를 선택해주세요"/>-->
-<!--                    <select name="day" id="" class="daySelect form-select" aria-label="Default select example">-->
-<!--                        <option value="allday">전체 일정</option>-->
-<!--                    </select>-->
-
-<!--                </div>-->
-<!--                <div class="dayScheduleWrapper">-->
-<!--                    <ul id="newPlaceList" class="dayList">-->
-<!--                        &lt;!&ndash;                        <li >&ndash;&gt;-->
-<!--                        &lt;!&ndash;                            <div>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                                <img src="/images/daylistnum.png" alt=""><span class="listnum">1</span>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                                <p >음식점</p>&ndash;&gt;-->
-
-<!--                        &lt;!&ndash;                                <span ></span>&ndash;&gt;-->
-
-<!--                        &lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                            <div class="dayPicture">&ndash;&gt;-->
-<!--                        &lt;!&ndash;                                <img  alt="">&ndash;&gt;-->
-<!--                        &lt;!&ndash;                                <p class="nextPlace" >다음 장소까지: <p >200</p>km</p>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                        <hr>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                        </li>&ndash;&gt;-->
-<!--                    </ul>-->
-
-<!--                    <button class="saveBtn scheduleSave">저장</button>-->
-<!--                    <button class="saveBtn dayDelete">초기화</button>-->
-
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
 
         <!-- 설명. 상세 box -->
         <div id="info_wrap" class="bg_white menu_wrap">
@@ -333,15 +263,6 @@
     <div class="myScheduleModal" id="myScheduleModal"></div> <!---->
     <div class="schedule_modal_body" id="schedule_modal_body">
         <div><h1>나의 일정</h1></div>
-<!--        <div class="plan">-->
-<!--            <div class="plan_title">여행 이름 <span><input type="text" placeholder="여행이름"></span></div>-->
-<!--            <div class="plan_date">여행 일자 <span>2023-07-23~2023-07-25</span></div>-->
-<!--            <div class="plan_cnt">선택장소 <span>12</span></div>-->
-<!--            <div class="schedule_modal_btnBox">-->
-<!--                <button class="modal_btn scheduleModify">일정 수정</button>-->
-<!--                <button class="modal_btn">삭제</button>-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
     </div>
 

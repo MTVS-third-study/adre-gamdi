@@ -44,6 +44,7 @@ let imgBtn = document.getElementById("imgBtn");         // new 버튼
 let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
 let option = document.getElementsByClassName("option");     // 검색 box
 // let newDayWrap=document.getElementById("newDay_wrap")
+// 필기. 검색 버튼 이벤트
 homeBtn.addEventListener("click", () => {
     console.log(1);
 
@@ -52,13 +53,27 @@ homeBtn.addEventListener("click", () => {
     infoWrap.style.display = "none";
     // option[0].style.display = "block"; newDayWrap.style.display="none"
 });
-
+// 필기. 새 일정 짜기 버튼 이벤트
 imgBtn.addEventListener("click", () => {
     console.log(3);
-    // newDayWrap.style.display="block"
+    const confirm = window.confirm("새 일정을 추가하시겠습니까?");
+    if (!confirm) {
+        return;
+    }
+    window.localStorage.setItem("newTravelSchedule", newTravelSchedule);
+    travelDays = {};
+    newTravelSchedule = {
+        scheduleName: "",
+        startDate: "",
+        endDate: "",
+        dayAndNight: "",
+        travelDays: ""
+    };
+    showSelectedDaySchedule();
+
     infoWrap.style.display = "none";
     menuWrap.style.display = "none";
-    dayWrap.style.display = "none";
+    dayWrap.style.display = "block";
     BtnBox[0].style.display = "block";
     option[0].style.display = "block";
 
@@ -331,7 +346,7 @@ myScheduleModal.addEventListener("click", () => {
     // });
 
 /*설명. caleder*/
-const newTravelSchedule = {
+let newTravelSchedule = {
     scheduleName: "",
     startDate: "",
     endDate: "",
@@ -388,7 +403,11 @@ const newTravelSchedule = {
                         for (let i=1; i<=dayAndNight; i++) {
 
                             html += `
-                                <option value="${i}" class="testt">${i}일 차</option>
+                            if (i === 1) {
+                                <option value="${i}" selected="selected">${i}일 차</option>
+                            } else{
+                                <option value="${i}">${i}일 차</option>
+                            }
                             `;
                             daySelect.innerHTML = html;
                         }
