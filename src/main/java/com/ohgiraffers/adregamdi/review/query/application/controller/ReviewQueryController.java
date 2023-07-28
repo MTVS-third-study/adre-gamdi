@@ -17,7 +17,7 @@ import java.util.*;
 @RequestMapping("/review/query")
 public class ReviewQueryController {
 
-    private ReviewQueryService reviewQueryService;
+    private final ReviewQueryService reviewQueryService;
 
     @Autowired
     public ReviewQueryController(ReviewQueryService reviewQueryService) {
@@ -36,7 +36,6 @@ public class ReviewQueryController {
 
         Map<String, List<ReviewDTO>> reviewInfo = new HashMap<>();
         reviewInfo.put("reviewInfo", reviewList);
-
 
         return reviewInfo;
 
