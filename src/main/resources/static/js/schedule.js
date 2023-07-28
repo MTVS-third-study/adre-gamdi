@@ -1,4 +1,4 @@
-// 설명. reviwpage
+/* 설명. reviwpage */
 let infoNav = document.getElementById("infoNav");
 let reviewNav = document.getElementById("reviewNav");
 let infoContents = document.getElementsByClassName("infoContents");
@@ -25,16 +25,16 @@ reviewNav.addEventListener("click", () => {
             menuWrap.style.display = "block";
             dayWrap.style.display = "none";
             option[0].style.display = "block";
-            newDayWrap.style.display="none"
+            // newDayWrap.style.display="none"
         });
     infoContents[0].style.display = "none";
     reviewContainer[0].style.display = "block";
     imgBox[0].style.display = "none";
     infoPlace[0].style.display = "none";
-    newDayWrap.style.display="none"
+    // newDayWrap.style.display="none"
 });
 
-// 설명. 지도 사이드바 설정 js
+/* 설명. 지도 사이드바 설정 js */
 let menuWrap = document.getElementById("menu_wrap");    // 검색 list
 let dayWrap = document.getElementById("day_wrap");      // 일정 box
 let infoWrap = document.getElementById("info_wrap");    // 상세 box
@@ -43,19 +43,19 @@ let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 �
 let imgBtn = document.getElementById("imgBtn");         // new 버튼
 let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
 let option = document.getElementsByClassName("option");     // 검색 box
-let newDayWrap=document.getElementById("newDay_wrap")
+// let newDayWrap=document.getElementById("newDay_wrap")
 homeBtn.addEventListener("click", () => {
     console.log(1);
 
     menuWrap.style.display = "block";
     dayWrap.style.display = "none";
     infoWrap.style.display = "none";
-    option[0].style.display = "block"; newDayWrap.style.display="none"
+    // option[0].style.display = "block"; newDayWrap.style.display="none"
 });
 
 imgBtn.addEventListener("click", () => {
     console.log(3);
-    newDayWrap.style.display="block"
+    // newDayWrap.style.display="block"
     infoWrap.style.display = "none";
     menuWrap.style.display = "none";
     dayWrap.style.display = "none";
@@ -64,7 +64,7 @@ imgBtn.addEventListener("click", () => {
 
 });
 
-// 설명. 검색 비동기
+/*설명. 검색 비동기*/
 let searchBox = document.getElementById("searchBox");
 let searchKeyword = document.getElementById("searchKeyword1");
 let keyword = document.querySelector(".keyword");
@@ -142,7 +142,7 @@ searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 
             document.getElementById("placeList").innerHTML = html;
             menuWrap.style.display = "block";
             dayWrap.style.display = "none";
-            newDayWrap.style.display="none"
+            // newDayWrap.style.display="none"
             addPlaceListClickEvent();
         })
         .catch((error) => {
@@ -150,19 +150,14 @@ searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 
         });
 });
 
-// 설명. 상세페이지
+
+/*설명. 상세페이지*/
+let scheduleAdd = document.getElementsByClassName("scheduleAdd");
+let detailPlaceInfo = "";
 function addPlaceListClickEvent() {
-    let scheduleAdd = document.getElementsByClassName("scheduleAdd");
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
     let backBtn=document.getElementsByClassName("backBtn")
-    scheduleAdd[0].addEventListener("click", () => {
-        dayWrap.style.display = "block";
-        infoWrap.style.display = "none";
-        BtnBox[0].style.display = "block";
-        option[0].style.display = "block";
-        newDayWrap.style.display="none"
-    });
     backBtn[0].addEventListener("click",()=>{
         menuWrap.style.display="block"
         dayWrap.style.display = "none";
@@ -170,7 +165,7 @@ function addPlaceListClickEvent() {
         BtnBox[0].style.display = "block";
         option[0].style.display = "block";
         reviewContainer.style.display="none";
-        newDayWrap.style.display="none"
+        // newDayWrap.style.display="none"
     })
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {
@@ -180,7 +175,7 @@ function addPlaceListClickEvent() {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
-                    let detailPlaceInfo = data.detailPlaceInfo;
+                    detailPlaceInfo = data.detailPlaceInfo;
 
                     let placeName = document.getElementById("placeName");
                     // let categoryName=document.getElementById("categoryName")
@@ -198,7 +193,6 @@ function addPlaceListClickEvent() {
                     introduction.innerText = detailPlaceInfo.introduction;
                     const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
                     imgPath.innerHTML = imgsrc;
-
                 })
                 .catch((error) => {
                     console.error(error);
@@ -208,7 +202,7 @@ function addPlaceListClickEvent() {
                     dayWrap.style.display = "none";
                     option[0].style.display = "block";
                     reviewContainer.style.display="none";
-                    newDayWrap.style.display="none"
+                    // newDayWrap.style.display="none"
                 });
 
             infoWrap.style.display = "block";
@@ -216,13 +210,13 @@ function addPlaceListClickEvent() {
             dayWrap.style.display = "none";
             option[0].style.display = "none";
             reviewContainer.style.display="none";
-            newDayWrap.style.display="none"
+            // newDayWrap.style.display="none"
         });
     }
 }
 
 
-// 설명. Btnmouseover
+/*설명. Btnmouseover*/
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
 });
@@ -245,7 +239,7 @@ imgBtn.addEventListener("mouseleave", () => {
 });
 
 
-// 설명. userInfoBox
+/*설명. userInfoBox*/
 let userImgBox = document.getElementsByClassName("userImgBox");
 let hideUserInfoBox = document.getElementsByClassName("hideUserInfoBox");
 let hideUserInfoBoxItem = document.querySelectorAll(".hideUserInfoBox>li");
@@ -269,13 +263,14 @@ hideBtn.addEventListener("click", () => {
     hideUserInfoBox[0].style.display = "none";
     hideBtn.style.display="none";
 });
-//내 일정 모달창 설정
+
+/*설명. 내 일정 모달창 설정*/
 let myScheduleModal = document.getElementById("myScheduleModal");
 let myScheduleModalBody = document.getElementsByClassName(
     "schedule_modal_body"
 );
 let scheduleModify = document.getElementsByClassName("scheduleModify");
-//내 일정 모달창
+// 내 일정 모달창
 myScheduleBtn.addEventListener("click", () => {
     console.log(2);
     infoWrap.style.display = "none";
@@ -283,7 +278,7 @@ myScheduleBtn.addEventListener("click", () => {
     dayWrap.style.display = "block";
     BtnBox[0].style.display = "block";
     option[0].style.display = "block";
-    newDayWrap.style.display="none"
+    // newDayWrap.style.display="none"
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
         .then((data) => {
@@ -320,10 +315,10 @@ myScheduleBtn.addEventListener("click", () => {
             console.log(error);
         });
 })
-    myScheduleModal.addEventListener("click", () => {
-        myScheduleModal.style.display = "none";
-        myScheduleModalBody[0].style.display = "none";
-    });
+myScheduleModal.addEventListener("click", () => {
+    myScheduleModal.style.display = "none";
+    myScheduleModalBody[0].style.display = "none";
+});
     // scheduleModify[0].addEventListener("click", () => {
     //     if ((dayWrap.style.display = "none")) {
     //         dayWrap.style.display = "block";
@@ -335,11 +330,15 @@ myScheduleBtn.addEventListener("click", () => {
     //     myScheduleModalBody[0].style.display = "none";
     // });
 
-// 설명. caleder
-// function setCalendar() {
-    let startDate = "";
-    let endDate = "";
-    let dayAndNight = "";
+/*설명. caleder*/
+const newTravelSchedule = {
+    scheduleName: "",
+    startDate: "",
+    endDate: "",
+    dayAndNight: "",
+    travelDays: ""
+};
+    let daySelect = document.getElementById("daySelect");
     $(function () {
         $('input[name="datefilter"]').daterangepicker({
             autoUpdateInput: false,
@@ -365,7 +364,7 @@ myScheduleBtn.addEventListener("click", () => {
                     "-" +
                     picker.startDate._d.getDate() +
                     "";
-                endDate =
+                let endDate =
                     picker.endDate._d.getUTCFullYear() +
                     "-" +
                     (picker.endDate._d.getMonth() +
@@ -380,11 +379,23 @@ myScheduleBtn.addEventListener("click", () => {
                             alert(data.message);
                             return;
                         }
-                        dayAndNight = data.dayAndNight;
+                        let dayAndNight = data.dayAndNight;
+                        newTravelSchedule.startDate=startDate;
+                        newTravelSchedule.endDate=endDate;
+                        newTravelSchedule.dayAndNight = dayAndNight;
+
+                        let html = ` <option value="allday">전체 일정</option>`;
+                        for (let i=1; i<=dayAndNight; i++) {
+
+                            html += `
+                                <option value="${i}" class="testt">${i}일 차</option>
+                            `;
+                            daySelect.innerHTML = html;
+                        }
+                        showSelectedDaySchedule();
                     });
             }
         );
-
         $('input[name="datefilter"]').on(
             "cancel.daterangepicker",
             function (ev, picker) {
@@ -392,6 +403,101 @@ myScheduleBtn.addEventListener("click", () => {
             }
         );
     });
-// }
 
-// 설명. 일정 세우기
+/*설명. 일정 추가*/
+let dayNumber = 1;  // 첫 째날
+let travelDays = {};    // 몇박며칠
+function setScheduleName() {    // 필기. 일정 이름 변경 이벤트
+    let changedScheduleName = document.getElementsByClassName("newPlaceName");
+    changedScheduleName[0].addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤트
+        if (e.keyCode === 13) {
+            console.log("newTravelSchedule 이름", newTravelSchedule);
+        }
+    });
+    newTravelSchedule.scheduleName = changedScheduleName[0].value;
+
+}
+scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지에서 일정추가 버튼 클릭 이벤트
+    console.log("매개변수로 넘어온 Place", detailPlaceInfo);
+
+    if (!travelDays[dayNumber]) {
+        travelDays[dayNumber] = [];
+    }
+    if (dayNumber === "allday") {
+        alert('일정 일 차를 지정해주세요!');
+        return;
+    }
+
+    travelDays[dayNumber].push(detailPlaceInfo);
+    console.log("travelDays", travelDays);
+    dayWrap.style.display = "block";
+    infoWrap.style.display = "none";
+    BtnBox[0].style.display = "block";
+    option[0].style.display = "block";
+    showSelectedDaySchedule()
+});
+function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조회
+    dayNumber = daySelect.options[daySelect.selectedIndex].value;
+    let html = ``;
+    if (dayNumber === "allday") {   // 필기. 전체 일정 선택 시
+        for (let i = 1; i < daySelect.options.length; i++){
+            html += `
+                <li class="dayScheduleList" onclick="selectDaySchedule(${i})">
+                    <div class="daySchedule">
+                        <h3>${i}일 차 일정</h3>
+                        <hr>
+                    </div>
+                </li>
+        `
+        }
+    }
+    if (travelDays[dayNumber]) {    // 필기. 일 차가 있다면
+        for (let i = 0; i < travelDays[dayNumber].length; i++) {
+            html += `
+                <li id="dayPlaceList">
+                    <div>
+                        <img src="/images/daylistnum.png" alt=""><span class="listnum">${i + 1}</span>
+                        <p>${travelDays[dayNumber][i].categoryName}</p>
+                    </div>
+                    <div class="dayPicture">
+                        <img src="${travelDays[dayNumber][i].imagePath}">
+                    </div>
+                    <p>${travelDays[dayNumber][i].placeName}</p>
+                    <hr>
+                </li>
+            `;
+        }
+    }
+    document.getElementById("dayPlacesList").innerHTML = html;
+
+    newTravelSchedule.travelDays = travelDays;
+    console.log("newTravelSchedule", newTravelSchedule);
+    window.localStorage.setItem("newTravelSchedule", JSON.stringify(newTravelSchedule) );
+}
+function selectDaySchedule(day) {   // 필기. 전체 일정에서 일차 별 일정으로 이동 메소드
+    daySelect.value = day;
+    showSelectedDaySchedule();
+};
+// 필기. 선택된 날짜 일정 초기화
+let initScheduleBtn = document.getElementById("initScheduleBtn");
+initScheduleBtn.addEventListener("click", () => {
+    let selectedDay = daySelect.options[daySelect.selectedIndex].value;
+    if (selectedDay === "allday") {
+
+        const confirmed = window.confirm("전체 일정이 초기화됩니다.\n정말 초기화하시겠습니까?");
+        if (!confirmed) {
+            return;
+        }
+        travelDays = {};
+        showSelectedDaySchedule();
+        return;
+    }
+
+    const confirmed = window.confirm(`${selectedDay}일 차 일정이 초기화됩니다.\n정말 초기화하시겠습니까?`);
+    if (!confirmed) {
+        return;
+    }
+    travelDays[selectedDay] = [];
+    showSelectedDaySchedule();
+});
+

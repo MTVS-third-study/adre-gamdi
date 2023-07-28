@@ -25,6 +25,8 @@
 
 <body>
 <div class="schedule-container">
+
+    <!-- 설명. 사이드 바 -->
     <div id="hideBtn"></div>
     <div class="scheduleSideBar">
         <div class="BtnBox">
@@ -44,7 +46,7 @@
                 <p>new</p>
             </div>
             <div class="userImgBox">
-                <img th:src="${session.loginUser.getKakaoProfileImage()}" alt="" class="userImg">
+                <img th:if="${session.loginUser}" th:src="${session.loginUser.getKakaoProfileImage()}" alt="" class="userImg">
             </div>
         </div>
 
@@ -54,7 +56,9 @@
             <hr class="InfoBoxHr">
             <li    onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:8080/oauth/kakao/logout'">Logout</li>
         </ul>
-    </div>
+    </div>  <!--end 사이드 바-->
+
+    <!-- 설명. 세컨드 container -->
     <div class="schedule-list" id="schedule_wrap">
         <!-- <a href="/#"><img src="images/logo.png" style="height: 60px; width: 60px"/></a> -->
 
@@ -100,15 +104,18 @@
             <hr />
             <div class="scheduleBox">
                 <div class="selectBox">
+                    <div><span>여행 이름 : </span>
+                        <input type="text" placeholder="일정 이름을 변경해주세요" class="newPlaceName" maxlength="15" onchange="setScheduleName()">
+                    </div>
                     <input type="text" name="datefilter" value="" class="calendar" />
-                    <select name="day" id="" class="daySelect form-select" aria-label="Default select example">
-                        <option value="allday">전체일정</option>
-                        <option value="1day" >1일차</option>
+                    <select name="day" id="daySelect" class="daySelect form-select" aria-label="Default select example"
+                            onchange="showSelectedDaySchedule()">
+                        <option value="allday">전체 일정</option>
                     </select>
 
                 </div>
                 <div class="dayScheduleWrapper">
-                    <ul id="placesList" class="dayList">
+                    <ul id="dayPlacesList" class="dayList">
 <!--                        <li >-->
 <!--                            <div>-->
 <!--                                <img src="/images/daylistnum.png" alt=""><span class="listnum">1</span>-->
@@ -126,56 +133,54 @@
                     </ul>
 
                         <button class="saveBtn scheduleSave">저장</button>
-                        <button class="saveBtn dayDelete">초기화</button>
+                        <button class="saveBtn dayDelete" id="initScheduleBtn">초기화</button>
 
                 </div>
             </div>
         </div>
 
-<!--        new wrap-->
-        <div id="newDay_wrap" class="bg_white newDay_wrap">
-            <hr />
-            <div class="scheduleBox">
-                <div class="selectBox">
-                    <div><span>여행 이름 : </span>
-                    <input type="text" placeholder="일정 이름을 변경해주세요" class="newPlaceName" maxlength="15">
-                    </div>
-                    <input type="text" name="datefilter" value="" class="calendar" placeholder="날짜를 선택해주세요"/>
-                    <select name="day" id="" class="daySelect form-select" aria-label="Default select example">
-                        <option value="allday">전체일정</option>
-                        <option value="1day" >1일차</option>
+<!--        &lt;!&ndash;설명. new 일정 box &ndash;&gt;-->
+<!--        <div id="newDay_wrap" class="bg_white newDay_wrap">-->
+<!--            <hr />-->
+<!--            <div class="scheduleBox">-->
+<!--                <div class="selectBox">-->
+<!--                    <div><span>여행 이름 : </span>-->
+<!--                    <input type="text" placeholder="일정 이름을 변경해주세요" class="newPlaceName" maxlength="15">-->
+<!--                    </div>-->
+<!--                    <input type="text" name="datefilter" value="" class="calendar" placeholder="날짜를 선택해주세요"/>-->
+<!--                    <select name="day" id="" class="daySelect form-select" aria-label="Default select example">-->
+<!--                        <option value="allday">전체 일정</option>-->
+<!--                    </select>-->
 
-                    </select>
+<!--                </div>-->
+<!--                <div class="dayScheduleWrapper">-->
+<!--                    <ul id="newPlaceList" class="dayList">-->
+<!--                        &lt;!&ndash;                        <li >&ndash;&gt;-->
+<!--                        &lt;!&ndash;                            <div>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                                <img src="/images/daylistnum.png" alt=""><span class="listnum">1</span>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                                <p >음식점</p>&ndash;&gt;-->
 
-                </div>
-                <div class="dayScheduleWrapper">
-                    <ul id="newPlaceList" class="dayList">
-                        <!--                        <li >-->
-                        <!--                            <div>-->
-                        <!--                                <img src="/images/daylistnum.png" alt=""><span class="listnum">1</span>-->
-                        <!--                                <p >음식점</p>-->
+<!--                        &lt;!&ndash;                                <span ></span>&ndash;&gt;-->
 
-                        <!--                                <span ></span>-->
+<!--                        &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                            <div class="dayPicture">&ndash;&gt;-->
+<!--                        &lt;!&ndash;                                <img  alt="">&ndash;&gt;-->
+<!--                        &lt;!&ndash;                                <p class="nextPlace" >다음 장소까지: <p >200</p>km</p>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        <hr>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        </li>&ndash;&gt;-->
+<!--                    </ul>-->
 
-                        <!--                            </div>-->
-                        <!--                            <div class="dayPicture">-->
-                        <!--                                <img  alt="">-->
-                        <!--                                <p class="nextPlace" >다음 장소까지: <p >200</p>km</p>-->
-                        <!--                            </div>-->
-                        <!--                        <hr>-->
-                        <!--                        </li>-->
-                    </ul>
+<!--                    <button class="saveBtn scheduleSave">저장</button>-->
+<!--                    <button class="saveBtn dayDelete">초기화</button>-->
 
-                    <button class="saveBtn scheduleSave">저장</button>
-                    <button class="saveBtn dayDelete">초기화</button>
-
-                </div>
-            </div>
-        </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
 
 
-        <!-- 상세 box -->
+        <!-- 설명. 상세 box -->
         <div id="info_wrap" class="bg_white menu_wrap">
             <div class="imgBox">
                 <div  id="imgPath"></div>
@@ -195,6 +200,8 @@
                     <span id="introduction"></span>
                 </p>
                 <hr class="infoContentsHr"/>
+
+                <!-- 설명. 상세 - 정보 내용 -->
                 <div class="infoContents">
                     <div class="info">
                         <p>
@@ -215,6 +222,7 @@
                     </div>
                 </div>
 
+                <!-- 설명. 상세 - 리뷰 내용 -->
                 <div class="reviewContainer">
                     <div class="reviewHeader">
                         <div class="totlaPoint">
@@ -267,22 +275,20 @@
                                 </div>
                             </div>
                             <hr class="infoContentsHr">
-
                         </div>
-
                     </div>
-
                 </div>
-            </div>
-        </div>
-    </div>
-    <!--리뷰 작성 모달창-->
+
+            </div> <!--end InfoBox-->
+        </div>  <!--end 상세 Box -->
+
+    </div> <!--end second Container-->
+
+    <!--설명. 리뷰 작성 모달창-->
     <div class="modal">
         <div class="modal_body">리뷰 작성하기
 
             <form action="review/regist" name="review" id="review" method="post" encType="multipart/form-data">
-
-
                 <button class="closeBtn">닫기</button>
 
                 <div class="reviewStarPoint">
@@ -301,23 +307,24 @@
                     </fieldset><br>
                 </div>
 
-            <div class="reviewContents1">
-                <input type="file" name="imageFile" id="imageFile" accept="image/jpg, image/jpeg, image/png"
-                       onchange="readURL(this);"><br>
-                <span th:text="${ incorrectExtension }" style="color:red;"></span>
-                <br>
-                <img id="preview" style="width: 200px; height: 200px"/><br>
-                <br>
-                <textarea name="reviewContent" type="text" id="reviewContent"
-                          placeholder="리뷰 내용을 입력해주세요"></textarea><br>
-                <span th:text="${ nullContent }" style="color:red;"></span>
-            </div>
-            <input type="submit" value="등록하기">
-        </form>
+                <div class="reviewContents1">
+                    <input type="file" name="imageFile" id="imageFile" accept="image/jpg, image/jpeg, image/png"
+                           onchange="readURL(this);"><br>
+                    <span th:text="${ incorrectExtension }" style="color:red;"></span>
+                    <br>
+                    <img id="preview" style="width: 200px; height: 200px"/><br>
+                    <br>
+                    <textarea name="reviewContent" type="text" id="reviewContent"
+                              placeholder="리뷰 내용을 입력해주세요"></textarea><br>
+                    <span th:text="${ nullContent }" style="color:red;"></span>
+                </div>
+                <input type="submit" value="등록하기">
+            </form>
 
+        </div><!--end modal body-->
+    </div><!--end modal-->
 
-</div>
-    </div>
+    <!--설명. 지도 컨테이너 -->
     <div id="map" class="schedule-map" style="width: 65%; height: 100vh;"></div>
 
     <!-- 스케쥴 페이지에서 일정눌렀을 떄 내 일정 나오는 모달창 -->
@@ -334,9 +341,9 @@
 <!--            </div>-->
 <!--        </div>-->
     </div>
-
     </div>
-</div>
+
+</div><!--end Schedule Container-->
 
 <script src="/js/kakaomap.js"></script>
 <script src="/js/schedule.js"></script>
