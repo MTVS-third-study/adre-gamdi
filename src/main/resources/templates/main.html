@@ -36,8 +36,9 @@
                          width="300" />
                 </a>
             </th:block>
+
             <th:block th:if="${session.loginUser != null}" class="afterLogin" style="display: none;">
-                <div class="center-title" >
+                <div class="center-title">
                     <th:block th:if="${session.loginUser.getServiceNickName() == ''}">
                         <span class="user-title" th:text="${session.loginUser.getKakaoNickName()}"></span>
                         <span>님 환영합니다!</span>
@@ -47,6 +48,7 @@
                         <span> 님 환영합니다!</span>
                     </th:block>
                 </div>
+
 
                 <div class="myPageBtn">
                     <button class="upperBtn" onclick="location.href='/schedule'" type="button">일정 짜기</button>
@@ -75,6 +77,9 @@
                         </button>
                     </div>
                 </th:block>
+                <div class="suggestionPageBtn">
+                    <button onclick="location.href='/suggestion'">장소 수정 제보</button>
+                </div>
             </th:block>
 <!--                <script src="/js/main.js"></script>-->
         </div>
