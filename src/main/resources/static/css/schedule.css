@@ -223,15 +223,16 @@ body {
     height: 25px;
     border-radius: 10px;
     background-color: transparent;
-    border: 1px solid blue;
-    color: blue;
+    border: 1px solid orange;
+    color: orange;
     position: relative;
     top: 10px;
     left: 73px;
+    transition: all 1s;
 }
 .scheduleSave {
     float: right;
-    margin-right: 95px;
+    margin-right: 160px;
     margin-top: 20px;
     width: 100px;
     height: 40px;
@@ -275,7 +276,7 @@ body {
 }
 
 .dayList {
-    height: 70vh;
+    height:65vh;
     overflow-y: scroll;
     overflow-x: hidden;
 
@@ -290,33 +291,54 @@ body {
 }
 
 .dayList > li {
+    line-height: 30px;
+    width: 390px;
+    background-color: #fff;
+    color: #696cff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 30px;
+}
+.dayList > li > div {
     display: flex;
     justify-content: space-around;
-    margin: 20px 0;
+    margin: 20px;
     line-height: 30px;
 }
-
-.dayList > li > .dayPicture > img {
+#dayPlaceList > div >.dayListNumInfo {
+    height: 45px;
+    margin-top: 27px;
+}
+.dayListNumInfo>p{
+    font-size: 16px;
+    width: 50px;
+    position: relative;
+    left: 53px;
+    top: -20px;
+}
+.dayList > li > div > .dayPicture > img {
     width: 84px;
     height: 84px;
     border-radius: 5px;
     background-color: gray;
 }
-.dayList > li > .dayPicture > span {
+.dayList > li > div > .dayPicture > span {
     font-size: 12px;
 }
-.dayList > li > div > p {
+.dayList > li > div > .dayListNumInfo > span {
     font-size: 20px;
+    position: relative;
+    top: -24px;
 }
+.dayList > li > div > .dayListNumInfo > .listnum {
+    font-size: 15px;
+    top: -13px;
+    left: -21px;
+}
+
 .dayList > li > div > .nextPlace {
     font-size: 11px;
     color: gray;
     opacity: 0.5;
-}
-.listnum {
-    position: relative;
-    top: -13px;
-    left: -23px;
 }
 /*new day*/
 #newDay_wrap{
@@ -413,28 +435,30 @@ hr {
     margin: 0 auto;
     margin-top: 40px;
     text-align: center;
+    display: flex;
 }
 .scheduleAdd {
     width: 100px;
     height: 40px;
     border-radius: 10px;
     background-color: transparent;
-    border: 1px solid blue;
-    color: blue;
+    border: 1px solid orange;
+    color: orange;
     cursor: pointer;
+    transition: all 1s;
 }
 .backBtn {
-    width: 40px;
+    width: 100px;
     height: 40px;
     border-radius: 10px;
     background-color: transparent;
-    border: 1px solid blue;
-    color: blue;
+    border: 1px solid orange;
+    color: orange;
     cursor: pointer;
-    position: relative;
-    top: 8px;
-    left: -13px;
+    margin-right: 15px;
+    transition: all 1s;
 }
+
 .backBtn>img{width: 30px}
 /* 리뷰 */
 .on {
@@ -469,20 +493,20 @@ hr {
     height: 30px;
     border-radius: 10px;
     background-color: transparent;
-    border: 1px solid blue;
-    color: blue;
+    border: 1px solid orange;
+    color: orange;
     margin-bottom: 30px;
 }
 
 #infoNav:hover {
-    color: blue;
+    color: orange;
 
-    border-bottom: 5px solid blue;
+    border-bottom: 2px solid orange;
 }
 
 #reviewNav:hover {
-    color: blue;
-    border-bottom: 5px solid blue;
+    color: orange;
+    border-bottom: 2px solid orange;
 }
 .reviewBtn > img {
     width: 15px;
