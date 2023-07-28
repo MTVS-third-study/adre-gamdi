@@ -269,17 +269,17 @@ function addPlaceListClickEvent() {
 
 
 /*설명. Btnmouseover*/
-let saveBtn=document.querySelectorAll(".saveBtn")
-for(let i=0;i<40;i++){
-    saveBtn[i].addEventListener("mouseover",()=>{
-        saveBtn[i].style.backgroundColor="orange";
-        saveBtn[i].style.color="white";
-    })
-    saveBtn[i].addEventListener("mouseleave",()=>{
-        saveBtn[i].style.backgroundColor="transparent";
-        saveBtn[i].style.color="orange";
-    })
-}
+// let saveBtn=document.querySelectorAll(".saveBtn")
+// for(let i=0;i<40;i++){
+//     saveBtn[i].addEventListener("mouseover",()=>{
+//         saveBtn[i].style.backgroundColor="orange";
+//         saveBtn[i].style.color="white";
+//     })
+//     saveBtn[i].addEventListener("mouseleave",()=>{
+//         saveBtn[i].style.backgroundColor="transparent";
+//         saveBtn[i].style.color="orange";
+//     })
+// }
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
 });
@@ -450,13 +450,15 @@ let newTravelSchedule = {
                         let html = ` <option value="allday">전체 일정</option>`;
                         for (let i=1; i<=dayAndNight; i++) {
 
-                            html += `
                             if (i === 1) {
-                                <option value="${i}" selected="selected">${i}일 차</option>
+                                html += `
+                                    <option value="${i}" selected="selected">${i}일 차</option>
+                                `;
                             } else{
-                                <option value="${i}">${i}일 차</option>
+                                html += `
+                                    <option value="${i}">${i}일 차</option>
+                                `;
                             }
-                            `;
                             daySelect.innerHTML = html;
                         }
                         showSelectedDaySchedule();
