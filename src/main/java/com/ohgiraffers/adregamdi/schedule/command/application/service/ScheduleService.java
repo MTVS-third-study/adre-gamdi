@@ -7,8 +7,6 @@ import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.ScheduleUs
 import com.ohgiraffers.adregamdi.schedule.command.domain.repository.ScheduleRepository;
 import com.ohgiraffers.adregamdi.schedule.command.domain.service.ScheduleDomainService;
 import com.ohgiraffers.adregamdi.schedule.query.application.service.ScheduleQueryService;
-import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
-import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
 import com.ohgiraffers.adregamdi.user.query.application.service.UserQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +21,7 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
 
     private final UserQueryService userQueryService;
+//    private final
 
     @Autowired
     public ScheduleService (ScheduleDomainService scheduleDomainService,
@@ -35,20 +34,13 @@ public class ScheduleService {
         this.userQueryService = userQueryService;
     }
 
-    public ScheduleDTO insertSchedule(ScheduleDTO scheduleDTO) {
+    public String insertSchedule(ScheduleDTO scheduleDTO) {
         Schedule insertedSchedule = scheduleRepository.save(new Schedule(
                 new ScheduleUserNoVO(scheduleDTO.getUserNo()),
                 scheduleDTO.getScheduleName(),
-                new ScheduleDayVO(scheduleDTO.getStartDay(), scheduleDTO.getEndDay())
+                new ScheduleDayVO(scheduleDTO.getStartDate(), scheduleDTO.getEndDate())
         ));
-
-        return new ScheduleDTO(
-                insertedSchedule.getScheduleName(),
-                insertedSchedule.getScheduleUserNoVO().getUserNo(),
-                insertedSchedule.getScheduleDayVO().getStartDay(),
-                insertedSchedule.getScheduleDayVO().getEndDay(),
-                insertedSchedule.getScheduleDayVO().getDayAndNight()
-        );
+        return "성공적으로 저장되었습니다.";
     }
 
     public void updateSchedule(ScheduleDTO scheduleDTO) {
