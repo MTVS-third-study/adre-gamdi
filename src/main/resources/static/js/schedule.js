@@ -193,7 +193,6 @@ function addPlaceListClickEvent() {
                     introduction.innerText = detailPlaceInfo.introduction;
                     const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
                     imgPath.innerHTML = imgsrc;
-                    // addPlaceOnDay(detailPlaceInfo);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -423,6 +422,10 @@ scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지�
 
     if (!travelDays[dayNumber]) {
         travelDays[dayNumber] = [];
+    }
+    if (dayNumber === "allday") {
+        alert('일정 일 차를 지정해주세요!');
+        return;
     }
 
     travelDays[dayNumber].push(detailPlaceInfo);

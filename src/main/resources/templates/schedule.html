@@ -46,7 +46,7 @@
                 <p>new</p>
             </div>
             <div class="userImgBox">
-                <img th:src="${session.loginUser.getKakaoProfileImage()}" alt="" class="userImg">
+                <img th:if="${session.loginUser}" th:src="${session.loginUser.getKakaoProfileImage()}" alt="" class="userImg">
             </div>
         </div>
 
