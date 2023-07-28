@@ -28,13 +28,13 @@ public class DetailScheduleService {
         for (int i = 0; i < detailScheduleDTOList.size(); i++) {
             detailSchedule = detailScheduleRepository.save(new DetailSchedule(
                     detailScheduleDTOList.get(i).getDetailScheduleNo()
-                    , detailScheduleDTOList.get(i).getScheduleNo()
+                    , detailScheduleDTOList.get(i).getProcedureNo()
                     , detailScheduleDTOList.get(i).getScheduleDay()
                     , detailScheduleDTOList.get(i).getTotalScheduleNo()
                     , detailScheduleDTOList.get(i).getPlaceNo()));
-            
+
             detailScheduleDTO.setDetailScheduleNo(detailSchedule.getDetailScheduleNo());
-            detailScheduleDTO.setScheduleNo(detailSchedule.getScheduleNo());
+            detailScheduleDTO.setProcedureNo(detailSchedule.getProcedureNo());
             detailScheduleDTO.setScheduleDay(detailSchedule.getScheduleDay());
             detailScheduleDTO.setTotalScheduleNo(detailSchedule.getTotalScheduleNo());
             detailScheduleDTO.setPlaceNo(detailSchedule.getPlaceNo());
