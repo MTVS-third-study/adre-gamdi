@@ -15,24 +15,17 @@ public class ScheduleDTO {
 
     private Long userNo;
 
-    private String startDay;
+    private String startDate;
 
-    private String endDay;
+    private String endDate;
 
     private String dayAndNight;
 
-    public ScheduleDTO(String scheduleName, Long userNo, String startDay, String endDay) {
+    public ScheduleDTO(String scheduleName, Long userNo, String startDate, String endDate) {
         this.scheduleName = scheduleName;
         this.userNo = userNo;
-        this.startDay = startDay;
-        this.endDay = endDay;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public ScheduleDTO(String scheduleName, Long userNo, String startDay, String endDay, String dayAndNight) {
-        this.scheduleName = scheduleName;
-        this.userNo = userNo;
-        this.startDay = startDay;
-        this.endDay = endDay;
-        this.dayAndNight = dayAndNight;
-    }
 }
