@@ -33,7 +33,17 @@ reviewNav.addEventListener("click", () => {
     infoPlace[0].style.display = "none";
     // newDayWrap.style.display="none"
 });
+let reviewBtn=document.getElementsByClassName("reviewBtn")
+reviewBtn[0].addEventListener("mouseover",()=>{
+    reviewBtn[0].style.backgroundColor="orange"
+    reviewBtn[0].style.color="white"
 
+});
+reviewBtn[0].addEventListener("mouseleave",()=>{
+    reviewBtn[0].style.backgroundColor="transparent"
+    reviewBtn[0].style.color="orange"
+
+});
 /* 설명. 지도 사이드바 설정 js */
 let menuWrap = document.getElementById("menu_wrap");    // 검색 list
 let dayWrap = document.getElementById("day_wrap");      // 일정 box
@@ -43,7 +53,7 @@ let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 �
 let imgBtn = document.getElementById("imgBtn");         // new 버튼
 let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
 let option = document.getElementsByClassName("option");     // 검색 box
-// let newDayWrap=document.getElementById("newDay_wrap")
+let loadBtn=document.getElementById("loadBtn")
 // 필기. 검색 버튼 이벤트
 homeBtn.addEventListener("click", () => {
     console.log(1);
@@ -78,7 +88,14 @@ imgBtn.addEventListener("click", () => {
     option[0].style.display = "block";
 
 });
+loadBtn.addEventListener("click",()=>{
+    infoWrap.style.display = "none";
+    menuWrap.style.display = "none";
+    dayWrap.style.display = "block";
+    BtnBox[0].style.display = "block";
+    option[0].style.display = "block";
 
+})
 /*설명. 검색 비동기*/
 let searchBox = document.getElementById("searchBox");
 let searchKeyword = document.getElementById("searchKeyword1");
@@ -182,6 +199,26 @@ function addPlaceListClickEvent() {
         reviewContainer.style.display="none";
         // newDayWrap.style.display="none"
     })
+    backBtn[0].addEventListener("mouseleave",()=>{
+        backBtn[0].style.backgroundColor="transparent"
+        backBtn[0].style.color="orange"
+
+    })
+    backBtn[0].addEventListener("mouseover",()=>{
+        backBtn[0].style.backgroundColor="orange"
+        backBtn[0].style.color="white"
+
+    })
+    scheduleAdd[0].addEventListener("mouseover",()=>{
+        scheduleAdd[0].style.backgroundColor="orange"
+        scheduleAdd[0].style.color="white"
+
+    });
+    scheduleAdd[0].addEventListener("mouseleave",()=>{
+        scheduleAdd[0].style.backgroundColor="transparent"
+        scheduleAdd[0].style.color="orange"
+
+    });
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {
             let placeNo = placeList[i].querySelector("#placeNo").innerText;
@@ -232,6 +269,17 @@ function addPlaceListClickEvent() {
 
 
 /*설명. Btnmouseover*/
+let saveBtn=document.querySelectorAll(".saveBtn")
+for(let i=0;i<40;i++){
+    saveBtn[i].addEventListener("mouseover",()=>{
+        saveBtn[i].style.backgroundColor="orange";
+        saveBtn[i].style.color="white";
+    })
+    saveBtn[i].addEventListener("mouseleave",()=>{
+        saveBtn[i].style.backgroundColor="transparent";
+        saveBtn[i].style.color="orange";
+    })
+}
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
 });
@@ -455,6 +503,7 @@ scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지�
     option[0].style.display = "block";
     showSelectedDaySchedule()
 });
+
 function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조회
     dayNumber = daySelect.options[daySelect.selectedIndex].value;
     let html = ``;
@@ -474,15 +523,17 @@ function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조�
         for (let i = 0; i < travelDays[dayNumber].length; i++) {
             html += `
                 <li id="dayPlaceList">
-                    <div>
-                        <img src="/images/daylistnum.png" alt=""><span class="listnum">${i + 1}</span>
-                        <p>${travelDays[dayNumber][i].categoryName}</p>
+                <div>
+                    <div class="dayListNumInfo">
+                        <img src="/images/daylistnum.png" alt=""/><span class="listnum">${i + 1}</span>
+                         <span>${travelDays[dayNumber][i].placeName}</span>
+                         <p>${travelDays[dayNumber][i].categoryName}</p>
+                          
                     </div>
                     <div class="dayPicture">
                         <img src="${travelDays[dayNumber][i].imagePath}">
-                    </div>
-                    <p>${travelDays[dayNumber][i].placeName}</p>
-                    <hr>
+                    </div>                   
+                 </div>                     
                 </li>
             `;
         }
