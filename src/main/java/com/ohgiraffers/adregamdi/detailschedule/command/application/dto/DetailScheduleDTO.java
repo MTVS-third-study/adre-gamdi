@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class DetailScheduleDTO {
     private Long detailScheduleNo;
-    private int scheduleNo;
+    private int procedureNo;
     private int scheduleDay;
     private TotalScheduleNo totalScheduleNo;
     private PlaceNo placeNo;
