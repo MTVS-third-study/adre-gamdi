@@ -9,8 +9,11 @@ infoNav.addEventListener("click", () => {
     reviewContainer[0].style.display = "none";
     imgBox[0].style.display = "block";
 });
+
+//리뷰 조회 비동기
+function addReviewClickEvent(placeNo){
 reviewNav.addEventListener("click", () => {
-    fetch(`reviewController주소?placieNo=${placeNo}`)
+    fetch(`/review/query/reviewInfo?placeNo=${placeNo}`)
         .then((response) => response.json())
         .then((json) => {
             console.log(json);
@@ -28,6 +31,43 @@ reviewNav.addEventListener("click", () => {
     reviewContainer[0].style.display = "block";
     imgBox[0].style.display = "none";
 });
+}
+
+
+// 리뷰 등록 비동기
+function addReviewRegistEvent(placeNo) {
+    let reviewForm = document.getElementById("reviewForm")
+    reviewForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const reviewFormData = new FormData(reviewForm);
+
+
+        fetch(`/review/regist?placeNo=${placeNo}`,{
+            method: 'POST',
+            headers: {},
+            body: reviewFormData
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json);
+                console.log(placeNo);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("예기치 못한 오류가 발생했습니다.");
+                infoWrap.style.display = "none";
+                menuWrap.style.display = "block";
+                dayWrap.style.display = "none";
+                option[0].style.display = "block";
+            });
+        infoContents[0].style.display = "none";
+        reviewContainer[0].style.display = "block";
+        imgBox[0].style.display = "none";
+    });
+}
+
+
 
 // 설명. 지도 사이드바 설정 js
 let menuWrap = document.getElementById("menu_wrap");
@@ -65,7 +105,6 @@ let keywordValue = "";
 keyword.addEventListener("keyup", (e) => {
     if (e.keyCode === 13) {
         keywordValue = JSON.stringify(keyword.value);
-
         fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
             .then((response) => response.json())
             .then((json) => {
@@ -101,9 +140,7 @@ keyword.addEventListener("keyup", (e) => {
     }
 });
 searchKeyword.addEventListener("click", () => {
-
     keywordValue = JSON.stringify(keyword.value);
-
     fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
         .then((response) => response.json())
         .then((json) => {
@@ -113,7 +150,6 @@ searchKeyword.addEventListener("click", () => {
                 if (!json.length) {
                     console.log("등록된 값이없습니다");
                 } else {
-
                     html += `
                         <li class="placeItem">
                     <div class="placeContents">
@@ -143,6 +179,7 @@ function addPlaceListClickEvent() {
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
     scheduleAdd[0].addEventListener("click", () => {
+
         dayWrap.style.display = "block";
         infoWrap.style.display = "none";
         BtnBox[0].style.display = "block";
@@ -184,6 +221,10 @@ function addPlaceListClickEvent() {
                     dayWrap.style.display = "none";
                     option[0].style.display = "block";
                 });
+
+            addReviewClickEvent(placeNo);
+            addReviewRegistEvent(placeNo);
+
             infoWrap.style.display = "block";
             menuWrap.style.display = "none";
             dayWrap.style.display = "none";

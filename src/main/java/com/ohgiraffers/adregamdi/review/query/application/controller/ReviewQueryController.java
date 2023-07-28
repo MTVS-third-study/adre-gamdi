@@ -27,16 +27,16 @@ public class ReviewQueryController {
 
     @ResponseBody
     @GetMapping("/reviewInfo")
-    public Map<String, List<ReviewDTO>> getReviewInfo(@RequestParam("reviewNo") int reviewNo,
-                                                @RequestParam("reviewPlaceNo") Long reviewPlaceNo,
+    public Map<String, List<ReviewDTO>> getReviewInfo(@RequestParam("placeNo") Long placeNo,
                                                 Model model) {
-        reviewPlaceNo = 20L;
-        List<ReviewDTO> reviewList = reviewQueryService.getReviewList(reviewPlaceNo);
+
+        List<ReviewDTO> reviewList = reviewQueryService.getReviewList(placeNo);
 
         model.addAttribute("reviewList", reviewList);
 
         Map<String, List<ReviewDTO>> reviewInfo = new HashMap<>();
         reviewInfo.put("reviewInfo", reviewList);
+
 
         return reviewInfo;
 

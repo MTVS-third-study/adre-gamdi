@@ -1,10 +1,11 @@
 package com.ohgiraffers.adregamdi.report.command.application.dto;
 
-import com.ohgiraffers.adregamdi.report.command.domain.aggregate.entity.ReportedReview;
+import com.ohgiraffers.adregamdi.report.command.domain.aggregate.vo.ReportedReview;
 import com.ohgiraffers.adregamdi.report.command.domain.aggregate.vo.ReportUserNo;
-import com.ohgiraffers.adregamdi.report.command.domain.aggregate.vo.RespondentNo;
+import com.ohgiraffers.adregamdi.report.command.domain.aggregate.vo.ReportedUserNo;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Getter
@@ -14,11 +15,11 @@ import java.util.Date;
 @ToString
 public class ReportDTO {
 
-    private int reportNo;   // pk
+    private Long reportNo;   // pk
     private int reportCategoryCode;
     private String reportContents;
-    private Date reportedDate;
+    private Timestamp reportedDate;
     private ReportUserNo reportUserNo;  // 신고자
-    private RespondentNo respondentNo; // 피신고자
+    private ReportedUserNo reportedUserNo; // 피신고자
     private ReportedReview reportedReview;
 }
