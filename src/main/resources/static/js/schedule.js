@@ -4,10 +4,12 @@ let reviewNav = document.getElementById("reviewNav");
 let infoContents = document.getElementsByClassName("infoContents");
 let reviewContainer = document.getElementsByClassName("reviewContainer");
 let imgBox = document.getElementsByClassName("imgBox");
+let infoPlace=document.getElementsByClassName("infoPlace")
 infoNav.addEventListener("click", () => {
     infoContents[0].style.display = "block";
     reviewContainer[0].style.display = "none";
     imgBox[0].style.display = "block";
+
 });
 
 //리뷰 조회 비동기
@@ -26,10 +28,13 @@ reviewNav.addEventListener("click", () => {
             menuWrap.style.display = "block";
             dayWrap.style.display = "none";
             option[0].style.display = "block";
+            newDayWrap.style.display="none"
         });
     infoContents[0].style.display = "none";
     reviewContainer[0].style.display = "block";
     imgBox[0].style.display = "none";
+    infoPlace[0].style.display = "none";
+    newDayWrap.style.display="none"
 });
 }
 
@@ -70,39 +75,41 @@ function addReviewRegistEvent(placeNo) {
 
 
 // 설명. 지도 사이드바 설정 js
-let menuWrap = document.getElementById("menu_wrap");
-let dayWrap = document.getElementById("day_wrap");
-let infoWrap = document.getElementById("info_wrap");
-let homeBtn = document.getElementById("homeBtn");
-let myScheduleBtn = document.getElementById("myScheduleBtn");
-let imgBtn = document.getElementById("imgBtn");
-let BtnBox = document.getElementsByClassName("BtnBox");
-let option = document.getElementsByClassName("option");
+let menuWrap = document.getElementById("menu_wrap");    // 검색 list
+let dayWrap = document.getElementById("day_wrap");      // 일정 box
+let infoWrap = document.getElementById("info_wrap");    // 상세 box
+let homeBtn = document.getElementById("homeBtn");       // 홈 버튼
+let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 버튼
+let imgBtn = document.getElementById("imgBtn");         // new 버튼
+let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
+let option = document.getElementsByClassName("option");     // 검색 box
+let newDayWrap=document.getElementById("newDay_wrap")
 homeBtn.addEventListener("click", () => {
     console.log(1);
 
     menuWrap.style.display = "block";
     dayWrap.style.display = "none";
     infoWrap.style.display = "none";
-    option[0].style.display = "block";
+    option[0].style.display = "block"; newDayWrap.style.display="none"
 });
 
 imgBtn.addEventListener("click", () => {
     console.log(3);
-
-    infoWrap.style.display = "block";
+    newDayWrap.style.display="block"
+    infoWrap.style.display = "none";
     menuWrap.style.display = "none";
     dayWrap.style.display = "none";
-    BtnBox[0].style.display = "none";
-    option[0].style.display = "none";
+    BtnBox[0].style.display = "block";
+    option[0].style.display = "block";
+
 });
 
-//검색 비동기
+// 설명. 검색 비동기
 let searchBox = document.getElementById("searchBox");
 let searchKeyword = document.getElementById("searchKeyword1");
 let keyword = document.querySelector(".keyword");
 let keywordValue = "";
-keyword.addEventListener("keyup", (e) => {
+keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤트
     if (e.keyCode === 13) {
         keywordValue = JSON.stringify(keyword.value);
         fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
@@ -132,6 +139,8 @@ keyword.addEventListener("keyup", (e) => {
                     }
                 });
                 document.getElementById("placeList").innerHTML = html;
+                menuWrap.style.display = "block";
+                dayWrap.style.display = "none";
                 addPlaceListClickEvent();
             })
             .catch((error) => {
@@ -139,8 +148,10 @@ keyword.addEventListener("keyup", (e) => {
             });
     }
 });
-searchKeyword.addEventListener("click", () => {
+searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 이벤트
+
     keywordValue = JSON.stringify(keyword.value);
+
     fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
         .then((response) => response.json())
         .then((json) => {
@@ -150,6 +161,7 @@ searchKeyword.addEventListener("click", () => {
                 if (!json.length) {
                     console.log("등록된 값이없습니다");
                 } else {
+
                     html += `
                         <li class="placeItem">
                     <div class="placeContents">
@@ -167,28 +179,42 @@ searchKeyword.addEventListener("click", () => {
                 }
             });
             document.getElementById("placeList").innerHTML = html;
+            menuWrap.style.display = "block";
+            dayWrap.style.display = "none";
+            newDayWrap.style.display="none"
             addPlaceListClickEvent();
         })
         .catch((error) => {
             console.log(error);
         });
 });
+
+// 설명. 상세페이지
 function addPlaceListClickEvent() {
-    // 설명. 상세페이지
     let scheduleAdd = document.getElementsByClassName("scheduleAdd");
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
+    let backBtn=document.getElementsByClassName("backBtn")
     scheduleAdd[0].addEventListener("click", () => {
 
         dayWrap.style.display = "block";
         infoWrap.style.display = "none";
         BtnBox[0].style.display = "block";
         option[0].style.display = "block";
+        newDayWrap.style.display="none"
     });
-
+    backBtn[0].addEventListener("click",()=>{
+        menuWrap.style.display="block"
+        dayWrap.style.display = "none";
+        infoWrap.style.display = "none";
+        BtnBox[0].style.display = "block";
+        option[0].style.display = "block";
+        reviewContainer.style.display="none";
+        newDayWrap.style.display="none"
+    })
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {
-            let placeNo = placeList[i].querySelector("#placeNo").innerText; // 3030
+            let placeNo = placeList[i].querySelector("#placeNo").innerText;
 
             fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
                 .then((response) => response.json())
@@ -212,6 +238,7 @@ function addPlaceListClickEvent() {
                     introduction.innerText = detailPlaceInfo.introduction;
                     const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
                     imgPath.innerHTML = imgsrc;
+
                 })
                 .catch((error) => {
                     console.error(error);
@@ -220,6 +247,8 @@ function addPlaceListClickEvent() {
                     menuWrap.style.display = "block";
                     dayWrap.style.display = "none";
                     option[0].style.display = "block";
+                    reviewContainer.style.display="none";
+                    newDayWrap.style.display="none"
                 });
 
             addReviewClickEvent(placeNo);
@@ -229,9 +258,13 @@ function addPlaceListClickEvent() {
             menuWrap.style.display = "none";
             dayWrap.style.display = "none";
             option[0].style.display = "none";
+            reviewContainer.style.display="none";
+            newDayWrap.style.display="none"
         });
     }
 }
+
+
 // 설명. Btnmouseover
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
@@ -253,14 +286,17 @@ imgBtn.addEventListener("mouseover", () => {
 imgBtn.addEventListener("mouseleave", () => {
     imgBtn.classList.remove("add");
 });
-// 설명. userInfoBox
 
+
+// 설명. userInfoBox
 let userImgBox = document.getElementsByClassName("userImgBox");
 let hideUserInfoBox = document.getElementsByClassName("hideUserInfoBox");
 let hideUserInfoBoxItem = document.querySelectorAll(".hideUserInfoBox>li");
+let hideBtn=document.getElementById("hideBtn")
 
 userImgBox[0].addEventListener("click", () => {
     hideUserInfoBox[0].style.display = "block";
+    hideBtn.style.display="block";
 });
 
 for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
@@ -270,11 +306,12 @@ for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
     hideUserInfoBoxItem[i].addEventListener("mouseleave", () => {
         hideUserInfoBoxItem[i].style.backgroundColor = "transparent";
     });
-    hideUserInfoBoxItem[i].addEventListener("click", () => {
-        hideUserInfoBox[0].style.display = "none";
-    });
-}
 
+}
+hideBtn.addEventListener("click", () => {
+    hideUserInfoBox[0].style.display = "none";
+    hideBtn.style.display="none";
+});
 //내 일정 모달창 설정
 let myScheduleModal = document.getElementById("myScheduleModal");
 let myScheduleModalBody = document.getElementsByClassName(
@@ -284,15 +321,29 @@ let scheduleModify = document.getElementsByClassName("scheduleModify");
 //내 일정 모달창
 myScheduleBtn.addEventListener("click", () => {
     console.log(2);
+    infoWrap.style.display = "none";
+    menuWrap.style.display = "none";
+    dayWrap.style.display = "block";
+    BtnBox[0].style.display = "block";
+    option[0].style.display = "block";
+    newDayWrap.style.display="none"
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
-        .then((json) => {
+        .then((data) => {
+            console.log(data);
 
-            console.log(json);
+            if (data.message) { // 에러 메세지가 존재한다면
+                alert(data.message);
+                return;
+            }
+
+            myScheduleModal.style.display = "block";
+            myScheduleModalBody[0].style.display = "block";
+
             let html = `  <div><h1>나의 일정</h1></div>`;
-            json.forEach((obj, idx) => {
+            data.myScheduleList.forEach((obj, idx) => {
 
-                    console.log(json);
+                    console.log(data.myScheduleList);
                     html += `
            
              <div class="plan">
@@ -311,70 +362,79 @@ myScheduleBtn.addEventListener("click", () => {
         .catch((error) => {
             console.log(error);
         });
-    myScheduleModal.style.display = "block";
-    myScheduleModalBody[0].style.display = "block";
 })
     myScheduleModal.addEventListener("click", () => {
         myScheduleModal.style.display = "none";
         myScheduleModalBody[0].style.display = "none";
     });
-    scheduleModify[0].addEventListener("click", () => {
-        if ((dayWrap.style.display = "none")) {
-            dayWrap.style.display = "block";
-            infoWrap.style.display = "none";
-            menuWrap.style.display = "none";
-        }
+    // scheduleModify[0].addEventListener("click", () => {
+    //     if ((dayWrap.style.display = "none")) {
+    //         dayWrap.style.display = "block";
+    //         infoWrap.style.display = "none";
+    //         menuWrap.style.display = "none";
+    //     }
+    //
+    //     myScheduleModal.style.display = "none";
+    //     myScheduleModalBody[0].style.display = "none";
+    // });
 
-        myScheduleModal.style.display = "none";
-        myScheduleModalBody[0].style.display = "none";
+// 설명. caleder
+// function setCalendar() {
+    let startDate = "";
+    let endDate = "";
+    let dayAndNight = "";
+    $(function () {
+        $('input[name="datefilter"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: "Clear",
+            },
+        });
+
+        $('input[name="datefilter"]').on(
+            "apply.daterangepicker",
+            function (ev, picker) {
+                $(this).val(
+                    picker.startDate.format("MM/DD/YYYY") +
+                    " - " +
+                    picker.endDate.format("MM/DD/YYYY")
+                );
+
+                let startDate =
+                    picker.startDate._d.getUTCFullYear() +
+                    "-" +
+                    (picker.startDate._d.getMonth() +
+                        1) +
+                    "-" +
+                    picker.startDate._d.getDate() +
+                    "";
+                endDate =
+                    picker.endDate._d.getUTCFullYear() +
+                    "-" +
+                    (picker.endDate._d.getMonth() +
+                        1) +
+                    "-" +
+                    picker.endDate._d.getDate() +
+                    "";
+                fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.message) {
+                            alert(data.message);
+                            return;
+                        }
+                        dayAndNight = data.dayAndNight;
+                    });
+            }
+        );
+
+        $('input[name="datefilter"]').on(
+            "cancel.daterangepicker",
+            function (ev, picker) {
+                $(this).val("");
+            }
+        );
     });
+// }
 
-    //caleder
-
-$(function () {
-    $('input[name="datefilter"]').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            cancelLabel: "Clear",
-        },
-    });
-
-    $('input[name="datefilter"]').on(
-        "apply.daterangepicker",
-        function (ev, picker) {
-            $(this).val(
-                picker.startDate.format("MM/DD/YYYY") +
-                " - " +
-                picker.endDate.format("MM/DD/YYYY")
-            );
-
-            let startDate =
-                picker.startDate._d.getMonth() +
-                1 +
-                "" +
-                picker.startDate._d.getDate() +
-                "";
-
-            let endDate =
-                picker.endDate._d.getMonth() +
-                1 +
-                "" +
-                picker.endDate._d.getDate() +
-                "";
-            let result = endDate - startDate;
-            console.log(result);
-            fetch(``)
-                .then((response) => response.json())
-                .then((json) => {
-                    console.log(json);
-                });
-        }
-    );
-
-    $('input[name="datefilter"]').on(
-        "cancel.daterangepicker",
-        function (ev, picker) {
-            $(this).val("");
-        }
-    );
-});
+// 설명. 일정 세우기

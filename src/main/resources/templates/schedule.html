@@ -25,14 +25,15 @@
 
 <body>
 <div class="schedule-container">
+    <div id="hideBtn"></div>
     <div class="scheduleSideBar">
         <div class="BtnBox">
             <div class="logoBtn" onclick="location.href='/main'">
                 <img src="/images/logo.png" alt="">
             </div>
             <div class="homeBtn" id="homeBtn" >
-                <img src="/images/home_house_icon.png" alt="" />
-                <p>홈</p>
+                <img src="/images/search.png" alt="" />
+                <p>검색</p>
             </div>
             <div class="myScheduleBtn" id="myScheduleBtn">
                 <img src="/images/schedule_icon.png" alt="" />
@@ -43,13 +44,15 @@
                 <p>new</p>
             </div>
             <div class="userImgBox">
-                <img src="" alt="">
+                <img th:src="${session.loginUser.getKakaoProfileImage()}" alt="" class="userImg">
             </div>
         </div>
+
         <ul class="hideUserInfoBox">
-            <li>mypage</li>
+
+            <li  onclick="location.href='/myPage'">mypage</li>
             <hr class="InfoBoxHr">
-            <li>Logout</li>
+            <li    onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:8080/oauth/kakao/logout'">Logout</li>
         </ul>
     </div>
     <div class="schedule-list" id="schedule_wrap">
@@ -94,9 +97,6 @@
 
         <!-- 설명. 일정 box-->
         <div id="day_wrap" class="bg_white day_wrap">
-
-
-
             <hr />
             <div class="scheduleBox">
                 <div class="selectBox">
@@ -104,7 +104,6 @@
                     <select name="day" id="" class="daySelect form-select" aria-label="Default select example">
                         <option value="allday">전체일정</option>
                         <option value="1day" >1일차</option>
-
                     </select>
 
                 </div>
@@ -124,8 +123,52 @@
 <!--                            </div>-->
 <!--                        <hr>-->
 <!--                        </li>-->
-                        <button class="saveBtn scheduleSave">저장</button>
                     </ul>
+
+                        <button class="saveBtn scheduleSave">저장</button>
+                        <button class="saveBtn dayDelete">초기화</button>
+
+                </div>
+            </div>
+        </div>
+
+<!--        new wrap-->
+        <div id="newDay_wrap" class="bg_white newDay_wrap">
+            <hr />
+            <div class="scheduleBox">
+                <div class="selectBox">
+                    <div><span>여행 이름 : </span>
+                    <input type="text" placeholder="일정 이름을 변경해주세요" class="newPlaceName" maxlength="15">
+                    </div>
+                    <input type="text" name="datefilter" value="" class="calendar" placeholder="날짜를 선택해주세요"/>
+                    <select name="day" id="" class="daySelect form-select" aria-label="Default select example">
+                        <option value="allday">전체일정</option>
+                        <option value="1day" >1일차</option>
+
+                    </select>
+
+                </div>
+                <div class="dayScheduleWrapper">
+                    <ul id="newPlaceList" class="dayList">
+                        <!--                        <li >-->
+                        <!--                            <div>-->
+                        <!--                                <img src="/images/daylistnum.png" alt=""><span class="listnum">1</span>-->
+                        <!--                                <p >음식점</p>-->
+
+                        <!--                                <span ></span>-->
+
+                        <!--                            </div>-->
+                        <!--                            <div class="dayPicture">-->
+                        <!--                                <img  alt="">-->
+                        <!--                                <p class="nextPlace" >다음 장소까지: <p >200</p>km</p>-->
+                        <!--                            </div>-->
+                        <!--                        <hr>-->
+                        <!--                        </li>-->
+                    </ul>
+
+                    <button class="saveBtn scheduleSave">저장</button>
+                    <button class="saveBtn dayDelete">초기화</button>
+
                 </div>
             </div>
         </div>
@@ -167,6 +210,7 @@
                     </div>
                     <hr class="infoContentsHr"/>
                     <div class="addBtn">
+                        <button class="backBtn"><img src="/images/back.png" alt=""></button>
                         <button class="scheduleAdd">일정 추가</button>
                     </div>
                 </div>
@@ -277,7 +321,7 @@
     <div id="map" class="schedule-map" style="width: 65%; height: 100vh;"></div>
 
     <!-- 스케쥴 페이지에서 일정눌렀을 떄 내 일정 나오는 모달창 -->
-    <div class="myScheduleModal" id="myScheduleModal"></div>
+    <div class="myScheduleModal" id="myScheduleModal"></div> <!---->
     <div class="schedule_modal_body" id="schedule_modal_body">
         <div><h1>나의 일정</h1></div>
 <!--        <div class="plan">-->

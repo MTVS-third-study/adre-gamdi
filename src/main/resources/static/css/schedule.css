@@ -53,16 +53,26 @@ body {
     width: 30px;
 }
 .userImgBox {
+
+}
+.userImgBox>.userImg{
     width: 40px;
     height: 40px;
     border-radius: 15px;
-    background-color: aqua;
     margin: 0 auto;
     position: absolute;
-
-    bottom: -29px;
-
+    bottom: 35px;
     left: 20px;
+}
+#hideBtn{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 3;
+
 }
 .hideUserInfoBox {
     display: none;
@@ -80,6 +90,7 @@ body {
     left: 44px;
     font-size: 12px;
     cursor: pointer;
+    z-index: 5;
 }
 .hideUserInfoBox > .InfoBoxHr {
     margin: 0;
@@ -122,7 +133,7 @@ body {
 
 /* 검색 */
 #menu_wrap {
-    display: none;
+    display: block;
 }
 .keyword {
     border: none;
@@ -196,7 +207,7 @@ body {
 /* 일정 box */
 
 #day_wrap {
-    display: block;
+    display: none;
 }
 .scheduleBox {
     width: 400px;
@@ -222,7 +233,17 @@ body {
     float: right;
     margin-right: 95px;
     margin-top: 20px;
+    width: 100px;
+    height: 40px;
 }
+.dayDelete{
+    float: right;
+    margin-right: 26px;
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+}
+
 .calendar {
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
@@ -256,6 +277,8 @@ body {
 .dayList {
     height: 70vh;
     overflow-y: scroll;
+    overflow-x: hidden;
+
 }
 .dayList::-webkit-scrollbar {
     width: 5px; /*스크롤바의 너비*/
@@ -272,6 +295,7 @@ body {
     margin: 20px 0;
     line-height: 30px;
 }
+
 .dayList > li > .dayPicture > img {
     width: 84px;
     height: 84px;
@@ -287,12 +311,33 @@ body {
 .dayList > li > div > .nextPlace {
     font-size: 11px;
     color: gray;
-    opacity: 0, 5;
+    opacity: 0.5;
 }
 .listnum {
     position: relative;
     top: -13px;
     left: -23px;
+}
+/*new day*/
+#newDay_wrap{
+    display: none;
+}
+.newPlaceName{
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    border-radius: 16px;
+    z-index: 4;
+    width: 240px;
+    height: 40px;
+
+    font-weight: bold;
+    text-align: center;
+    font-size: 11px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+#newPlaceList{
+    height: 65vh;
 }
 /* 상세 box */
 
@@ -370,7 +415,7 @@ hr {
     text-align: center;
 }
 .scheduleAdd {
-    width: 200px;
+    width: 100px;
     height: 40px;
     border-radius: 10px;
     background-color: transparent;
@@ -378,7 +423,19 @@ hr {
     color: blue;
     cursor: pointer;
 }
-
+.backBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid blue;
+    color: blue;
+    cursor: pointer;
+    position: relative;
+    top: 8px;
+    left: -13px;
+}
+.backBtn>img{width: 30px}
 /* 리뷰 */
 .on {
     color: blue;
