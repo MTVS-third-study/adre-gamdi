@@ -43,7 +43,12 @@
              , AVERAGE_STAR_POINT
              , REVIEW_COUNT
         FROM TBL_PLACE
-        WHERE PLACE_NAME LIKE CONCAT('%',#{keyword},'%')
+        WHERE REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+        PLACE_NAME,'`',''),'~',''),'!',''),'@',''),'#','')
+        ,'$',''),'%',''),'^',''),'&amp;',''),'*',''),'(',''),')','')
+        ,'-',''),'_',''),'=',''),'+',''),'[',''),'{',''),']',''),'}','')
+        ,'\\',''),'|',''),';',''),':',''),'"',''),'\'',''),',','')
+        ,'&lt;',''),'.',''),'>',''),'/',''),'?',''),' ','') LIKE CONCAT('%',#{keyword},'%')
         ORDER BY PLACE_NAME
     </select>
 

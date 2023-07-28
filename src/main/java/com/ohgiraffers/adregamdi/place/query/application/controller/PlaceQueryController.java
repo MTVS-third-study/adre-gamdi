@@ -29,13 +29,13 @@ public class PlaceQueryController {
     @ResponseBody
     @GetMapping("/searchPlace")
     public  Map<String,List<PlaceDTO>> searchPlace(@RequestParam("searchKeyword") String keyword){
-        keyword = keyword.replaceAll("\"", "");
+        keyword = keyword.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]", "");
         List<PlaceDTO> placeList = placeQueryService.findPlaceByKeyword(keyword);
 
      Map<String,List<PlaceDTO>> responsePlaceList=new HashMap<>();
      responsePlaceList.put("respPlaceList",placeList);
         System.out.println("keyword = " + keyword);
-//        placeList.forEach(System.out::println);
+
         return responsePlaceList;
     }
 
