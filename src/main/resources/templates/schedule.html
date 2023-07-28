@@ -47,6 +47,10 @@
                 <img src="/images/plus.png" alt="" />
                 <p>new</p>
             </div>
+            <div class="loadBtn" id="loadBtn" >
+                <img src="/images/schedule_icon.png" alt="" />
+                <p>load</p>
+            </div>
             <div class="userImgBox">
                 <img th:if="${session.loginUser}" th:src="${session.loginUser.getKakaoProfileImage()}" alt="" class="userImg">
             </div>
@@ -78,11 +82,7 @@
             <hr />
             <ul class="placeList" id="placeList" >
             </ul>
-            <div >
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-            </div>
+
         </div>
 
 
@@ -149,8 +149,8 @@
                     </div>
                     <hr class="infoContentsHr"/>
                     <div class="addBtn">
-                        <button class="backBtn"><img src="/images/back.png" alt=""></button>
-                        <button class="scheduleAdd">일정 추가</button>
+                        <button class="backBtn ">돌아 가기</button>
+                        <button class="scheduleAdd ">일정 추가</button>
                     </div>
                 </div>
 
