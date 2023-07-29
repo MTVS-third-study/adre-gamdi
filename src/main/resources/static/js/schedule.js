@@ -53,7 +53,18 @@ function addReviewClickEvent(placeNo) {
                             <div class="reviewImg">
                                 <img src="/images/reviewImages/${obj.savedReviewImageName}"/>
                             </div>
-                           
+                           <div class="csBox">
+                                <div class="like white">
+
+                                    <img src="/images/whiteLie.png" alt="" /><span>1</span>
+                                </div>
+                                <div class="like black">
+                                    <img src="/images/blackLike.png" alt="" /><span>2</span>
+                                </div>
+                                <div class="report">
+                                    <img src="/images/siren.png" alt="" /><span>신고</span>
+                                </div>
+                            </div>
                         </div>
 `;
                     }
@@ -80,6 +91,8 @@ function addReviewClickEvent(placeNo) {
 // 설명. 리뷰 등록 비동기
 function addReviewRegistEvent(placeNo) {
     let reviewForm = document.getElementById("reviewForm")
+    const modal = document.querySelector('.modal');
+
     reviewForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -502,70 +515,41 @@ $(function () {
             fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
                 .then((response) => response.json())
                 .then((data) => {
-                        if (data.message) {
-                            alert(data.message);
-                            return;
-                        }
-                        let dayAndNight = data.dayAndNight;
-                        newTravelSchedule.startDate = startDate;
-                        newTravelSchedule.endDate = endDate;
-                        newTravelSchedule.dayAndNight = dayAndNight;
-                        let startDate =
-                            picker.startDate._d.getUTCFullYear() +
-                            "-" +
-                            (picker.startDate._d.getMonth() +
-                                1) +
-                            "-" +
-                            picker.startDate._d.getDate() +
-                            "";
-                        let endDate =
-                            picker.endDate._d.getUTCFullYear() +
-                            "-" +
-                            (picker.endDate._d.getMonth() +
-                                1) +
-                            "-" +
-                            picker.endDate._d.getDate() +
-                            "";
-                        fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
-                            .then((response) => response.json())
-                            .then((data) => {
 
-                                if (data.message) {
-                                    alert(data.message);
-                                    return;
-                                }
-                                let dayAndNight = data.dayAndNight;
-                                newTravelSchedule.startDate = startDate;
-                                newTravelSchedule.endDate = endDate;
-                                newTravelSchedule.dayAndNight = dayAndNight;
-
-                                let html = ` <option value="allday">전체 일정</option>`;
-                                for (let i = 1; i <= dayAndNight; i++) {
-
-
-                                    if (i === 1) {
-                                        html += `   
-                                    <option value="${i}" selected="selected">${i}일 차</option>
-                                `;
-                                    } else {
-                                        html += `   
-                                    <option value="${i}">${i}일 차</option>
-                                `;
-                                    }
-                                    daySelect.innerHTML = html;
-                                }
-                                saveScheduleInLocalStorage();
-                                showSelectedDaySchedule();
-                            });
+                    if (data.message) {
+                        alert(data.message);
+                        return;
                     }
-                );
-            $('input[name="datefilter"]').on(
-                "cancel.daterangepicker",
-                function (ev, picker) {
-                    $(this).val("");
-                }
-            );
-        });
+                    let dayAndNight = data.dayAndNight;
+                    newTravelSchedule.startDate=startDate;
+                    newTravelSchedule.endDate=endDate;
+                    newTravelSchedule.dayAndNight = dayAndNight;
+
+                    let html = ` <option value="allday">전체 일정</option>`;
+                    for (let i=1; i<=dayAndNight; i++) {
+
+                        if (i === 1) {
+                            html += `   
+                                <option value="${i}" selected="selected">${i}일 차</option>
+                            `;
+                        } else{
+                            html += `   
+                                <option value="${i}">${i}일 차</option>
+                            `;
+                        }
+                        daySelect.innerHTML = html;
+                    }
+                    saveScheduleInLocalStorage();
+                    showSelectedDaySchedule();
+                });
+        }
+    );
+    $('input[name="datefilter"]').on(
+        "cancel.daterangepicker",
+        function (ev, picker) {
+            $(this).val("");
+        }
+    );
 });
 
 /*설명. 일정 추가*/

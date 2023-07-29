@@ -6,11 +6,9 @@ import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,13 +28,13 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
+
     @PostMapping("/regist")
     public ResponseEntity<String> registReview(ReviewDTO reviewDTO,
                                                @RequestParam MultipartFile imageFile,
                                                HttpServletRequest request,
-                                               HttpServletResponse response,
                                                Model model,
-                                               HttpSession session) throws IOException {
+                                               HttpSession session) {
         Long placeNo = Long.valueOf(request.getParameter("placeNo"));
         Long userNo = ((UserDTO) session.getAttribute("loginUser")).getUserNo();
         String userName = ((UserDTO) session.getAttribute("loginUser")).getKakaoNickName();
@@ -45,15 +43,5 @@ public class ReviewController {
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("등록 실패");
         }
-    }
-
-
-    private void alert(String notice, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html; charset=utf-8");
-        PrintWriter out = response.getWriter();
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + notice + "');");
-        out.println("</script>");
-        out.flush();
     }
 }
