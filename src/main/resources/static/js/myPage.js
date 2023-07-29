@@ -15,11 +15,14 @@ for(let i=0;i<menuListItem.length;i++){
 }
 
 let saveBtn=document.getElementsByClassName("saveBtn")
-saveBtn[0].addEventListener("mouseover",()=>{
-    saveBtn[0].style.backgroundColor="#696cff"
-    saveBtn[0].style.color="#fff"
-})
-saveBtn[0].addEventListener("mouseleave",()=>{
-    saveBtn[0].style.backgroundColor="transparent"
-    saveBtn[0].style.color="#696cff"
-})
+for(let i=0;i<saveBtn.length;i++){
+    saveBtn[i].addEventListener("mouseover",()=>{
+        saveBtn[i].style.backgroundColor="orange"
+        saveBtn[i].style.color="#fff"
+    })
+    saveBtn[i].addEventListener("mouseleave",()=>{
+        saveBtn[i].style.backgroundColor="transparent"
+        saveBtn[i].style.color="orange"
+    })
+}
+

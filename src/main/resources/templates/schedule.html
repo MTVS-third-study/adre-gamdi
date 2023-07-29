@@ -48,7 +48,7 @@
                 <p>new</p>
             </div>
             <div class="loadBtn" id="loadBtn" >
-                <img src="/images/schedule_icon.png" alt="" />
+                <img src="/images/load.png" alt="" />
                 <p>load</p>
             </div>
             <div class="userImgBox">
@@ -92,9 +92,9 @@
             <div class="scheduleBox">
                 <div class="selectBox">
                     <div><span>여행 이름 : </span>
-                        <input type="text" placeholder="일정 이름을 변경해주세요" class="newPlaceName" maxlength="15" onchange="setScheduleName()">
+                        <input type="text" placeholder="일정 이름을 변경해주세요" id="scheduleName" class="newPlaceName" maxlength="15" onchange="setScheduleName()">
                     </div>
-                    <input type="text" name="datefilter" value="" class="calendar" />
+                    <input type="text" name="datefilter" id="datefilter" value="" class="calendar" />
                     <select name="day" id="daySelect" class="daySelect form-select" aria-label="Default select example"
                             onchange="showSelectedDaySchedule()">
                         <option value="allday">전체 일정</option>
@@ -105,9 +105,8 @@
                     <ul id="dayPlacesList" class="dayList">
                     </ul>
 
-                        <button class="saveBtn scheduleSave">저장</button>
+                        <button class="saveBtn scheduleSave" id="saveScheduleBtn">저장</button>
                         <button class="saveBtn dayDelete" id="initScheduleBtn">초기화</button>
-
                 </div>
             </div>
         </div>

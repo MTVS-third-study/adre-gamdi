@@ -36,20 +36,20 @@
                     <h1>Profile Details</h1>
                 </div>
                 <div class="userInfo">
-                    <img src="/images/jejuIsland.png" alt="">
+                    <img th:src="${session.loginUser.getKakaoProfileImage()}" alt="">
                     <div class="InfoText">
                         <p>ID</p>
-                        <input type="text" readonly="readonly">
+                        <input type="text" readonly="readonly" th:placeholder="${session.loginUser.getKakaoId()}">
                         <p>NICK NAME</p>
-                        <input type="text">
+                        <input type="text" th:placeholder="${session.loginUser.getKakaoNickName()}">
                         <p>EMAIL</p>
-                        <input type="text">
+                        <input type="text" th:placeholder="${session.loginUser.getEmail()}">
                         <p>AGE</p>
-                        <input type="text">
+                        <input type="text" th:placeholder="${session.loginUser.getAge()}">
                         <p>GENDER</p>
-                        <input type="text">
+                        <input type="text" th:placeholder="${session.loginUser.getGender()}">
                         <p>GRADE</p>
-                        <input type="text" readonly="readonly">
+                        <input type="text" readonly="readonly" th:placeholder="${session.loginUser.getGrade()}">
                     </div>
                 </div>
             </div>
