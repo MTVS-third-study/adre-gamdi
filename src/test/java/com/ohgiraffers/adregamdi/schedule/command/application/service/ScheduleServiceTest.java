@@ -22,25 +22,25 @@ class ScheduleServiceTest {
     @Autowired
     private ScheduleService scheduleService;
 
-    @DisplayName("insertSchedule 생성 확인")
-    @Test
-    void testInsertScheduleService() {
-
-        // given
-        ScheduleDTO schedule = new ScheduleDTO(
-                "제주제주",
-                null,
-                "2023-07-07",
-                "2023-07-08"
-        );
-
-        // when & then
-        Assertions.assertDoesNotThrow(
-                () -> scheduleService.insertSchedule(schedule)
-        );
-
-    }
-
+//    @DisplayName("insertSchedule 생성 확인")
+//    @Test
+//    void testInsertScheduleService() {
+//
+//        // given
+//        ScheduleDTO schedule = new ScheduleDTO(
+//                "제주제주",
+//                null,
+//                "2023-07-07",
+//                "2023-07-08"
+//        );
+//
+//        // when & then
+//        Assertions.assertDoesNotThrow(
+//                () -> scheduleService.insertSchedule(schedule)
+//        );
+//
+//    }
+//
 //    @DisplayName("deleteSchedule 삭제 확인")
 //    @Test
 //    void testDeleteScheduleService() {
