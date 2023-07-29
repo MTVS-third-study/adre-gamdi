@@ -46,14 +46,13 @@ let option = document.getElementsByClassName("option");     // 검색 box
 let loadBtn=document.getElementById("loadBtn")
 // 필기. 검색 버튼 이벤트
 homeBtn.addEventListener("click", () => {
-    console.log(1);
-
     menuWrap.style.display = "block";
     dayWrap.style.display = "none";
     infoWrap.style.display = "none";
     // option[0].style.display = "block"; newDayWrap.style.display="none"
 });
 // 필기. 새 일정 짜기 버튼 이벤트
+let scheduleId = document.getElementById("scheduleName");
 imgBtn.addEventListener("click", () => {
     const confirm = window.confirm("새 일정을 추가하시겠습니까?");
     if (!confirm) {
@@ -70,10 +69,7 @@ imgBtn.addEventListener("click", () => {
         dayAndNight: "",
         travelDays: ""
     };
-    let calendarDay = document.getElementById("datefilter");
-    let scheduleId = document.getElementById("scheduleName");
-    calendarDay.value="";
-    scheduleId.value="";
+    clearDatepicker();
     setScheduleName();
     showSelectedDaySchedule();
 
@@ -91,6 +87,7 @@ loadBtn.addEventListener("click",()=>{
     option[0].style.display = "block";
 
 })
+
 /*설명. 검색 비동기*/
 let searchBox = document.getElementById("searchBox");
 let searchKeyword = document.getElementById("searchKeyword1");
@@ -136,7 +133,8 @@ keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤�
             });
     }
 });
-searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 이벤트
+// 설명. 검색 버튼 클릭 이벤트
+searchKeyword.addEventListener("click", () => {
 
     keywordValue = JSON.stringify(keyword.value);
 
@@ -146,8 +144,15 @@ searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 
             json = json.respPlaceList;
             let html = "";
             json.forEach((obj, idx) => {
-                if (!json.length) {
-                    console.log("등록된 값이없습니다");
+                if (json.length === 0) {
+
+                    html += `
+                        <li class="placeItem">
+                            <div class="placeContents">
+                                <h4>등록된 값이없습니다</h4>
+                            </div>
+                        </li>
+                    `;
                 } else {
 
                     html += `
@@ -202,7 +207,6 @@ function addPlaceListClickEvent() {
             fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
                     detailPlaceInfo = data.detailPlaceInfo;
 
                     let placeName = document.getElementById("placeName");
@@ -243,8 +247,7 @@ function addPlaceListClickEvent() {
     }
 }
 
-
-
+/*설명. 마우스 이벤트 정리*/
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
 });
@@ -278,7 +281,6 @@ let userImgBox = document.getElementsByClassName("userImgBox");
 let hideUserInfoBox = document.getElementsByClassName("hideUserInfoBox");
 let hideUserInfoBoxItem = document.querySelectorAll(".hideUserInfoBox>li");
 let hideBtn=document.getElementById("hideBtn")
-
 userImgBox[0].addEventListener("click", () => {
     hideUserInfoBox[0].style.display = "block";
     hideBtn.style.display="block";
@@ -293,6 +295,7 @@ for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
     });
 
 }
+// 프로필 제거 이벤트
 hideBtn.addEventListener("click", () => {
     hideUserInfoBox[0].style.display = "none";
     hideBtn.style.display="none";
@@ -306,7 +309,6 @@ let myScheduleModalBody = document.getElementsByClassName(
 let scheduleModify = document.getElementsByClassName("scheduleModify");
 // 내 일정 모달창
 myScheduleBtn.addEventListener("click", () => {
-    console.log(2);
     infoWrap.style.display = "none";
     menuWrap.style.display = "none";
     dayWrap.style.display = "block";
@@ -316,8 +318,6 @@ myScheduleBtn.addEventListener("click", () => {
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-
             if (data.message) { // 에러 메세지가 존재한다면
                 alert(data.message);
                 return;
@@ -329,7 +329,6 @@ myScheduleBtn.addEventListener("click", () => {
             let html = `  <div><h1>나의 일정</h1> <img src="/images/close.png" alt="" class="closeBtn1" id="closeBtn"></div>`;
             data.myScheduleList.forEach((obj, idx) => {
 
-                    console.log(data.myScheduleList);
                     html += `
            
              <div class="plan">
@@ -337,7 +336,7 @@ myScheduleBtn.addEventListener("click", () => {
             <div class="plan_date">여행 일자 <span>${obj.startDate}~${obj.endDate}</span></div>
 <!--            <div class="plan_cnt">선택장소 <span>12</span></div>-->
             <div class="schedule_modal_btnBox">
-                <button class="modal_btn scheduleModify">일정 수정</button>
+                <button class="modal_btn scheduleModify" id="modifyScheduleBtn">일정 수정</button>
                 <button class="modal_btn">삭제</button>
             </div>         
             </div>
@@ -356,6 +355,11 @@ myScheduleBtn.addEventListener("click", () => {
         });
 
 })
+// 필기. 일정 수정 버튼 클릭 이벤트
+// const modifyScheduleBtn = document.getElementById("modifyScheduleBtn");
+// modifyScheduleBtn.addEventListener("click", () => {
+//     console.log(1000);
+// });
 myScheduleModal.addEventListener("click", () => {
     myScheduleModal.style.display = "none";
     myScheduleModalBody[0].style.display = "none";
@@ -380,78 +384,78 @@ let newTravelSchedule = {
     dayAndNight: "",
     travelDays: ""
 };
-    let daySelect = document.getElementById("daySelect");
-    $(function () {
-        $('input[name="datefilter"]').daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-                cancelLabel: "Clear",
-            },
-        });
-
-        $('input[name="datefilter"]').on(
-            "apply.daterangepicker",
-            function (ev, picker) {
-                $(this).val(
-                    picker.startDate.format("MM/DD/YYYY") +
-                    " - " +
-                    picker.endDate.format("MM/DD/YYYY")
-                );
-
-                let startDate =
-                    picker.startDate._d.getUTCFullYear() +
-                    "-" +
-                    (picker.startDate._d.getMonth() +
-                        1) +
-                    "-" +
-                    picker.startDate._d.getDate() +
-                    "";
-                let endDate =
-                    picker.endDate._d.getUTCFullYear() +
-                    "-" +
-                    (picker.endDate._d.getMonth() +
-                        1) +
-                    "-" +
-                    picker.endDate._d.getDate() +
-                    "";
-                fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.message) {
-                            alert(data.message);
-                            return;
-                        }
-                        let dayAndNight = data.dayAndNight;
-                        newTravelSchedule.startDate=startDate;
-                        newTravelSchedule.endDate=endDate;
-                        newTravelSchedule.dayAndNight = dayAndNight;
-
-                        let html = ` <option value="allday">전체 일정</option>`;
-                        for (let i=1; i<=dayAndNight; i++) {
-
-
-                            if (i === 1) {
-                                html += `   
-                                    <option value="${i}" selected="selected">${i}일 차</option>
-                                `;
-                            } else{
-                                html += `   
-                                    <option value="${i}">${i}일 차</option>
-                                `;
-                            }
-                            daySelect.innerHTML = html;
-                        }
-                        showSelectedDaySchedule();
-                    });
-            }
-        );
-        $('input[name="datefilter"]').on(
-            "cancel.daterangepicker",
-            function (ev, picker) {
-                $(this).val("");
-            }
-        );
+let daySelect = document.getElementById("daySelect");
+$(function () {
+    $('input[name="datefilter"]').daterangepicker({
+        autoUpdateInput: false,
+        locale: {
+            cancelLabel: "Clear",
+        },
     });
+
+    $('input[name="datefilter"]').on(
+        "apply.daterangepicker",
+        function (ev, picker) {
+            $(this).val(
+                picker.startDate.format("MM/DD/YYYY") +
+                " - " +
+                picker.endDate.format("MM/DD/YYYY")
+            );
+
+            let startDate =
+                picker.startDate._d.getUTCFullYear() +
+                "-" +
+                (picker.startDate._d.getMonth() +
+                    1) +
+                "-" +
+                picker.startDate._d.getDate() +
+                "";
+            let endDate =
+                picker.endDate._d.getUTCFullYear() +
+                "-" +
+                (picker.endDate._d.getMonth() +
+                    1) +
+                "-" +
+                picker.endDate._d.getDate() +
+                "";
+            fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.message) {
+                        alert(data.message);
+                        return;
+                    }
+                    let dayAndNight = data.dayAndNight;
+                    newTravelSchedule.startDate=startDate;
+                    newTravelSchedule.endDate=endDate;
+                    newTravelSchedule.dayAndNight = dayAndNight;
+
+                    let html = ` <option value="allday">전체 일정</option>`;
+                    for (let i=1; i<=dayAndNight; i++) {
+
+
+                        if (i === 1) {
+                            html += `   
+                                <option value="${i}" selected="selected">${i}일 차</option>
+                            `;
+                        } else{
+                            html += `   
+                                <option value="${i}">${i}일 차</option>
+                            `;
+                        }
+                        daySelect.innerHTML = html;
+                    }
+                    showSelectedDaySchedule();
+                });
+        }
+    );
+    $('input[name="datefilter"]').on(
+        "cancel.daterangepicker",
+        function (ev, picker) {
+            $(this).val("");
+        }
+    );
+});
 
 /*설명. 일정 추가*/
 let dayNumber = 1;  // 첫 째날
@@ -462,8 +466,6 @@ function setScheduleName() {    // 필기. 일정 이름 변경 이벤트
     saveScheduleInLocalStorage();
 }
 scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지에서 일정추가 버튼 클릭 이벤트
-    console.log("매개변수로 넘어온 Place", detailPlaceInfo);
-
     if (!travelDays[dayNumber]) {
         travelDays[dayNumber] = [];
     }
@@ -473,7 +475,6 @@ scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지�
     }
 
     travelDays[dayNumber].push(detailPlaceInfo);
-    console.log("travelDays", travelDays);
     newTravelSchedule.travelDays=travelDays;
 
     dayWrap.style.display = "block";
@@ -483,8 +484,8 @@ scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지�
     saveScheduleInLocalStorage();
     showSelectedDaySchedule();
 });
-function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조회
-    console.log("newTravelSchedule", newTravelSchedule);
+// 필기. 세부 일정 리스트 조회
+function showSelectedDaySchedule() {
     dayNumber = daySelect.options[daySelect.selectedIndex].value;
     let html = ``;
     if (dayNumber === "allday") {   // 필기. 전체 일정 선택 시
@@ -527,6 +528,14 @@ function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조�
 let saveScheduleBtn = document.getElementById("saveScheduleBtn");
 saveScheduleBtn.addEventListener("click", () => {
     saveSchedule();
+    newTravelSchedule = {};
+    travelDays=[];
+    showSelectedDaySchedule();
+    clearScheduleName();
+    clearDatepicker();
+    menuWrap.style.display = "block";
+    dayWrap.style.display = "none";
+    infoWrap.style.display = "none";
 })
 function saveSchedule() {
 
@@ -551,6 +560,8 @@ function selectDaySchedule(day) {   // 필기. 전체 일정에서 일차 별 �
     daySelect.value = day;
     showSelectedDaySchedule();
 };
+
+/* 설명. 초기화 */
 // 필기. 선택된 날짜 일정 초기화
 let initScheduleBtn = document.getElementById("initScheduleBtn");
 initScheduleBtn.addEventListener("click", () => {
@@ -573,4 +584,19 @@ initScheduleBtn.addEventListener("click", () => {
     travelDays[selectedDay] = [];
     showSelectedDaySchedule();
 });
+// 필기. 여행 이름 초기화 함수
+function clearScheduleName() {
+    scheduleId.value = "";
+    setScheduleName();
+}
+// 필기. calendar 초기화 함수
+function clearDatepicker() {
+    $('input[name="datefilter"]').data('daterangepicker').setStartDate(moment());
+    $('input[name="datefilter"]').data('daterangepicker').setEndDate(moment());
+    $('input[name="datefilter"]').val('');
+
+    while (daySelect.firstChild) {
+        daySelect.removeChild(daySelect.firstChild);
+    }
+}
 
