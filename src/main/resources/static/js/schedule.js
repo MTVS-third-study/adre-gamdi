@@ -326,7 +326,7 @@ myScheduleBtn.addEventListener("click", () => {
             myScheduleModal.style.display = "block";
             myScheduleModalBody[0].style.display = "block";
 
-            let html = `  <div><h1>나의 일정</h1></div>`;
+            let html = `  <div><h1>나의 일정</h1> <img src="/images/close.png" alt="" class="closeBtn1" id="closeBtn"></div>`;
             data.myScheduleList.forEach((obj, idx) => {
 
                     console.log(data.myScheduleList);
@@ -345,15 +345,22 @@ myScheduleBtn.addEventListener("click", () => {
 
             });
             document.getElementById("schedule_modal_body").innerHTML = html;
+            let closeBtn=document.getElementById("closeBtn")
+            closeBtn.addEventListener("click",()=>{
+                myScheduleModal.style.display = "none";
+                myScheduleModalBody[0].style.display = "none";
+            })
         })
         .catch((error) => {
             console.log(error);
         });
+
 })
 myScheduleModal.addEventListener("click", () => {
     myScheduleModal.style.display = "none";
     myScheduleModalBody[0].style.display = "none";
 });
+
     // scheduleModify[0].addEventListener("click", () => {
     //     if ((dayWrap.style.display = "none")) {
     //         dayWrap.style.display = "block";

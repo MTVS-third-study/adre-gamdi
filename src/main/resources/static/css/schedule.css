@@ -620,7 +620,13 @@ hr {
     background-color: black; /스크롤바의 색상/
 border-radius: 5px;
 }
-
+.schedule_modal_body .closeBtn1{
+    position: relative;
+    left: 512px;
+    bottom: 67px;
+    width: 30px;
+    cursor: pointer;
+}
 .plan {
     line-height: 30px;
     width: 500px;
