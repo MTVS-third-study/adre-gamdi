@@ -26,30 +26,13 @@ public class ReviewQueryController {
     }
 
 
-//    @ResponseBody
-//    @GetMapping("/reviewInfo")
-//    public Map<String, List<ReviewDTO>> getReviewInfo(@RequestParam("reviewNo") int reviewNo,
-//                                                      @RequestParam("reviewPlaceNo") Long reviewPlaceNo,
-//                                                      Model model) {
-////        reviewPlaceNo = 20L;
-//        List<ReviewDTO> reviewList = reviewQueryService.getReviewList(reviewPlaceNo);
-//
-//        model.addAttribute("reviewList", reviewList);
-//
-//        Map<String, List<ReviewDTO>> reviewInfo = new HashMap<>();
-//        reviewInfo.put("reviewInfo", reviewList);
-//
-//        return reviewInfo;
-//
-//    }
-
     @ResponseBody
     @GetMapping("/reviewInfo")
     public Map<String, List<ReviewDTO>> getReviewInfo(@RequestParam("placeNo") Long placeNo,
-                                                      Model model) {
-        System.out.println("placeNo = " + placeNo);
+                                                Model model) {
+
         List<ReviewDTO> reviewList = reviewQueryService.getReviewList(placeNo);
-        
+
         model.addAttribute("reviewList", reviewList);
 
         Map<String, List<ReviewDTO>> reviewInfo = new HashMap<>();

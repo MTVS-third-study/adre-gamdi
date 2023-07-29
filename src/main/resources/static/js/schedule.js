@@ -11,28 +11,106 @@ infoNav.addEventListener("click", () => {
     imgBox[0].style.display = "block";
 
 });
-// reviewNav.addEventListener("click", () => {
-//     fetch(`reviewController주소?placieNo=${placeNo}`)
-//         .then((response) => response.json())
-//         .then((json) => {
-//             console.log(json);
-//             console.log(placeNo);
-//         })
-//         .catch((error) => {
-//             console.error(error);
-//             alert("예기치 못한 오류가 발생했습니다.");
-//             infoWrap.style.display = "none";
-//             menuWrap.style.display = "block";
-//             dayWrap.style.display = "none";
-//             option[0].style.display = "block";
-//             // newDayWrap.style.display="none"
-//         });
-//     infoContents[0].style.display = "none";
-//     reviewContainer[0].style.display = "block";
-//     imgBox[0].style.display = "none";
-//     infoPlace[0].style.display = "none";
-//     // newDayWrap.style.display="none"
-// });
+
+
+// 설명. 리뷰 조회 비동기
+function addReviewClickEvent(placeNo) {
+    reviewNav.addEventListener("click", () => {
+        fetch(`/review/query/reviewInfo?placeNo=${placeNo}`)
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json
+                );
+                console.log(placeNo);
+
+                json = json.reviewInfo;
+                let html = "";
+                json.forEach((obj, idx) => {
+                    if (!json.length) {
+                        console.log("등록된 값이없습니다");
+                    } else {
+                        html += `
+                        <div class="reviewBox">
+                            <div class="reviewBox"><p>${obj.reviewNo}</p>
+
+                            <div class="userinfoBox">
+                                <div class="userName"><img src="" alt="" /><span >${obj.reviewWriter.reviewWriterName}</span></div>
+                                <div class="star-ratings">
+                                    <div class="starRatingsFill space-x-2 text-lg" style="width: ${obj.starPoint * 20}%">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                   
+                                    <div class="starRatingsBase space-x-2 text-lg">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="reviewContents">
+                                <p >
+                                    ${obj.reviewContent}
+                                </p>
+                            </div>
+                            <div class="reviewImg">
+                                <img src="/images/reviewImages/${obj.savedReviewImageName}"/>
+                            </div>
+                           
+                        </div>
+`;
+                    }
+                    document.querySelector(".reviewContentsBox").innerHTML = html;
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("예기치 못한 오류가 발생했습니다.");
+                infoWrap.style.display = "none";
+                menuWrap.style.display = "block";
+                dayWrap.style.display = "none";
+                option[0].style.display = "block";
+                // newDayWrap.style.display="none"
+            });
+        infoContents[0].style.display = "none";
+        reviewContainer[0].style.display = "block";
+        imgBox[0].style.display = "none";
+        infoPlace[0].style.display = "none";
+        // newDayWrap.style.display="none"
+    });
+}
+
+// 설명. 리뷰 등록 비동기
+function addReviewRegistEvent(placeNo) {
+    let reviewForm = document.getElementById("reviewForm")
+    reviewForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const reviewFormData = new FormData(reviewForm);
+
+
+        fetch(`/review/regist?placeNo=${placeNo}`,{
+            method: 'POST',
+            headers: {},
+            body: reviewFormData
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json);
+                console.log(placeNo);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("예기치 못한 오류가 발생했습니다.");
+                infoWrap.style.display = "none";
+                menuWrap.style.display = "block";
+                dayWrap.style.display = "none";
+                option[0].style.display = "block";
+            });
+        infoContents[0].style.display = "none";
+        reviewContainer[0].style.display = "block";
+        imgBox[0].style.display = "none";
+        infoPlace[0].style.display = "none";
+    });
+}
 
 /* 설명. 지도 사이드바 설정 js */
 let menuWrap = document.getElementById("menu_wrap");    // 검색 list
@@ -234,6 +312,8 @@ function addPlaceListClickEvent() {
                     // newDayWrap.style.display="none"
                 });
             addReviewClickEvent(placeNo);
+            addReviewRegistEvent(placeNo);
+
             infoWrap.style.display = "block";
             menuWrap.style.display = "none";
             dayWrap.style.display = "none";

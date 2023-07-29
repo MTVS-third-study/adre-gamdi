@@ -9,14 +9,14 @@ import javax.persistence.Embeddable;
 @Embeddable
 @Getter
 @ToString
-public class ReportUserNo {
+public class ReportedReview {
 
     @Column
-    private Long reportUserNo;
+    private int reportedReviewNo;
 
-    protected ReportUserNo() {}
+    protected ReportedReview() {}
 
-    public ReportUserNo(Long reportUserNo) {
-        this.reportUserNo = reportUserNo;
+    public ReportedReview(int reportedReviewNo) {
+        this.reportedReviewNo = reportedReviewNo;
     }
 }
