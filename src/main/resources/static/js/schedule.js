@@ -12,7 +12,7 @@ infoNav.addEventListener("click", () => {
 });
 
 reviewNav.addEventListener("click", () => {
-    getReviewList(selectedPlaceNo);
+    getReviewList(placeNo);
 });
 
 
@@ -87,7 +87,6 @@ function getReviewList(placeNo) {
         infoContents[0].style.display = "none";
         reviewContainer[0].style.display = "block";
         imgBox[0].style.display = "none";
-        // infoPlace[0].style.display = "none";
 }
 
 // 설명. 리뷰 등록 비동기
@@ -296,7 +295,7 @@ searchKeyword.addEventListener("click", () => {
 /*설명. 상세페이지*/
 let scheduleAdd = document.getElementsByClassName("scheduleAdd");
 let detailPlaceInfo = "";
-let selectedPlaceNo = "";
+let placeNo = "";
 function addPlaceListClickEvent() {
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
@@ -308,8 +307,7 @@ function addPlaceListClickEvent() {
 
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {  // 검색된 리스트
-            let placeNo = placeList[i].querySelector("#placeNo").innerText;
-            selectedPlaceNo = placeNo;
+            placeNo = placeList[i].querySelector("#placeNo").innerText;
             fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
                 .then((response) => response.json())
                 .then((data) => {
@@ -332,6 +330,7 @@ function addPlaceListClickEvent() {
                     introduction.innerText = detailPlaceInfo.introduction;
                     const imgsrc = `<img src="${detailPlaceInfo.imagePath}">`;
                     imgPath.innerHTML = imgsrc;
+                    addReviewRegistEvent(placeNo);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -341,8 +340,8 @@ function addPlaceListClickEvent() {
             showDetailWindow();
         });
     }
-    getReviewList(selectedPlaceNo);
-    addReviewRegistEvent(selectedPlaceNo);
+    getReviewList(placeNo);
+
 }
 
 /*설명. 마우스 이벤트 정리*/
