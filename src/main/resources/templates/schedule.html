@@ -40,7 +40,7 @@
                 <img src="/images/search.png" alt="" />
                 <p>검색</p>
             </div>
-            <div class="myScheduleBtn" id="myScheduleBtn">
+            <div class="loadBtn" id="loadBtn">
                 <img src="/images/schedule_icon.png" alt="" />
                 <p>일정</p>
             </div>
@@ -48,7 +48,7 @@
                 <img src="/images/plus.png" alt="" />
                 <p>new</p>
             </div>
-            <div class="loadBtn" id="loadBtn" >
+            <div class="myScheduleBtn" id="myScheduleBtn" >
                 <img src="/images/load.png" alt="" />
                 <p>load</p>
             </div>
@@ -168,32 +168,32 @@
                     </div>
                     <hr class="infoContentsHr"/>
                     <div class="reviewContentsBox">
-                        <div class="reviewBox"  th:each="review:${reviews}">
+<!--                        <div class="reviewBox"  th:each="review:${reviews}">-->
 
-                            <div class="userinfoBox">
-                                <div class="userId" th:text="${review.getReviewWriter().getReviewWriterName()}"><img src="" alt="" /><span >JM</span></div>
-                                <div class="star-ratings">
-                                    <div class="starRatingsFill"
-                                            th:style="'width: '+${review.getStarPoint()} * 20 + '%'">
-                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                    </div>
-                                    <div class="starRatingsBase">
-                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                    </div>
-                                </div>
-                            </div>
+<!--                            <div class="userinfoBox">-->
+<!--                                <div class="userName" th:text="${review.getReviewWriter().getReviewWriterName()}"><img src="" alt="" /><span >JM</span></div>-->
+<!--                                <div class="star-ratings">-->
+<!--                                    <div class="starRatingsFill"-->
+<!--                                            th:style="'width: '+${review.getStarPoint()} * 20 + '%'">-->
+<!--                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="starRatingsBase">-->
+<!--                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
-                            <div class="reviewContents" th:text="${review.getReviewContent()}">
-                                <p >
-                                    분위기 사먹으러 가세요. 음식은 쏘쏘인데, 식사보단 커피하러
-                                    가시는걸 추천요. 양껏 먹는집은 아니에요ㅎㅎ 주말은 웨이팅
-                                    있으니, 미리가서 대기 하셔야되요. 분위기는 좋아요
+<!--                            <div class="reviewContents" th:text="${review.getReviewContent()}">-->
+<!--                                <p >-->
+<!--                                    분위기 사먹으러 가세요. 음식은 쏘쏘인데, 식사보단 커피하러-->
+<!--                                    가시는걸 추천요. 양껏 먹는집은 아니에요ㅎㅎ 주말은 웨이팅-->
+<!--                                    있으니, 미리가서 대기 하셔야되요. 분위기는 좋아요-->
 
-                                </p>
-                            </div>
-                            <div class="reviewImg">
-                                <img th:src="@{'/images/reviewImages/'+${review.getSavedReviewImageName()}}"/>
-                            </div>
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="reviewImg">-->
+<!--                                <img th:src="@{'/images/reviewImages/'+${review.getSavedReviewImageName()}}"/>-->
+<!--                            </div>-->
                             <div class="csBox">
                                 <div class="like white">
 
@@ -207,10 +207,9 @@
                                 </div>
                             </div>
                             <hr class="infoContentsHr">
-                        </div>
+<!--                        </div>-->
                     </div>
                 </div>
-
             </div> <!--end InfoBox-->
         </div>  <!--end 상세 Box -->
 
@@ -220,8 +219,8 @@
     <div class="modal">
         <div class="modal_body">리뷰 작성하기
 
-            <form action="review/regist" name="review" id="review" method="post" encType="multipart/form-data">
-                <button class="closeBtn">닫기</button>
+            <button class="closeBtn">닫기</button>
+            <form name="review" id="reviewForm" method="post" encType="multipart/form-data">
 
                 <div class="reviewStarPoint">
                     <fieldset>
@@ -235,20 +234,17 @@
                             for="rate4">⭐</label>
                         <input type="radio" name="starPoint" value="1" id="rate5"><label
                             for="rate5">⭐</label><br>
-                        <span th:text="${ nullStarPoint }" style="color:red;"></span>
                     </fieldset><br>
                 </div>
 
                 <div class="reviewContents1">
                     <input type="file" name="imageFile" id="imageFile" accept="image/jpg, image/jpeg, image/png"
                            onchange="readURL(this);"><br>
-                    <span th:text="${ incorrectExtension }" style="color:red;"></span>
                     <br>
                     <img id="preview" style="width: 200px; height: 200px"/><br>
                     <br>
                     <textarea name="reviewContent" type="text" id="reviewContent"
                               placeholder="리뷰 내용을 입력해주세요"></textarea><br>
-                    <span th:text="${ nullContent }" style="color:red;"></span>
                 </div>
                 <input type="submit" value="등록하기">
             </form>
@@ -262,7 +258,7 @@
     <!-- 스케쥴 페이지에서 일정눌렀을 떄 내 일정 나오는 모달창 -->
     <div class="myScheduleModal" id="myScheduleModal"></div> <!---->
     <div class="schedule_modal_body" id="schedule_modal_body">
-        <div><h1>나의 일정</h1></div>
+
     </div>
     </div>
 

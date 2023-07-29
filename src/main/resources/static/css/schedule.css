@@ -222,9 +222,9 @@ body {
     width: 50px;
     height: 25px;
     border-radius: 10px;
-    background-color: transparent;
+    background-color: orange;
     border: 1px solid orange;
-    color: orange;
+    color: white;
     position: relative;
     top: 10px;
     left: 73px;
@@ -449,9 +449,9 @@ hr {
     width: 100px;
     height: 40px;
     border-radius: 10px;
-    background-color: transparent;
+    background-color: orange;
     border: 1px solid orange;
-    color: orange;
+    color: white;
     cursor: pointer;
     transition: all 1s;
 }
@@ -459,9 +459,9 @@ hr {
     width: 100px;
     height: 40px;
     border-radius: 10px;
-    background-color: transparent;
+    background-color: orange;
     border: 1px solid orange;
-    color: orange;
+    color: white;
     cursor: pointer;
     margin-right: 15px;
     transition: all 1s;
@@ -500,9 +500,9 @@ hr {
     width: 150px;
     height: 30px;
     border-radius: 10px;
-    background-color: transparent;
+    background-color: orange;
     border: 1px solid orange;
-    color: orange;
+    color: white;
     margin-bottom: 30px;
 }
 
@@ -620,7 +620,13 @@ hr {
     background-color: black; /스크롤바의 색상/
 border-radius: 5px;
 }
-
+.schedule_modal_body .closeBtn1{
+    position: relative;
+    left: 512px;
+    bottom: 67px;
+    width: 30px;
+    cursor: pointer;
+}
 .plan {
     line-height: 30px;
     width: 500px;

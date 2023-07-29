@@ -20,8 +20,8 @@ public class ReviewQueryService {
         this.reviewQueryRepository = reviewQueryRepository;
     }
 
-    public List<ReviewDTO> getReviewList(Long reviewPlaceNo) {
-        List<Review> reviewList = reviewQueryRepository.findALLByReviewPlaceNo(new ReviewPlaceNo(reviewPlaceNo));
+    public List<ReviewDTO> getReviewList(Long placeNo) {
+        List<Review> reviewList = reviewQueryRepository.findALLByReviewPlaceNo(new ReviewPlaceNo(placeNo));
         List<ReviewDTO> reviewDTOList = new ArrayList<>();
 
         for(Review review : reviewList) {
@@ -34,6 +34,8 @@ public class ReviewQueryService {
             reviewDTO.setRegDate(review.getRegDate());
             reviewDTO.setReviewWriter(review.getReviewWriter());
             reviewDTO.setReviewPlaceNo(review.getReviewPlaceNo());
+            reviewDTO.setStarPoint(review.getStarPoint());
+            reviewDTO.setLikeNum(review.getLikeNum());
 
             reviewDTOList.add(reviewDTO);
         }

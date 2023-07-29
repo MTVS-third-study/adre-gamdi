@@ -1,26 +1,26 @@
-#review fieldset{
+#reviewForm fieldset{
     display: inline-block;
     direction: rtl;
     border:0;
 }
-#review fieldset legend{
+#reviewForm fieldset legend{
     text-align: right;
 }
-#review input[type=radio]{
+#reviewForm input[type=radio]{
     display: none;
 }
-#review label{
+#reviewForm label{
     font-size: 2em;
     color: transparent;
     text-shadow: 0 0 0 #f0f0f0;
 }
-#review label:hover{
+#reviewForm label:hover{
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
-#review label:hover ~ label{
+#reviewForm label:hover ~ label{
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
-#review input[type=radio]:checked ~ label{
+#reviewForm input[type=radio]:checked ~ label{
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
 #reviewContent {
@@ -63,12 +63,10 @@
     padding: 0;
 }
 
-
-
 .closeBtn {
     position : relative;
-    left: 250px;
-    bottom: 50px;
+    left: 220px;
+    bottom: 30px;
 }
 
 .modal {
