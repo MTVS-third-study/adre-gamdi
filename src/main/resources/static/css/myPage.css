@@ -115,9 +115,7 @@ main {
     margin-bottom: 30px;
 }
 .BtnBox{
-    position: absolute;
-    bottom: 100px;
-    right: 294px;
+
 }
 
 .saveBtn{
@@ -128,7 +126,12 @@ main {
     height: 40px;
     border-radius: 5px;
     color: orange;
-    margin-left: 40px;
+
     font-size:18px;
     transition: all 1s;
+}
+.deleteBtn{
+    position: relative;
+    top: 387px;
+    left: -155px;
 }

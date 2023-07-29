@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -41,5 +44,11 @@ public class UserDTO {
         this.grade = grade;
         this.blacklist_status = blacklist_status;
         this.role = role;
+    }
+    public void setKakaoNickName(String kakaoNickName) {
+        ByteBuffer buffer = StandardCharsets.UTF_8.encode(kakaoNickName);
+
+        String utf8EncodedString = StandardCharsets.UTF_8.decode(buffer).toString();
+        this.kakaoNickName = utf8EncodedString;
     }
 }
