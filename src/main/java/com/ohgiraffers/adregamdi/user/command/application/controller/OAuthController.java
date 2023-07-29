@@ -33,7 +33,7 @@ public class OAuthController {
             , HttpServletRequest request, HttpServletResponse response) throws IOException {
         session.setAttribute("service", "kakao");
         session.setAttribute("loginUser", oAuthService.kakaoLogin(code));
-        response.sendRedirect("http://adregamdi.site:9090"); // 메인 페이지로
+        response.sendRedirect("http://localhost:9090"); // 메인 페이지로
     }
 
     // 카카오 로그아웃
@@ -45,7 +45,7 @@ public class OAuthController {
         if (result != 0L) { // 카카오 로그아웃 성공 시
             session.removeAttribute("loginUser");
             session.removeAttribute("service");
-            response.sendRedirect("http://adregamdi.site:9090"); // 메인 페이지로
+            response.sendRedirect("http://localhost:9090"); // 메인 페이지로
         } else {
             response.sendRedirect("errorPage"); // 로그아웃 실패 시 에러 페이지로
         }
