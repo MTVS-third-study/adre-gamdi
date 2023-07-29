@@ -28,7 +28,13 @@ public class SuggestionTests {
         // given
         SuggestionDTO suggestion = new SuggestionDTO(
                 1L,
-                "나는 문어입니다"
+                "우리집",
+                "1",
+                "도로집",
+                "그냥집",
+                "1층임",
+                "007빵",
+                "집으로가자"
         );
 
 

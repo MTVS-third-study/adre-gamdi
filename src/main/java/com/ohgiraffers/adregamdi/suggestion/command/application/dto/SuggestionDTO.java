@@ -15,10 +15,30 @@ public class SuggestionDTO {
 
     private Long userNo;
 
+    private String placeName;
+
+    private String postCode;
+
+    private String roadAddress;
+
+    private String address;
+
+    private String detailAddress;
+
+    private String phoneNumber;
+
     private String suggestionMessage;
 
-    public SuggestionDTO(Long userNo, String suggestionMessage) {
+    public SuggestionDTO(Long userNo, String placeName, String postCode,
+                         String roadAddress, String address, String detailAddress,
+                         String phoneNumber, String suggestionMessage) {
         this.userNo = userNo;
+        this.placeName = placeName;
+        this.postCode = postCode;
+        this.roadAddress = roadAddress;
+        this.address = address;
+        this.detailAddress = detailAddress;
+        this.phoneNumber = phoneNumber;
         this.suggestionMessage = suggestionMessage;
     }
 }

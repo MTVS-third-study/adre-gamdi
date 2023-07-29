@@ -1,6 +1,12 @@
 package com.ohgiraffers.adregamdi.schedule.command.application.dto;
 
+import com.google.gson.stream.JsonToken;
 import lombok.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.util.List;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -15,24 +21,27 @@ public class ScheduleDTO {
 
     private Long userNo;
 
-    private String startDay;
+    private String startDate;
 
-    private String endDay;
+    private String endDate;
 
     private String dayAndNight;
 
-    public ScheduleDTO(String scheduleName, Long userNo, String startDay, String endDay) {
+    private JSONObject travelDays;
+
+    public ScheduleDTO(String scheduleName, Long userNo, String startDate, String endDate) {
         this.scheduleName = scheduleName;
         this.userNo = userNo;
-        this.startDay = startDay;
-        this.endDay = endDay;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public ScheduleDTO(String scheduleName, Long userNo, String startDay, String endDay, String dayAndNight) {
+    public ScheduleDTO(Long scheduleNo, String scheduleName, Long userNo, String startDate, String endDate, String dayAndNight) {
+        this.scheduleNo = scheduleNo;
         this.scheduleName = scheduleName;
         this.userNo = userNo;
-        this.startDay = startDay;
-        this.endDay = endDay;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.dayAndNight = dayAndNight;
     }
 }

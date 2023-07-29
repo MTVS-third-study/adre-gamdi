@@ -2,6 +2,7 @@ package com.ohgiraffers.adregamdi.detailschedule.command.application.service;
 
 import com.ohgiraffers.adregamdi.detailschedule.command.application.dto.DetailScheduleDTO;
 import com.ohgiraffers.adregamdi.detailschedule.command.domain.aggregate.entity.DetailSchedule;
+import com.ohgiraffers.adregamdi.detailschedule.command.domain.aggregate.vo.PlaceNo;
 import com.ohgiraffers.adregamdi.detailschedule.command.domain.repository.DetailScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,19 +26,20 @@ public class DetailScheduleService {
         DetailScheduleDTO detailScheduleDTO = new DetailScheduleDTO();
         DetailSchedule detailSchedule;
 
-        for (int i = 0; i < detailScheduleDTOList.size(); i++) {
+        int listSize = detailScheduleDTOList.size();
+        for (int i = 0; i < listSize; i++) {
             detailSchedule = detailScheduleRepository.save(new DetailSchedule(
                     detailScheduleDTOList.get(i).getDetailScheduleNo()
                     , detailScheduleDTOList.get(i).getProcedureNo()
                     , detailScheduleDTOList.get(i).getScheduleDay()
                     , detailScheduleDTOList.get(i).getTotalScheduleNo()
-                    , detailScheduleDTOList.get(i).getPlaceNo()));
+                    , new PlaceNo(detailScheduleDTOList.get(i).getPlaceNo())));
 
             detailScheduleDTO.setDetailScheduleNo(detailSchedule.getDetailScheduleNo());
             detailScheduleDTO.setProcedureNo(detailSchedule.getProcedureNo());
             detailScheduleDTO.setScheduleDay(detailSchedule.getScheduleDay());
             detailScheduleDTO.setTotalScheduleNo(detailSchedule.getTotalScheduleNo());
-            detailScheduleDTO.setPlaceNo(detailSchedule.getPlaceNo());
+            detailScheduleDTO.setPlaceNo(detailSchedule.getPlaceNo().getPlaceNo());
 
             detailScheduleList.add(i, detailScheduleDTO);
         }

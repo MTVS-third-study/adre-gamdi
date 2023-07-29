@@ -65,12 +65,13 @@ homeBtn.addEventListener("click", () => {
 });
 // 필기. 새 일정 짜기 버튼 이벤트
 imgBtn.addEventListener("click", () => {
-    console.log(3);
     const confirm = window.confirm("새 일정을 추가하시겠습니까?");
     if (!confirm) {
         return;
     }
-    window.localStorage.setItem("newTravelSchedule", newTravelSchedule);
+    if (newTravelSchedule) {
+        saveScheduleInLocalStorage();
+    }
     travelDays = {};
     newTravelSchedule = {
         scheduleName: "",
@@ -79,6 +80,11 @@ imgBtn.addEventListener("click", () => {
         dayAndNight: "",
         travelDays: ""
     };
+    let calendarDay = document.getElementById("datefilter");
+    let scheduleId = document.getElementById("scheduleName");
+    calendarDay.value="";
+    scheduleId.value="";
+    setScheduleName();
     showSelectedDaySchedule();
 
     infoWrap.style.display = "none";
@@ -86,7 +92,6 @@ imgBtn.addEventListener("click", () => {
     dayWrap.style.display = "block";
     BtnBox[0].style.display = "block";
     option[0].style.display = "block";
-
 });
 loadBtn.addEventListener("click",()=>{
     infoWrap.style.display = "none";
@@ -446,12 +451,13 @@ let newTravelSchedule = {
                         let html = ` <option value="allday">전체 일정</option>`;
                         for (let i=1; i<=dayAndNight; i++) {
 
+
                             if (i === 1) {
-                                html += `
+                                html += `   
                                     <option value="${i}" selected="selected">${i}일 차</option>
                                 `;
                             } else{
-                                html += `
+                                html += `   
                                     <option value="${i}">${i}일 차</option>
                                 `;
                             }
@@ -474,13 +480,8 @@ let dayNumber = 1;  // 첫 째날
 let travelDays = {};    // 몇박며칠
 function setScheduleName() {    // 필기. 일정 이름 변경 이벤트
     let changedScheduleName = document.getElementsByClassName("newPlaceName");
-    changedScheduleName[0].addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤트
-        if (e.keyCode === 13) {
-            console.log("newTravelSchedule 이름", newTravelSchedule);
-        }
-    });
     newTravelSchedule.scheduleName = changedScheduleName[0].value;
-
+    saveScheduleInLocalStorage();
 }
 scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지에서 일정추가 버튼 클릭 이벤트
     console.log("매개변수로 넘어온 Place", detailPlaceInfo);
@@ -495,14 +496,17 @@ scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지�
 
     travelDays[dayNumber].push(detailPlaceInfo);
     console.log("travelDays", travelDays);
+    newTravelSchedule.travelDays=travelDays;
+
     dayWrap.style.display = "block";
     infoWrap.style.display = "none";
     BtnBox[0].style.display = "block";
     option[0].style.display = "block";
-    showSelectedDaySchedule()
+    saveScheduleInLocalStorage();
+    showSelectedDaySchedule();
 });
-
 function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조회
+    console.log("newTravelSchedule", newTravelSchedule);
     dayNumber = daySelect.options[daySelect.selectedIndex].value;
     let html = ``;
     if (dayNumber === "allday") {   // 필기. 전체 일정 선택 시
@@ -529,7 +533,7 @@ function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조�
                        
                          <span>${travelDays[dayNumber][i].placeName}</span>
                          <p>${travelDays[dayNumber][i].categoryName}</p>
-                          
+                         
                     </div>
                     <div class="dayPicture">
                         <img src="${travelDays[dayNumber][i].imagePath}">
@@ -540,9 +544,29 @@ function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조�
         }
     }
     document.getElementById("dayPlacesList").innerHTML = html;
+}
+// 필기. 일정 저장
+let saveScheduleBtn = document.getElementById("saveScheduleBtn");
+saveScheduleBtn.addEventListener("click", () => {
+    saveSchedule();
+})
+function saveSchedule() {
 
-    newTravelSchedule.travelDays = travelDays;
-    console.log("newTravelSchedule", newTravelSchedule);
+    fetch("/schedule/insertSchedule", {
+        method: "POST",
+        headers: { "Content-Type":"application/json"},
+        body: JSON.stringify(newTravelSchedule),
+    })
+    .then(resp => {
+        if (resp.status === 200) {
+            alert("성공적으로 저장되었습니다.");
+        }
+    })
+    .catch(error => {
+        alert(error);
+    })
+}
+function saveScheduleInLocalStorage() {
     window.localStorage.setItem("newTravelSchedule", JSON.stringify(newTravelSchedule) );
 }
 function selectDaySchedule(day) {   // 필기. 전체 일정에서 일차 별 일정으로 이동 메소드
