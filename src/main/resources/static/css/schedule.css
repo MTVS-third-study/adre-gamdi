@@ -605,13 +605,22 @@ hr {
     height: 700px;
     z-index: 3;
     padding: 40px;
-
+    overflow-y: scroll;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
 
     transform: translateX(-50%) translateY(-50%);
 }
+.schedule_modal_body::-webkit-scrollbar {
+    width: 5px; /스크롤바의 너비/
+}
+
+.schedule_modal_body::-webkit-scrollbar-thumb {
+    background-color: black; /스크롤바의 색상/
+border-radius: 5px;
+}
+
 .plan {
     line-height: 30px;
     width: 500px;
