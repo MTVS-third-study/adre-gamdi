@@ -54,7 +54,18 @@ function addReviewClickEvent(placeNo) {
                             <div class="reviewImg">
                                 <img src="/images/reviewImages/${obj.savedReviewImageName}"/>
                             </div>
-                           
+                           <div class="csBox">
+                                <div class="like white">
+
+                                    <img src="/images/whiteLie.png" alt="" /><span>1</span>
+                                </div>
+                                <div class="like black">
+                                    <img src="/images/blackLike.png" alt="" /><span>2</span>
+                                </div>
+                                <div class="report">
+                                    <img src="/images/siren.png" alt="" /><span>신고</span>
+                                </div>
+                            </div>
                         </div>
 `;
                     }
@@ -85,21 +96,23 @@ function addReviewRegistEvent(placeNo) {
         e.preventDefault();
 
         const reviewFormData = new FormData(reviewForm);
-
-
-        fetch(`/review/regist?placeNo=${placeNo}`,{
-            method: 'POST',
-            headers: {},
-            body: reviewFormData
-        })
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
-                console.log(placeNo);
+        reviewFormData.append("placeNo", placeNo)
+        console.log(reviewFormData);
+        fetch("/review/regist"
+            , {
+                method: 'POST',
+                headers: {},
+                body: reviewFormData
+            }
+        )
+            .then((resp) => {
+                if (resp.status === 200) {
+                    alert("리뷰가 성공적으로 등록되었습니다!");
+                }
             })
             .catch((error) => {
                 console.error(error);
-                alert("예기치 못한 오류가 발생했습니다.");
+                alert("예기치 못한 오류가 발생했습니다22.");
                 infoWrap.style.display = "none";
                 menuWrap.style.display = "block";
                 dayWrap.style.display = "none";
