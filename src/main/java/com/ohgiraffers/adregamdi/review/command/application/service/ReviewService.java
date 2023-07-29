@@ -44,14 +44,6 @@ public class ReviewService {
         return false;
     }
 
-    public void updateReview(@PathVariable("reviewNo") Review review) {
-        reviewRepository.save(review);
-    }
-
-    public void deleteReview(int reviewNo) {
-        reviewRepository.deleteById(reviewNo);
-    }
-
     private boolean insertReviewImage(ReviewDTO reviewDTO, MultipartFile imageFile) {
 
         String filePath = System.getProperty("user.dir") + "/src/main/resources/static/images/reviewImages/"; //user.dir은 프로젝트 경로
