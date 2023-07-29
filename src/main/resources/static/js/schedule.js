@@ -54,17 +54,7 @@ function addReviewClickEvent(placeNo) {
                             <div class="reviewImg">
                                 <img src="/images/reviewImages/${obj.savedReviewImageName}"/>
                             </div>
-                            <div class="csBox">
-                                <div class="like white">
-
-                                    <img src="/images/whiteLie.png" alt="" /><span>1</span>
-                                </div>
-                                <div class="like black">
-                                    <img src="/images/blackLike.png" alt="" /><span>2</span>
-                                </div>
-                                <div class="report">
-                                    <img src="/images/siren.png" alt="" /><span>신고</span>
-                                </div>
+                           
                         </div>
 `;
                     }
