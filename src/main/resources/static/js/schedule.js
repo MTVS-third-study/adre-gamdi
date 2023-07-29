@@ -273,18 +273,7 @@ function addPlaceListClickEvent() {
 }
 
 
-/*설명. Btnmouseover*/
-// let saveBtn=document.querySelectorAll(".saveBtn")
-// for(let i=0;i<40;i++){
-//     saveBtn[i].addEventListener("mouseover",()=>{
-//         saveBtn[i].style.backgroundColor="orange";
-//         saveBtn[i].style.color="white";
-//     })
-//     saveBtn[i].addEventListener("mouseleave",()=>{
-//         saveBtn[i].style.backgroundColor="transparent";
-//         saveBtn[i].style.color="orange";
-//     })
-// }
+
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
 });
@@ -304,6 +293,12 @@ imgBtn.addEventListener("mouseover", () => {
 });
 imgBtn.addEventListener("mouseleave", () => {
     imgBtn.classList.remove("add");
+});
+loadBtn.addEventListener("mouseover", () => {
+    loadBtn.classList.add("add");
+});
+loadBtn.addEventListener("mouseleave", () => {
+    loadBtn.classList.remove("add");
 });
 
 
@@ -374,6 +369,7 @@ myScheduleBtn.addEventListener("click", () => {
                 <button class="modal_btn scheduleModify">일정 수정</button>
                 <button class="modal_btn">삭제</button>
             </div>         
+            </div>
                     `;
 
             });
@@ -519,8 +515,8 @@ function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조�
                 <li class="dayScheduleList" onclick="selectDaySchedule(${i})">
                     <div class="daySchedule">
                         <h3>${i}일 차 일정</h3>
-                        <hr>
                     </div>
+                      
                 </li>
         `
         }
@@ -529,9 +525,15 @@ function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조�
         for (let i = 0; i < travelDays[dayNumber].length; i++) {
             html += `
                 <li id="dayPlaceList">
-                    <div>
-                        <img src="/images/daylistnum.png" alt=""><span class="listnum">${i + 1}</span>
-                        <p>${travelDays[dayNumber][i].categoryName}</p>
+                <div>
+                    <div class="placeNum">
+                     <img src="/images/daylistnum.png" alt=""/><span class="listnum">${i + 1}</span>
+                    </div>
+                    <div class="dayListNumInfo">
+                       
+                         <span>${travelDays[dayNumber][i].placeName}</span>
+                         <p>${travelDays[dayNumber][i].categoryName}</p>
+                         
                     </div>
                     <div class="dayPicture">
                         <img src="${travelDays[dayNumber][i].imagePath}">
@@ -594,3 +596,15 @@ initScheduleBtn.addEventListener("click", () => {
     showSelectedDaySchedule();
 });
 
+/*설명. Btnmouseover*/
+let saveBtn=document.getElementsByClassName("saveBtn")
+for(let i=0;i<saveBtn.length;i++){
+    saveBtn[i].addEventListener("mouseover",()=>{
+        saveBtn[i].style.backgroundColor="orange";
+        saveBtn[i].style.color="white";
+    })
+    saveBtn[i].addEventListener("mouseleave",()=>{
+        saveBtn[i].style.backgroundColor="transparent";
+        saveBtn[i].style.color="orange";
+    })
+}

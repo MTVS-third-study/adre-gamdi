@@ -163,7 +163,7 @@ body {
     cursor: pointer;
 }
 .placeList {
-    height: 70vh;
+    height: 80vh;
     overflow-y: scroll;
 }
 .placeList::-webkit-scrollbar {
@@ -276,7 +276,7 @@ body {
 }
 
 .dayList {
-    height:65vh;
+    height:60vh;
     overflow-y: scroll;
     overflow-x: hidden;
 
@@ -300,20 +300,30 @@ body {
 }
 .dayList > li > div {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 20px;
     line-height: 30px;
+}
+.placeNum{
+    margin-top: 27px;
+}
+.placeNum>.listnum{
+    font-size: 20px;
+    position: relative;
+    top: -11px;
+    left: -23px;
 }
 #dayPlaceList > div >.dayListNumInfo {
     height: 45px;
     margin-top: 27px;
+    text-align: left;
 }
 .dayListNumInfo>p{
-    font-size: 16px;
+    font-size: 13px;
     width: 50px;
     position: relative;
-    left: 53px;
-    top: -20px;
+    /*left: 35px;*/
+    top: -15px;
 }
 .dayList > li > div > .dayPicture > img {
     width: 84px;
@@ -327,13 +337,11 @@ body {
 .dayList > li > div > .dayListNumInfo > span {
     font-size: 20px;
     position: relative;
-    top: -24px;
+    top: -17px;
+    font-weight: bold;
+
 }
-.dayList > li > div > .dayListNumInfo > .listnum {
-    font-size: 15px;
-    top: -13px;
-    left: -21px;
-}
+
 
 .dayList > li > div > .nextPlace {
     font-size: 11px;
@@ -359,7 +367,7 @@ body {
     margin-top: 10px;
 }
 #newPlaceList{
-    height: 65vh;
+    height: 80vh;
 }
 /* 상세 box */
 
