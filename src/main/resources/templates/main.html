@@ -81,12 +81,39 @@
                     <button onclick="location.href='/suggestion'" class="upperBtn">장소 수정 제보</button>
                 </div>
                 <div class="feedbackPageBtn">
-                    <button onclick="location.href='/feedback'" class="upperBtn">사용자 피드백</button>
+                    <button id="open-modal" class="upperBtn">사용자 피드백</button>
                 </div>
             </th:block>
-<!--                <script src="/js/main.js"></script>-->
+
         </div>
     </div>
 </div>
+<div id="modal">
+    <div class="modal-content">
+        <main>
+            <div class="contents">
+                <div class="contentsWrap">
+                        <div id="feedbackHead">
+                            <h1>Feedback</h1>
+                        </div>
+                    <form action="/feedback/feedbackMessage" class="feedbackSubmit" method="POST">
+                        <div>
+                            <textarea cols="50" rows="10" id="feedbackBox" name="feedbackMessage">
+                            </textarea>
+                        </div>
+                        <div class="BtnBox">
+                            <button type="submit" class="feedbackBtn" >제출하기</button>
+                            <button id="close-modal" class="feedbackBtn">닫기</button>
+                        </div>
+                    </form>
+
+                    <!-- user modify 끝 -->
+
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="/js/main.js"></script>
 </body>
 </html>
