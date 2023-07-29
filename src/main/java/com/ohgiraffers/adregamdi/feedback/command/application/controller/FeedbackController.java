@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Controller
 @RequestMapping("/feedback")
@@ -23,20 +26,17 @@ public class FeedbackController {
         this.feedbackCommandService = feedbackCommandService;
     }
 
-    @GetMapping
-    public String goFeedbackPage(){
-        return "/feedbackPage";
-    }
     @PostMapping("/feedbackMessage")
     public String sendFeedback(@RequestParam("feedbackMessage")String feedbackMessage,
-                               HttpSession session){
+                               HttpSession session) {
 
         Long userNo = ((UserDTO)session.getAttribute("loginUser")).getUserNo();
         FeedbackDTO feedbackDTO = new FeedbackDTO(userNo, feedbackMessage);
         feedbackCommandService.insertFeedback(feedbackDTO);
 
-        return "redirect:/feedback";
-    }
 
+
+        return "redirect:/";
+    }
 
 }

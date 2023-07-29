@@ -21,7 +21,7 @@ public class Feedback {
     @Embedded
     private UserNo userNo;
 
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String feedbackMessage;
 
     public Feedback(UserNo userNo, String feedbackMessage) {
