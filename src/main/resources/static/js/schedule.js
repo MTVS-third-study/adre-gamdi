@@ -363,7 +363,7 @@ myScheduleBtn.addEventListener("click", () => {
            
              <div class="plan">
             <div class="plan_title">여행 이름 <span><input type="text" placeholder=${obj.scheduleName}></span></div>
-            <div class="plan_date">여행 일자 <span>${obj.startDay}~${obj.endDay}</span></div>
+            <div class="plan_date">여행 일자 <span>${obj.startDate}~${obj.endDate}</span></div>
 <!--            <div class="plan_cnt">선택장소 <span>12</span></div>-->
             <div class="schedule_modal_btnBox">
                 <button class="modal_btn scheduleModify">일정 수정</button>

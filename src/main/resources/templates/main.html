@@ -5,8 +5,8 @@
     <link href="/css/main.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Title</title>
-
+    <title>Adregamdi : 메인 페이지</title>
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
 </head>
 <script>
     history.pushState(null, null, location.href);
@@ -29,7 +29,7 @@
         <div class="loginBox beforLogin">
             <th:block th:if="${session.loginUser == null}">
 
-                <a href="https://kauth.kakao.com/oauth/authorize?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&redirect_uri=http://localhost:8080/oauth/kakao/login&response_type=code"
+                <a href="https://kauth.kakao.com/oauth/authorize?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&redirect_uri=http://adregamdi.site:9090/oauth/kakao/login&response_type=code"
                    id="kakao-login-btn" class="upperBtn1">
                     <img alt="카카오 로그인 버튼"
                          src="/images/kakao_login_large_narrow.png"
@@ -64,7 +64,7 @@
                 <th:block th:if="${session.service.equals('kakao')}">
                     <div class="logoutBtn">
                         <button class="upperBtn"
-                                onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:8080/oauth/kakao/logout'"
+                                onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://adregamdi.site:9090/oauth/kakao/logout'"
                                 type="button">
                             로그아웃
                         </button>

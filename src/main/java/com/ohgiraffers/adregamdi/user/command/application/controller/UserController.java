@@ -44,7 +44,7 @@ public class UserController {
         if (result == 1) { // 탈퇴 성공
             session.removeAttribute("loginUser");
             session.removeAttribute("service");
-            return "redirect:/";
+            return "redirect:/main";
         }
         return "errorPage"; // 탈퇴 실패 시 에러페이지로
     }
