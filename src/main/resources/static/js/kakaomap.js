@@ -12,7 +12,7 @@ let options = {
     level: 9
 };
 let map = new kakao.maps.Map(container, options);
-map.setMaxLevel(12);    // 필기. 지도 축소 최대치 설정
+map.setMaxLevel(10);    // 필기. 지도 축소 최대치 설정
 
 // 설명. 지도 이동 범위 제한
 let pos1 = new kakao.maps.LatLng(33.087182684278126, 126.0769775264879);

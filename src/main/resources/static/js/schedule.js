@@ -118,22 +118,41 @@ let menuWrap = document.getElementById("menu_wrap");    // 검색 list
 let dayWrap = document.getElementById("day_wrap");      // 일정 box
 let infoWrap = document.getElementById("info_wrap");    // 상세 box
 let homeBtn = document.getElementById("homeBtn");       // 홈 버튼
-let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 버튼
+let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 불러오기 버튼
 let imgBtn = document.getElementById("imgBtn");         // new 버튼
 let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
-let option = document.getElementsByClassName("option");     // 검색 box
-let loadBtn = document.getElementById("loadBtn")
+let option = document.getElementsByClassName("option");     // 검색 창
+let loadBtn=document.getElementById("loadBtn")          // 일정 버튼
 
-// 필기. 검색 버튼 이벤트
-homeBtn.addEventListener("click", () => {
-    console.log(1);
-
+// 필기. 검색 창 보이기
+function showSearchListWindow(){
     menuWrap.style.display = "block";
     dayWrap.style.display = "none";
     infoWrap.style.display = "none";
-    // option[0].style.display = "block"; newDayWrap.style.display="none"
+    BtnBox[0].style.display = "block";
+    option[0].style.display = "block";
+    // reviewContainer.style.display="none";
+}
+// 필기. 상세 창 보이기
+function showDetailWindow() {
+    menuWrap.style.display = "none";
+    dayWrap.style.display = "none";
+    infoWrap.style.display = "block";
+    option[0].style.display = "none";
+    // reviewContainer.style.display="none";
+}
+// 필기. 일정 창 보이기
+function showScheduleWindow() {
+    menuWrap.style.display = "none";
+    dayWrap.style.display = "block";
+    infoWrap.style.display = "none";
+    BtnBox[0].style.display = "block";
+    option[0].style.display = "block";
+}
+// 필기. 검색 사이드 바 버튼 이벤트
+homeBtn.addEventListener("click", () => {
+    showSearchListWindow();
 });
-
 
 // 필기. 새 일정 짜기 버튼 이벤트
 imgBtn.addEventListener("click", () => {
@@ -144,35 +163,20 @@ imgBtn.addEventListener("click", () => {
     if (newTravelSchedule) {
         saveScheduleInLocalStorage();
     }
-    travelDays = {};
-    newTravelSchedule = {
-        scheduleName: "",
-        startDate: "",
-        endDate: "",
-        dayAndNight: "",
-        travelDays: ""
-    };
-    let calendarDay = document.getElementById("datefilter");
-    let scheduleId = document.getElementById("scheduleName");
-    calendarDay.value = "";
-    scheduleId.value = "";
-    setScheduleName();
+
+    clearSchedule();
+    clearDatepicker();
     showSelectedDaySchedule();
+    clearScheduleName();
 
-    infoWrap.style.display = "none";
-    menuWrap.style.display = "none";
-    dayWrap.style.display = "block";
-    BtnBox[0].style.display = "block";
-    option[0].style.display = "block";
+    showScheduleWindow();
 });
-loadBtn.addEventListener("click", () => {
-    infoWrap.style.display = "none";
-    menuWrap.style.display = "none";
-    dayWrap.style.display = "block";
-    BtnBox[0].style.display = "block";
-    option[0].style.display = "block";
 
+// 필기. 일정 버튼 이벤트
+loadBtn.addEventListener("click",()=>{
+    showScheduleWindow();
 })
+
 /*설명. 검색 비동기*/
 let searchBox = document.getElementById("searchBox");
 let searchKeyword = document.getElementById("searchKeyword1");
@@ -187,27 +191,33 @@ keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤�
             .then((json) => {
                 json = json.respPlaceList;
                 let html = "";
-                json.forEach((obj, idx) => {
-                    if (!json.length) {
-                        console.log("등록된 값이없습니다");
-                    } else {
-                        console.log(obj);
+                if (json.length === 0) {
+                    html = `
+                        <li class="placeItem">
+                            <div class="placeContents">
+                                <h4>검색 결과가 없습니다</h4>
+                            </div>
+                        </li>
+                    `;
+                } else {
+                    json.forEach((obj, idx) => {
                         html += `
                         <li class="placeItem">
-                    <div class="placeContents">
-                    <div class="placeInfo">
-                        <p id="placeNo" style="display: none">${obj.placeNo}</p>
-                        <h4>${obj.placeName}</h4>
-                        <p>${obj.categoryName}</p>
-                        <span  class="placeAddr">${obj.placeAddress}</span><br>
-                        <span>${obj.phoneNumber}</span>
-                    </div>
-                    <img src="${obj.imagePath}" alt="">
-                    </div>
-                <hr>
-                </li>`;
-                    }
-                });
+                            <div class="placeContents">
+                                <div class="placeInfo">
+                                    <p id="placeNo" style="display: none">${obj.placeNo}</p>
+                                    <h4>${obj.placeName}</h4>
+                                    <p>${obj.categoryName}</p>
+                                    <span  class="placeAddr">${obj.placeAddress}</span><br>
+                                    <span>${obj.phoneNumber}</span>
+                                </div>
+                                <img src="${obj.imagePath}" alt="">
+                            </div>
+                            <hr>
+                        </li>
+                        `;
+                    });
+                }
                 document.getElementById("placeList").innerHTML = html;
                 menuWrap.style.display = "block";
                 dayWrap.style.display = "none";
@@ -218,7 +228,8 @@ keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤�
             });
     }
 });
-searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 이벤트
+// 설명. 검색 버튼 클릭 이벤트
+searchKeyword.addEventListener("click", () => {
 
     keywordValue = JSON.stringify(keyword.value);
 
@@ -227,31 +238,36 @@ searchKeyword.addEventListener("click", () => { // 설명. 검색 버튼 클릭 
         .then((json) => {
             json = json.respPlaceList;
             let html = "";
-            json.forEach((obj, idx) => {
-                if (!json.length) {
-                    console.log("등록된 값이없습니다");
-                } else {
-
+            if (json.length === 0) {
+                html = `
+                    <li class="placeItem">
+                        <div class="placeContents">
+                            <h4>검색 결과가 없습니다</h4>
+                        </div>
+                    </li>
+                `;
+            } else {
+                json.forEach((obj, idx) => {
                     html += `
                         <li class="placeItem">
-                    <div class="placeContents">
-                    <div class="placeInfo">
-                        <p id="placeNo" style="display: none">${obj.placeNo}</p>
-                        <h4>${obj.placeName}</h4>
-                        <p>${obj.categoryName}</p>
-                        <span  class="placeAddr">${obj.placeAddress}</span><br>
-                        <span>${obj.phoneNumber}</span>
-                    </div>
-                    <img src="${obj.imagePath}" alt="">
-                    </div>
-                <hr>
-                </li>`;
-                }
-            });
+                            <div class="placeContents">
+                                <div class="placeInfo">
+                                    <p id="placeNo" style="display: none">${obj.placeNo}</p>
+                                    <h4>${obj.placeName}</h4>
+                                    <p>${obj.categoryName}</p>
+                                    <span  class="placeAddr">${obj.placeAddress}</span><br>
+                                    <span>${obj.phoneNumber}</span>
+                                </div>
+                                <img src="${obj.imagePath}" alt="">
+                            </div>
+                            <hr>
+                        </li>
+                    `;
+                });
+            }
             document.getElementById("placeList").innerHTML = html;
             menuWrap.style.display = "block";
             dayWrap.style.display = "none";
-            // newDayWrap.style.display="none"
             addPlaceListClickEvent();
         })
         .catch((error) => {
@@ -267,19 +283,14 @@ let detailPlaceInfo = "";
 function addPlaceListClickEvent() {
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
-    let backBtn = document.getElementsByClassName("backBtn")
-    backBtn[0].addEventListener("click", () => {
-        menuWrap.style.display = "block"
-        dayWrap.style.display = "none";
-        infoWrap.style.display = "none";
-        BtnBox[0].style.display = "block";
-        option[0].style.display = "block";
-        reviewContainer.style.display = "none";
-        // newDayWrap.style.display="none"
+    let backBtn=document.getElementsByClassName("backBtn")
+    backBtn[0].addEventListener("click",()=>{
+        showSearchListWindow();
+        // reviewContainer.style.display="none";
     })
 
     for (let i = 0; i < placeList.length; i++) {
-        placeItem[i].addEventListener("click", () => {
+        placeItem[i].addEventListener("click", () => {  // 검색된 리스트
             let placeNo = placeList[i].querySelector("#placeNo").innerText;
 
             fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
@@ -308,26 +319,17 @@ function addPlaceListClickEvent() {
                 .catch((error) => {
                     console.error(error);
                     alert("예기치 못한 오류가 발생했습니다.");
-                    infoWrap.style.display = "none";
-                    menuWrap.style.display = "block";
-                    dayWrap.style.display = "none";
-                    option[0].style.display = "block";
-                    reviewContainer.style.display = "none";
-                    // newDayWrap.style.display="none"
+                    showSearchListWindow();
                 });
             addReviewClickEvent(placeNo);
             addReviewRegistEvent(placeNo);
 
-            infoWrap.style.display = "block";
-            menuWrap.style.display = "none";
-            dayWrap.style.display = "none";
-            option[0].style.display = "none";
-            reviewContainer.style.display = "none";
-            // newDayWrap.style.display="none"
+            showDetailWindow();
         });
     }
 }
 
+/*설명. 마우스 이벤트 정리*/
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
 });
@@ -356,7 +358,7 @@ loadBtn.addEventListener("mouseleave", () => {
 });
 
 
-/*설명. userInfoBox*/
+/*설명. user 프로필*/
 let userImgBox = document.getElementsByClassName("userImgBox");
 let hideUserInfoBox = document.getElementsByClassName("hideUserInfoBox");
 let hideUserInfoBoxItem = document.querySelectorAll(".hideUserInfoBox>li");
@@ -374,8 +376,8 @@ for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
     hideUserInfoBoxItem[i].addEventListener("mouseleave", () => {
         hideUserInfoBoxItem[i].style.backgroundColor = "transparent";
     });
-
 }
+// 프로필 제거 이벤트
 hideBtn.addEventListener("click", () => {
     hideUserInfoBox[0].style.display = "none";
     hideBtn.style.display = "none";
@@ -389,18 +391,11 @@ let myScheduleModalBody = document.getElementsByClassName(
 let scheduleModify = document.getElementsByClassName("scheduleModify");
 // 내 일정 모달창
 myScheduleBtn.addEventListener("click", () => {
-    console.log(2);
-    infoWrap.style.display = "none";
-    menuWrap.style.display = "none";
-    dayWrap.style.display = "block";
-    BtnBox[0].style.display = "block";
-    option[0].style.display = "block";
-    // newDayWrap.style.display="none"
+    showScheduleWindow();
+
     fetch(`/schedule/query/mySchedule`)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-
             if (data.message) { // 에러 메세지가 존재한다면
                 alert(data.message);
                 return;
@@ -412,7 +407,6 @@ myScheduleBtn.addEventListener("click", () => {
             let html = `  <div><h1>나의 일정</h1> <img src="/images/close.png" alt="" class="closeBtn1" id="closeBtn"></div>`;
             data.myScheduleList.forEach((obj, idx) => {
 
-                console.log(data.myScheduleList);
                 html += `
            
              <div class="plan">
@@ -420,7 +414,7 @@ myScheduleBtn.addEventListener("click", () => {
             <div class="plan_date">여행 일자 <span>${obj.startDate}~${obj.endDate}</span></div>
 <!--            <div class="plan_cnt">선택장소 <span>12</span></div>-->
             <div class="schedule_modal_btnBox">
-                <button class="modal_btn scheduleModify">일정 수정</button>
+                <button class="modal_btn scheduleModify" id="modifyScheduleBtn">일정 수정</button>
                 <button class="modal_btn">삭제</button>
             </div>         
             </div>
@@ -439,6 +433,11 @@ myScheduleBtn.addEventListener("click", () => {
         });
 
 })
+// 필기. 일정 수정 버튼 클릭 이벤트
+// const modifyScheduleBtn = document.getElementById("modifyScheduleBtn");
+// modifyScheduleBtn.addEventListener("click", () => {
+//     console.log(1000);
+// });
 myScheduleModal.addEventListener("click", () => {
     myScheduleModal.style.display = "none";
     myScheduleModalBody[0].style.display = "none";
@@ -463,7 +462,7 @@ let newTravelSchedule = {
     dayAndNight: "",
     travelDays: ""
 };
-let daySelect = document.getElementById("daySelect");
+let daySelect = document.getElementById("daySelect");  // 캘린더 input
 $(function () {
     $('input[name="datefilter"]').daterangepicker({
         autoUpdateInput: false,
@@ -508,6 +507,34 @@ $(function () {
                     newTravelSchedule.startDate = startDate;
                     newTravelSchedule.endDate = endDate;
                     newTravelSchedule.dayAndNight = dayAndNight;
+            let startDate =
+                picker.startDate._d.getUTCFullYear() +
+                "-" +
+                (picker.startDate._d.getMonth() +
+                    1) +
+                "-" +
+                picker.startDate._d.getDate() +
+                "";
+            let endDate =
+                picker.endDate._d.getUTCFullYear() +
+                "-" +
+                (picker.endDate._d.getMonth() +
+                    1) +
+                "-" +
+                picker.endDate._d.getDate() +
+                "";
+            fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
+                .then((response) => response.json())
+                .then((data) => {
+
+                    if (data.message) {
+                        alert(data.message);
+                        return;
+                    }
+                    let dayAndNight = data.dayAndNight;
+                    newTravelSchedule.startDate=startDate;
+                    newTravelSchedule.endDate=endDate;
+                    newTravelSchedule.dayAndNight = dayAndNight;
 
                     let html = ` <option value="allday">전체 일정</option>`;
                     for (let i = 1; i <= dayAndNight; i++) {
@@ -535,6 +562,29 @@ $(function () {
         }
     );
 });
+                        if (i === 1) {
+                            html += `   
+                                <option value="${i}" selected="selected">${i}일 차</option>
+                            `;
+                        } else{
+                            html += `   
+                                <option value="${i}">${i}일 차</option>
+                            `;
+                        }
+                        daySelect.innerHTML = html;
+                    }
+                    saveScheduleInLocalStorage();
+                    showSelectedDaySchedule();
+                });
+        }
+    );
+    $('input[name="datefilter"]').on(
+        "cancel.daterangepicker",
+        function (ev, picker) {
+            $(this).val("");
+        }
+    );
+});
 
 /*설명. 일정 추가*/
 let dayNumber = 1;  // 첫 째날
@@ -546,10 +596,13 @@ function setScheduleName() {    // 필기. 일정 이름 변경 이벤트
 }
 
 scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지에서 일정추가 버튼 클릭 이벤트
-    console.log("매개변수로 넘어온 Place", detailPlaceInfo);
-
     if (!travelDays[dayNumber]) {
         travelDays[dayNumber] = [];
+    }
+    let datefilterValue = $('input[name="datefilter"]').val();
+    if (datefilterValue === '') {
+        alert('일정을 생성해주세요!');
+        return;
     }
     if (dayNumber === "allday") {
         alert('일정 일 차를 지정해주세요!');
@@ -557,19 +610,14 @@ scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지�
     }
 
     travelDays[dayNumber].push(detailPlaceInfo);
-    console.log("travelDays", travelDays);
-    newTravelSchedule.travelDays = travelDays;
+    newTravelSchedule.travelDays=travelDays;
 
-    dayWrap.style.display = "block";
-    infoWrap.style.display = "none";
-    BtnBox[0].style.display = "block";
-    option[0].style.display = "block";
+    showScheduleWindow();
     saveScheduleInLocalStorage();
     showSelectedDaySchedule();
 });
-
-function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조회
-    console.log("newTravelSchedule", newTravelSchedule);
+// 필기. 세부 일정 리스트 조회
+function showSelectedDaySchedule() {
     dayNumber = daySelect.options[daySelect.selectedIndex].value;
     let html = ``;
     if (dayNumber === "allday") {   // 필기. 전체 일정 선택 시
@@ -579,29 +627,28 @@ function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조�
                     <div class="daySchedule">
                         <h3>${i}일 차 일정</h3>
                     </div>
-                      
                 </li>
-        `
+            `;
         }
     }
     if (travelDays[dayNumber]) {    // 필기. 일 차가 있다면
         for (let i = 0; i < travelDays[dayNumber].length; i++) {
             html += `
                 <li id="dayPlaceList">
-                <div>
-                    <div class="placeNum">
-                     <img src="/images/daylistnum.png" alt=""/><span class="listnum">${i + 1}</span>
-                    </div>
-                    <div class="dayListNumInfo">
-                       
-                         <span>${travelDays[dayNumber][i].placeName}</span>
-                         <p>${travelDays[dayNumber][i].categoryName}</p>
-                         
-                    </div>
-                    <div class="dayPicture">
-                        <img src="${travelDays[dayNumber][i].imagePath}">
-                    </div>                   
-                 </div>                     
+                    <div>
+                        <div class="placeNum">
+                         <img src="/images/daylistnum.png" alt=""/><span class="listnum">${i + 1}</span>
+                        </div>
+                        <div class="dayListNumInfo">
+                           
+                             <span>${travelDays[dayNumber][i].placeName}</span>
+                             <p>${travelDays[dayNumber][i].categoryName}</p>
+                             
+                        </div>
+                        <div class="dayPicture">
+                            <img src="${travelDays[dayNumber][i].imagePath}">
+                        </div>                   
+                    </div>                     
                 </li>
             `;
         }
@@ -622,14 +669,18 @@ function saveSchedule() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(newTravelSchedule),
     })
-        .then(resp => {
-            if (resp.status === 200) {
-                alert("성공적으로 저장되었습니다.");
-            }
-        })
-        .catch(error => {
-            alert(error);
-        })
+    .then(resp => {
+        if (resp.status === 200) {
+            alert("성공적으로 저장되었습니다.");
+            clearSchedule();
+            showSelectedDaySchedule();
+            clearScheduleName();
+            clearDatepicker();
+        }
+    })
+    .catch(error => {
+        alert(error);
+    })
 }
 
 function saveScheduleInLocalStorage() {
@@ -639,8 +690,14 @@ function saveScheduleInLocalStorage() {
 function selectDaySchedule(day) {   // 필기. 전체 일정에서 일차 별 일정으로 이동 메소드
     daySelect.value = day;
     showSelectedDaySchedule();
-}
+};
 
+/* 설명. 초기화 */
+// 일정 정보들 초기화
+function clearSchedule() {
+    newTravelSchedule={};
+    travelDays=[];
+}
 // 필기. 선택된 날짜 일정 초기화
 let initScheduleBtn = document.getElementById("initScheduleBtn");
 initScheduleBtn.addEventListener("click", () => {
@@ -663,4 +720,27 @@ initScheduleBtn.addEventListener("click", () => {
     travelDays[selectedDay] = [];
     showSelectedDaySchedule();
 });
+// 필기. 여행 이름 초기화 함수
+function clearScheduleName() {
+    scheduleId.value = "";
+    setScheduleName();
+}
+// 필기. calendar 초기화 함수
+function clearDatepicker() {
+    $('input[name="datefilter"]').data('daterangepicker').setStartDate(moment());
+    $('input[name="datefilter"]').data('daterangepicker').setEndDate(moment());
+    $('input[name="datefilter"]').val('');
 
+    while (daySelect.firstChild) {
+        daySelect.removeChild(daySelect.firstChild);
+    }
+
+    let allDayOption = document.createElement("option");
+    allDayOption.value = "allday";
+    allDayOption.textContent = "전체 일정";
+    daySelect.appendChild(allDayOption);
+}
+// 필기. 로컬스토리지 초기화 함수
+function clearLocalStorage() {
+    window.localStorage.removeItem("newTravelSchedule")
+}
