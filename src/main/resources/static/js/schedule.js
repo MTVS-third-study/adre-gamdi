@@ -92,6 +92,8 @@ function addReviewClickEvent(placeNo) {
 // 설명. 리뷰 등록 비동기
 function addReviewRegistEvent(placeNo) {
     let reviewForm = document.getElementById("reviewForm")
+    const modal = document.querySelector('.modal');
+
     reviewForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -108,6 +110,7 @@ function addReviewRegistEvent(placeNo) {
             .then((resp) => {
                 if (resp.status === 200) {
                     alert("리뷰가 성공적으로 등록되었습니다!");
+                    modal.style.display = "none";
                 }
             })
             .catch((error) => {
