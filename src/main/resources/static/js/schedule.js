@@ -85,7 +85,7 @@ function addReviewRegistEvent(placeNo) {
 
         const reviewFormData = new FormData(reviewForm);
         reviewFormData.append("placeNo", placeNo)
-        console.log(reviewFormData);
+
         fetch("/review/regist"
             , {
                 method: 'POST',
@@ -122,10 +122,10 @@ let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 �
 let imgBtn = document.getElementById("imgBtn");         // new 버튼
 let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
 let option = document.getElementsByClassName("option");     // 검색 창
-let loadBtn=document.getElementById("loadBtn")          // 일정 버튼
+let loadBtn = document.getElementById("loadBtn")          // 일정 버튼
 
 // 필기. 검색 창 보이기
-function showSearchListWindow(){
+function showSearchListWindow() {
     menuWrap.style.display = "block";
     dayWrap.style.display = "none";
     infoWrap.style.display = "none";
@@ -133,6 +133,7 @@ function showSearchListWindow(){
     option[0].style.display = "block";
     // reviewContainer.style.display="none";
 }
+
 // 필기. 상세 창 보이기
 function showDetailWindow() {
     menuWrap.style.display = "none";
@@ -141,6 +142,7 @@ function showDetailWindow() {
     option[0].style.display = "none";
     // reviewContainer.style.display="none";
 }
+
 // 필기. 일정 창 보이기
 function showScheduleWindow() {
     menuWrap.style.display = "none";
@@ -149,6 +151,7 @@ function showScheduleWindow() {
     BtnBox[0].style.display = "block";
     option[0].style.display = "block";
 }
+
 // 필기. 검색 사이드 바 버튼 이벤트
 homeBtn.addEventListener("click", () => {
     showSearchListWindow();
@@ -173,7 +176,7 @@ imgBtn.addEventListener("click", () => {
 });
 
 // 필기. 일정 버튼 이벤트
-loadBtn.addEventListener("click",()=>{
+loadBtn.addEventListener("click", () => {
     showScheduleWindow();
 })
 
@@ -283,8 +286,8 @@ let detailPlaceInfo = "";
 function addPlaceListClickEvent() {
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
-    let backBtn=document.getElementsByClassName("backBtn")
-    backBtn[0].addEventListener("click",()=>{
+    let backBtn = document.getElementsByClassName("backBtn")
+    backBtn[0].addEventListener("click", () => {
         showSearchListWindow();
         // reviewContainer.style.display="none";
     })
@@ -499,91 +502,70 @@ $(function () {
             fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
                 .then((response) => response.json())
                 .then((data) => {
-                    if (data.message) {
-                        alert(data.message);
-                        return;
-                    }
-                    let dayAndNight = data.dayAndNight;
-                    newTravelSchedule.startDate = startDate;
-                    newTravelSchedule.endDate = endDate;
-                    newTravelSchedule.dayAndNight = dayAndNight;
-            let startDate =
-                picker.startDate._d.getUTCFullYear() +
-                "-" +
-                (picker.startDate._d.getMonth() +
-                    1) +
-                "-" +
-                picker.startDate._d.getDate() +
-                "";
-            let endDate =
-                picker.endDate._d.getUTCFullYear() +
-                "-" +
-                (picker.endDate._d.getMonth() +
-                    1) +
-                "-" +
-                picker.endDate._d.getDate() +
-                "";
-            fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
-                .then((response) => response.json())
-                .then((data) => {
+                        if (data.message) {
+                            alert(data.message);
+                            return;
+                        }
+                        let dayAndNight = data.dayAndNight;
+                        newTravelSchedule.startDate = startDate;
+                        newTravelSchedule.endDate = endDate;
+                        newTravelSchedule.dayAndNight = dayAndNight;
+                        let startDate =
+                            picker.startDate._d.getUTCFullYear() +
+                            "-" +
+                            (picker.startDate._d.getMonth() +
+                                1) +
+                            "-" +
+                            picker.startDate._d.getDate() +
+                            "";
+                        let endDate =
+                            picker.endDate._d.getUTCFullYear() +
+                            "-" +
+                            (picker.endDate._d.getMonth() +
+                                1) +
+                            "-" +
+                            picker.endDate._d.getDate() +
+                            "";
+                        fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
+                            .then((response) => response.json())
+                            .then((data) => {
 
-                    if (data.message) {
-                        alert(data.message);
-                        return;
-                    }
-                    let dayAndNight = data.dayAndNight;
-                    newTravelSchedule.startDate=startDate;
-                    newTravelSchedule.endDate=endDate;
-                    newTravelSchedule.dayAndNight = dayAndNight;
+                                if (data.message) {
+                                    alert(data.message);
+                                    return;
+                                }
+                                let dayAndNight = data.dayAndNight;
+                                newTravelSchedule.startDate = startDate;
+                                newTravelSchedule.endDate = endDate;
+                                newTravelSchedule.dayAndNight = dayAndNight;
 
-                    let html = ` <option value="allday">전체 일정</option>`;
-                    for (let i = 1; i <= dayAndNight; i++) {
+                                let html = ` <option value="allday">전체 일정</option>`;
+                                for (let i = 1; i <= dayAndNight; i++) {
 
 
-                        if (i === 1) {
-                            html += `   
+                                    if (i === 1) {
+                                        html += `   
                                     <option value="${i}" selected="selected">${i}일 차</option>
                                 `;
-                        } else {
-                            html += `   
+                                    } else {
+                                        html += `   
                                     <option value="${i}">${i}일 차</option>
                                 `;
-                        }
-                        daySelect.innerHTML = html;
+                                    }
+                                    daySelect.innerHTML = html;
+                                }
+                                saveScheduleInLocalStorage();
+                                showSelectedDaySchedule();
+                            });
                     }
-                    showSelectedDaySchedule();
-                });
-        }
-    );
-    $('input[name="datefilter"]').on(
-        "cancel.daterangepicker",
-        function (ev, picker) {
-            $(this).val("");
-        }
-    );
-});
-                        if (i === 1) {
-                            html += `   
-                                <option value="${i}" selected="selected">${i}일 차</option>
-                            `;
-                        } else{
-                            html += `   
-                                <option value="${i}">${i}일 차</option>
-                            `;
-                        }
-                        daySelect.innerHTML = html;
-                    }
-                    saveScheduleInLocalStorage();
-                    showSelectedDaySchedule();
-                });
-        }
-    );
-    $('input[name="datefilter"]').on(
-        "cancel.daterangepicker",
-        function (ev, picker) {
-            $(this).val("");
-        }
-    );
+                );
+            $('input[name="datefilter"]').on(
+                "cancel.daterangepicker",
+                function (ev, picker) {
+                    $(this).val("");
+                }
+            );
+        });
 });
 
 /*설명. 일정 추가*/
@@ -610,12 +592,13 @@ scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지�
     }
 
     travelDays[dayNumber].push(detailPlaceInfo);
-    newTravelSchedule.travelDays=travelDays;
+    newTravelSchedule.travelDays = travelDays;
 
     showScheduleWindow();
     saveScheduleInLocalStorage();
     showSelectedDaySchedule();
 });
+
 // 필기. 세부 일정 리스트 조회
 function showSelectedDaySchedule() {
     dayNumber = daySelect.options[daySelect.selectedIndex].value;
@@ -669,18 +652,18 @@ function saveSchedule() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(newTravelSchedule),
     })
-    .then(resp => {
-        if (resp.status === 200) {
-            alert("성공적으로 저장되었습니다.");
-            clearSchedule();
-            showSelectedDaySchedule();
-            clearScheduleName();
-            clearDatepicker();
-        }
-    })
-    .catch(error => {
-        alert(error);
-    })
+        .then(resp => {
+            if (resp.status === 200) {
+                alert("성공적으로 저장되었습니다.");
+                clearSchedule();
+                showSelectedDaySchedule();
+                clearScheduleName();
+                clearDatepicker();
+            }
+        })
+        .catch(error => {
+            alert(error);
+        })
 }
 
 function saveScheduleInLocalStorage() {
@@ -690,14 +673,16 @@ function saveScheduleInLocalStorage() {
 function selectDaySchedule(day) {   // 필기. 전체 일정에서 일차 별 일정으로 이동 메소드
     daySelect.value = day;
     showSelectedDaySchedule();
-};
+}
 
 /* 설명. 초기화 */
+
 // 일정 정보들 초기화
 function clearSchedule() {
-    newTravelSchedule={};
-    travelDays=[];
+    newTravelSchedule = {};
+    travelDays = [];
 }
+
 // 필기. 선택된 날짜 일정 초기화
 let initScheduleBtn = document.getElementById("initScheduleBtn");
 initScheduleBtn.addEventListener("click", () => {
@@ -720,11 +705,13 @@ initScheduleBtn.addEventListener("click", () => {
     travelDays[selectedDay] = [];
     showSelectedDaySchedule();
 });
+
 // 필기. 여행 이름 초기화 함수
 function clearScheduleName() {
     scheduleId.value = "";
     setScheduleName();
 }
+
 // 필기. calendar 초기화 함수
 function clearDatepicker() {
     $('input[name="datefilter"]').data('daterangepicker').setStartDate(moment());
@@ -740,6 +727,7 @@ function clearDatepicker() {
     allDayOption.textContent = "전체 일정";
     daySelect.appendChild(allDayOption);
 }
+
 // 필기. 로컬스토리지 초기화 함수
 function clearLocalStorage() {
     window.localStorage.removeItem("newTravelSchedule")
