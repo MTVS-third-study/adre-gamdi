@@ -33,17 +33,7 @@ reviewNav.addEventListener("click", () => {
     infoPlace[0].style.display = "none";
     // newDayWrap.style.display="none"
 });
-let reviewBtn=document.getElementsByClassName("reviewBtn")
-reviewBtn[0].addEventListener("mouseover",()=>{
-    reviewBtn[0].style.backgroundColor="orange"
-    reviewBtn[0].style.color="white"
 
-});
-reviewBtn[0].addEventListener("mouseleave",()=>{
-    reviewBtn[0].style.backgroundColor="transparent"
-    reviewBtn[0].style.color="orange"
-
-});
 /* 설명. 지도 사이드바 설정 js */
 let menuWrap = document.getElementById("menu_wrap");    // 검색 list
 let dayWrap = document.getElementById("day_wrap");      // 일정 box
@@ -204,26 +194,7 @@ function addPlaceListClickEvent() {
         reviewContainer.style.display="none";
         // newDayWrap.style.display="none"
     })
-    backBtn[0].addEventListener("mouseleave",()=>{
-        backBtn[0].style.backgroundColor="transparent"
-        backBtn[0].style.color="orange"
 
-    })
-    backBtn[0].addEventListener("mouseover",()=>{
-        backBtn[0].style.backgroundColor="orange"
-        backBtn[0].style.color="white"
-
-    })
-    scheduleAdd[0].addEventListener("mouseover",()=>{
-        scheduleAdd[0].style.backgroundColor="orange"
-        scheduleAdd[0].style.color="white"
-
-    });
-    scheduleAdd[0].addEventListener("mouseleave",()=>{
-        scheduleAdd[0].style.backgroundColor="transparent"
-        scheduleAdd[0].style.color="orange"
-
-    });
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {
             let placeNo = placeList[i].querySelector("#placeNo").innerText;
@@ -315,7 +286,7 @@ userImgBox[0].addEventListener("click", () => {
 
 for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
     hideUserInfoBoxItem[i].addEventListener("mouseover", () => {
-        hideUserInfoBoxItem[i].style.backgroundColor = "#70757a";
+        hideUserInfoBoxItem[i].style.backgroundColor = "orange";
     });
     hideUserInfoBoxItem[i].addEventListener("mouseleave", () => {
         hideUserInfoBoxItem[i].style.backgroundColor = "transparent";
@@ -355,7 +326,7 @@ myScheduleBtn.addEventListener("click", () => {
             myScheduleModal.style.display = "block";
             myScheduleModalBody[0].style.display = "block";
 
-            let html = `  <div><h1>나의 일정</h1></div>`;
+            let html = `  <div><h1>나의 일정</h1> <img src="/images/close.png" alt="" class="closeBtn1" id="closeBtn"></div>`;
             data.myScheduleList.forEach((obj, idx) => {
 
                     console.log(data.myScheduleList);
@@ -374,15 +345,22 @@ myScheduleBtn.addEventListener("click", () => {
 
             });
             document.getElementById("schedule_modal_body").innerHTML = html;
+            let closeBtn=document.getElementById("closeBtn")
+            closeBtn.addEventListener("click",()=>{
+                myScheduleModal.style.display = "none";
+                myScheduleModalBody[0].style.display = "none";
+            })
         })
         .catch((error) => {
             console.log(error);
         });
+
 })
 myScheduleModal.addEventListener("click", () => {
     myScheduleModal.style.display = "none";
     myScheduleModalBody[0].style.display = "none";
 });
+
     // scheduleModify[0].addEventListener("click", () => {
     //     if ((dayWrap.style.display = "none")) {
     //         dayWrap.style.display = "block";
@@ -596,15 +574,3 @@ initScheduleBtn.addEventListener("click", () => {
     showSelectedDaySchedule();
 });
 
-/*설명. Btnmouseover*/
-let saveBtn=document.getElementsByClassName("saveBtn")
-for(let i=0;i<saveBtn.length;i++){
-    saveBtn[i].addEventListener("mouseover",()=>{
-        saveBtn[i].style.backgroundColor="orange";
-        saveBtn[i].style.color="white";
-    })
-    saveBtn[i].addEventListener("mouseleave",()=>{
-        saveBtn[i].style.backgroundColor="transparent";
-        saveBtn[i].style.color="orange";
-    })
-}

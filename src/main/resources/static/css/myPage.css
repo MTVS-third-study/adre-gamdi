@@ -106,7 +106,7 @@ main {
     margin-bottom: 10px;
     font-weight: bold;
 }
-.InfoText > input {
+.InfoText > .updateInput {
     width: 300px;
     height: 30px;
     border-radius: 5px;
@@ -121,17 +121,17 @@ main {
 .saveBtn{
     border: 1px solid orange;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0 rgba(0,0,0,0.02);
-    background-color: transparent;
+    background-color: orange;
     width: 100px;
     height: 40px;
     border-radius: 5px;
-    color: orange;
+    color: white;
 
     font-size:18px;
     transition: all 1s;
 }
 .deleteBtn{
     position: relative;
-    top: 387px;
+    top: 430px;
     left: -155px;
 }
