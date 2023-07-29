@@ -1,9 +1,5 @@
 package com.ohgiraffers.adregamdi.review.command.application.controller;
 
-import com.ohgiraffers.adregamdi.place.command.application.dto.PlaceDTO;
-import com.ohgiraffers.adregamdi.place.command.domain.aggregate.entity.Place;
-import com.ohgiraffers.adregamdi.place.query.application.dto.ResponsePlaceDTO;
-import com.ohgiraffers.adregamdi.placebyschedule.domain.aggregate.vo.PlaceNo;
 import com.ohgiraffers.adregamdi.review.command.application.dto.ReviewDTO;
 import com.ohgiraffers.adregamdi.review.command.application.service.ReviewService;
 import com.ohgiraffers.adregamdi.review.query.application.controller.ReviewQueryController;
@@ -35,33 +31,24 @@ public class ReviewController {
     }
 
 
-//    @ResponseBody
-//    @GetMapping("")
-//    public ReviewController(){
-//
-//    }
-
     @ResponseBody
     @PostMapping("/regist")
-    public void registReview(ReviewDTO reviewDTO,
+    public String registReview(ReviewDTO reviewDTO,
                                @RequestParam MultipartFile imageFile,
-
+                               @RequestParam("placeNo") Long placeNo,
                                HttpServletResponse response,
                                Model model,
                                HttpSession session) throws IOException {
 //        Long placeNo = responsePlaceDTO.getPlaceNo();
-        Long placeNo = 20L;
 //        System.out.println("placeNo = " + placeNo);
         Long userNo = ((UserDTO) session.getAttribute("loginUser")).getUserNo();
         String userName = ((UserDTO) session.getAttribute("loginUser")).getKakaoNickName();
-//        Map<String, ReviewDTO> reviewDTOMap = new HashMap<>();
-//        reviewDTOMap.put("reviewRegist", reviewDTO);
         if (reviewService.insertReview(reviewDTO, imageFile, model, userNo, userName, placeNo)) {
 //            alert("리뷰가 등록되었습니다.", response);
-//            return "/schedule";
+            return "/schedule";
         } else {
 //            alert("리뷰 등록에 실패하였습니다.", response);
-//            return "/schedule";
+            return "/schedule";
         }
     }
 

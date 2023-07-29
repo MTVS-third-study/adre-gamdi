@@ -12,29 +12,30 @@ infoNav.addEventListener("click", () => {
 
 });
 
-//리뷰 조회 비동기
-function addReviewClickEvent(placeNo){
-reviewNav.addEventListener("click", () => {
-    fetch(`/review/query/reviewInfo?placeNo=${placeNo}`)
-        .then((response) => response.json())
-        .then((json) => {
-            console.log(json);
-            console.log(placeNo);
+// 설명. 리뷰 조회 비동기
+function addReviewClickEvent(placeNo) {
+    reviewNav.addEventListener("click", () => {
+        fetch(`/review/query/reviewInfo?placeNo=${placeNo}`)
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json
+                );
+                console.log(placeNo);
 
-            json = json.reviewInfo;
-            let html = "";
-            json.forEach((obj, idx) => {
-                if (!json.length) {
-                    console.log("등록된 값이없습니다");
-                } else {
-                    html += `
+                json = json.reviewInfo;
+                let html = "";
+                json.forEach((obj, idx) => {
+                    if (!json.length) {
+                        console.log("등록된 값이없습니다");
+                    } else {
+                        html += `
                         <div class="reviewBox">
                             <div class="reviewBox"><p>${obj.reviewNo}</p>
 
                             <div class="userinfoBox">
                                 <div class="userName"><img src="" alt="" /><span >${obj.reviewWriter.reviewWriterName}</span></div>
                                 <div class="star-ratings">
-                                    <div class="starRatingsFill space-x-2 text-lg" style="width: ${obj.starPoint*20}%">
+                                    <div class="starRatingsFill space-x-2 text-lg" style="width: ${obj.starPoint * 20}%">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                    
@@ -50,7 +51,7 @@ reviewNav.addEventListener("click", () => {
                                 </p>
                             </div>
                             <div class="reviewImg">
-                                <img src="@{'/images/reviewImages/'+${obj.savedReviewImageName}}"/>
+                                <img src="/images/reviewImages/${obj.savedReviewImageName}"/>
                             </div>
                             <div class="csBox">
                                 <div class="like white">
@@ -64,25 +65,62 @@ reviewNav.addEventListener("click", () => {
                                     <img src="/images/siren.png" alt="" /><span>신고</span>
                                 </div>
                         </div>
-`;}
-                document.querySelector(".reviewContentsBox").innerHTML=html;
+`;
+                    }
+                    document.querySelector(".reviewContentsBox").innerHTML = html;
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("예기치 못한 오류가 발생했습니다.");
+                infoWrap.style.display = "none";
+                menuWrap.style.display = "block";
+                dayWrap.style.display = "none";
+                option[0].style.display = "block";
+                // newDayWrap.style.display="none"
             });
+        infoContents[0].style.display = "none";
+        reviewContainer[0].style.display = "block";
+        imgBox[0].style.display = "none";
+        infoPlace[0].style.display = "none";
+        // newDayWrap.style.display="none"
+    });
+}
+
+// 설명. 리뷰 등록 비동기
+function addReviewRegistEvent(placeNo) {
+    let reviewForm = document.getElementById("reviewForm")
+    reviewForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const reviewFormData = new FormData(reviewForm);
+
+
+        fetch(`/review/regist?placeNo=${placeNo}`,{
+            method: 'POST',
+            headers: {},
+            body: reviewFormData
         })
-        .catch((error) => {
-            console.error(error);
-            alert("예기치 못한 오류가 발생했습니다.");
-            infoWrap.style.display = "none";
-            menuWrap.style.display = "block";
-            dayWrap.style.display = "none";
-            option[0].style.display = "block";
-            // newDayWrap.style.display="none"
-        });
-    infoContents[0].style.display = "none";
-    reviewContainer[0].style.display = "block";
-    imgBox[0].style.display = "none";
-    infoPlace[0].style.display = "none";
-    // newDayWrap.style.display="none"
-});
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json);
+                console.log(placeNo);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("예기치 못한 오류가 발생했습니다.");
+                infoWrap.style.display = "none";
+                menuWrap.style.display = "block";
+                dayWrap.style.display = "none";
+                option[0].style.display = "block";
+            });
+        infoContents[0].style.display = "none";
+        reviewContainer[0].style.display = "block";
+        imgBox[0].style.display = "none";
+    });
+}
+
+
 let reviewBtn=document.getElementsByClassName("reviewBtn")
 reviewBtn[0].addEventListener("mouseover",()=>{
     reviewBtn[0].style.backgroundColor="orange"
@@ -306,9 +344,8 @@ function addPlaceListClickEvent() {
                     reviewContainer.style.display="none";
                     // newDayWrap.style.display="none"
                 });
-
             addReviewClickEvent(placeNo);
-            // addReviewRegistEvent(placeNo);
+            addReviewRegistEvent(placeNo);
 
             infoWrap.style.display = "block";
             menuWrap.style.display = "none";
@@ -322,17 +359,17 @@ function addPlaceListClickEvent() {
 
 
 /*설명. Btnmouseover*/
-let saveBtn=document.querySelectorAll(".saveBtn")
-for(let i=0;i<40;i++){
-    saveBtn[i].addEventListener("mouseover",()=>{
-        saveBtn[i].style.backgroundColor="orange";
-        saveBtn[i].style.color="white";
-    })
-    saveBtn[i].addEventListener("mouseleave",()=>{
-        saveBtn[i].style.backgroundColor="transparent";
-        saveBtn[i].style.color="orange";
-    })
-}
+// let saveBtn=document.querySelectorAll(".saveBtn")
+// for(let i=0;i<40;i++){
+//     saveBtn[i].addEventListener("mouseover",()=>{
+//         saveBtn[i].style.backgroundColor="orange";
+//         saveBtn[i].style.color="white";
+//     })
+//     saveBtn[i].addEventListener("mouseleave",()=>{
+//         saveBtn[i].style.backgroundColor="transparent";
+//         saveBtn[i].style.color="orange";
+//     })
+// }
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
 });
@@ -411,8 +448,8 @@ myScheduleBtn.addEventListener("click", () => {
             let html = `  <div><h1>나의 일정</h1></div>`;
             data.myScheduleList.forEach((obj, idx) => {
 
-                    console.log(data.myScheduleList);
-                    html += `
+                console.log(data.myScheduleList);
+                html += `
            
              <div class="plan">
             <div class="plan_title">여행 이름 <span><input type="text" placeholder=${obj.scheduleName}></span></div>
@@ -435,16 +472,16 @@ myScheduleModal.addEventListener("click", () => {
     myScheduleModal.style.display = "none";
     myScheduleModalBody[0].style.display = "none";
 });
-    // scheduleModify[0].addEventListener("click", () => {
-    //     if ((dayWrap.style.display = "none")) {
-    //         dayWrap.style.display = "block";
-    //         infoWrap.style.display = "none";
-    //         menuWrap.style.display = "none";
-    //     }
-    //
-    //     myScheduleModal.style.display = "none";
-    //     myScheduleModalBody[0].style.display = "none";
-    // });
+// scheduleModify[0].addEventListener("click", () => {
+//     if ((dayWrap.style.display = "none")) {
+//         dayWrap.style.display = "block";
+//         infoWrap.style.display = "none";
+//         menuWrap.style.display = "none";
+//     }
+//
+//     myScheduleModal.style.display = "none";
+//     myScheduleModalBody[0].style.display = "none";
+// });
 
 /*설명. caleder*/
 let newTravelSchedule = {
@@ -454,75 +491,77 @@ let newTravelSchedule = {
     dayAndNight: "",
     travelDays: ""
 };
-    let daySelect = document.getElementById("daySelect");
-    $(function () {
-        $('input[name="datefilter"]').daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-                cancelLabel: "Clear",
-            },
-        });
-
-        $('input[name="datefilter"]').on(
-            "apply.daterangepicker",
-            function (ev, picker) {
-                $(this).val(
-                    picker.startDate.format("MM/DD/YYYY") +
-                    " - " +
-                    picker.endDate.format("MM/DD/YYYY")
-                );
-
-                let startDate =
-                    picker.startDate._d.getUTCFullYear() +
-                    "-" +
-                    (picker.startDate._d.getMonth() +
-                        1) +
-                    "-" +
-                    picker.startDate._d.getDate() +
-                    "";
-                let endDate =
-                    picker.endDate._d.getUTCFullYear() +
-                    "-" +
-                    (picker.endDate._d.getMonth() +
-                        1) +
-                    "-" +
-                    picker.endDate._d.getDate() +
-                    "";
-                fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.message) {
-                            alert(data.message);
-                            return;
-                        }
-                        let dayAndNight = data.dayAndNight;
-                        newTravelSchedule.startDate=startDate;
-                        newTravelSchedule.endDate=endDate;
-                        newTravelSchedule.dayAndNight = dayAndNight;
-
-                        let html = ` <option value="allday">전체 일정</option>`;
-                        for (let i=1; i<=dayAndNight; i++) {
-
-                            html += `
-                            if (i === 1) {
-                                <option value="${i}" selected="selected">${i}일 차</option>
-                            } else{
-                                <option value="${i}">${i}일 차</option>
-                            }
-                            `;
-                            daySelect.innerHTML = html;
-                        }
-                        showSelectedDaySchedule();
-                    });
-            }
-        );
-        $('input[name="datefilter"]').on(
-            "cancel.daterangepicker",
-            function (ev, picker) {
-                $(this).val("");
-            }
-        );
+let daySelect = document.getElementById("daySelect");
+$(function () {
+    $('input[name="datefilter"]').daterangepicker({
+        autoUpdateInput: false,
+        locale: {
+            cancelLabel: "Clear",
+        },
     });
+
+    $('input[name="datefilter"]').on(
+        "apply.daterangepicker",
+        function (ev, picker) {
+            $(this).val(
+                picker.startDate.format("MM/DD/YYYY") +
+                " - " +
+                picker.endDate.format("MM/DD/YYYY")
+            );
+
+            let startDate =
+                picker.startDate._d.getUTCFullYear() +
+                "-" +
+                (picker.startDate._d.getMonth() +
+                    1) +
+                "-" +
+                picker.startDate._d.getDate() +
+                "";
+            let endDate =
+                picker.endDate._d.getUTCFullYear() +
+                "-" +
+                (picker.endDate._d.getMonth() +
+                    1) +
+                "-" +
+                picker.endDate._d.getDate() +
+                "";
+            fetch(`/schedule/getDayAndNight?startDay=${startDate}&endDay=${endDate}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.message) {
+                        alert(data.message);
+                        return;
+                    }
+                    let dayAndNight = data.dayAndNight;
+                    newTravelSchedule.startDate=startDate;
+                    newTravelSchedule.endDate=endDate;
+                    newTravelSchedule.dayAndNight = dayAndNight;
+
+                    let html = ` <option value="allday">전체 일정</option>`;
+                    for (let i=1; i<=dayAndNight; i++) {
+
+                        if (i === 1) {
+                            html += `
+                                    <option value="${i}" selected="selected">${i}일 차</option>
+                                `;
+                        } else{
+                            html += `
+                                    <option value="${i}">${i}일 차</option>
+                                `;
+                        }
+                        daySelect.innerHTML = html;
+                    }
+                    showSelectedDaySchedule();
+                });
+        }
+    );
+    $('input[name="datefilter"]').on(
+        "cancel.daterangepicker",
+        function (ev, picker) {
+            $(this).val("");
+        }
+    );
+});
 
 /*설명. 일정 추가*/
 let dayNumber = 1;  // 첫 째날
