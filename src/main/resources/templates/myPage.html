@@ -58,6 +58,18 @@
                         <p>GENDER</p>
                         <input type="text" th:placeholder="${session.loginUser.getGender()}" readonly="readonly">
                         <div>
+                            <button class="saveBtn nickNameChangeBtn" type="submit">SAVE</button>
+
+
+
+                        </div>
+                    </form>
+                    <form action="user/deleteUser" method="post" class="deleteBtn">
+                        <button class="saveBtn" type="submit">Delete</button>
+                    </form>
+
+                        <input type="text" th:placeholder="${session.loginUser.getGender()}" readonly="readonly">
+                        <div>
                         <button class="saveBtn nickNameChangeBtn" type="submit">SAVE</button>
 
 
