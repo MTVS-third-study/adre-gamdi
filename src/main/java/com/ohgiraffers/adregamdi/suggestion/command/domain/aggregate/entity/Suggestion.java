@@ -25,11 +25,37 @@ public class Suggestion {
     private UserNo userNo;
 
     @Column
+    private String placeName;
+
+    @Column
+    private String postCode;
+
+    @Column
+    private String roadAddress;
+
+    @Column
+    private String address;
+
+    @Column
+    private String detailAddress;
+
+    @Column
+    private String phoneNumber;
+
+    @Column
     private String suggestionMessage;
 
 
-    public Suggestion(UserNo userNo, String suggestionMessage) {
+    public Suggestion(UserNo userNo, String placeName, String postCode,
+                      String roadAddress, String address, String detailAddress,
+                      String phoneNumber, String suggestionMessage) {
         this.userNo = userNo;
+        this.placeName = placeName;
+        this.postCode = postCode;
+        this.roadAddress = roadAddress;
+        this.address = address;
+        this.detailAddress = detailAddress;
+        this.phoneNumber = phoneNumber;
         this.suggestionMessage = suggestionMessage;
     }
 }
