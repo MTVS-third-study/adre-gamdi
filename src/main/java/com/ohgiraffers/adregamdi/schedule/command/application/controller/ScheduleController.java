@@ -24,14 +24,15 @@ public class ScheduleController {
     }
 
     @PostMapping("insertSchedule")
-    public ResponseEntity<String> insertSchedule(HttpSession session, @RequestBody ScheduleDTO scheduleDTO) {
+    public ResponseEntity<String> insertSchedule(HttpSession session, @RequestBody ScheduleDTO scheduleDTO){
+        System.out.println("scheduleDTO = " + scheduleDTO);
         if (session.getAttribute("loginUser") == null){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("로그인 후 이용해주세요.");
         }
         Long userNo = ((UserDTO)session.getAttribute("loginUser")).getUserNo();
         scheduleDTO.setUserNo(userNo);
-        scheduleService.insertSchedule(scheduleDTO);
-        return ResponseEntity.ok("성공적으로 저장되었습니다.");
+        String insertResult = scheduleService.insertSchedule(scheduleDTO);
+        return ResponseEntity.ok(insertResult);
     }
 
     @GetMapping("deleteSchedule")

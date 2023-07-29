@@ -26,7 +26,7 @@ public class AdminController {
     public void updateGrade(@RequestParam("grade") int grade, HttpServletResponse response, HttpSession session) throws Exception {
         UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
         session.setAttribute("loginUser", adminService.updateGrade(grade, loginUser));
-        response.sendRedirect("http://localhost:8080/adminPage"); // 메인 페이지로
+        response.sendRedirect("http://localhost:9090/adminPage"); // 메인 페이지로
     }
 
 }

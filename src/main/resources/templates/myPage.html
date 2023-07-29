@@ -36,27 +36,38 @@
                     <h1>Profile Details</h1>
                 </div>
                 <div class="userInfo">
-                    <img src="/images/jejuIsland.png" alt="">
-                    <div class="InfoText">
+                    <img th:src="${session.loginUser.getKakaoProfileImage()}" alt="">
+                    <form action="user/updateNickName" method="post" class="InfoText">
                         <p>ID</p>
-                        <input type="text" readonly="readonly">
-                        <p>NICK NAME</p>
-                        <input type="text">
+                        <input type="text" readonly="readonly" th:placeholder="${session.loginUser.getKakaoId()}" class="updateInput">
+
+                            <th:block th:if="${session.loginUser.getServiceNickName() == ''}">
+                                <p>NICK NAME</p>
+                                <input type="text" th:placeholder="${session.loginUser.getKakaoNickName()}" name="nickName" class="updateInput">
+                            </th:block>
+                            <th:block th:if="${session.loginUser.getServiceNickName() != ''}">
+                                <p>NICK NAME</p>
+                                <input type="text" th:placeholder="${session.loginUser.getServiceNickName()}" name="nickName" class="updateInput">
+                            </th:block>
+
+
                         <p>EMAIL</p>
-                        <input type="text">
+                        <input type="text" th:placeholder="${session.loginUser.getEmail()}" readonly="readonly" class="updateInput">
                         <p>AGE</p>
-                        <input type="text">
+                        <input type="text" th:placeholder="${session.loginUser.getAge()}" readonly="readonly" class="updateInput">
                         <p>GENDER</p>
-                        <input type="text">
-                        <p>GRADE</p>
-                        <input type="text" readonly="readonly">
-                    </div>
+                        <input type="text" th:placeholder="${session.loginUser.getGender()}" readonly="readonly" class="updateInput">
+                        <div>
+                            <button class="saveBtn nickNameChangeBtn" type="submit">SAVE</button>
+                        </div>
+                    </form>
+                    <form action="user/deleteUser" method="post" class="deleteBtn">
+                        <button class="saveBtn" type="submit">Delete</button>
+                    </form>
+
                 </div>
             </div>
-            <div class="BtnBox">
-                <button class="saveBtn">SAVE</button>
-                <button class="saveBtn">Delete</button>
-            </div>
+
             <!-- user modify 끝 -->
 
 

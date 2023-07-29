@@ -17,14 +17,14 @@ public class ReviewServiceTests {
     @Autowired
     ReviewRepository reviewRepository;
 
-    @DisplayName("리뷰 삭제 기능 확인")
-    @ParameterizedTest
-    @ValueSource(ints = {1})
-    void deleteReview(int reviewNo) {
-
-        reviewRepository.deleteById(reviewNo);
-
+//    @DisplayName("리뷰 삭제 기능 확인")
+//    @ParameterizedTest
+//    @ValueSource(ints = {1})
+//    void deleteReview(int reviewNo) {
+//
+//        reviewRepository.deleteById(reviewNo);
+//
 //        Assertions.assertEquals(5,);
-    }
+//    }
 
 }

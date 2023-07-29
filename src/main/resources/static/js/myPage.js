@@ -14,12 +14,5 @@ for(let i=0;i<menuListItem.length;i++){
     }  )
 }
 
-let saveBtn=document.getElementsByClassName("saveBtn")
-saveBtn[0].addEventListener("mouseover",()=>{
-    saveBtn[0].style.backgroundColor="#696cff"
-    saveBtn[0].style.color="#fff"
-})
-saveBtn[0].addEventListener("mouseleave",()=>{
-    saveBtn[0].style.backgroundColor="transparent"
-    saveBtn[0].style.color="#696cff"
-})
+
+

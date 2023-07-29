@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/user")
+
 public class UserController {
     private final UserService userService;
 
@@ -22,21 +22,22 @@ public class UserController {
     }
 
     // 닉네임 변경
-    @PostMapping("updateNickName")
+    @PostMapping("user/updateNickName")
     public String updateNickName(@RequestParam("nickName") String nickName, HttpSession session) throws Exception {
         UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
         session.setAttribute("loginUser", userService.updateNickName(nickName, loginUser));
+        System.out.println(nickName) ;
         return "redirect:/myPage";
     }
 
     // 회원탈퇴 페이지로 이동
-    @GetMapping("deleteForm")
+    @GetMapping("user/deleteForm")
     public String goDeleteUser() {
         return "user/deleteForm";
     }
 
     // 회원탈퇴 예
-    @PostMapping("deleteUser")
+    @PostMapping("user/deleteUser")
     public String deleteUser(HttpSession session) {
         String token = ((UserDTO) session.getAttribute("loginUser")).getAccess_Token();
         int result = userService.deleteUser(token);
@@ -44,13 +45,13 @@ public class UserController {
         if (result == 1) { // 탈퇴 성공
             session.removeAttribute("loginUser");
             session.removeAttribute("service");
-            return "redirect:/";
+            return "redirect:/main";
         }
         return "errorPage"; // 탈퇴 실패 시 에러페이지로
     }
 
     // 회원탈퇴 아니오
-    @PostMapping("deleteNo")
+    @PostMapping("user/deleteNo")
     public String deleteNo() {
         return "redirect:/myPage";
     }

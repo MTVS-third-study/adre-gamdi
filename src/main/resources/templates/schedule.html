@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Adregamdi : 일정페이지</title>
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
     <!-- 설명. 카카오맵 api appkey-->
     <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -39,7 +40,7 @@
                 <img src="/images/search.png" alt="" />
                 <p>검색</p>
             </div>
-            <div class="myScheduleBtn" id="myScheduleBtn">
+            <div class="loadBtn" id="loadBtn">
                 <img src="/images/schedule_icon.png" alt="" />
                 <p>일정</p>
             </div>
@@ -47,8 +48,8 @@
                 <img src="/images/plus.png" alt="" />
                 <p>new</p>
             </div>
-            <div class="loadBtn" id="loadBtn" >
-                <img src="/images/schedule_icon.png" alt="" />
+            <div class="myScheduleBtn" id="myScheduleBtn" >
+                <img src="/images/load.png" alt="" />
                 <p>load</p>
             </div>
             <div class="userImgBox">
@@ -60,7 +61,7 @@
 
             <li  onclick="location.href='/myPage'">mypage</li>
             <hr class="InfoBoxHr">
-            <li    onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:8080/oauth/kakao/logout'">Logout</li>
+            <li    onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:9090/oauth/kakao/logout'">Logout</li>
         </ul>
     </div>  <!--end 사이드 바-->
 
@@ -92,9 +93,9 @@
             <div class="scheduleBox">
                 <div class="selectBox">
                     <div><span>여행 이름 : </span>
-                        <input type="text" placeholder="일정 이름을 변경해주세요" class="newPlaceName" maxlength="15" onchange="setScheduleName()">
+                        <input type="text" placeholder="일정 이름을 변경해주세요" id="scheduleName" class="newPlaceName" maxlength="15" onchange="setScheduleName()">
                     </div>
-                    <input type="text" name="datefilter" value="" class="calendar" />
+                    <input type="text" name="datefilter" id="datefilter" value="" class="calendar" />
                     <select name="day" id="daySelect" class="daySelect form-select" aria-label="Default select example"
                             onchange="showSelectedDaySchedule()">
                         <option value="allday">전체 일정</option>
@@ -105,9 +106,8 @@
                     <ul id="dayPlacesList" class="dayList">
                     </ul>
 
-                        <button class="saveBtn scheduleSave">저장</button>
+                        <button class="saveBtn scheduleSave" id="saveScheduleBtn">저장</button>
                         <button class="saveBtn dayDelete" id="initScheduleBtn">초기화</button>
-
                 </div>
             </div>
         </div>
@@ -258,7 +258,7 @@
     <!-- 스케쥴 페이지에서 일정눌렀을 떄 내 일정 나오는 모달창 -->
     <div class="myScheduleModal" id="myScheduleModal"></div> <!---->
     <div class="schedule_modal_body" id="schedule_modal_body">
-        <div><h1>나의 일정</h1></div>
+
     </div>
     </div>
 
