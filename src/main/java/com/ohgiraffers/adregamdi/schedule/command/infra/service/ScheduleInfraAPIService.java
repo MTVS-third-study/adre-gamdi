@@ -1,10 +1,12 @@
 package com.ohgiraffers.adregamdi.schedule.command.infra.service;
 
+import com.ohgiraffers.adregamdi.detailschedule.command.application.dto.DetailScheduleDTO;
 import com.ohgiraffers.adregamdi.detailschedule.command.application.service.DetailScheduleService;
-import com.ohgiraffers.adregamdi.schedule.command.application.dto.DetailScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.command.domain.service.ScheduleAPIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ScheduleInfraAPIService implements ScheduleAPIService {
@@ -17,8 +19,8 @@ public class ScheduleInfraAPIService implements ScheduleAPIService {
     }
 
     @Override
-    public DetailScheduleDTO insertDetailSchedule(DetailScheduleDTO detailScheduleDTO) {
-//        detailScheduleService.registDetailSchedule(detailScheduleDTO);
-        return null;
+    public List<DetailScheduleDTO> insertDetailSchedule(List<DetailScheduleDTO> detailScheduleDTOList) {
+        List<DetailScheduleDTO> result = detailScheduleService.registDetailSchedule(detailScheduleDTOList);
+        return result;
     }
 }

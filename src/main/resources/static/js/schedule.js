@@ -69,7 +69,9 @@ imgBtn.addEventListener("click", () => {
     if (!confirm) {
         return;
     }
-    window.localStorage.setItem("newTravelSchedule", newTravelSchedule);
+    if (newTravelSchedule) {
+        saveScheduleInLocalStorage();
+    }
     travelDays = {};
     newTravelSchedule = {
         scheduleName: "",
@@ -272,17 +274,17 @@ function addPlaceListClickEvent() {
 
 
 /*설명. Btnmouseover*/
-let saveBtn=document.querySelectorAll(".saveBtn")
-for(let i=0;i<40;i++){
-    saveBtn[i].addEventListener("mouseover",()=>{
-        saveBtn[i].style.backgroundColor="orange";
-        saveBtn[i].style.color="white";
-    })
-    saveBtn[i].addEventListener("mouseleave",()=>{
-        saveBtn[i].style.backgroundColor="transparent";
-        saveBtn[i].style.color="orange";
-    })
-}
+// let saveBtn=document.querySelectorAll(".saveBtn")
+// for(let i=0;i<40;i++){
+//     saveBtn[i].addEventListener("mouseover",()=>{
+//         saveBtn[i].style.backgroundColor="orange";
+//         saveBtn[i].style.color="white";
+//     })
+//     saveBtn[i].addEventListener("mouseleave",()=>{
+//         saveBtn[i].style.backgroundColor="transparent";
+//         saveBtn[i].style.color="orange";
+//     })
+// }
 homeBtn.addEventListener("mouseover", () => {
     homeBtn.classList.add("add");
 });
@@ -508,6 +510,7 @@ scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지�
     showSelectedDaySchedule();
 });
 function showSelectedDaySchedule() {    // 필기. 세부 일정 리스트 조회
+    console.log("newTravelSchedule", newTravelSchedule);
     dayNumber = daySelect.options[daySelect.selectedIndex].value;
     let html = ``;
     if (dayNumber === "allday") {   // 필기. 전체 일정 선택 시
@@ -549,6 +552,7 @@ function saveSchedule() {
 
     fetch("/schedule/insertSchedule", {
         method: "POST",
+        headers: { "Content-Type":"application/json"},
         body: JSON.stringify(newTravelSchedule),
     })
     .then(resp => {
@@ -557,7 +561,7 @@ function saveSchedule() {
         }
     })
     .catch(error => {
-        console.error(error);
+        alert(error);
     })
 }
 function saveScheduleInLocalStorage() {

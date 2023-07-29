@@ -7,12 +7,12 @@ import java.io.Serializable;
 @Embeddable
 public class TotalScheduleNo implements Serializable {
     @Column
-    private int scheduleNo; // 스케줄 (FK)
+    private Long scheduleNo; // 스케줄 (FK)
 
     protected TotalScheduleNo() {
     }
 
-    public TotalScheduleNo(int scheduleNo) {
+    public TotalScheduleNo(Long scheduleNo) {
         this.scheduleNo = scheduleNo;
     }
 }

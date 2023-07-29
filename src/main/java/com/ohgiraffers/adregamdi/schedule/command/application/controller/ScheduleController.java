@@ -1,7 +1,6 @@
 package com.ohgiraffers.adregamdi.schedule.command.application.controller;
 
 import com.ohgiraffers.adregamdi.schedule.command.application.dto.DayAndNightResponseDTO;
-import com.ohgiraffers.adregamdi.schedule.command.application.dto.DetailScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.command.application.dto.ScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.command.application.service.ScheduleService;
 import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.ScheduleDayVO;
@@ -25,14 +24,14 @@ public class ScheduleController {
     }
 
     @PostMapping("insertSchedule")
-    public ResponseEntity<String> insertSchedule(HttpSession session, @RequestBody ScheduleDTO scheduleDTO,
-                                                              @RequestBody DetailScheduleDTO detailScheduleDTO) {
+    public ResponseEntity<String> insertSchedule(HttpSession session, @RequestBody ScheduleDTO scheduleDTO){
+        System.out.println("scheduleDTO = " + scheduleDTO);
         if (session.getAttribute("loginUser") == null){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("로그인 후 이용해주세요.");
         }
         Long userNo = ((UserDTO)session.getAttribute("loginUser")).getUserNo();
         scheduleDTO.setUserNo(userNo);
-        String insertResult = scheduleService.insertSchedule(scheduleDTO, detailScheduleDTO);
+        String insertResult = scheduleService.insertSchedule(scheduleDTO);
         return ResponseEntity.ok(insertResult);
     }
 

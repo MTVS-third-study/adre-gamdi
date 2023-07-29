@@ -1,9 +1,11 @@
 package com.ohgiraffers.adregamdi.schedule.command.domain.service;
 
-import com.ohgiraffers.adregamdi.schedule.command.application.dto.DetailScheduleDTO;
+import com.ohgiraffers.adregamdi.detailschedule.command.application.dto.DetailScheduleDTO;
+
+import java.util.List;
 
 public interface ScheduleAPIService {
 
-    DetailScheduleDTO insertDetailSchedule(DetailScheduleDTO detailScheduleDTO);
+    List<DetailScheduleDTO> insertDetailSchedule(List<DetailScheduleDTO> detailScheduleDTOList);
 
 }
