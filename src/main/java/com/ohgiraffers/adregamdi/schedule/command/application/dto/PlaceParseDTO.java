@@ -28,6 +28,4 @@ public class PlaceParseDTO {
     private double averageStarPoint;
     private int reviewCount;
     private List<String> tagList;
-
-
 }

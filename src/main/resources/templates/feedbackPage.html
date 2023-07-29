@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/feedbackPage.css">
+</head>
+<body>
+<main>
+    <div class="sideMenu">
+        <div>
+            <div id="adminBtn" onclick="location.href='/main'">
+                <img src="/images/logo.png" alt="">
+                <li id="admin">Home</li>
+            </div>
+            <ul class="menuList" id="menuList">
+                <div id="userImage">
+                    <img th:src="${session.loginUser.getKakaoProfileImage()}" alt="" id="feedbackUserImage">
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div class="contents">
+        <div class="contentsWrap">
+            <div class="userImgBox">
+                <div id="feedbackHead">
+                    <h1>Feedback</h1>
+                </div>
+
+            </div>
+
+                <form action="/feedback/feedbackMessage" class="feedbackSubmit" method="POST">
+                    <div>
+                        <textarea cols="50" rows="10" id="feedbackBox" name="feedbackMessage">
+                        </textarea>
+                    </div>
+                    <div class="BtnBox">
+                        <button type="submit" class="feedbackBtn" >제출하기</button>
+                    </div>
+                </form>
+
+            <!-- user modify 끝 -->
+
+        </div>
+    </div>
+
+</main>
+
+</body>
+</html>
