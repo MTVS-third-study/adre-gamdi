@@ -1,26 +1,30 @@
 /* 설명. reviwpage */
-let infoNav = document.getElementById("infoNav");
-let reviewNav = document.getElementById("reviewNav");
-let infoContents = document.getElementsByClassName("infoContents");
-let reviewContainer = document.getElementsByClassName("reviewContainer");
-let imgBox = document.getElementsByClassName("imgBox");
-let infoPlace=document.getElementsByClassName("infoPlace")
+let infoNav = document.getElementById("infoNav");       // 장소 탭
+let reviewNav = document.getElementById("reviewNav");       // 리뷰 탭
+let infoContents = document.getElementsByClassName("infoContents");     // 상세 정보 내용
+let reviewContainer = document.getElementsByClassName("reviewContainer");   // 리뷰 내용
+let imgBox = document.getElementsByClassName("imgBox"); // 상세 창 이미지
+// let infoPlace=document.getElementsByClassName("infoPlace")
 infoNav.addEventListener("click", () => {
     infoContents[0].style.display = "block";
     reviewContainer[0].style.display = "none";
     imgBox[0].style.display = "block";
+});
 
+reviewNav.addEventListener("click", () => {
+    getReviewList(selectedPlaceNo);
 });
 
 
 // 설명. 리뷰 조회 비동기
-function addReviewClickEvent(placeNo) {
-    reviewNav.addEventListener("click", () => {
+function getReviewList(placeNo) {
+    if (!placeNo) {
+        return;
+    }
         fetch(`/review/query/reviewInfo?placeNo=${placeNo}`)
             .then((response) => response.json())
             .then((json) => {
-                console.log(json
-                );
+                console.log(json);
                 console.log(placeNo);
 
                 json = json.reviewInfo;
@@ -30,44 +34,44 @@ function addReviewClickEvent(placeNo) {
                         console.log("등록된 값이없습니다");
                     } else {
                         html += `
-                        <div class="reviewBox">
-                            <div class="reviewBox"><p>${obj.reviewNo}</p>
-
-                            <div class="userinfoBox">
-                                <div class="userName"><img src="" alt="" /><span >${obj.reviewWriter.reviewWriterName}</span></div>
-                                <div class="star-ratings">
-                                    <div class="starRatingsFill space-x-2 text-lg" style="width: ${obj.starPoint * 20}%">
-                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            <div class="reviewBox">
+                                <div class="reviewBox"><p>${obj.reviewNo}</p>
+    
+                                <div class="userinfoBox">
+                                    <div class="userName"><img src="" alt="" /><span >${obj.reviewWriter.reviewWriterName}</span></div>
+                                    <div class="star-ratings">
+                                        <div class="starRatingsFill space-x-2 text-lg" style="width: ${obj.starPoint * 20}%">
+                                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                        </div>
+                                       
+                                        <div class="starRatingsBase space-x-2 text-lg">
+                                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                        </div>
                                     </div>
-                                   
-                                    <div class="starRatingsBase space-x-2 text-lg">
-                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                </div>
+    
+                                <div class="reviewContents">
+                                    <p >
+                                        ${obj.reviewContent}
+                                    </p>
+                                </div>
+                                <div class="reviewImg">
+                                    <img src="/images/reviewImages/${obj.savedReviewImageName}"/>
+                                </div>
+                               <div class="csBox">
+                                    <div class="like white">
+    
+                                        <img src="/images/whiteLie.png" alt="" /><span>1</span>
+                                    </div>
+                                    <div class="like black">
+                                        <img src="/images/blackLike.png" alt="" /><span>2</span>
+                                    </div>
+                                    <div class="report">
+                                        <img src="/images/siren.png" alt="" /><span>신고</span>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="reviewContents">
-                                <p >
-                                    ${obj.reviewContent}
-                                </p>
-                            </div>
-                            <div class="reviewImg">
-                                <img src="/images/reviewImages/${obj.savedReviewImageName}"/>
-                            </div>
-                           <div class="csBox">
-                                <div class="like white">
-
-                                    <img src="/images/whiteLie.png" alt="" /><span>1</span>
-                                </div>
-                                <div class="like black">
-                                    <img src="/images/blackLike.png" alt="" /><span>2</span>
-                                </div>
-                                <div class="report">
-                                    <img src="/images/siren.png" alt="" /><span>신고</span>
-                                </div>
-                            </div>
-                        </div>
-`;
+                        `;
                     }
                     document.querySelector(".reviewContentsBox").innerHTML = html;
                 });
@@ -79,53 +83,53 @@ function addReviewClickEvent(placeNo) {
                 menuWrap.style.display = "block";
                 dayWrap.style.display = "none";
                 option[0].style.display = "block";
-                // newDayWrap.style.display="none"
             });
         infoContents[0].style.display = "none";
         reviewContainer[0].style.display = "block";
         imgBox[0].style.display = "none";
-        infoPlace[0].style.display = "none";
-        // newDayWrap.style.display="none"
-    });
+        // infoPlace[0].style.display = "none";
 }
 
 // 설명. 리뷰 등록 비동기
 function addReviewRegistEvent(placeNo) {
-    let reviewForm = document.getElementById("reviewForm")
-    const modal = document.querySelector('.modal');
+    if (!placeNo) {
+        return;
+    }
+        let reviewForm = document.getElementById("reviewForm")
+        const modal = document.querySelector('.modal');
 
-    reviewForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        const reviewFormData = new FormData(reviewForm);
-        reviewFormData.append("placeNo", placeNo)
-        console.log(reviewFormData);
-        fetch("/review/regist"
-            , {
-                method: 'POST',
-                headers: {},
-                body: reviewFormData
-            }
-        )
-            .then((resp) => {
-                if (resp.status === 200) {
-                    alert("리뷰가 성공적으로 등록되었습니다!");
-                    modal.style.display = "none";
+            const reviewFormData = new FormData(reviewForm);
+            reviewFormData.append("placeNo", placeNo);
+            console.log(reviewFormData);
+            fetch("/review/regist"
+                , {
+                    method: 'POST',
+                    headers: {},
+                    body: reviewFormData
                 }
-            })
-            .catch((error) => {
-                console.error(error);
-                alert("예기치 못한 오류가 발생했습니다22.");
-                infoWrap.style.display = "none";
-                menuWrap.style.display = "block";
-                dayWrap.style.display = "none";
-                option[0].style.display = "block";
-            });
-        infoContents[0].style.display = "none";
-        reviewContainer[0].style.display = "block";
-        imgBox[0].style.display = "none";
-        infoPlace[0].style.display = "none";
-    });
+            )
+                .then((resp) => {
+                    if (resp.status === 200) {
+                        alert("리뷰가 성공적으로 등록되었습니다!");
+                        modal.style.display = "none";
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert("예기치 못한 오류가 발생했습니다.");
+                    infoWrap.style.display = "none";
+                    menuWrap.style.display = "block";
+                    dayWrap.style.display = "none";
+                    option[0].style.display = "block";
+                });
+            infoContents[0].style.display = "none";
+            reviewContainer[0].style.display = "block";
+            imgBox[0].style.display = "none";
+            // infoPlace[0].style.display = "none";
+        });
 }
 
 /* 설명. 지도 사이드바 설정 js */
@@ -244,7 +248,7 @@ keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤�
 // 설명. 검색 버튼 클릭 이벤트
 searchKeyword.addEventListener("click", () => {
 
-    keywordValue = JSON.stringify(keyword.value);
+    keywordValue = JSON.stringify(keyword.value);기
 
     fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
         .then((response) => response.json())
@@ -292,6 +296,7 @@ searchKeyword.addEventListener("click", () => {
 /*설명. 상세페이지*/
 let scheduleAdd = document.getElementsByClassName("scheduleAdd");
 let detailPlaceInfo = "";
+let selectedPlaceNo = "";
 function addPlaceListClickEvent() {
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
@@ -304,7 +309,7 @@ function addPlaceListClickEvent() {
     for (let i = 0; i < placeList.length; i++) {
         placeItem[i].addEventListener("click", () => {  // 검색된 리스트
             let placeNo = placeList[i].querySelector("#placeNo").innerText;
-
+            selectedPlaceNo = placeNo;
             fetch(`/placeQuery/placeInfo?placeNo=${placeNo}`)
                 .then((response) => response.json())
                 .then((data) => {
@@ -333,12 +338,11 @@ function addPlaceListClickEvent() {
                     alert("예기치 못한 오류가 발생했습니다.");
                     showSearchListWindow();
                 });
-            addReviewClickEvent(placeNo);
-            addReviewRegistEvent(placeNo);
-
             showDetailWindow();
         });
     }
+    getReviewList(selectedPlaceNo);
+    addReviewRegistEvent(selectedPlaceNo);
 }
 
 /*설명. 마우스 이벤트 정리*/
@@ -677,6 +681,7 @@ initScheduleBtn.addEventListener("click", () => {
     showSelectedDaySchedule();
 });
 // 필기. 여행 이름 초기화 함수
+let scheduleId = document.getElementById("scheduleName");
 function clearScheduleName() {
     scheduleId.value = "";
     setScheduleName();
