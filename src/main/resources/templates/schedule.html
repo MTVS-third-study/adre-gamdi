@@ -216,10 +216,11 @@
     </div> <!--end second Container-->
 
     <!--설명. 리뷰 작성 모달창-->
-    <div class="modal">
-        <div class="modal_body">리뷰 작성하기
+    <div class="modal"></div>
 
-            <button class="closeBtn">닫기</button>
+    <div class="modal_body"><span>리뷰 작성하기</span>
+
+            <img src="/images/close.png" alt="" class="closeBtn1" id="closeBtn">
             <form name="review" id="reviewForm" method="post" encType="multipart/form-data">
 
                 <div class="reviewStarPoint">
@@ -238,6 +239,7 @@
                 </div>
 
                 <div class="reviewContents1">
+                    <label for="imageFile" class="imageFile">파일찾기</label>
                     <input type="file" name="imageFile" id="imageFile" accept="image/jpg, image/jpeg, image/png"
                            onchange="readURL(this);"><br>
                     <br>
@@ -246,7 +248,7 @@
                     <textarea name="reviewContent" type="text" id="reviewContent"
                               placeholder="리뷰 내용을 입력해주세요"></textarea><br>
                 </div>
-                <input type="submit" value="등록하기">
+                <input type="submit" value="등록하기" class="reviewAddBtn">
             </form>
 
         </div><!--end modal body-->

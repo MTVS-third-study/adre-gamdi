@@ -631,7 +631,7 @@ border-radius: 5px;
     line-height: 30px;
     width: 500px;
     background-color: #fff;
-    color: #696cff;
+    color: black;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     margin-top: 30px;
     overflow: scroll;
@@ -675,13 +675,13 @@ border-radius: 5px;
     float: right;
 }
 .schedule_modal_btnBox button {
-    border: 1px solid #696cff;
+    border: 1px solid orange;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(0, 0, 0, 0.02);
-    background-color: transparent;
+    background-color: orange;
     width: 60px;
     height: 25px;
     border-radius: 5px;
-    color: #696cff;
+    color: white;
     font-size: 11px;
     margin-right: 20px;
 }

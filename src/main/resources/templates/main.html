@@ -61,6 +61,13 @@
                         <button class="upperBtn" onclick="location.href='/adminPage'" type="button">관리자 페이지</button>
                     </div>
                 </th:block>
+
+<!--                <div class="suggestionPageBtn">-->
+<!--                    <button onclick="location.href='/suggestion'" class="upperBtn">장소 수정 제보</button>-->
+<!--                </div>-->
+                <div class="feedbackPageBtn">
+                    <button id="open-modal" class="upperBtn">사용자 피드백</button>
+                </div>
                 <th:block th:if="${session.service.equals('kakao')}">
                     <div class="logoutBtn">
                         <button class="upperBtn"
@@ -77,19 +84,13 @@
                         </button>
                     </div>
                 </th:block>
-                <div class="suggestionPageBtn">
-                    <button onclick="location.href='/suggestion'" class="upperBtn">장소 수정 제보</button>
-                </div>
-                <div class="feedbackPageBtn">
-                    <button id="open-modal" class="upperBtn">사용자 피드백</button>
-                </div>
             </th:block>
 
         </div>
     </div>
 </div>
 <div id="modal">
-    <div class="modal-content">
+    <div class="modal-content1">
         <main>
             <div class="contents">
                 <div class="contentsWrap">
@@ -102,8 +103,8 @@
                             </textarea>
                         </div>
                         <div class="BtnBox">
-                            <button type="submit" class="feedbackBtn" >제출하기</button>
-                            <button id="close-modal" class="feedbackBtn">닫기</button>
+                            <button type="submit" class="feedbackBtn " >제출하기</button>
+                            <button id="close-modal" class="feedbackBtn ">닫기</button>
                         </div>
                     </form>
 
