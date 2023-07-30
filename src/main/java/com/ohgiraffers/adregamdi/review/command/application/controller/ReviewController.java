@@ -6,6 +6,8 @@ import com.ohgiraffers.adregamdi.review.query.application.controller.ReviewQuery
 import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
 import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/review")
 public class ReviewController {
 
@@ -31,34 +33,19 @@ public class ReviewController {
     }
 
 
-    @ResponseBody
     @PostMapping("/regist")
-    public String registReview(ReviewDTO reviewDTO,
-                               @RequestParam MultipartFile imageFile,
-                               @RequestParam("placeNo") Long placeNo,
-                               HttpServletResponse response,
-                               Model model,
-                               HttpSession session) throws IOException {
-//        Long placeNo = responsePlaceDTO.getPlaceNo();
-//        System.out.println("placeNo = " + placeNo);
+    public ResponseEntity<String> registReview(ReviewDTO reviewDTO,
+                                               @RequestParam MultipartFile imageFile,
+                                               HttpServletRequest request,
+                                               Model model,
+                                               HttpSession session) {
+        Long placeNo = Long.valueOf(request.getParameter("placeNo"));
         Long userNo = ((UserDTO) session.getAttribute("loginUser")).getUserNo();
         String userName = ((UserDTO) session.getAttribute("loginUser")).getKakaoNickName();
         if (reviewService.insertReview(reviewDTO, imageFile, model, userNo, userName, placeNo)) {
-//            alert("리뷰가 등록되었습니다.", response);
-            return "/schedule";
+            return ResponseEntity.ok("성공적으로 등록되었습니다.");
         } else {
-//            alert("리뷰 등록에 실패하였습니다.", response);
-            return "/schedule";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("등록 실패");
         }
-    }
-
-
-    private void alert(String notice, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html; charset=utf-8");
-        PrintWriter out = response.getWriter();
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + notice + "');");
-        out.println("</script>");
-        out.flush();
     }
 }
