@@ -27,14 +27,7 @@ public class SuggestionController {
     }
 
 
-    @GetMapping
-    public String goSuggestionPage(){
-
-        return "/suggestionPage";
-    }
-
-
-    @PostMapping("/submitMessage")
+    @PostMapping
     public String submitSuggestion(@RequestParam("suggestionMessage") String suggestionMessage,
                                    @RequestParam("suggestPostcode") String postCode,
                                    @RequestParam("suggestRoadAddress") String roadAddress,
@@ -50,7 +43,7 @@ public class SuggestionController {
         SuggestionDTO suggestionDTO = new SuggestionDTO(userNo,placeName,postCode,roadAddress,address,detailAddress,phoneNumber,suggestionMessage);
         suggestionCommandService.insertSuggestion(suggestionDTO);
 
-        return "redirect:/suggestion";
+        return "redirect:/myPage";
     }
 
 }
