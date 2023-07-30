@@ -19,7 +19,6 @@ function addReviewClickEvent(placeNo) {
         fetch(`/review/query/reviewInfo?placeNo=${placeNo}`)
             .then((response) => response.json())
             .then((json) => {
-                console.log(json);
                 console.log(placeNo);
 
                 json = json.reviewInfo;
@@ -55,7 +54,6 @@ function addReviewClickEvent(placeNo) {
                             </div>
                            <div class="csBox">
                                 <div class="like white">
-
                                     <img src="/images/whiteLie.png" alt="" /><span>1</span>
                                 </div>
                                 <div class="like black">
@@ -244,6 +242,7 @@ keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤�
             });
     }
 });
+
 // 설명. 검색 버튼 클릭 이벤트
 searchKeyword.addEventListener("click", () => {
 
@@ -521,18 +520,18 @@ $(function () {
                         return;
                     }
                     let dayAndNight = data.dayAndNight;
-                    newTravelSchedule.startDate=startDate;
-                    newTravelSchedule.endDate=endDate;
+                    newTravelSchedule.startDate = startDate;
+                    newTravelSchedule.endDate = endDate;
                     newTravelSchedule.dayAndNight = dayAndNight;
 
                     let html = ` <option value="allday">전체 일정</option>`;
-                    for (let i=1; i<=dayAndNight; i++) {
+                    for (let i = 1; i <= dayAndNight; i++) {
 
                         if (i === 1) {
                             html += `   
                                 <option value="${i}" selected="selected">${i}일 차</option>
                             `;
-                        } else{
+                        } else {
                             html += `   
                                 <option value="${i}">${i}일 차</option>
                             `;
