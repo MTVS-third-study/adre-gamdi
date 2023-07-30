@@ -177,10 +177,11 @@ body{
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    margin: 12px auto;
+    padding: 0px;
     border: 1px solid #888;
-    width: 80%;
+    width: 50%;
+    border-radius: 30px;
 }
 
 .close {
@@ -210,19 +211,19 @@ main {
 }
 #feedbackHead{
     position: absolute;
-    bottom: 453px;
+    bottom: 715px;
     right: 777px;
 }
 .contents {
 
-    width: 80%;
-    height: 100vh;
+    width: 85%;
+    height: 93vh;
     margin: 0 auto;
 
 }
 .contentsWrap {
-    width: 90%;
-    height: 90vh;
+    width: 100%;
+    height: 85vh;
     border: none;
     background-color: white;
     border-radius: 10px;
@@ -231,9 +232,9 @@ main {
 }
 #feedbackBox{
     position: absolute;
-    top: 400px;
-    left: 440px;
-    width: 810px;
+    top: 145px;
+    left: 545px;
+    width: 600px;
     height: 540px;
     border-radius: 5px;
     font-size: 20px;
@@ -242,8 +243,8 @@ main {
 }
 .BtnBox{
     position: absolute;
-    bottom: -190px;
-    right: 470px;
+    bottom: 88px;
+    right: 580px;
 }
 .feedbackBtn{
     border: 1px solid orange;

@@ -3,88 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>Adregamdi : 장소 제보</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/suggestionPage.css">
 </head>
 <body>
+    <main>
+        <div class="contents">
+            <div class="contentsWrap">
+                <form action="/suggestion/submitMessage" class="suggestionSubmit" method="POST">
 
-    <form action="/suggestion/submitMessage" class="suggestionSubmit" method="POST">
+                    <div class="suggestContent">
+                        <h1 class="nameBox">장소이름</h1>
+                        <input type="text" id="suggestPlaceName" name="suggestPlaceName" placeholder="장소이름" class="textBox1">
+                    </div>
 
-        <div>
-            <h3>장소명 혹은 상호명</h3>
-            <input type="text" id="suggestPlaceName" name="suggestPlaceName">
+                    <div id="suggestContent">
+                        <h1 id="nameBox">주소</h1>
+                        <div id="textBox">
+                            <input type="button" onclick="sample4_execDaumPostcode()" value="주소 검색" class="suggestBtn" id="searchBtn"><br>
+                            <input type="text" id="sample4_postcode" placeholder="우편번호" name="suggestPostcode" class="textBox">
+                            <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="suggestRoadAddress" class="textBox">
+                            <input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="suggestAddress" class="textBox">
+                            <span id="guide" style="color:#999;display:none"></span>
+                            <input type="text" id="sample4_detailAddress" placeholder="상세주소" name="suggestDetailAddress" class="textBox">
+                            <input type="text" id="sample4_extraAddress" placeholder="참고항목" class="textBox">
+                        </div>
+                        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                        <script>
+                            function sample4_execDaumPostcode() {
+                                new daum.Postcode({
+                                    oncomplete: function(data) {
+                                        var roadAddr = data.roadAddress;
+                                        var extraRoadAddr = '';
+
+                                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                            extraRoadAddr += data.bname;
+                                        }
+
+                                        if(data.buildingName !== '' && data.apartment === 'Y'){
+                                            extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                        }
+
+                                        if(extraRoadAddr !== ''){
+                                            extraRoadAddr = ' (' + extraRoadAddr + ')';
+                                        }
+
+
+                                        document.getElementById('sample4_postcode').value = data.zonecode;
+                                        document.getElementById("sample4_roadAddress").value = roadAddr;
+                                        document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+
+                                        if(roadAddr !== ''){
+                                            document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                                        } else {
+                                            document.getElementById("sample4_extraAddress").value = '';
+                                        }
+
+                                        var guideTextBox = document.getElementById("guide");
+
+                                        if(data.autoRoadAddress) {
+                                            var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                                            guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                                            guideTextBox.style.display = 'block';
+
+                                        } else if(data.autoJibunAddress) {
+                                            var expJibunAddr = data.autoJibunAddress;
+                                            guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                                            guideTextBox.style.display = 'block';
+                                        } else {
+                                            guideTextBox.innerHTML = '';
+                                            guideTextBox.style.display = 'none';
+                                        }
+                                    }
+                                }).open();
+                            }
+                        </script>
+                    </div>
+                    <div class="suggestContent">
+                        <h1 class="nameBox">전화번호</h1>
+                        <input type="tel" id="suggestPhoneNumber" name="suggestPhoneNumber" placeholder="전화번호" class="textBox">
+                    </div>
+                    <div class="suggestContent">
+                        <h1 class="nameBox">추가사항</h1>
+                        <input type="text" name="suggestionMessage" placeholder="추가사항" class="textBox1">
+                    </div>
+                    <div id="submitBtn">
+                        <button type="submit" class="suggestBtn">제출하기</button>
+                    </div>
+                </form>
+                    <div id="mainBtn">
+                        <button onclick="location.href='/'" class="suggestBtn">메인으로</button>
+                    </div>
+            </div>
         </div>
-
-        <div>
-            <h3>주소</h3>
-            <input type="text" id="sample4_postcode" placeholder="우편번호" name="suggestPostcode">
-            <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-            <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="suggestRoadAddress">
-            <input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="suggestAddress">
-            <span id="guide" style="color:#999;display:none"></span>
-            <input type="text" id="sample4_detailAddress" placeholder="상세주소" name="suggestDetailAddress">
-            <input type="text" id="sample4_extraAddress" placeholder="참고항목">
-
-            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-            <script>
-                function sample4_execDaumPostcode() {
-                    new daum.Postcode({
-                        oncomplete: function(data) {
-                            var roadAddr = data.roadAddress;
-                            var extraRoadAddr = '';
-
-                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                                extraRoadAddr += data.bname;
-                            }
-
-                            if(data.buildingName !== '' && data.apartment === 'Y'){
-                                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                            }
-
-                            if(extraRoadAddr !== ''){
-                                extraRoadAddr = ' (' + extraRoadAddr + ')';
-                            }
-
-
-                            document.getElementById('sample4_postcode').value = data.zonecode;
-                            document.getElementById("sample4_roadAddress").value = roadAddr;
-                            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-
-
-                            if(roadAddr !== ''){
-                                document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-                            } else {
-                                document.getElementById("sample4_extraAddress").value = '';
-                            }
-
-                            var guideTextBox = document.getElementById("guide");
-
-                            if(data.autoRoadAddress) {
-                                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                                guideTextBox.style.display = 'block';
-
-                            } else if(data.autoJibunAddress) {
-                                var expJibunAddr = data.autoJibunAddress;
-                                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                                guideTextBox.style.display = 'block';
-                            } else {
-                                guideTextBox.innerHTML = '';
-                                guideTextBox.style.display = 'none';
-                            }
-                        }
-                    }).open();
-                }
-            </script>
-        </div>
-        <div>
-            <h3>전화번호</h3>
-            <input type="tel" id="suggestPhoneNumber" name="suggestPhoneNumber">
-        </div>
-        <div>
-            <h3>추가사항</h3>
-            <input type="text" class="suggestionBox" name="suggestionMessage">
-        </div>
-        <button type="submit">제출하기</button>
-    </form>
+    </main>
 </body>
 </html>
