@@ -2,15 +2,17 @@
 <!-- 리뷰 작성 모달창 -->
 const modal = document.querySelector('.modal');
 const btnOpenPopup = document.querySelector('.reviewBtn');
-const closeModalBtn = document.querySelector('.closeBtn')
-
+const closeModalBtn = document.querySelector('.closeBtn1')
+let modalBody=document.querySelector(".modal_body");
 btnOpenPopup.addEventListener('click', () => {
     modal.style.display = 'block';
+    modalBody.style.display="block"
     // document.body.style.overflow = "hidden"; // 스크롤바 제거
 });
 
 closeModalBtn.addEventListener("click", () => {
     modal.style.display = "none";
+    modalBody.style.display="none"
     // document.body.style.overflow = "auto"; // 스크롤바 보이기
 });
 

@@ -33,8 +33,8 @@ main {
     text-align: center;
 }
 .on {
-    color: #696cff;
-    border-bottom: 2px solid #696cff;
+    color:orange;
+    border-bottom: 2px solid orange;
 
     animation: linemove 1s alternate;
 }
@@ -79,6 +79,7 @@ main {
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0 rgba(0,0,0,0.02);
     margin: 50px auto;
+    display: block;
 }
 
 .userImgBox > div {
@@ -134,4 +135,47 @@ main {
     position: relative;
     top: 430px;
     left: -155px;
+}
+/*장소 요청*/
+.placeReqWrap{
+    width: 90%;
+    height: 90vh;
+    border: none;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0 rgba(0,0,0,0.02);
+    margin: 50px auto;
+    display: none;
+    padding: 20px;
+}
+.suggestPlaceName{
+ margin-top:50px ;
+}
+.suggestionSubmit{
+    margin: 30px;
+
+}
+.suggestionSubmit h1{
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+.suggestionSubmit input{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #d9dee3;
+    padding-left: 10px;
+    margin-bottom: 30px;
+}
+.placeReqBtn{
+    border: 1px solid orange;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0 rgba(0,0,0,0.02);
+    background-color: orange;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+
+    font-size:18px;
+
 }
