@@ -58,8 +58,16 @@ main {
     left: 13px;
     background: #FFFBF0;
     height: 30px;
+}
+.textBox1{
+    position: relative;
+    left: -35px;
+    background: #FFFBF0;
+    height: 30px;
+    width: 250px;
 
 }
+
 #textBox{
     position: relative;
     right: 115px;
@@ -85,6 +93,5 @@ main {
 }
 #searchBtn{
     position: relative;
-    bottom: 5px;
-    left: 312px;
+    bottom: 15px;
 }
