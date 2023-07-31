@@ -253,7 +253,6 @@ keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤�
 
 // 설명. 검색 버튼 클릭 이벤트
 searchKeyword.addEventListener("click", () => {
-
     keywordValue = JSON.stringify(keyword.value);
 
     fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
@@ -301,6 +300,7 @@ searchKeyword.addEventListener("click", () => {
 });
 
 function addMarker(obj) {
+
     // 마커가 표시될 위치입니다
     var markerPosition = new kakao.maps.LatLng(obj.latitude, obj.longitude);
 
@@ -336,6 +336,10 @@ function addMarker(obj) {
         // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
         infowindow.close();
     });
+}
+
+function resetMarker() {
+    window.location.replace("http://localhost:9090/schedule");
 }
 
 
