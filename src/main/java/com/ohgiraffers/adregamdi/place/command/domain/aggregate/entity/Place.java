@@ -46,9 +46,9 @@ public class Place {
 
 
     /* 이미지 관련 */
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String imagePath;
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String thumbnailPath;
 
 
