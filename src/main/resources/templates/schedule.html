@@ -58,7 +58,6 @@
         </div>
 
         <ul class="hideUserInfoBox">
-
             <li  onclick="location.href='/myPage'">mypage</li>
             <hr class="InfoBoxHr">
             <li    onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:9090/oauth/kakao/logout'">Logout</li>
@@ -78,7 +77,6 @@
                 <!--                                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
                 <button class="resetBtn" onclick="resetMarker()"><img src="/images/reset.png" alt=""></button>
             </div>
-
         </div>
         <div id="menu_wrap" class="bg_white menu_wrap">
             <hr />
@@ -169,48 +167,11 @@
                     </div>
                     <hr class="infoContentsHr"/>
                     <div class="reviewContentsBox">
-<!--                        <div class="reviewBox"  th:each="review:${reviews}">-->
-
-<!--                            <div class="userinfoBox">-->
-<!--                                <div class="userName" th:text="${review.getReviewWriter().getReviewWriterName()}"><img src="" alt="" /><span >JM</span></div>-->
-<!--                                <div class="star-ratings">-->
-<!--                                    <div class="starRatingsFill"-->
-<!--                                            th:style="'width: '+${review.getStarPoint()} * 20 + '%'">-->
-<!--                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="starRatingsBase">-->
-<!--                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            <div class="reviewContents" th:text="${review.getReviewContent()}">-->
-<!--                                <p >-->
-<!--                                    분위기 사먹으러 가세요. 음식은 쏘쏘인데, 식사보단 커피하러-->
-<!--                                    가시는걸 추천요. 양껏 먹는집은 아니에요ㅎㅎ 주말은 웨이팅-->
-<!--                                    있으니, 미리가서 대기 하셔야되요. 분위기는 좋아요-->
-
-<!--                                </p>-->
-<!--                            </div>-->
-<!--                            <div class="reviewImg">-->
-<!--                                <img th:src="@{'/images/reviewImages/'+${review.getSavedReviewImageName()}}"/>-->
-<!--                            </div>-->
-<!--                            <div class="csBox">-->
-<!--                                <div class="like white">-->
-
-<!--                                    <img src="/images/whiteLie.png" alt="" /><span>1</span>-->
-<!--                                </div>-->
-<!--                                <div class="like black">-->
-<!--                                    <img src="/images/blackLike.png" alt="" /><span>2</span>-->
-<!--                                </div>-->
-<!--                                <div class="report">-->
-<!--                                    <img src="/images/siren.png" alt="" /><span>신고</span>-->
-<!--                                </div>-->
-<!--                            </div>-->
                             <hr class="infoContentsHr">
 <!--                        </div>-->
                     </div>
                 </div>
+
             </div> <!--end InfoBox-->
         </div>  <!--end 상세 Box -->
 
@@ -221,7 +182,7 @@
 
     <div class="modal_body"><span>리뷰 작성하기</span>
 
-            <img src="/images/close.png" alt="" class="closeBtn1" id="closeBtn">
+            <img src="/images/close.png" alt="" class="closeBtn1" id="">
             <form name="review" id="reviewForm" method="post" encType="multipart/form-data">
 
                 <div class="reviewStarPoint">
@@ -260,7 +221,7 @@
 
 
     <!-- 스케쥴 페이지에서 일정눌렀을 떄 내 일정 나오는 모달창 -->
-    <div class="myScheduleModal" id="myScheduleModal"></div> <!---->
+    <div class="myScheduleModal" id="myScheduleModal"></div>
     <div class="schedule_modal_body" id="schedule_modal_body">
 
     </div>

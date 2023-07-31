@@ -23,4 +23,10 @@ public class ScheduleInfraAPIService implements ScheduleAPIService {
         List<DetailScheduleDTO> result = detailScheduleService.registDetailSchedule(detailScheduleDTOList);
         return result;
     }
+
+    @Override
+    public int deleteDetailScheduleByscheduleNo(Long scheduleNo) {
+        int result = detailScheduleService.deleteDetailScheduleByscheduleNo(scheduleNo);
+        return 0;
+    }
 }

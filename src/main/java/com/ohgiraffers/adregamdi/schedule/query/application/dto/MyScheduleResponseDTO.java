@@ -1,5 +1,6 @@
 package com.ohgiraffers.adregamdi.schedule.query.application.dto;
 
+import com.ohgiraffers.adregamdi.detailschedule.command.application.dto.DetailScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.command.application.dto.ScheduleDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

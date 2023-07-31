@@ -15,4 +15,5 @@ public class DetailScheduleDTO {
         private int scheduleDay;
         private TotalScheduleNo totalScheduleNo;
         private Long placeNo;
-    }
+}
+

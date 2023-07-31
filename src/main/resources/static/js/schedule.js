@@ -4,14 +4,19 @@ let reviewNav = document.getElementById("reviewNav");
 let infoContents = document.getElementsByClassName("infoContents");
 let reviewContainer = document.getElementsByClassName("reviewContainer");
 let imgBox = document.getElementsByClassName("imgBox");
-let infoPlace = document.getElementsByClassName("infoPlace")
-infoNav.addEventListener("click", () => {
+function showReviewWindow() {
+    infoContents[0].style.display = "none";
+    reviewContainer[0].style.display = "block";
+    imgBox[0].style.display = "none";
+}
+function closeReviewWindow() {
     infoContents[0].style.display = "block";
     reviewContainer[0].style.display = "none";
     imgBox[0].style.display = "block";
-
+};
+infoNav.addEventListener("click", () => {
+    closeReviewWindow();
 });
-
 
 // 설명. 리뷰 조회 비동기
 function addReviewClickEvent(placeNo) {
@@ -19,13 +24,15 @@ function addReviewClickEvent(placeNo) {
         fetch(`/review/query/reviewInfo?placeNo=${placeNo}`)
             .then((response) => response.json())
             .then((json) => {
+                console.log(json
+                );
                 console.log(placeNo);
 
                 json = json.reviewInfo;
                 let html = "";
                 json.forEach((obj, idx) => {
                     if (!json.length) {
-                        console.log("등록된 값이 없습니다");
+                        console.log("등록된 값이없습니다");
                     } else {
                         html += `
                         <div class="reviewBox">
@@ -72,17 +79,9 @@ function addReviewClickEvent(placeNo) {
             .catch((error) => {
                 console.error(error);
                 alert("예기치 못한 오류가 발생했습니다.");
-                infoWrap.style.display = "none";
-                menuWrap.style.display = "block";
-                dayWrap.style.display = "none";
-                option[0].style.display = "block";
-                // newDayWrap.style.display="none"
+                showSearchListWindow();
             });
-        infoContents[0].style.display = "none";
-        reviewContainer[0].style.display = "block";
-        imgBox[0].style.display = "none";
-        infoPlace[0].style.display = "none";
-        // newDayWrap.style.display="none"
+        showReviewWindow();
     });
 }
 
@@ -90,17 +89,17 @@ function addReviewClickEvent(placeNo) {
 function addReviewRegistEvent(placeNo) {
     let reviewForm = document.getElementById("reviewForm")
     const modal = document.querySelector('.modal');
-    let modalBody = document.querySelector(".modal_body");
-    modal.addEventListener("click", () => {
-        modal.style.display = "none"
-        modalBody.style.display = "none"
+    let modalBody=document.querySelector(".modal_body");
+    modal.addEventListener("click",()=>{
+        modal.style.display="none"
+        modalBody.style.display="none"
     })
     reviewForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const reviewFormData = new FormData(reviewForm);
         reviewFormData.append("placeNo", placeNo)
-
+        console.log(reviewFormData);
         fetch("/review/regist"
             , {
                 method: 'POST',
@@ -112,21 +111,15 @@ function addReviewRegistEvent(placeNo) {
                 if (resp.status === 200) {
                     alert("리뷰가 성공적으로 등록되었습니다!");
                     modal.style.display = "none";
-                    modalBody.style.display = "none";
+                    modalBody.style.display="none";
                 }
             })
             .catch((error) => {
                 console.error(error);
                 alert("예기치 못한 오류가 발생했습니다22.");
-                infoWrap.style.display = "none";
-                menuWrap.style.display = "block";
-                dayWrap.style.display = "none";
-                option[0].style.display = "block";
+                showSearchListWindow();
             });
-        infoContents[0].style.display = "none";
-        reviewContainer[0].style.display = "block";
-        imgBox[0].style.display = "none";
-        infoPlace[0].style.display = "none";
+        showReviewWindow();
     });
 }
 
@@ -139,27 +132,23 @@ let myScheduleBtn = document.getElementById("myScheduleBtn");   // 내 일정 �
 let imgBtn = document.getElementById("imgBtn");         // new 버튼
 let BtnBox = document.getElementsByClassName("BtnBox");     // 모든 버튼 박스
 let option = document.getElementsByClassName("option");     // 검색 창
-let loadBtn = document.getElementById("loadBtn")          // 일정 버튼
+let loadBtn=document.getElementById("loadBtn")          // 일정 버튼
 
 // 필기. 검색 창 보이기
-function showSearchListWindow() {
+function showSearchListWindow(){
     menuWrap.style.display = "block";
     dayWrap.style.display = "none";
     infoWrap.style.display = "none";
     BtnBox[0].style.display = "block";
     option[0].style.display = "block";
-    // reviewContainer.style.display="none";
 }
-
 // 필기. 상세 창 보이기
 function showDetailWindow() {
     menuWrap.style.display = "none";
     dayWrap.style.display = "none";
     infoWrap.style.display = "block";
     option[0].style.display = "none";
-    // reviewContainer.style.display="none";
 }
-
 // 필기. 일정 창 보이기
 function showScheduleWindow() {
     menuWrap.style.display = "none";
@@ -168,12 +157,13 @@ function showScheduleWindow() {
     BtnBox[0].style.display = "block";
     option[0].style.display = "block";
 }
-
 // 필기. 검색 사이드 바 버튼 이벤트
 homeBtn.addEventListener("click", () => {
     showSearchListWindow();
+    infoContents[0].style.display = "block";
+    reviewContainer[0].style.display = "none";
+    imgBox[0].style.display = "block";
 });
-
 // 필기. 새 일정 짜기 버튼 이벤트
 imgBtn.addEventListener("click", () => {
     const confirm = window.confirm("새 일정을 추가하시겠습니까?");
@@ -191,9 +181,8 @@ imgBtn.addEventListener("click", () => {
 
     showScheduleWindow();
 });
-
 // 필기. 일정 버튼 이벤트
-loadBtn.addEventListener("click", () => {
+loadBtn.addEventListener("click",()=>{
     showScheduleWindow();
 })
 
@@ -353,7 +342,6 @@ function addPlaceListClickEvent() {
     let backBtn = document.getElementsByClassName("backBtn")
     backBtn[0].addEventListener("click", () => {
         showSearchListWindow();
-        // reviewContainer.style.display="none";
     })
 
     for (let i = 0; i < placeList.length; i++) {
@@ -471,55 +459,146 @@ myScheduleBtn.addEventListener("click", () => {
             myScheduleModal.style.display = "block";
             myScheduleModalBody[0].style.display = "block";
 
-            let html = `  <div><h1>나의 일정</h1> <img src="/images/close.png" alt="" class="closeBtn1" id="closeBtn"></div>`;
+            let html = `  
+            <div><h1>나의 일정</h1> 
+                <img src="/images/close.png" alt="" class="closeBtn1" id="closeBtn">
+            </div>`;
             data.myScheduleList.forEach((obj, idx) => {
 
                 html += `
            
              <div class="plan">
-            <div class="plan_title">여행 이름 <span><input type="text" placeholder=${obj.scheduleName}></span></div>
+            <div class="plan_title">여행 이름 <span><input type="text" placeholder=${obj.scheduleName} disabled></span></div>
             <div class="plan_date">여행 일자 <span>${obj.startDate}~${obj.endDate}</span></div>
+            <p id="scheduleNo" style="display: none">${obj.scheduleNo}</p>
 <!--            <div class="plan_cnt">선택장소 <span>12</span></div>-->
             <div class="schedule_modal_btnBox">
-                <button class="modal_btn scheduleModify" id="modifyScheduleBtn">일정 수정</button>
-                <button class="modal_btn">삭제</button>
+                <button class="modal_btn scheduleModify">일정 수정</button>
+                <button class="modal_btn deleteSchedule">삭제</button>
             </div>         
             </div>
                     `;
 
             });
             document.getElementById("schedule_modal_body").innerHTML = html;
-            let closeBtn = document.getElementById("closeBtn")
-            closeBtn.addEventListener("click", () => {
-                myScheduleModal.style.display = "none";
-                myScheduleModalBody[0].style.display = "none";
+            let closeBtn=document.getElementById("closeBtn")
+            closeBtn.addEventListener("click",()=>{
+                closeMyScheduleModal();
             })
+            modifyMySchedule();
+            deleteMySchedule();
         })
         .catch((error) => {
             console.log(error);
         });
-
 })
 // 필기. 일정 수정 버튼 클릭 이벤트
-// const modifyScheduleBtn = document.getElementById("modifyScheduleBtn");
-// modifyScheduleBtn.addEventListener("click", () => {
-//     console.log(1000);
-// });
-myScheduleModal.addEventListener("click", () => {
+function modifyMySchedule() {
+    const modifyScheduleBtn = document.getElementsByClassName("scheduleModify");
+    for (let i=0; i<modifyScheduleBtn.length; i++) {
+        modifyScheduleBtn[i].addEventListener("click", () => {
+            let scheduleNo = modifyScheduleBtn[i].closest(".plan").querySelector("#scheduleNo").innerText;
+
+            fetch(`schedule/query/loadMySchedule?scheduleNo=${scheduleNo}`)
+                .then(resp => resp.json())
+                .then(data => {
+                    console.log(data);
+                    newTravelSchedule.scheduleName=data.scheduleName;
+                    newTravelSchedule.startDate=data.startDate;
+                    newTravelSchedule.endDate=data.endDate;
+                    newTravelSchedule.dayAndNight=data.dayAndNight;
+                    let detailScheduleList = data.detailScheduleList;
+                    let dayArray = [];
+                    let dayList = [];
+                    scheduleId.value = newTravelSchedule.scheduleName;
+                    setScheduleName();
+                    for (let i=1; i<=newTravelSchedule.dayAndNight; i++) {
+                        dayArray = []
+                        for (let j=0; j<detailScheduleList[i].length; j++){
+                                dayList[j] = new Object();
+                                dayList[j].placeNo = detailScheduleList[i][j].detailScheduleDTO.placeNo,
+                                dayList[j].placeName = detailScheduleList[i][j].responsePlaceDTO.placeName,
+                                dayList[j].categoryName = detailScheduleList[i][j].responsePlaceDTO.categoryName,
+                                dayList[j].cityName = detailScheduleList[i][j].responsePlaceDTO.cityName,
+                                dayList[j].dongName = detailScheduleList[i][j].responsePlaceDTO.dongName,
+                                dayList[j].imagePath = detailScheduleList[i][j].responsePlaceDTO.imagePath,
+                                dayList[j].averageStarPoint = detailScheduleList[i][j].responsePlaceDTO.averageStarPoint,
+                                dayList[j].introduction = detailScheduleList[i][j].responsePlaceDTO.introduction,
+                                dayList[j].latitude = detailScheduleList[i][j].responsePlaceDTO.latitude,
+                                dayList[j].longitude = detailScheduleList[i][j].responsePlaceDTO.longitude,
+                                dayList[j].phoneNumber = detailScheduleList[i][j].responsePlaceDTO.phoneNumber,
+                                dayList[j].placeAddress = detailScheduleList[i][j].responsePlaceDTO.placeAddress,
+                                dayList[j].roadPlaceAddress = detailScheduleList[i][j].responsePlaceDTO.roadPlaceAddress,
+                                dayList[j].postCode = detailScheduleList[i][j].responsePlaceDTO.postCode,
+                                dayList[j].reviewCount = detailScheduleList[i][j].responsePlaceDTO.reviewCount,
+                                dayList[j].tagList = detailScheduleList[i][j].responsePlaceDTO.tagList,
+                                dayList[j].thumbnailPath =detailScheduleList[i][j].responsePlaceDTO.thumbnailPath
+                            dayArray.push(dayList[j]);
+                            console.log(dayList[j]);
+                            console.log(dayArray);
+                        }
+                        travelDays[i] = (dayArray);
+                    }
+                    console.log(travelDays);
+                    newTravelSchedule.travelDays=travelDays;
+                    $('input[name="datefilter"]').val(
+                        newTravelSchedule.startDate +
+                        '-' +
+                        newTravelSchedule.endDate
+                    )
+                    let html = ` <option value="allday">전체 일정</option>`;
+                    for (let i=1; i<=newTravelSchedule.dayAndNight; i++) {
+
+                        if (i === 1) {
+                            html += `   
+                                <option value="${i}" selected="selected">${i}일 차</option>
+                            `;
+                        } else {
+                            html += `   
+                                <option value="${i}">${i}일 차</option>
+                            `;
+                        }
+                        daySelect.innerHTML = html;
+                    }
+
+                    closeMyScheduleModal();
+                    showSelectedDaySchedule();
+                    showScheduleWindow();
+                })
+        });
+    }
+}
+function closeMyScheduleModal(){
     myScheduleModal.style.display = "none";
     myScheduleModalBody[0].style.display = "none";
+}
+myScheduleModal.addEventListener("click", () => {
+    closeMyScheduleModal();
 });
+// 필기. 내 일정 삭제 클릭 이벤트
+function deleteMySchedule() {
+    let myScheduleItems = document.getElementsByClassName("deleteSchedule");
+    for (let i = 0; i < myScheduleItems.length; i++) {
+        myScheduleItems[i].addEventListener("click", () => {
+            const confirm = window.confirm("정말 삭제하시겠습니까?");
+            if (!confirm){
+                return;
+            }
+            let scheduleNo = myScheduleItems[i].closest(".plan").querySelector("#scheduleNo").innerText;
 
-// scheduleModify[0].addEventListener("click", () => {
-//     if ((dayWrap.style.display = "none")) {
-//         dayWrap.style.display = "block";
-//         infoWrap.style.display = "none";
-//         menuWrap.style.display = "none";
-//     }
-//
-//     myScheduleModal.style.display = "none";
-//     myScheduleModalBody[0].style.display = "none";
-// });
+            fetch(`/schedule/deleteSchedule?scheduleNo=${scheduleNo}`)
+                .then(resp => resp.json())
+                .then(data => {
+                    alert(data.message);
+                    closeMyScheduleModal();
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert("예기치 못한 오류가 발생하였습니다.");
+                })
+        })
+    }
+};
 
 /*설명. caleder*/
 let newTravelSchedule = {
@@ -681,24 +760,26 @@ saveScheduleBtn.addEventListener("click", () => {
 })
 
 function saveSchedule() {
+    console.log(newTravelSchedule);
+    console.log("travelDays",travelDays);
 
     fetch("/schedule/insertSchedule", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(newTravelSchedule),
     })
-        .then(resp => {
-            if (resp.status === 200) {
-                alert("성공적으로 저장되었습니다.");
-                clearSchedule();
-                showSelectedDaySchedule();
-                clearScheduleName();
-                clearDatepicker();
-            }
-        })
-        .catch(error => {
-            alert(error);
-        })
+    .then(resp => {
+        if (resp.status === 200) {
+            alert("성공적으로 저장되었습니다.");
+            clearSchedule();
+            showSelectedDaySchedule();
+            clearScheduleName();
+            clearDatepicker();
+        }
+    })
+    .catch(error => {
+        alert(error);
+    })
 }
 
 function saveScheduleInLocalStorage() {
@@ -742,6 +823,7 @@ initScheduleBtn.addEventListener("click", () => {
 });
 
 // 필기. 여행 이름 초기화 함수
+let scheduleId = document.getElementById("scheduleName");
 function clearScheduleName() {
     scheduleId.value = "";
     setScheduleName();
