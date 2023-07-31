@@ -1,6 +1,7 @@
 package com.ohgiraffers.adregamdi.schedule.command.application.controller;
 
 import com.ohgiraffers.adregamdi.schedule.command.application.dto.DayAndNightResponseDTO;
+import com.ohgiraffers.adregamdi.schedule.command.application.dto.DeleteScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.command.application.dto.ScheduleDTO;
 import com.ohgiraffers.adregamdi.schedule.command.application.service.ScheduleService;
 import com.ohgiraffers.adregamdi.schedule.command.domain.aggregate.vo.ScheduleDayVO;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/schedule/*")
@@ -36,14 +39,17 @@ public class ScheduleController {
     }
 
     @GetMapping("deleteSchedule")
-    public ResponseEntity<String> deleteSchedule(@RequestParam("scheduleNo") Long scheduleNo) {
+    public ResponseEntity<DeleteScheduleDTO> deleteSchedule(@RequestParam("scheduleNo") Long scheduleNo) {
+        DeleteScheduleDTO response = new DeleteScheduleDTO();
         try {
             scheduleService.deleteSchedule(scheduleNo);
         } catch (Exception e){
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예기치 못한 오류가 발생하였습니다.");
+            response.setMessage("예기치 못한 오류가 발생하였습니다.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
-        return ResponseEntity.ok("성공적으로 삭제되었습니다.");
+        response.setMessage("성공적으로 삭제되었습니다.");
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("getDayAndNight")

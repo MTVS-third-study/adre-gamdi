@@ -8,4 +8,6 @@ public interface ScheduleAPIService {
 
     List<DetailScheduleDTO> insertDetailSchedule(List<DetailScheduleDTO> detailScheduleDTOList);
 
+
+    int deleteDetailScheduleByscheduleNo(Long scheduleNo);
 }

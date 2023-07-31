@@ -46,4 +46,8 @@ public class DetailScheduleService {
         return detailScheduleList;
     }
 
+    public int deleteDetailScheduleByscheduleNo(Long scheduleNo) {
+        int result = detailScheduleRepository.deleteDetailScheduleByscheduleNo(scheduleNo);
+        return result;
+    }
 }

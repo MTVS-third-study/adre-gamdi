@@ -102,6 +102,12 @@ public class ScheduleService {
     }
 
     public void deleteSchedule(Long scheduleNo) {
-        scheduleRepository.deleteById(scheduleNo);
+        try {
+            scheduleAPIService.deleteDetailScheduleByscheduleNo(scheduleNo);
+            scheduleRepository.deleteById(scheduleNo);
+        }catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("삭제에 실패하였습니다.");
+        }
+
     }
 }
