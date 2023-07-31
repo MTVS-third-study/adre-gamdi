@@ -539,7 +539,6 @@ function modifyMySchedule() {
                         }
                         travelDays[i] = (dayArray);
                     }
-                    console.log(travelDays);
                     newTravelSchedule.travelDays=travelDays;
                     $('input[name="datefilter"]').val(
                         newTravelSchedule.startDate +
@@ -796,7 +795,7 @@ function selectDaySchedule(day) {   // 필기. 전체 일정에서 일차 별 �
 // 일정 정보들 초기화
 function clearSchedule() {
     newTravelSchedule = {};
-    travelDays = [];
+    travelDays = {};
 }
 
 // 필기. 선택된 날짜 일정 초기화
