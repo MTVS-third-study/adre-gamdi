@@ -328,7 +328,7 @@ function addMarker(obj) {
 }
 
 function resetMarker() {
-    window.location.replace("http://localhost:9090/schedule");
+    window.location.replace("http://adregamdi.site:9090/schedule");
 }
 
 

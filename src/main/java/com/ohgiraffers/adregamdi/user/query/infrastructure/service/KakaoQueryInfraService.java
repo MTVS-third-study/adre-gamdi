@@ -33,7 +33,7 @@ public class KakaoQueryInfraService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             String sb = "grant_type=authorization_code" +
                     "&client_id=dd52d3a258bf3ccbc37de832dfecd0d4" + // REST API 키
-                    "&redirect_uri=http://localhost:9090/oauth/kakao/login" + // Redirect URI
+                    "&redirect_uri=http://adregamdi.site:9090/oauth/kakao/login" + // Redirect URI
                     "&code=" + code;
             System.out.println(sb);
             bw.write(sb);
