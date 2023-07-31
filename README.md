@@ -31,17 +31,6 @@
 <br>
 
 ## 🖼️ : 프로젝트 목표
-### 기획 & 문서
-
-- 폭포수형 & 애자일 융합 진행
-- Miro를 이용해 MSA 기획
-- Figma를 이용해 목업 디자인 기획
-- ERD Cloud를 이용해 DB모델링
-- Git을 통해 형상관리 & Github를 통한 협업
-- README 작성
-- 발표 ppt 제작(플로우 차트, 워크 플로우, 작동 원리 등)
-
-
 ### 개발
 
 - 스프링 부트를 사용한 웹 어플리케이션 개발
@@ -50,6 +39,8 @@
 - JPA & Mybatis를 사용해 DB 연동
 - 서비스 제공을 로컬이 아닌 실제 사용자에게 하는 배포
 
+### 기술 스택
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> 
 
 ### 제작 의도
 제주도 여행 시 지역 카테고리별 정보 불균형과 일정 관리에 대한 불편함을 해소하고자<br>
