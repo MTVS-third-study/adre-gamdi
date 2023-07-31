@@ -2,9 +2,7 @@ package com.ohgiraffers.adregamdi.review.command.application.controller;
 
 import com.ohgiraffers.adregamdi.review.command.application.dto.ReviewDTO;
 import com.ohgiraffers.adregamdi.review.command.application.service.ReviewService;
-import com.ohgiraffers.adregamdi.review.query.application.controller.ReviewQueryController;
 import com.ohgiraffers.adregamdi.user.command.application.dto.UserDTO;
-import com.ohgiraffers.adregamdi.user.command.domain.aggregate.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/review")

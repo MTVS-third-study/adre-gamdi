@@ -71,10 +71,11 @@
         <div class="option">
             <div>
                 <div  class="searchBox" id="searchBox">
-                    <input type="text" placeholder="검색어를 입력해주세요" class="keyword" name="searchKeyword" method="GET"/>
+                    <input type="text" placeholder="검색어를 입력해주세요" id="keyword" class="keyword" name="searchKeyword" method="GET"/>
                     <button class="searchKeyword" id="searchKeyword1" type="submit"><img src="/images/search.png" alt=""></button>
                 </div>
                 <!--                                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
+                <button class="resetBtn" onclick="resetMarker()"><img src="/images/reset.png" alt=""></button>
             </div>
         </div>
         <div id="menu_wrap" class="bg_white menu_wrap">

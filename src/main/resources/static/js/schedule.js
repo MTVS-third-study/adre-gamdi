@@ -61,7 +61,6 @@ function addReviewClickEvent(placeNo) {
                             </div>
                            <div class="csBox">
                                 <div class="like white">
-
                                     <img src="/images/whiteLie.png" alt="" /><span>1</span>
                                 </div>
                                 <div class="like black">
@@ -211,6 +210,8 @@ keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤�
                     `;
                 } else {
                     json.forEach((obj, idx) => {
+                        addMarker(obj);
+
                         html += `
                         <li class="placeItem">
                             <div class="placeContents">
@@ -238,9 +239,9 @@ keyword.addEventListener("keyup", (e) => {  // 설명. 엔터키 검색 이벤�
             });
     }
 });
+
 // 설명. 검색 버튼 클릭 이벤트
 searchKeyword.addEventListener("click", () => {
-
     keywordValue = JSON.stringify(keyword.value);
 
     fetch(`/placeQuery/searchPlace?searchKeyword=${keywordValue}`)
@@ -258,6 +259,8 @@ searchKeyword.addEventListener("click", () => {
                 `;
             } else {
                 json.forEach((obj, idx) => {
+                    addMarker(obj);
+
                     html += `
                         <li class="placeItem">
                             <div class="placeContents">
@@ -285,15 +288,59 @@ searchKeyword.addEventListener("click", () => {
         });
 });
 
+function addMarker(obj) {
+
+    // 마커가 표시될 위치입니다
+    var markerPosition = new kakao.maps.LatLng(obj.latitude, obj.longitude);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+    var iwContent = '<div style="padding-top:5px; padding-left:5px; padding-right:10px; padding-bottom:20px;"> ' +
+            obj.placeName +
+            '<br>' +
+            '<a href="https://map.kakao.com/link/map/' + obj.placeName + ',' + obj.latitude + ',' + obj.longitude + '" style="color:blue" target="_blank">큰지도보기</a> ' +
+            '<a href="https://map.kakao.com/link/to/' + obj.placeName + ',' + obj.latitude + ',' + obj.longitude + '" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        iwPosition = new kakao.maps.LatLng(obj.latitude, obj.longitude); //인포윈도우 표시 위치입니다
+
+    // 인포윈도우를 생성합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        position: iwPosition,
+        content: iwContent
+    });
+
+    // 마커에 마우스오버 이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'mouseover', function () {
+        // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+        infowindow.open(map, marker);
+    });
+
+    // 마커에 마우스아웃 이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'mouseout', function () {
+        // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+        infowindow.close();
+    });
+}
+
+function resetMarker() {
+    window.location.replace("http://localhost:9090/schedule");
+}
+
 
 /*설명. 상세페이지*/
 let scheduleAdd = document.getElementsByClassName("scheduleAdd");
 let detailPlaceInfo = "";
+
 function addPlaceListClickEvent() {
     let placeItem = document.getElementsByClassName("placeItem");
     let placeList = document.querySelectorAll("#placeList>li");
-    let backBtn=document.getElementsByClassName("backBtn")
-    backBtn[0].addEventListener("click",()=>{
+    let backBtn = document.getElementsByClassName("backBtn")
+    backBtn[0].addEventListener("click", () => {
         showSearchListWindow();
     })
 
@@ -370,10 +417,11 @@ loadBtn.addEventListener("mouseleave", () => {
 let userImgBox = document.getElementsByClassName("userImgBox");
 let hideUserInfoBox = document.getElementsByClassName("hideUserInfoBox");
 let hideUserInfoBoxItem = document.querySelectorAll(".hideUserInfoBox>li");
-let hideBtn=document.getElementById("hideBtn")
+let hideBtn = document.getElementById("hideBtn")
+
 userImgBox[0].addEventListener("click", () => {
     hideUserInfoBox[0].style.display = "block";
-    hideBtn.style.display="block";
+    hideBtn.style.display = "block";
 });
 
 for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
@@ -387,7 +435,7 @@ for (let i = 0; i < hideUserInfoBoxItem.length; i++) {
 // 프로필 제거 이벤트
 hideBtn.addEventListener("click", () => {
     hideUserInfoBox[0].style.display = "none";
-    hideBtn.style.display="none";
+    hideBtn.style.display = "none";
 });
 
 /*설명. 내 일정 모달창 설정*/
@@ -417,7 +465,7 @@ myScheduleBtn.addEventListener("click", () => {
             </div>`;
             data.myScheduleList.forEach((obj, idx) => {
 
-                    html += `
+                html += `
            
              <div class="plan">
             <div class="plan_title">여행 이름 <span><input type="text" placeholder=${obj.scheduleName} disabled></span></div>
@@ -603,18 +651,18 @@ $(function () {
                         return;
                     }
                     let dayAndNight = data.dayAndNight;
-                    newTravelSchedule.startDate=startDate;
-                    newTravelSchedule.endDate=endDate;
+                    newTravelSchedule.startDate = startDate;
+                    newTravelSchedule.endDate = endDate;
                     newTravelSchedule.dayAndNight = dayAndNight;
 
                     let html = ` <option value="allday">전체 일정</option>`;
-                    for (let i=1; i<=dayAndNight; i++) {
+                    for (let i = 1; i <= dayAndNight; i++) {
 
                         if (i === 1) {
                             html += `   
                                 <option value="${i}" selected="selected">${i}일 차</option>
                             `;
-                        } else{
+                        } else {
                             html += `   
                                 <option value="${i}">${i}일 차</option>
                             `;
@@ -642,6 +690,7 @@ function setScheduleName() {    // 필기. 일정 이름 변경 이벤트
     newTravelSchedule.scheduleName = changedScheduleName[0].value;
     saveScheduleInLocalStorage();
 }
+
 scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지에서 일정추가 버튼 클릭 이벤트
     if (!travelDays[dayNumber]) {
         travelDays[dayNumber] = [];
@@ -657,18 +706,19 @@ scheduleAdd[0].addEventListener("click", () => {    // 필기. 상세 페이지�
     }
 
     travelDays[dayNumber].push(detailPlaceInfo);
-    newTravelSchedule.travelDays=travelDays;
-    console.log(newTravelSchedule);
+    newTravelSchedule.travelDays = travelDays;
+
     showScheduleWindow();
     saveScheduleInLocalStorage();
     showSelectedDaySchedule();
 });
+
 // 필기. 세부 일정 리스트 조회
 function showSelectedDaySchedule() {
     dayNumber = daySelect.options[daySelect.selectedIndex].value;
     let html = ``;
     if (dayNumber === "allday") {   // 필기. 전체 일정 선택 시
-        for (let i = 1; i < daySelect.options.length; i++){
+        for (let i = 1; i < daySelect.options.length; i++) {
             html += `
                 <li class="dayScheduleList" onclick="selectDaySchedule(${i})">
                     <div class="daySchedule">
@@ -702,18 +752,20 @@ function showSelectedDaySchedule() {
     }
     document.getElementById("dayPlacesList").innerHTML = html;
 }
+
 // 필기. 일정 저장
 let saveScheduleBtn = document.getElementById("saveScheduleBtn");
 saveScheduleBtn.addEventListener("click", () => {
     saveSchedule();
 })
+
 function saveSchedule() {
     console.log(newTravelSchedule);
     console.log("travelDays",travelDays);
 
     fetch("/schedule/insertSchedule", {
         method: "POST",
-        headers: { "Content-Type":"application/json"},
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(newTravelSchedule),
     })
     .then(resp => {
@@ -729,20 +781,24 @@ function saveSchedule() {
         alert(error);
     })
 }
+
 function saveScheduleInLocalStorage() {
-    window.localStorage.setItem("newTravelSchedule", JSON.stringify(newTravelSchedule) );
+    window.localStorage.setItem("newTravelSchedule", JSON.stringify(newTravelSchedule));
 }
+
 function selectDaySchedule(day) {   // 필기. 전체 일정에서 일차 별 일정으로 이동 메소드
     daySelect.value = day;
     showSelectedDaySchedule();
-};
+}
 
 /* 설명. 초기화 */
+
 // 일정 정보들 초기화
 function clearSchedule() {
-    newTravelSchedule={};
-    travelDays={};
+    newTravelSchedule = {};
+    travelDays = [];
 }
+
 // 필기. 선택된 날짜 일정 초기화
 let initScheduleBtn = document.getElementById("initScheduleBtn");
 initScheduleBtn.addEventListener("click", () => {
@@ -765,12 +821,14 @@ initScheduleBtn.addEventListener("click", () => {
     travelDays[selectedDay] = [];
     showSelectedDaySchedule();
 });
+
 // 필기. 여행 이름 초기화 함수
 let scheduleId = document.getElementById("scheduleName");
 function clearScheduleName() {
     scheduleId.value = "";
     setScheduleName();
 }
+
 // 필기. calendar 초기화 함수
 function clearDatepicker() {
     $('input[name="datefilter"]').data('daterangepicker').setStartDate(moment());
@@ -786,6 +844,7 @@ function clearDatepicker() {
     allDayOption.textContent = "전체 일정";
     daySelect.appendChild(allDayOption);
 }
+
 // 필기. 로컬스토리지 초기화 함수
 function clearLocalStorage() {
     window.localStorage.removeItem("newTravelSchedule")

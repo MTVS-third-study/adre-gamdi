@@ -24,7 +24,9 @@ public class ReviewQueryService {
         List<Review> reviewList = reviewQueryRepository.findALLByReviewPlaceNo(new ReviewPlaceNo(placeNo));
         List<ReviewDTO> reviewDTOList = new ArrayList<>();
 
-        for(Review review : reviewList) {
+        for (Review review : reviewList) {
+            System.out.println("review = " + review);
+
             ReviewDTO reviewDTO = new ReviewDTO();
             reviewDTO.setReviewNo(review.getReviewNo());
             reviewDTO.setOriginReviewImageName(review.getOriginReviewImageName());
