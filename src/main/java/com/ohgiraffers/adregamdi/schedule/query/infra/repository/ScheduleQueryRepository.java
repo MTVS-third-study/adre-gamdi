@@ -20,4 +20,6 @@ public interface ScheduleQueryRepository extends JpaRepository<Schedule, Long>{
             " FROM TBL_SCHEDULE " +
             "WHERE USER_NO = :userNo", nativeQuery = true)
     List<Schedule> findScheduleListByUserNo(@Param("userNo") Long userNo);
+
+    Schedule findByScheduleNo(Long scheduleNo);
 }
