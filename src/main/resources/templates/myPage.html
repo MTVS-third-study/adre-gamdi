@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adregamdi : 마이페이지</title>
+    <link rel="stylesheet" href="/css/myPage.css">
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+
+<main>
+    <div class="sideMenu">
+        <div>
+            <div id="adminBtn" onclick="location.href='/main'">
+                <img src="/images/logo.png" alt="">
+                <li id="admin">Profile</li>
+            </div>
+            <ul class="menuList" id="menuList">
+                <div id="modifyBtn">
+                    <li id="modify">회원 수정</li>
+                </div>
+                <div id="modifyBtn">
+                    <li id="placeRequest">장소 요청</li>
+                </div>
+                <!-- <div id="deleteBtn">
+                    <li id="delete">User Delete</li>
+                </div> -->
+
+            </ul>
+        </div>
+    </div>
+    <div class="contents">
+        <div class="contentsWrap">
+            <!-- user modify시작 -->
+            <div class="userImgBox">
+                <div>
+                    <h1>Profile Details</h1>
+                </div>
+                <div class="userInfo">
+                    <img th:src="${session.loginUser.getKakaoProfileImage()}" alt="">
+                    <form action="user/updateNickName" method="post" class="InfoText">
+                        <p>ID</p>
+                        <input type="text" readonly="readonly" th:placeholder="${session.loginUser.getKakaoId()}" class="updateInput">
+
+                            <th:block th:if="${session.loginUser.getServiceNickName() == ''}">
+                                <p>NICK NAME</p>
+                                <input type="text" th:placeholder="${session.loginUser.getKakaoNickName()}" name="nickName" class="updateInput">
+                            </th:block>
+                            <th:block th:if="${session.loginUser.getServiceNickName() != ''}">
+                                <p>NICK NAME</p>
+                                <input type="text" th:placeholder="${session.loginUser.getServiceNickName()}" name="nickName" class="updateInput">
+                            </th:block>
+
+
+                        <p>EMAIL</p>
+                        <input type="text" th:placeholder="${session.loginUser.getEmail()}" readonly="readonly" class="updateInput">
+                        <p>AGE</p>
+                        <input type="text" th:placeholder="${session.loginUser.getAge()}" readonly="readonly" class="updateInput">
+                        <p>GENDER</p>
+                        <input type="text" th:placeholder="${session.loginUser.getGender()}" readonly="readonly" class="updateInput">
+                        <div>
+                            <button class="saveBtn nickNameChangeBtn" type="submit">회원수정</button>
+                        </div>
+                    </form>
+                    <form action="user/deleteUser" method="post" class="deleteBtn">
+                        <button class="saveBtn" type="submit">회원탈퇴</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="placeReqWrap">
+            <div>
+                <h1>장소 요청</h1>
+            </div>
+            <form action="/suggestion" class="suggestionSubmit" method="POST">
+
+                <div class="suggestContent">
+                    <h1 class="nameBox">장소이름</h1>
+                    <input type="text" id="suggestPlaceName" name="suggestPlaceName" placeholder="장소이름" class="textBox1">
+                </div>
+
+                <div id="suggestContent">
+                    <h1 id="nameBox">주소</h1>
+                    <div id="textBox">
+                        <input type="button" onclick="sample4_execDaumPostcode()" value="주소 검색" class="suggestBtn" id="searchBtn"><br>
+                        <input type="text" id="sample4_postcode" placeholder="우편번호" name="suggestPostcode" class="textBox">
+                        <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="suggestRoadAddress" class="textBox">
+                        <input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="suggestAddress" class="textBox">
+                        <span id="guide" style="color:#999;display:none"></span>
+                        <input type="text" id="sample4_detailAddress" placeholder="상세주소" name="suggestDetailAddress" class="textBox">
+                        <input type="text" id="sample4_extraAddress" placeholder="참고항목" class="textBox">
+                    </div>
+
+                </div>
+                <div class="suggestContent">
+                    <h1 class="nameBox">전화번호</h1>
+                    <input type="tel" id="suggestPhoneNumber" name="suggestPhoneNumber" placeholder="전화번호" class="textBox">
+                </div>
+                <div class="suggestContent">
+                    <h1 class="nameBox">추가사항</h1>
+                    <input type="text" name="suggestionMessage" placeholder="추가사항" class="textBox1">
+                </div>
+                <div id="submitBtn">
+                    <button type="submit" class="suggestBtn placeReqBtn">제출하기</button>
+                </div>
+            </form>
+<!--            <div id="mainBtn">-->
+<!--                <button onclick="location.href='/'" class="suggestBtn placeReqBtn ">메인으로</button>-->
+<!--            </div>-->
+        </div>
+    </div>
+</main>
+<script defer="defer" src="/js/myPage.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var roadAddr = data.roadAddress;
+                var extraRoadAddr = '';
+
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+
+                document.getElementById('sample4_postcode').value = data.zonecode;
+                document.getElementById("sample4_roadAddress").value = roadAddr;
+                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+
+                if(roadAddr !== ''){
+                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                } else {
+                    document.getElementById("sample4_extraAddress").value = '';
+                }
+
+                var guideTextBox = document.getElementById("guide");
+
+                if(data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                    guideTextBox.style.display = 'block';
+                } else {
+                    guideTextBox.innerHTML = '';
+                    guideTextBox.style.display = 'none';
+                }
+            }
+        }).open();
+    }
+</script>
+</body>
+
+</html>

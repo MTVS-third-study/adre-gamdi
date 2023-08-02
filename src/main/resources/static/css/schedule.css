@@ -1,0 +1,799 @@
+/* 공통 */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "neon";
+    list-style: none;
+}
+
+@font-face {
+    font-family: "neon";
+    src: url("./images/Yeongdeok\ Snow\ Crab.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "EF_jejudoldam";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2") format("woff2");
+
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    margin: 0;
+}
+
+.schedule-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.scheduleSideBar {
+    width: 80px;
+}
+
+.BtnBox {
+    margin: 50px auto;
+    text-align: center;
+    z-index: 2;
+    display: block;
+}
+
+.BtnBox > div {
+    border: none;
+
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+
+.BtnBox > div > p {
+    font-size: 12px;
+}
+
+.BtnBox > div > img {
+    width: 30px;
+}
+
+.userImgBox {
+
+}
+
+.userImgBox > .userImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 35px;
+    left: 20px;
+}
+
+#hideBtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 3;
+
+}
+
+.hideUserInfoBox {
+    display: none;
+    width: 100px;
+    height: 60px;
+    border-radius: 5px;
+    background-color: white;
+    text-align: center;
+    float: left;
+    border: 1px thin black;
+    line-height: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    position: absolute;
+    bottom: 61px;
+    left: 44px;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.hideUserInfoBox > .InfoBoxHr {
+    margin: 0;
+    border-bottom: 1px solid #818384;
+}
+
+.schedule-list {
+    float: none;
+    width: 400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+}
+
+.schedule-content {
+    display: flex;
+    flex: 1;
+}
+
+.add {
+    background-color: orange;
+    transition: all 1s;
+
+    margin: 0 auto;
+}
+
+.schedule-map {
+    display: flex;
+    flex: 1;
+    overflow: auto;
+}
+
+.searchBox {
+    width: 400px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.serchBtn {
+    border-radius: 5px;
+    width: 70px;
+    height: 30px;
+    border: none;
+    color: white;
+    background-color: green;
+}
+
+/* 검색 */
+#menu_wrap {
+    display: block;
+}
+
+.keyword {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    border-radius: 16px;
+    z-index: 4;
+    width: 350px;
+    height: 40px;
+    padding: 11px 106px 11px 30px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.searchKeyword {
+    width: 20px;
+    border: none;
+    background-color: transparent;
+    display: inline-block;
+    float: right;
+    position: relative;
+    top: 10px;
+    left: -50px;
+}
+
+.searchKeyword > img {
+    width: 20px;
+
+    cursor: pointer;
+}
+
+.placeList {
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.placeList::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+}
+
+.placeList::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
+}
+
+.placeList > li {
+    margin: 30px 0;
+}
+
+.placeList > li > .placeContents > img {
+    width: 84px;
+    height: 84px;
+    border-radius: 5px;
+    background-color: gray;
+}
+
+.placeInfo {
+    width: 250px;
+    height: 120px;
+    line-height: 35px;
+    font-size: 14px;
+}
+
+.placeCategory {
+    font-size: 7px;
+}
+
+.placeAdd {
+    width: 250px;
+    font-size: 1em;
+}
+
+.placeContents {
+    display: flex;
+    justify-content: space-around;
+}
+
+.placeAddr {
+    font-size: 11px;
+}
+
+/* 일정 box */
+
+#day_wrap {
+    display: none;
+}
+
+.scheduleBox {
+    width: 400px;
+}
+
+.selectBox {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.saveBtn {
+    width: 50px;
+    height: 25px;
+    border-radius: 10px;
+    background-color: orange;
+    border: 1px solid orange;
+    color: white;
+    position: relative;
+    top: 10px;
+    left: 73px;
+    transition: all 1s;
+}
+
+.scheduleSave {
+    float: right;
+    margin-right: 160px;
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+}
+
+.dayDelete {
+    float: right;
+    margin-right: 26px;
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+}
+
+.calendar {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    border-radius: 16px;
+    z-index: 4;
+    width: 240px;
+    height: 40px;
+
+    font-weight: bold;
+    text-align: center;
+    font-size: 11px;
+    margin-left: 10px;
+}
+
+.daySelect {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    border-radius: 16px;
+    z-index: 4;
+    width: 100px;
+    height: 40px;
+    padding: 0 0 0 10px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.daySelect > option {
+    text-align: left;
+}
+
+.dayList {
+    height: 60vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+}
+
+.dayList::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+}
+
+.dayList::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
+}
+
+.dayList > li {
+    line-height: 30px;
+    width: 390px;
+    background-color: #fff;
+    color: black;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 30px;
+}
+
+.dayList > li > div {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    line-height: 30px;
+}
+
+.placeNum {
+    margin-top: 27px;
+}
+
+.placeNum > .listnum {
+    font-size: 20px;
+    position: relative;
+    top: -11px;
+    left: -23px;
+}
+
+#dayPlaceList > div > .dayListNumInfo {
+    height: 45px;
+    margin-top: 27px;
+    text-align: left;
+}
+
+.dayListNumInfo > p {
+    font-size: 13px;
+    width: 50px;
+    position: relative;
+    /*left: 35px;*/
+    top: -15px;
+}
+
+.dayList > li > div > .dayPicture > img {
+    width: 84px;
+    height: 84px;
+    border-radius: 5px;
+    background-color: gray;
+}
+
+.dayList > li > div > .dayPicture > span {
+    font-size: 12px;
+}
+
+.dayList > li > div > .dayListNumInfo > span {
+    font-size: 20px;
+    position: relative;
+    top: -17px;
+    font-weight: bold;
+
+}
+
+
+.dayList > li > div > .nextPlace {
+    font-size: 11px;
+    color: gray;
+    opacity: 0.5;
+}
+
+/*new day*/
+#newDay_wrap {
+    display: none;
+}
+
+.newPlaceName {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    border-radius: 16px;
+    z-index: 4;
+    width: 240px;
+    height: 40px;
+
+    font-weight: bold;
+    text-align: center;
+    font-size: 11px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#newPlaceList {
+    height: 80vh;
+}
+
+/* 상세 box */
+
+#imgPath > img {
+    width: 400px;
+}
+
+.titleBox {
+    padding: 10px 20px;
+    line-height: 30px;
+}
+
+.titleBox > span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.infoContentsHr {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: left;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+
+hr {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: left;
+    margin-left: 0px;
+    margin-top: 40px;
+}
+
+.navBar {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navBar > li {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #70757a;
+    cursor: pointer;
+}
+
+#info_wrap {
+    display: none;
+}
+
+.infoContents {
+    margin-top: 10px;
+    display: block;
+    line-height: 80px;
+}
+
+.infoContents > .info > p {
+    margin-left: 10px;
+}
+
+.infoContents > .info > p > img {
+    width: 25px;
+}
+
+.infoContents > .info > p > span {
+    font-size: 15px;
+    color: #70757a;
+    margin-left: 10px;
+    position: relative;
+    top: -7px;
+}
+
+#introduction {
+    font-size: 13px;
+
+    font-weight: bold;
+    text-align: left;
+}
+
+.addBtn {
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 40px;
+    text-align: center;
+    display: flex;
+}
+
+.scheduleAdd {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: orange;
+    border: 1px solid orange;
+    color: white;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.backBtn {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: orange;
+    border: 1px solid orange;
+    color: white;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: all 1s;
+}
+
+.backBtn > img {
+    width: 30px
+}
+
+/* 리뷰 */
+.on {
+    color: blue;
+    border-bottom: 1px solid blue;
+}
+
+.reviewContainer {
+    display: none;
+}
+
+.reviewContentsBox {
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.reviewContentsBox::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+}
+
+.reviewContentsBox::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
+}
+
+.reviewHeader {
+    margin-top: 30px;
+}
+
+.reiewBtnBox {
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.reviewBtn {
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: orange;
+    border: 1px solid orange;
+    color: white;
+    margin-bottom: 30px;
+}
+
+#infoNav:hover {
+    color: orange;
+
+    border-bottom: 2px solid orange;
+}
+
+#reviewNav:hover {
+    color: orange;
+    border-bottom: 2px solid orange;
+}
+
+.reviewBtn > img {
+    width: 15px;
+    margin-right: 14px;
+}
+
+.reviewBox > .userinfoBox {
+    margin: 30px 0 10px 30px;
+}
+
+.userinfoBox > div {
+    margin-bottom: 10px;
+}
+
+.reviewContents > img {
+    width: 15px;
+    margin-right: 10px;
+}
+
+.reviewContents {
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 19px;
+    overflow-y: scroll;
+    width: 350px;
+    height: 50px;
+    margin: 30px 0 30px 30px;
+}
+
+.reviewContents::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+}
+
+.reviewContents::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
+}
+
+.reviewImg > img {
+    width: 100%;
+    height: 300px;
+}
+
+.white > img {
+    position: relative;
+}
+
+.black > img {
+    position: relative;
+}
+
+.csBox {
+    display: flex;
+    margin: 10px 0 20px 10px;
+}
+
+.csBox > div {
+    margin-right: 30px;
+}
+
+.csBox > div > img {
+    width: 13px;
+    margin-right: 15px;
+}
+
+.csBox > div > span {
+    position: relative;
+    top: -2px;
+    font-size: 10px;
+}
+
+.white {
+    display: none;
+}
+
+.black {
+    display: block;
+}
+
+/* 내 일정불러오는 모달 */
+.myScheduleModal {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.schedule_modal_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: none;
+    width: 600px;
+    height: 700px;
+    z-index: 3;
+    padding: 40px;
+    overflow-y: scroll;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.schedule_modal_body::-webkit-scrollbar {
+    width: 5px;
+/ 스크롤바의 너비 /
+}
+
+.schedule_modal_body::-webkit-scrollbar-thumb {
+    background-color: black;
+/ 스크롤바의 색상 / border-radius: 5 px;
+}
+
+.schedule_modal_body .closeBtn1 {
+    position: relative;
+    left: 512px;
+    bottom: 67px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.plan {
+    line-height: 30px;
+    width: 500px;
+    background-color: #fff;
+    color: black;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 30px;
+    overflow: scroll;
+}
+
+.plan::-webkit-scrollbar {
+    width: 5px; /*스크롤바의 너비*/
+}
+
+.plan::-webkit-scrollbar-thumb {
+    background-color: black; /*스크롤바의 색상*/
+    border-radius: 5px;
+}
+
+.plan > div {
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.plan_title {
+    width: 350px;
+}
+
+.plan_title input {
+    width: 150px;
+    height: 30px;
+    border: none;
+    margin-left: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.plan_title input::placeholder {
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+.plan_date > span {
+    margin-left: 20px;
+    color: grey;
+}
+
+.plan_cnt > span {
+    margin-left: 20px;
+    color: grey;
+}
+
+.schedule_modal_btnBox {
+    float: right;
+}
+
+.schedule_modal_btnBox button {
+    border: 1px solid orange;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(0, 0, 0, 0.02);
+    background-color: orange;
+    width: 60px;
+    height: 25px;
+    border-radius: 5px;
+    color: white;
+    font-size: 11px;
+    margin-right: 20px;
+}
+
+.resetBtn {
+    position: absolute;
+    top: 20PX;
+    left: 494px;
+    z-index: 999;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.resetBtn > img {
+    width: 33px;
+
+}
+

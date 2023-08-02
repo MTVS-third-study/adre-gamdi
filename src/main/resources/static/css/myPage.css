@@ -1,0 +1,181 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "HallymGothic-Regular";
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+main {
+    display: flex;
+    background-color: #f5f5f9;
+    color: #697a8d;
+}
+.menuList {
+    width: 200px;
+    margin: 65% auto 0;
+    font-weight: bold;
+    font-size: 30px;
+
+}
+.menuList li {
+    margin-top: 100px;
+    cursor: pointer;
+}
+.sideMenu {
+    background-color: white;
+    border-right: 1px solid black;
+    height: 100vh;
+    width: 300px;
+    text-align: center;
+}
+.on {
+    color:orange;
+    border-bottom: 2px solid orange;
+
+    animation: linemove 1s alternate;
+}
+
+@keyframes linemove1 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#adminBtn {
+    font-size: 50px;
+    width: 300px;
+    margin-top: 30px;
+    text-align: center;
+    color: #566a7f;
+    cursor: pointer;
+}
+#adminBtn > img {
+    float: left;
+    position: relative;
+    top: 12px;
+    left: 30px;
+    width: 40px;
+}
+/* mainbody */
+.contents {
+
+    width: 80%;
+    height: 100vh;
+    margin: 0 auto;
+
+}
+.contentsWrap {
+    width: 90%;
+    height: 90vh;
+    border: none;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0 rgba(0,0,0,0.02);
+    margin: 50px auto;
+    display: block;
+}
+
+.userImgBox > div {
+    padding: 10px 0 30px 100px;
+
+}
+.userInfo {
+
+    display: flex;
+
+}
+.userInfo > img {
+
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+
+}
+.InfoText {
+    margin-left: 150px;
+}
+.InfoText > p {
+    color: #566a7f;
+    font-size: 12px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.InfoText > .updateInput {
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #d9dee3;
+    padding-left: 10px;
+    margin-bottom: 30px;
+}
+.BtnBox{
+
+}
+
+.saveBtn{
+    border: 1px solid orange;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0 rgba(0,0,0,0.02);
+    background-color: orange;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+
+    font-size:18px;
+    transition: all 1s;
+}
+.deleteBtn{
+    position: relative;
+    top: 430px;
+    left: -155px;
+}
+/*장소 요청*/
+.placeReqWrap{
+    width: 90%;
+    height: 90vh;
+    border: none;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0 rgba(0,0,0,0.02);
+    margin: 50px auto;
+    display: none;
+    padding: 20px;
+}
+.suggestPlaceName{
+ margin-top:50px ;
+}
+.suggestionSubmit{
+    margin: 30px;
+
+}
+.suggestionSubmit h1{
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+.suggestionSubmit input{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #d9dee3;
+    padding-left: 10px;
+    margin-bottom: 30px;
+}
+.placeReqBtn{
+    border: 1px solid orange;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0 rgba(0,0,0,0.02);
+    background-color: orange;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+
+    font-size:18px;
+
+}

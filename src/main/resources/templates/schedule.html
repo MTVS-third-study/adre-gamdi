@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Adregamdi : 일정페이지</title>
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <!-- 설명. 카카오맵 api appkey-->
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68b6fbdf7ad018b34a2bab823e0f11ae&libraries=services"
+    ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <link rel="stylesheet" href="/css/schedule.css" type="text/css" />
+    <link rel="stylesheet" href="/css/review.css" type="text/css" />
+</head>
+
+
+<body>
+
+
+<div class="schedule-container">
+
+    <!-- 설명. 사이드 바 -->
+    <div id="hideBtn"></div>
+    <div class="scheduleSideBar">
+        <div class="BtnBox">
+            <div class="logoBtn" onclick="location.href='/main'">
+                <img src="/images/logo.png" alt="">
+            </div>
+            <div class="homeBtn" id="homeBtn" >
+                <img src="/images/search.png" alt="" />
+                <p>검색</p>
+            </div>
+            <div class="loadBtn" id="loadBtn">
+                <img src="/images/schedule_icon.png" alt="" />
+                <p>일정</p>
+            </div>
+            <div class="imgBtn" id="imgBtn" >
+                <img src="/images/plus.png" alt="" />
+                <p>new</p>
+            </div>
+            <div class="myScheduleBtn" id="myScheduleBtn" >
+                <img src="/images/load.png" alt="" />
+                <p>load</p>
+            </div>
+            <div class="userImgBox">
+                <img th:if="${session.loginUser}" th:src="${session.loginUser.getKakaoProfileImage()}" alt="" class="userImg">
+            </div>
+        </div>
+
+        <ul class="hideUserInfoBox">
+            <li  onclick="location.href='/myPage'">mypage</li>
+            <hr class="InfoBoxHr">
+            <li    onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=dd52d3a258bf3ccbc37de832dfecd0d4&logout_redirect_uri=http://localhost:9090/oauth/kakao/logout'">Logout</li>
+        </ul>
+    </div>  <!--end 사이드 바-->
+
+    <!-- 설명. 세컨드 container -->
+    <div class="schedule-list" id="schedule_wrap">
+
+        <!-- 설명. 검색 box -->
+        <div class="option">
+            <div>
+                <div  class="searchBox" id="searchBox">
+                    <input type="text" placeholder="검색어를 입력해주세요" id="keyword" class="keyword" name="searchKeyword" method="GET"/>
+                    <button class="searchKeyword" id="searchKeyword1" type="submit"><img src="/images/search.png" alt=""></button>
+                </div>
+                <!--                                        <button onclick="getMapBounds()">현지도 경계 좌표 얻기</button>-->
+                <button class="resetBtn" onclick="resetMarker()"><img src="/images/reset.png" alt=""></button>
+            </div>
+        </div>
+        <div id="menu_wrap" class="bg_white menu_wrap">
+            <hr />
+            <ul class="placeList" id="placeList" >
+            </ul>
+
+        </div>
+
+
+        <!-- 설명. 일정 box-->
+        <div id="day_wrap" class="bg_white day_wrap">
+            <hr />
+            <div class="scheduleBox">
+                <div class="selectBox">
+                    <div><span>여행 이름 : </span>
+                        <input type="text" placeholder="일정 이름을 변경해주세요" id="scheduleName" class="newPlaceName" maxlength="15" onchange="setScheduleName()">
+                    </div>
+                    <input type="text" name="datefilter" id="datefilter" value="" class="calendar" placeholder="여행 일정을 정해주세요." />
+                    <select name="day" id="daySelect" class="daySelect form-select" aria-label="Default select example"
+                            onchange="showSelectedDaySchedule()">
+                        <option value="allday">전체 일정</option>
+                    </select>
+
+                </div>
+                <div class="dayScheduleWrapper">
+                    <ul id="dayPlacesList" class="dayList">
+                    </ul>
+
+                        <button class="saveBtn scheduleSave" id="saveScheduleBtn">저장</button>
+                        <button class="saveBtn dayDelete" id="initScheduleBtn">초기화</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 설명. 상세 box -->
+        <div id="info_wrap" class="bg_white menu_wrap">
+            <div class="imgBox">
+                <div  id="imgPath"></div>
+                <div class="titleBox">
+                    <span id="placeName"></span>
+                    <p id="=categoryName"></p>
+                </div>
+            </div>
+            <hr class="infoContentsHr"/>
+            <div class="infoBox">
+                <nav class="navBar">
+                    <li id="infoNav">정보</li>
+                    <li id="reviewNav">리뷰</li>
+                </nav>
+                <hr class="infoContentsHr"/>
+                <p style="margin: 10px">
+                    <span id="introduction"></span>
+                </p>
+                <hr class="infoContentsHr"/>
+
+                <!-- 설명. 상세 - 정보 내용 -->
+                <div class="infoContents">
+                    <div class="info">
+                        <p>
+                            <img src="/images/phone.png" alt="" />
+                            <span id="phoneNumber"></span>
+                        </p>
+
+                        <p>
+                            <img src="/images/marker.png" alt="" />
+                            <span id="placeAddress"> </span>
+                        </p>
+
+                    </div>
+                    <hr class="infoContentsHr"/>
+                    <div class="addBtn">
+                        <button class="backBtn">돌아 가기</button>
+                        <button class="scheduleAdd ">일정 추가</button>
+                    </div>
+                </div>
+
+                <!-- 설명. 상세 - 리뷰 내용 -->
+                <div class="reviewContainer">
+                    <div class="reviewHeader">
+                        <div class="totlaPoint">
+                            <span >3.8</span>
+                        </div>
+                        <div class="reiewBtnBox">
+                            <button class="reviewBtn">
+                                <img src="/images/reviewAdd.png" alt="" />리뷰 작성
+                            </button>
+                        </div>
+                    </div>
+                    <hr class="infoContentsHr"/>
+                    <div class="reviewContentsBox">
+                            <hr class="infoContentsHr">
+<!--                        </div>-->
+                    </div>
+                </div>
+
+            </div> <!--end InfoBox-->
+        </div>  <!--end 상세 Box -->
+
+    </div> <!--end second Container-->
+
+    <!--설명. 리뷰 작성 모달창-->
+    <div class="modal"></div>
+
+    <div class="modal_body"><span>리뷰 작성하기</span>
+
+            <img src="/images/close.png" alt="" class="closeBtn1" id="">
+            <form name="review" id="reviewForm" method="post" encType="multipart/form-data">
+
+                <div class="reviewStarPoint">
+                    <fieldset>
+                        <input type="radio" name="starPoint" value="5" id="rate1"><label
+                            for="rate1">⭐</label>
+                        <input type="radio" name="starPoint" value="4" id="rate2"><label
+                            for="rate2">⭐</label>
+                        <input type="radio" name="starPoint" value="3" id="rate3"><label
+                            for="rate3">⭐</label>
+                        <input type="radio" name="starPoint" value="2" id="rate4"><label
+                            for="rate4">⭐</label>
+                        <input type="radio" name="starPoint" value="1" id="rate5"><label
+                            for="rate5">⭐</label><br>
+                    </fieldset><br>
+                </div>
+
+                <div class="reviewContents1">
+                    <label for="imageFile" class="imageFile">파일찾기</label>
+                    <input type="file" name="imageFile" id="imageFile" accept="image/jpg, image/jpeg, image/png"
+                           onchange="readURL(this);"><br>
+                    <br>
+                    <img id="preview" style="width: 200px; height: 200px"/><br>
+                    <br>
+                    <textarea name="reviewContent" type="text" id="reviewContent"
+                              placeholder="리뷰 내용을 입력해주세요"></textarea><br>
+                </div>
+                <input type="submit" value="등록하기" class="reviewAddBtn">
+            </form>
+
+        </div><!--end modal body-->
+
+
+    <!--설명. 지도 컨테이너 -->
+    <div id="map" class="schedule-map" style="width: 65%; height: 100vh;"></div>
+
+
+    <!-- 스케쥴 페이지에서 일정눌렀을 떄 내 일정 나오는 모달창 -->
+    <div class="myScheduleModal" id="myScheduleModal"></div>
+    <div class="schedule_modal_body" id="schedule_modal_body">
+
+    </div>
+
+</div><!--end modal-->
+</div><!--end Schedule Container-->
+
+<script src="/js/kakaomap.js"></script>
+<script src="/js/schedule.js"></script>
+<script src="/js/review.js"></script>
+
+</body>
+</html>
